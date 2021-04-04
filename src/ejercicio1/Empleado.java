@@ -2,43 +2,44 @@ package ejercicio1;
 
 public class Empleado {
 
-	private static int contID = 999;
+	private static int contID = 1000; //Le cambié a 1000, ya que necesitamos empezarlo en el numero que vamos a usar, no tiene sentido un numero menos para despues sumarle 1 en la primera instrucción
 	private final int id;
 	private String nombre;
-	private int edad;
+	private byte edad; // le cambié el tipo de dato a byte, para no consumir recursos innecesarios (nadie debería vivir más de 127 años jaja no sería justo)
 
 	// Ctor
+	
 	public Empleado() {
-		id = ++contID;
+		id = contID++;  //ahora sería contID++ ya que primero asigna y luego actualiza el contador
 		nombre = "sin nombre";
 		edad = 99;
 
 	}
 
-	public Empleado(String nombre, int edad) {
-		id = ++contID;
+	public Empleado(String nombre, byte edad) { //le cambié el tipo de dato a byte ya que la property es un tipo de dato Byte
+		id = contID++; //mismo que en el otro constructor
 		this.nombre = nombre;
 		this.edad = edad;
 	}
 
 	// Getters & Setters
 
-	String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
-	void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	int getEdad() {
+	public int getEdad() {
 		return edad;
 	}
 
-	void setEdad(int edad) {
+	public void setEdad(byte edad) { //mismo, ahora es byte y no int
 		this.edad = edad;
 	}
-
+	
 	// Metodo ToString()
 	@Override
 	public String toString() {
@@ -46,6 +47,6 @@ public class Empleado {
 	}
 
 	public static int devuelveProximoID() {
-		return contID + 1;
+		return contID; //Ahora no hace falta sumarle +1, ya que se actualiza el contador estático al próximo ID en el propio constructor 
 	}
 }
