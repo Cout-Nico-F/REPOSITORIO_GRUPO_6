@@ -30,4 +30,14 @@ public class Profesor extends Empleado {
 		this.antiguedadDocente = antiguedadDocente;
 	}
 	
+	//Sobreescritura del metodo toString() porque no hay metodo devuelveDatos()
+	@Override
+	public String toString() {
+		return  super.toString() + "Cargo: " + cargo + ", antiguedadDocente: " + antiguedadDocente + ".";
+	}
+	
+	
+	
+	
+	
 }

@@ -39,7 +39,7 @@ public class Empleado {
 		this.edad = edad;
 	}
 	
-	// Metodo ToString()
+	//Metodo ToString()
 	@Override
 	public String toString() {
 		return "Empleado: " + nombre + ", edad: " + edad + ", legajo: " + id + '.';
