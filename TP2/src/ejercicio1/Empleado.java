@@ -42,7 +42,7 @@ public class Empleado {
 	//Metodo ToString()
 	@Override
 	public String toString() {
-		return "Legajo: " + id + ", Empleado: " + nombre + ", edad: " + edad + '.';
+		return "Legajo: " + id + ", Empleado: " + nombre + ", edad: " + edad;
 	}
 
 	public static int devuelveProximoID() {
