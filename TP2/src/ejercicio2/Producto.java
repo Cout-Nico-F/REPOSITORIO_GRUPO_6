@@ -31,4 +31,11 @@ public class Producto {
 	public void setNumeroDeLote(int numeroDeLote) {
 		this.numeroDeLote = numeroDeLote;
 	}
+
+	@Override
+	public String toString() {
+		return "fecha de caducidad: " + fechaDeCaducidad + ", nro. de lote: " + numeroDeLote;
+	}
+	
+	
 }

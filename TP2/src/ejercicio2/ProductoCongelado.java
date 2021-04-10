@@ -22,4 +22,11 @@ public class ProductoCongelado extends Producto {
 	public void setTemperaturaDeCongelacion(float temperaturaDeCongelacion) {
 		this.temperaturaDeCongelacion = temperaturaDeCongelacion;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + ", temp. de congelación: " + temperaturaDeCongelacion;
+	}
+	
+	
 }
