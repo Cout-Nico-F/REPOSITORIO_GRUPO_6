@@ -1,5 +1,6 @@
 package ejercicio1;
 
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class mainEjercicio1_b {
@@ -22,10 +23,19 @@ public class mainEjercicio1_b {
 		tProfesores.add(p5);
 		
 		//Recorre y muestra el TreeSet ordenado por edad de menor a mayor
-		for(Profesor x: tProfesores) {
-			System.out.println(x.toString());
-		}
+//		for(Profesor x: tProfesores) {
+//			System.out.println(x.toString());
+//		}
 		
+		//Comenté el código del for porque nos pedían hacerlo con Iterator
+		
+		{Iterator<Profesor> it = tProfesores.iterator();
+			while(it.hasNext())
+			{
+					Profesor profeiterado = it.next();
+					System.out.println(profeiterado.toString());
+			}
+		}
 	}
 
 }
