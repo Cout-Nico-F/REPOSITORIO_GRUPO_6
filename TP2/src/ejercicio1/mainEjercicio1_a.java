@@ -1,6 +1,7 @@
 package ejercicio1;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class mainEjercicio1_a {
 
@@ -18,10 +19,19 @@ public class mainEjercicio1_a {
 		lProfesores.add(new Profesor("Fulano",(byte)16,"Profesor",1));
 		lProfesores.add(new Profesor("Florencia",(byte)17,"Profesor",2));
 		
-		for(Profesor x: lProfesores) {
-			System.out.println(x);
-		}
+		//Lo comento porque nos pidieron usar un Iterator
+//		for(Profesor x: lProfesores) {
+//			System.out.println(x);
+//		}
 		
+		//Esta dentro de llaves (bloque de código) para que el GC libere la memoria del iterador luego de mostrarlo
+		{ListIterator<Profesor> it = lProfesores.listIterator();
+			while(it.hasNext())
+			{
+					Profesor profeIterado = it.next();
+					System.out.println(profeIterado.toString());
+			}
+		}
 	}
 
 }
