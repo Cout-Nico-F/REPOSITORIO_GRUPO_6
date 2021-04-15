@@ -1,9 +1,9 @@
 package ejercicio3;
 
-public class Edificio {
+public abstract class Edificio {
 	private String nombre;
 	private String ubicacion;
-	private double superficieEdificio;
+	private double superficie;
 	
 	//getters y setters
 	public String getNombre() {
@@ -18,15 +18,18 @@ public class Edificio {
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
 	}
-	public double getSuperficieEdificio() { //act 3.2
-		return superficieEdificio;
+		
+	public double getSuperficie() {
+		return this.superficie;
 	}
-	public void setSuperficieEdificio(double superficieEdificio) {
-		this.superficieEdificio = superficieEdificio;
+	public void setSuperficie(double superficie) {
+		this.superficie = superficie;
 	}
 	
+	@Override
+	public String toString() {
+		return "nombre: " + nombre + ", ubicacion: " + ubicacion;
+	}
 	
-	
-	
-	
+	public abstract double getSuperficieEdificio();
 }
