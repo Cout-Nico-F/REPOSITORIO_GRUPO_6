@@ -19,12 +19,6 @@ public class Empleado {
 		this.nombre = nombre;
 		this.edad = edad;
 	}
-	
-	public Empleado(int legajo, String nombre, byte edad) {
-		id = legajo;
-		this.nombre = nombre;
-		this.edad = edad;
-	}
 
 	// Getters & Setters
 	public String getNombre() {
@@ -73,8 +67,6 @@ public class Empleado {
 			return false;
 		Empleado other = (Empleado) obj;
 		if (edad != other.edad)
-			return false;
-		if (id != other.id)
 			return false;
 		if (nombre == null) {
 			if (other.nombre != null)

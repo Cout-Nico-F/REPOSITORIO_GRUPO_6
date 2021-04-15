@@ -16,12 +16,6 @@ public class Profesor extends Empleado implements Comparable<Profesor> {
 		this.cargo = cargo;
 		this.antiguedadDocente = antiguedadDocente;
 	}
-	
-	public Profesor(int legajo, String nombre, byte edad, String cargo, int antiguedadDocente) {
-		super(legajo, nombre, edad);
-		this.cargo = cargo;
-		this.antiguedadDocente = antiguedadDocente;
-	}
 
 	// Encapsulamiento (Getters and Setters)
 	public String getCargo() {
@@ -67,7 +61,7 @@ public class Profesor extends Empleado implements Comparable<Profesor> {
 		result = prime * result + ((cargo == null) ? 0 : cargo.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
