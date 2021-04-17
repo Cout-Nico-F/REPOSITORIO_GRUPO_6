@@ -22,13 +22,6 @@ public class mainEjercicio1_b {
 		tProfesores.add(p4);
 		tProfesores.add(p5);
 		
-		//Recorre y muestra el TreeSet ordenado por edad de menor a mayor
-//		for(Profesor x: tProfesores) {
-//			System.out.println(x.toString());
-//		}
-		
-		//Comenté el código del for porque nos pedían hacerlo con Iterator
-		
 		{Iterator<Profesor> it = tProfesores.iterator();
 			while(it.hasNext())
 			{
