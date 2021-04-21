@@ -6,6 +6,17 @@ public class Principal {
 	//Escribe a resultado.txt.
 	public static void main(String[] args) {
 		
+		//Punto 3 
+		Archivo archivo = new Archivo();
+		archivo.setRuta("Resultado.txt");
+		
+		if(archivo.existeArchivo()) {
+			System.out.println("Existe archivo");
+		}
+		else {
+			System.out.println("No existe archivo");
+			archivo.crearArchivo();
+		}
 		
 	}
 	
@@ -19,5 +30,7 @@ public class Principal {
 			throw new DniInvalidoException();
 		}
 	}
+	
+	
 	
 }
