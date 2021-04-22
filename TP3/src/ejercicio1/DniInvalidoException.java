@@ -8,12 +8,10 @@ public class DniInvalidoException extends IOException {
 	
 	public static final String FORMATO_NO_VALIDO = "El Dni debe estar conformado por 8 caracteres entre el 0 al 9.";
 	
-	public DniInvalidoException() {
-		//codigo que ejecutar si se produce la excepcion
+	public DniInvalidoException() {	
 	}
 	
-	public DniInvalidoException(String exception) {
-		
+	public DniInvalidoException(String exception) {		
 	}
 
 	@Override
