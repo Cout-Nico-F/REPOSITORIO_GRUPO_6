@@ -1,15 +1,27 @@
 package ejercicio1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Principal {
+import javax.swing.JOptionPane;
 
-	//Lee el archivo personas.txt, por cada registro llama al metodo verificarDNI y lo guarda en una lista solo si es valido
-	//Escribe a resultado.txt.
+public class Principal {	
+
 	public static void main(String[] args) {
-
+		
+		try {
+			String DNI = JOptionPane.showInputDialog("Ingrese el número de DNI: ");
+			Dni.validarDni(DNI);
+			JOptionPane.showMessageDialog(null,"Carga exitosa!");
+		} catch (DniInvalidoException e) {
+			JOptionPane.showMessageDialog(null, "Carga incorrecta. \n" + e.getMensaje());
+			e.printStackTrace();
+		}
+		
+		//Lee el archivo personas.txt, por cada registro llama al metodo verificarDNI y lo guarda en una lista solo si es valido
+		//Escribe a resultado.txt.
 		// Punto 2
 		Archivo archivoLectura = new Archivo();
 		archivoLectura.setRuta("Personas.txt");
@@ -35,6 +47,6 @@ public class Principal {
 					archivoEscritura.escribirLinea(persona.toString());	
 				}
 			}
-		}	
+		}
 	}
 }

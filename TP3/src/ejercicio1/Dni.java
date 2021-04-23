@@ -8,7 +8,7 @@ public class Dni {
 	
 	public static boolean validarDni(String dni) throws DniInvalidoException {
 		
-		Boolean auxLongitud = false;
+		Boolean auxLongitud;
 
 
 		if (dni.length() == 8) {
@@ -21,17 +21,16 @@ public class Dni {
 		int DniException = 0;
 		
 		try {
-			DniException = Integer.parseInt(dni);
+			DniException = Integer.parseUnsignedInt(dni);
 
 		} catch (NumberFormatException e) {
 			throw new DniInvalidoException(DniInvalidoException.FORMATO_NO_VALIDO);
 		}
-		
-		
+				
 		if (auxLongitud && DniException != 0) {
 			return true;
 		} return false;
 	}
-	
-
 }
+
+
