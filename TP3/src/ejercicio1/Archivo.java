@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -91,6 +92,25 @@ public class Archivo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void escribirArbolPersonas(TreeSet<Persona> arbol) {
+		Iterator<Persona> i = arbol.iterator();
+		try 
+		{	
+			FileWriter entrada = new FileWriter(ruta, false);
+			BufferedWriter miBuffer = new BufferedWriter(entrada);
+			miBuffer.write(i.next().toString());
+			miBuffer.newLine();
+			miBuffer.close();
+			entrada.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		while(i.hasNext()) {
+			escribirLinea(i.next().toString());
+		}	
 	}
 	
 	public void informarInexistente() {

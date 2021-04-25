@@ -29,9 +29,7 @@ public class Principal {
 			
 			if (!archivoEscritura.existeArchivo()) archivoEscritura.crearArchivo();
 			
-			for (Persona persona: personas) {
-				archivoEscritura.escribirLinea(persona.toString());
-			}
+			archivoEscritura.escribirArbolPersonas(personas);
 		}
 	}
 }
