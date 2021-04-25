@@ -46,9 +46,24 @@ public class Persona implements Comparable<Persona> {
 	
 	//Ordena los datos de la A - Z
 	@Override
-	public int compareTo(Persona p) {
-		//Codigo para ordenar los apellidos
-		return 0;
+	public int compareTo(Persona persona) {
+		//Criterio de ordenamiento de apellidos
+		int retorno=0;
+		if(this.apellido.compareToIgnoreCase(persona.apellido)>0){
+			retorno=1;
+		} else if (this.apellido.compareToIgnoreCase(persona.apellido)<0){
+			retorno=-1;
+		} else if(this.nombre.compareToIgnoreCase(persona.nombre)>0){ 
+			//si son iguales los apellidos comparo los nombres
+			retorno= 1;
+		} else if (this.nombre.compareToIgnoreCase(persona.nombre)<0) {
+			retorno= -1;
+		} else if(this.dni.compareTo(persona.dni)<0) {
+			retorno= -1;
+		} else if(this.dni.compareTo(persona.dni)>0) {
+			retorno= 1;
+		}
+		return retorno;
 	}
 	
 	

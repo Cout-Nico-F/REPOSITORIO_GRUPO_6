@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Archivo {
 	
@@ -43,8 +44,11 @@ public class Archivo {
 
 	/* - Se trabaja con un Set asi no se aceptan datos duplicados
 	 * - Se llama a verificarDniInvalido y si tira una excepcion no se agrega la persona */
-	public Set<Persona> leerPersonas() {
-		Set<Persona> resultado = new HashSet<Persona>();
+	//Cambio al TreeSet para ingresar los nombres ya ordenados en el set
+	//sin necesidad de un ArraySet
+	public TreeSet<Persona> leerPersonas() {
+		//Set<Persona> resultado = new HashSet<Persona>();
+		TreeSet<Persona> resultado = new TreeSet<Persona>();
 		FileReader entrada;
 		try {
 			entrada = new FileReader(ruta);
