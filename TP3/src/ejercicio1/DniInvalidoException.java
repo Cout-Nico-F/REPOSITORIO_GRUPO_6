@@ -20,7 +20,7 @@ public class DniInvalidoException extends IOException {
 	@Override
 	public String getMessage() {
 
-		return "El DNI ingresado no es válido.\n" + mensaje;
+		return mensaje + "\n";
 	}
 
 	public String getMensaje() {

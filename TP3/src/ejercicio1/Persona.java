@@ -111,10 +111,16 @@ public class Persona implements Comparable<Persona> {
 	}
 	
 	void verificarDniInvalido() throws DniInvalidoException {
+		
 		try {
 			Integer.parseInt(dni);
 		} catch (NumberFormatException e) {
 			throw new DniInvalidoException(DniInvalidoException.FORMATO_NO_VALIDO);
 		}
+		
+		if (dni.length() != 8) {
+			throw new DniInvalidoException(DniInvalidoException.LONGITUD_NO_VALIDA);
+		}
 	}
+	
 }

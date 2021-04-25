@@ -66,6 +66,8 @@ public class Archivo {
 				} catch (DniInvalidoException e) {
 					System.out.println("No se agrego a " + persona.getNombre() + " " + persona.getApellido() + 
 							" porque su DNI (" + persona.getDni() + ") es invalido.");
+					
+					System.out.println(e.getMessage());
 				}
 				linea = miBuffer.readLine();
 			}

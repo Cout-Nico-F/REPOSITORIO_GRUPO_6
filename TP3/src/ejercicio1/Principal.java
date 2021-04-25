@@ -1,12 +1,6 @@
 package ejercicio1;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.TreeSet;
-
-import javax.swing.JOptionPane;
 
 public class Principal {	
 
@@ -21,18 +15,13 @@ public class Principal {
 		if (!archivoLectura.existeArchivo()) {
 			archivoLectura.informarInexistente();
 		} else {
-			//List<Persona> personas = (new ArrayList<Persona>(archivoLectura.leerPersonas()));
+			
 			TreeSet<Persona> personas = new TreeSet<Persona>(archivoLectura.leerPersonas());
 			
 			if (personas.isEmpty()) {
 				archivoLectura.informarVacio();
 			} 
 			
-			/*else {
-				// Se ordena por apellido alfabeticamente
-				Collections.sort(personas, (p1, o2) -> (p1.getApellido().compareTo(o2.getApellido())));
-				*/ 
-			//No sería necesario el ordenamiento, se hace automáticamente al cargar el treeset
 				
 			//Punto 3
 			Archivo archivoEscritura = new Archivo();
