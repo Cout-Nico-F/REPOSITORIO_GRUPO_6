@@ -1,18 +1,12 @@
 package menu;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.SystemColor;
-import java.awt.TextField;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -23,6 +17,8 @@ import java.awt.event.FocusEvent;
 
 public class FrameEjercicio2 extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTextField textbox_nota1;
 	private JTextField textbox_nota2;
