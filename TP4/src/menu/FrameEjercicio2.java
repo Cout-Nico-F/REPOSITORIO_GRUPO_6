@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -16,6 +17,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FrameEjercicio2 extends JFrame {
 
@@ -88,10 +91,17 @@ public class FrameEjercicio2 extends JFrame {
 		
 		
 		textbox_nota1 = new JTextField();
+		textbox_nota1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char num = e.getKeyChar();
+				CheckOnlyNumbers(num,e); //Calls the method every time a key is pressed
+			}
+		});
 		textbox_nota1.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				ComprobarNotaIngresada(e);				
+				//ComprobarNotaIngresada(e);				
 			}
 		});
 		textbox_nota1.setBounds(91, 37, 161, 23);
@@ -99,10 +109,17 @@ public class FrameEjercicio2 extends JFrame {
 		textbox_nota1.setColumns(10);
 		
 		textbox_nota2 = new JTextField();
+		textbox_nota2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char num = e.getKeyChar();
+				CheckOnlyNumbers(num,e); //Calls the method every time a key is pressed
+			}
+		});
 		textbox_nota2.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				ComprobarNotaIngresada(e);				
+				//ComprobarNotaIngresada(e);				
 			}
 		});
 		textbox_nota2.setColumns(10);
@@ -110,10 +127,17 @@ public class FrameEjercicio2 extends JFrame {
 		panel.add(textbox_nota2);
 		
 		textbox_nota3 = new JTextField();
+		textbox_nota3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char num = e.getKeyChar();
+				CheckOnlyNumbers(num,e); //Calls the method every time a key is pressed
+			}
+		});
 		textbox_nota3.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				ComprobarNotaIngresada(e);				
+				//ComprobarNotaIngresada(e);				
 			}
 		});
 		
@@ -178,7 +202,7 @@ public class FrameEjercicio2 extends JFrame {
 		contentPane.add(lblNotasDelEstudiante_1);
 	}
 	
-	private boolean ComprobarNotaIngresada(FocusEvent e) throws NumberFormatException{
+	/*private boolean ComprobarNotaIngresada(FocusEvent e) throws NumberFormatException{
 		JTextField tb = (JTextField) e.getComponent();
 		String input = tb.getText();
 		try {
@@ -188,5 +212,13 @@ public class FrameEjercicio2 extends JFrame {
 			return false;
 		}
 		return true;
+	}*/ //esto lo comento por ahora para que no cree conflicto con el otro metodo
+	
+	private void CheckOnlyNumbers(char num,KeyEvent e) {
+		if(Character.isLetter(num)) { //if variable num is a number
+				getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
+				e.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
+			JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+		}
 	}
 }
