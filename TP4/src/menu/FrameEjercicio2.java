@@ -10,6 +10,7 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Font;
@@ -19,6 +20,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrameEjercicio2 extends JFrame {
 
@@ -167,6 +170,11 @@ public class FrameEjercicio2 extends JFrame {
 		contentPane.add(btnNuevo);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnSalir.setBounds(399, 233, 146, 54);
 		contentPane.add(btnSalir);
 		

@@ -56,6 +56,8 @@ public class menuppal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//creamos un objeto del tipo FrameEjercicio2
 				//lo ponemos visible = true;
+				FrameEjercicio2 e2 = new FrameEjercicio2();
+				e2.setVisible(true);
 			}
 		});
 		btnEjercicio2.setBounds(154, 119, 97, 25);
