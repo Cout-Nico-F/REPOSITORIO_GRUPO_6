@@ -45,13 +45,19 @@ public class menuppal extends JFrame {
 		
 		JButton btnEjercicio1 = new JButton("Ejercicio 1");
 		btnEjercicio1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {				
 			}
 		});
 		btnEjercicio1.setBounds(154, 63, 97, 25);
 		contentPane.add(btnEjercicio1);
 		
 		JButton btnEjercicio2 = new JButton("Ejercicio 2");
+		btnEjercicio2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//creamos un objeto del tipo FrameEjercicio2
+				//lo ponemos visible = true;
+			}
+		});
 		btnEjercicio2.setBounds(154, 119, 97, 25);
 		contentPane.add(btnEjercicio2);
 		
