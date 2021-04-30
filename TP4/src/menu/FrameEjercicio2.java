@@ -46,6 +46,7 @@ public class FrameEjercicio2 extends JFrame {
 	public FrameEjercicio2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 705, 445);
+		setTitle("Promedio");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -108,6 +109,7 @@ public class FrameEjercicio2 extends JFrame {
 				ComprobarNotaIngresada(e);				
 			}
 		});
+		
 		textbox_nota3.setColumns(10);
 		textbox_nota3.setBounds(91, 114, 161, 23);
 		panel.add(textbox_nota3);
