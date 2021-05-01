@@ -33,6 +33,7 @@ public class FrameEjercicio2 extends JFrame {
 	private JTextField textbox_nota3;
 	private JTextField tfPromedio;
 	private JTextField tfCondicion;
+	JComboBox<String> comboBox_TPS;
 
 	/**
 	 * Launch the application.
@@ -157,14 +158,14 @@ public class FrameEjercicio2 extends JFrame {
 		lblTps.setBounds(10, 148, 71, 26);
 		panel.add(lblTps);
 		
-		//String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
-		//JComboBox<String> comboBox_TPS = new JComboBox<>(comboBox_TPS_Opciones);
-		//comboBox_TPS.setMaximumRowCount(2);
-		//Arreglado error Type safety: The constructor JComboBox(Object[]) belongs to the raw type JComboBox. References to generic type JComboBox<E> should be parameterized
-		//era que le faltaban <> estos signos al combobox esto debido a que ahora es una clase generica a partir de java 7
+		String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
+		comboBox_TPS = new JComboBox(comboBox_TPS_Opciones);
+		comboBox_TPS.setSelectedIndex(-1);
+		comboBox_TPS.setMaximumRowCount(2);
 		
-		//comboBox_TPS.setBounds(91, 148, 161, 23);
-		//panel.add(comboBox_TPS);
+		
+		comboBox_TPS.setBounds(91, 148, 161, 23);
+		panel.add(comboBox_TPS);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setBounds(39, 286, 315, 113);
@@ -200,6 +201,13 @@ public class FrameEjercicio2 extends JFrame {
 		contentPane.add(lblNotasDelEstudiante_1);
 		
 		JButton btnCalcular = new JButton("Calcular");
+		btnCalcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (ComprobarCampos()) {
+					Calcular();
+				}else JOptionPane.showMessageDialog(rootPane, "Todas las notas deben estar ingresadas para calcular");
+			}
+		});
 		btnCalcular.setBounds(399, 103, 146, 54);
 		contentPane.add(btnCalcular);
 		
@@ -207,6 +215,7 @@ public class FrameEjercicio2 extends JFrame {
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LimpiarTxt(textbox_nota1,textbox_nota2,textbox_nota3,tfPromedio,tfCondicion);
+				comboBox_TPS.setSelectedIndex(-1);
 			}
 		});
 		btnNuevo.setBounds(399, 168, 146, 54);
@@ -264,5 +273,34 @@ public class FrameEjercicio2 extends JFrame {
 				LimpiarTxt(tb);
 			}
 		}
+	}
+	
+	private boolean ComprobarCampos() {
+		//este metodo comprueba que halla algo ingresado en los 4 campos, caso contrario avisa.
+		boolean field1 = false, field2 = false, field3= false ,field4 = false;
+		
+		if(textbox_nota1.getText().length() >0) {
+			field1=true;
+		}
+		if(textbox_nota2.getText().length() >0) {
+			field2=true;
+		}
+		if(textbox_nota3.getText().length() >0) {
+			field3=true;
+		}
+		if(comboBox_TPS.getSelectedIndex() > -1) {
+			field4=true;
+		}
+		
+		if (field1 && field2 && field3 && field4) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	private void Calcular() {
+		// ete metodo decide la condicion del alumno en base al enunciado
 	}
 }
