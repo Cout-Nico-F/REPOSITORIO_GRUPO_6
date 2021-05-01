@@ -49,7 +49,6 @@ public class FrameEjercicio2 extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -158,29 +157,14 @@ public class FrameEjercicio2 extends JFrame {
 		lblTps.setBounds(10, 148, 71, 26);
 		panel.add(lblTps);
 		
-		String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
-		JComboBox<String> comboBox_TPS = new JComboBox<>(comboBox_TPS_Opciones);
-		comboBox_TPS.setMaximumRowCount(2);
+		//String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
+		//JComboBox<String> comboBox_TPS = new JComboBox<>(comboBox_TPS_Opciones);
+		//comboBox_TPS.setMaximumRowCount(2);
+		//Arreglado error Type safety: The constructor JComboBox(Object[]) belongs to the raw type JComboBox. References to generic type JComboBox<E> should be parameterized
+		//era que le faltaban <> estos signos al combobox esto debido a que ahora es una clase generica a partir de java 7
 		
-		comboBox_TPS.setBounds(91, 148, 161, 23);
-		panel.add(comboBox_TPS);
-		
-		JButton btnCalcular = new JButton("Calcular");
-		btnCalcular.setBounds(399, 103, 146, 54);
-		contentPane.add(btnCalcular);
-		
-		JButton btnNuevo = new JButton("Nuevo");
-		btnNuevo.setBounds(399, 168, 146, 54);
-		contentPane.add(btnNuevo);
-		
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		btnSalir.setBounds(399, 233, 146, 54);
-		contentPane.add(btnSalir);
+		//comboBox_TPS.setBounds(91, 148, 161, 23);
+		//panel.add(comboBox_TPS);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setBounds(39, 286, 315, 113);
@@ -214,6 +198,28 @@ public class FrameEjercicio2 extends JFrame {
 		lblNotasDelEstudiante_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNotasDelEstudiante_1.setBounds(54, 266, 133, 23);
 		contentPane.add(lblNotasDelEstudiante_1);
+		
+		JButton btnCalcular = new JButton("Calcular");
+		btnCalcular.setBounds(399, 103, 146, 54);
+		contentPane.add(btnCalcular);
+		
+		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LimpiarTxt(textbox_nota1,textbox_nota2,textbox_nota3,tfPromedio,tfCondicion);
+			}
+		});
+		btnNuevo.setBounds(399, 168, 146, 54);
+		contentPane.add(btnNuevo);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnSalir.setBounds(399, 233, 146, 54);
+		contentPane.add(btnSalir);
 	}
 	
 	/*private boolean ComprobarNotaIngresada(FocusEvent e) throws NumberFormatException{
@@ -226,7 +232,8 @@ public class FrameEjercicio2 extends JFrame {
 			return false;
 		}
 		return true;
-	}*/ //esto lo comento por ahora para que no cree conflicto con el otro metodo
+	}*/ 
+	//esto lo comento por ahora para que no cree conflicto con el otro metodo
 	
 	private void CheckOnlyNumbers(char num,KeyEvent e) {
 		if(Character.isLetter(num)) { //if variable num is a number
@@ -234,5 +241,13 @@ public class FrameEjercicio2 extends JFrame {
 				e.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
 			JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
 		}
+	}
+	
+	private void LimpiarTxt(JTextField nota1,JTextField nota2,JTextField nota3,JTextField prom,JTextField con) {
+		nota1.setText(null);
+		nota2.setText(null);
+		nota3.setText(null);
+		prom.setText(null);
+		con.setText(null);
 	}
 }
