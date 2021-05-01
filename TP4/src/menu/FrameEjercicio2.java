@@ -290,5 +290,27 @@ public class FrameEjercicio2 extends JFrame {
 		//Calcular promedio y mostrarlo
 		tfPromedio.setText (((Float.parseFloat(textbox_nota1.getText()) + Float.parseFloat(textbox_nota2.getText()) + Float.parseFloat(textbox_nota3.getText()) )/3)+"");
 		
+		//Calculo condicion
+		if(comboBox_TPS.getSelectedItem().equals("Aprobado")) {
+			
+			if(Float.parseFloat(textbox_nota1.getText()) < 6 || Float.parseFloat(textbox_nota2.getText()) < 6 || 
+				Float.parseFloat(textbox_nota3.getText()) < 6) {
+				tfCondicion.setText("Libre");
+				System.out.println("Libre");
+			}
+			else if(Float.parseFloat(textbox_nota1.getText()) >= 8 && Float.parseFloat(textbox_nota2.getText()) >= 8 && 
+				Float.parseFloat(textbox_nota3.getText()) >= 8) {
+				tfCondicion.setText("Promocionado");
+				System.out.println("Promocionado");
+			}
+			else{
+				tfCondicion.setText("Regular");
+				System.out.println("Regular");
+			}
+		}
+		else {
+			tfCondicion.setText("Libre");
+		}
+		
 	}
 }
