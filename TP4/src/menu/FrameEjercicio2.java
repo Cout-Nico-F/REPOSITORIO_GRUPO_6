@@ -296,16 +296,13 @@ public class FrameEjercicio2 extends JFrame {
 			if(Float.parseFloat(textbox_nota1.getText()) < 6 || Float.parseFloat(textbox_nota2.getText()) < 6 || 
 				Float.parseFloat(textbox_nota3.getText()) < 6) {
 				tfCondicion.setText("Libre");
-				System.out.println("Libre");
 			}
 			else if(Float.parseFloat(textbox_nota1.getText()) >= 8 && Float.parseFloat(textbox_nota2.getText()) >= 8 && 
 				Float.parseFloat(textbox_nota3.getText()) >= 8) {
 				tfCondicion.setText("Promocionado");
-				System.out.println("Promocionado");
 			}
 			else{
 				tfCondicion.setText("Regular");
-				System.out.println("Regular");
 			}
 		}
 		else {
