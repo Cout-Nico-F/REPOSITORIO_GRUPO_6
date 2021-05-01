@@ -117,6 +117,10 @@ public class FrameEjercicio2 extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char num = e.getKeyChar();
 				CheckOnlyNumbers(num,e); //Calls the method every time a key is pressed
+				/*if(textbox_nota2.getText().length() == 4) e.consume();
+				if(Float.parseFloat(textbox_nota2.getText()) > 0 && Float.parseFloat(textbox_nota2.getText()) <= 10){
+					JOptionPane.showMessageDialog(rootPane,"Solo se permiten numero entre el 1 y el 10");
+				}*/ //MAL
 			}
 		});
 		textbox_nota2.addFocusListener(new FocusAdapter() {
@@ -155,7 +159,7 @@ public class FrameEjercicio2 extends JFrame {
 		panel.add(lblTps);
 		
 		String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
-		JComboBox comboBox_TPS = new JComboBox(comboBox_TPS_Opciones);
+		JComboBox<String> comboBox_TPS = new JComboBox<>(comboBox_TPS_Opciones);
 		comboBox_TPS.setMaximumRowCount(2);
 		
 		comboBox_TPS.setBounds(91, 148, 161, 23);
@@ -197,11 +201,13 @@ public class FrameEjercicio2 extends JFrame {
 		tfPromedio = new JTextField();
 		tfPromedio.setColumns(10);
 		tfPromedio.setBounds(104, 21, 161, 23);
+		tfPromedio.setEditable(false);//I make the field non-editable so they don't write in it
 		panel2.add(tfPromedio);
 		
 		tfCondicion = new JTextField();
 		tfCondicion.setColumns(10);
 		tfCondicion.setBounds(104, 60, 161, 23);
+		tfCondicion.setEditable(false);
 		panel2.add(tfCondicion);
 		
 		JLabel lblNotasDelEstudiante_1 = new JLabel("Notas del estudiante");
