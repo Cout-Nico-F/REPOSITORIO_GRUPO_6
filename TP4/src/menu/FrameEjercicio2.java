@@ -34,22 +34,6 @@ public class FrameEjercicio2 extends JFrame {
 	private JTextField tfPromedio;
 	private JTextField tfCondicion;
 	JComboBox<String> comboBox_TPS;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameEjercicio2 frame = new FrameEjercicio2();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	/**
 	 * Create the frame.
 	 */
