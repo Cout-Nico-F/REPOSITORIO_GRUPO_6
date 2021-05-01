@@ -63,7 +63,7 @@ public class FrameEjercicio2 extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNotasDelEstudiante = new JLabel("Notas del estudiante");
-		lblNotasDelEstudiante.setBounds(54, 21, 133, 14);
+		lblNotasDelEstudiante.setBounds(39, 11, 133, 14);
 		lblNotasDelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNotasDelEstudiante.setBackground(Color.LIGHT_GRAY);
 		contentPane.add(lblNotasDelEstudiante);
@@ -169,7 +169,7 @@ public class FrameEjercicio2 extends JFrame {
 		
 		JPanel panel2 = new JPanel();
 		panel2.setBounds(39, 286, 315, 113);
-		panel2.setBorder(new LineBorder(SystemColor.activeCaption));
+		panel2.setBorder(new LineBorder(new Color(153, 180, 209), 2));
 		contentPane.add(panel2);
 		panel2.setLayout(null);
 		
@@ -197,7 +197,7 @@ public class FrameEjercicio2 extends JFrame {
 		
 		JLabel lblNotasDelEstudiante_1 = new JLabel("Notas del estudiante");
 		lblNotasDelEstudiante_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNotasDelEstudiante_1.setBounds(54, 266, 133, 23);
+		lblNotasDelEstudiante_1.setBounds(39, 264, 133, 23);
 		contentPane.add(lblNotasDelEstudiante_1);
 		
 		JButton btnCalcular = new JButton("Calcular");
