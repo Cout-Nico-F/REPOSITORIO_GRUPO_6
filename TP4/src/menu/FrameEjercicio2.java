@@ -285,5 +285,9 @@ public class FrameEjercicio2 extends JFrame {
 	
 	private void Calcular() {
 		// ete metodo decide la condicion del alumno en base al enunciado
+		//textbox_nota1.getText()
+		
+		tfPromedio.setText (((Float.parseFloat(textbox_nota1.getText()) + Float.parseFloat(textbox_nota2.getText()) + Float.parseFloat(textbox_nota3.getText()) )/3)+"");
+		
 	}
 }
