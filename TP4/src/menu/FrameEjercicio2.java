@@ -54,7 +54,6 @@ public class FrameEjercicio2 extends JFrame {
 	 * Create the frame.
 	 */
 	public FrameEjercicio2() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 584, 460);
 		setTitle("Promedio");
 		contentPane = new JPanel();
