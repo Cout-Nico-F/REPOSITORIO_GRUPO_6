@@ -91,7 +91,7 @@ public class FrameEjercicio2 extends JFrame {
 		lblNota3.setBounds(10, 111, 71, 26);
 		panel.add(lblNota3);
 		
-		
+		//nota1
 		textbox_nota1 = new JTextField();
 		textbox_nota1.addKeyListener(new KeyAdapter() {
 			@Override
@@ -103,35 +103,33 @@ public class FrameEjercicio2 extends JFrame {
 		textbox_nota1.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ComprobarNotaIngresada(e);				
+			 ComprobarNotaIngresada(e);
 			}
 		});
 		textbox_nota1.setBounds(91, 37, 161, 23);
 		panel.add(textbox_nota1);
 		textbox_nota1.setColumns(10);
 		
+		//nota2
 		textbox_nota2 = new JTextField();
 		textbox_nota2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char num = e.getKeyChar();
 				CheckOnlyNumbers(num,e); //Calls the method every time a key is pressed
-				/*if(textbox_nota2.getText().length() == 4) e.consume();
-				if(Float.parseFloat(textbox_nota2.getText()) > 0 && Float.parseFloat(textbox_nota2.getText()) <= 10){
-					JOptionPane.showMessageDialog(rootPane,"Solo se permiten numero entre el 1 y el 10");
-				}*/ //MAL
 			}
 		});
 		textbox_nota2.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ComprobarNotaIngresada(e);				
+				ComprobarNotaIngresada(e);	
 			}
 		});
 		textbox_nota2.setColumns(10);
 		textbox_nota2.setBounds(91, 77, 161, 23);
 		panel.add(textbox_nota2);
 		
+		//nota3
 		textbox_nota3 = new JTextField();
 		textbox_nota3.addKeyListener(new KeyAdapter() {
 			@Override
@@ -143,7 +141,7 @@ public class FrameEjercicio2 extends JFrame {
 		textbox_nota3.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ComprobarNotaIngresada(e);				
+				ComprobarNotaIngresada(e);				
 			}
 		});
 		
@@ -151,6 +149,8 @@ public class FrameEjercicio2 extends JFrame {
 		textbox_nota3.setBounds(91, 114, 161, 23);
 		panel.add(textbox_nota3);
 		
+		
+		//TPS
 		JLabel lblTps = new JLabel("TPS");
 		lblTps.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTps.setHorizontalAlignment(SwingConstants.CENTER);
@@ -221,22 +221,9 @@ public class FrameEjercicio2 extends JFrame {
 		btnSalir.setBounds(399, 233, 146, 54);
 		contentPane.add(btnSalir);
 	}
-	
-	/*private boolean ComprobarNotaIngresada(FocusEvent e) throws NumberFormatException{
-		JTextField tb = (JTextField) e.getComponent();
-		String input = tb.getText();
-		try {
-			float x = Float.valueOf(input).floatValue();
-		} catch (NumberFormatException e2) {
-			e2.printStackTrace();
-			return false;
-		}
-		return true;
-	}*/ 
-	//esto lo comento por ahora para que no cree conflicto con el otro metodo
-	
+
 	private void CheckOnlyNumbers(char num,KeyEvent e) {
-		if(Character.isLetter(num)) { //if variable num is a number
+		if(Character.isLetter(num)) { //if variable num is not a number
 				getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
 				e.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
 			JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
@@ -249,5 +236,33 @@ public class FrameEjercicio2 extends JFrame {
 		nota3.setText(null);
 		prom.setText(null);
 		con.setText(null);
+	}
+	
+	private void LimpiarTxt(JTextField textField) {
+		textField.setText(null);
+	}
+	
+	private void ComprobarNotaIngresada(FocusEvent e) {
+		
+		//podriamos tener un metodo aca para que se puedan ingresar comas o puntos.( que busque comas y las cambie por puntos en el string y no pinche el convert )
+		//o un label que indique que los numeros decimales se marquen con punto
+		
+		JTextField tb = (JTextField) e.getComponent();
+		String input = tb.getText();
+		float number = -1;
+		if (input.length() > 0) {
+			try {
+				 number = Float.valueOf(input).floatValue();
+			} catch (NumberFormatException e2) {
+				JOptionPane.showMessageDialog(rootPane, "La nota ingresada no es valida.\n Utilice punto(.) para ingresar decimales, la coma no esta permitida");
+				System.out.println("Nota incorrecta ingresada");
+				LimpiarTxt(tb);
+			}
+			if (number < 1 || number > 10) {
+				JOptionPane.showMessageDialog(rootPane, "La nota ingresada esta fuera del rango permitido.\n Debe ser mayor o igual a 1 y menor o igual que 10");
+				System.out.println("Nota fuera de rango ingresada");
+				LimpiarTxt(tb);
+			}
+		}
 	}
 }
