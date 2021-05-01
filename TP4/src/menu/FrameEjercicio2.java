@@ -249,6 +249,7 @@ public class FrameEjercicio2 extends JFrame {
 				JOptionPane.showMessageDialog(rootPane, "La nota ingresada no es valida.\n Utilice punto(.) para ingresar decimales, la coma no esta permitida");
 				System.out.println("Nota incorrecta ingresada");
 				LimpiarTxt(tb);
+				return;
 			}
 			if (number < 1 || number > 10) {
 				JOptionPane.showMessageDialog(rootPane, "La nota ingresada esta fuera del rango permitido.\n Debe ser mayor o igual a 1 y menor o igual que 10");
@@ -284,9 +285,9 @@ public class FrameEjercicio2 extends JFrame {
 	}
 	
 	private void Calcular() {
-		// ete metodo decide la condicion del alumno en base al enunciado
-		//textbox_nota1.getText()
+		// este metodo decide la condicion del alumno en base al enunciado
 		
+		//Calcular promedio y mostrarlo
 		tfPromedio.setText (((Float.parseFloat(textbox_nota1.getText()) + Float.parseFloat(textbox_nota2.getText()) + Float.parseFloat(textbox_nota3.getText()) )/3)+"");
 		
 	}
