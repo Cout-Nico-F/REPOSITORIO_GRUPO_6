@@ -53,8 +53,6 @@ public class Principal extends JFrame {
 		JButton btnEjercicio2 = new JButton("Ejercicio 2");
 		btnEjercicio2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//creamos un objeto del tipo FrameEjercicio2
-				//lo ponemos visible = true;
 				FrameEjercicio2 e2 = new FrameEjercicio2();
 				e2.setVisible(true);
 			}

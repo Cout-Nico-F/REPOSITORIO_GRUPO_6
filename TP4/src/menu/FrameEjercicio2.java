@@ -33,27 +33,11 @@ public class FrameEjercicio2 extends JFrame {
 	private JTextField textbox_nota3;
 	private JTextField tfPromedio;
 	private JTextField tfCondicion;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameEjercicio2 frame = new FrameEjercicio2();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	JComboBox<String> comboBox_TPS;
 	/**
 	 * Create the frame.
 	 */
 	public FrameEjercicio2() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 584, 460);
 		setTitle("Promedio");
 		contentPane = new JPanel();
@@ -62,7 +46,7 @@ public class FrameEjercicio2 extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNotasDelEstudiante = new JLabel("Notas del estudiante");
-		lblNotasDelEstudiante.setBounds(54, 21, 133, 14);
+		lblNotasDelEstudiante.setBounds(39, 11, 133, 14);
 		lblNotasDelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNotasDelEstudiante.setBackground(Color.LIGHT_GRAY);
 		contentPane.add(lblNotasDelEstudiante);
@@ -91,7 +75,7 @@ public class FrameEjercicio2 extends JFrame {
 		lblNota3.setBounds(10, 111, 71, 26);
 		panel.add(lblNota3);
 		
-		
+		//nota1
 		textbox_nota1 = new JTextField();
 		textbox_nota1.addKeyListener(new KeyAdapter() {
 			@Override
@@ -103,35 +87,33 @@ public class FrameEjercicio2 extends JFrame {
 		textbox_nota1.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ComprobarNotaIngresada(e);				
+			 ComprobarNotaIngresada(e);
 			}
 		});
 		textbox_nota1.setBounds(91, 37, 161, 23);
 		panel.add(textbox_nota1);
 		textbox_nota1.setColumns(10);
 		
+		//nota2
 		textbox_nota2 = new JTextField();
 		textbox_nota2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char num = e.getKeyChar();
 				CheckOnlyNumbers(num,e); //Calls the method every time a key is pressed
-				/*if(textbox_nota2.getText().length() == 4) e.consume();
-				if(Float.parseFloat(textbox_nota2.getText()) > 0 && Float.parseFloat(textbox_nota2.getText()) <= 10){
-					JOptionPane.showMessageDialog(rootPane,"Solo se permiten numero entre el 1 y el 10");
-				}*/ //MAL
 			}
 		});
 		textbox_nota2.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ComprobarNotaIngresada(e);				
+				ComprobarNotaIngresada(e);	
 			}
 		});
 		textbox_nota2.setColumns(10);
 		textbox_nota2.setBounds(91, 77, 161, 23);
 		panel.add(textbox_nota2);
 		
+		//nota3
 		textbox_nota3 = new JTextField();
 		textbox_nota3.addKeyListener(new KeyAdapter() {
 			@Override
@@ -143,7 +125,7 @@ public class FrameEjercicio2 extends JFrame {
 		textbox_nota3.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				//ComprobarNotaIngresada(e);				
+				ComprobarNotaIngresada(e);				
 			}
 		});
 		
@@ -151,24 +133,26 @@ public class FrameEjercicio2 extends JFrame {
 		textbox_nota3.setBounds(91, 114, 161, 23);
 		panel.add(textbox_nota3);
 		
+		
+		//TPS
 		JLabel lblTps = new JLabel("TPS");
 		lblTps.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTps.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTps.setBounds(10, 148, 71, 26);
 		panel.add(lblTps);
 		
-		//String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
-		//JComboBox<String> comboBox_TPS = new JComboBox<>(comboBox_TPS_Opciones);
-		//comboBox_TPS.setMaximumRowCount(2);
-		//Arreglado error Type safety: The constructor JComboBox(Object[]) belongs to the raw type JComboBox. References to generic type JComboBox<E> should be parameterized
-		//era que le faltaban <> estos signos al combobox esto debido a que ahora es una clase generica a partir de java 7
+		String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
+		comboBox_TPS = new JComboBox(comboBox_TPS_Opciones);
+		comboBox_TPS.setSelectedIndex(-1);
+		comboBox_TPS.setMaximumRowCount(2);
 		
-		//comboBox_TPS.setBounds(91, 148, 161, 23);
-		//panel.add(comboBox_TPS);
+		
+		comboBox_TPS.setBounds(91, 148, 161, 23);
+		panel.add(comboBox_TPS);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setBounds(39, 286, 315, 113);
-		panel2.setBorder(new LineBorder(SystemColor.activeCaption));
+		panel2.setBorder(new LineBorder(new Color(153, 180, 209), 2));
 		contentPane.add(panel2);
 		panel2.setLayout(null);
 		
@@ -196,10 +180,17 @@ public class FrameEjercicio2 extends JFrame {
 		
 		JLabel lblNotasDelEstudiante_1 = new JLabel("Notas del estudiante");
 		lblNotasDelEstudiante_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNotasDelEstudiante_1.setBounds(54, 266, 133, 23);
+		lblNotasDelEstudiante_1.setBounds(39, 264, 133, 23);
 		contentPane.add(lblNotasDelEstudiante_1);
 		
 		JButton btnCalcular = new JButton("Calcular");
+		btnCalcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (ComprobarCampos()) {
+					Calcular();
+				}else JOptionPane.showMessageDialog(rootPane, "Todas las notas deben estar ingresadas para calcular");
+			}
+		});
 		btnCalcular.setBounds(399, 103, 146, 54);
 		contentPane.add(btnCalcular);
 		
@@ -207,6 +198,7 @@ public class FrameEjercicio2 extends JFrame {
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LimpiarTxt(textbox_nota1,textbox_nota2,textbox_nota3,tfPromedio,tfCondicion);
+				comboBox_TPS.setSelectedIndex(-1);
 			}
 		});
 		btnNuevo.setBounds(399, 168, 146, 54);
@@ -221,22 +213,9 @@ public class FrameEjercicio2 extends JFrame {
 		btnSalir.setBounds(399, 233, 146, 54);
 		contentPane.add(btnSalir);
 	}
-	
-	/*private boolean ComprobarNotaIngresada(FocusEvent e) throws NumberFormatException{
-		JTextField tb = (JTextField) e.getComponent();
-		String input = tb.getText();
-		try {
-			float x = Float.valueOf(input).floatValue();
-		} catch (NumberFormatException e2) {
-			e2.printStackTrace();
-			return false;
-		}
-		return true;
-	}*/ 
-	//esto lo comento por ahora para que no cree conflicto con el otro metodo
-	
+
 	private void CheckOnlyNumbers(char num,KeyEvent e) {
-		if(Character.isLetter(num)) { //if variable num is a number
+		if(Character.isLetter(num)) { //if variable num is not a number
 				getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
 				e.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
 			JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
@@ -249,5 +228,86 @@ public class FrameEjercicio2 extends JFrame {
 		nota3.setText(null);
 		prom.setText(null);
 		con.setText(null);
+	}
+	
+	private void LimpiarTxt(JTextField textField) {
+		textField.setText(null);
+	}
+	
+	private void ComprobarNotaIngresada(FocusEvent e) {
+		
+		//podriamos tener un metodo aca para que se puedan ingresar comas o puntos.( que busque comas y las cambie por puntos en el string y no pinche el convert )
+		//o un label que indique que los numeros decimales se marquen con punto
+		
+		JTextField tb = (JTextField) e.getComponent();
+		String input = tb.getText();
+		float number = -1;
+		if (input.length() > 0) {
+			try {
+				 number = Float.valueOf(input).floatValue();
+			} catch (NumberFormatException e2) {
+				JOptionPane.showMessageDialog(rootPane, "La nota ingresada no es valida.\n Utilice punto(.) para ingresar decimales, la coma no esta permitida");
+				System.out.println("Nota incorrecta ingresada");
+				LimpiarTxt(tb);
+				return;
+			}
+			if (number < 1 || number > 10) {
+				JOptionPane.showMessageDialog(rootPane, "La nota ingresada esta fuera del rango permitido.\n Debe ser mayor o igual a 1 y menor o igual que 10");
+				System.out.println("Nota fuera de rango ingresada");
+				LimpiarTxt(tb);
+			}
+		}
+	}
+	
+	private boolean ComprobarCampos() {
+		//este metodo comprueba que halla algo ingresado en los 4 campos, caso contrario avisa.
+		boolean field1 = false, field2 = false, field3= false ,field4 = false;
+		
+		if(textbox_nota1.getText().length() >0) {
+			field1=true;
+		}
+		if(textbox_nota2.getText().length() >0) {
+			field2=true;
+		}
+		if(textbox_nota3.getText().length() >0) {
+			field3=true;
+		}
+		if(comboBox_TPS.getSelectedIndex() > -1) {
+			field4=true;
+		}
+		
+		if (field1 && field2 && field3 && field4) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	private void Calcular() {
+		// este metodo decide la condicion del alumno en base al enunciado
+		
+		//Calcular promedio y mostrarlo
+		tfPromedio.setText (((Float.parseFloat(textbox_nota1.getText()) + Float.parseFloat(textbox_nota2.getText()) + Float.parseFloat(textbox_nota3.getText()) )/3)+"");
+		
+		//Calculo condicion
+		if(comboBox_TPS.getSelectedItem().equals("Aprobado")) {
+			
+			if(Float.parseFloat(textbox_nota1.getText()) < 6 || Float.parseFloat(textbox_nota2.getText()) < 6 || 
+				Float.parseFloat(textbox_nota3.getText()) < 6) {
+				tfCondicion.setText("Libre");
+			}
+			else if(Float.parseFloat(textbox_nota1.getText()) >= 8 && Float.parseFloat(textbox_nota2.getText()) >= 8 && 
+				Float.parseFloat(textbox_nota3.getText()) >= 8) {
+				tfCondicion.setText("Promocionado");
+			}
+			else{
+				tfCondicion.setText("Regular");
+			}
+		}
+		else {
+			tfCondicion.setText("Libre");
+		}
+		
 	}
 }
