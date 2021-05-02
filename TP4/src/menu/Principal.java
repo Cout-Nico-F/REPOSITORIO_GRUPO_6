@@ -1,18 +1,17 @@
 package menu;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import java.awt.Font;
 
-public class menuppal extends JFrame {
+public class Principal extends JFrame {
 
 	private JPanel contentPane;
 
@@ -23,7 +22,7 @@ public class menuppal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					menuppal frame = new menuppal();
+					Principal frame = new Principal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +34,7 @@ public class menuppal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public menuppal() {
+	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,6 +64,12 @@ public class menuppal extends JFrame {
 		
 		JButton btnEjercicio3 = new JButton("Ejercicio 3");
 		btnEjercicio3.setBounds(154, 170, 97, 25);
+		btnEjercicio3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrameEjercicio3 e3 = new FrameEjercicio3();
+				e3.setVisible(true);
+			}
+		});
 		contentPane.add(btnEjercicio3);
 		
 		JLabel lblGrupoN = new JLabel("GRUPO N\u00B0 6");
