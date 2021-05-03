@@ -15,13 +15,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrameEjercicio3 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtfCantHoras;
 
 	public FrameEjercicio3() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -85,11 +87,11 @@ public class FrameEjercicio3 extends JFrame {
 		lblCantidadDeHoras.setBounds(10, 171, 322, 14);
 		contentPane.add(lblCantidadDeHoras);
 
-		textField = new JTextField();
-		textField.setBounds(388, 168, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		textField.addKeyListener(new KeyAdapter() {
+		txtfCantHoras = new JTextField();
+		txtfCantHoras.setBounds(388, 168, 86, 20);
+		contentPane.add(txtfCantHoras);
+		txtfCantHoras.setColumns(10);
+		txtfCantHoras.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char num = e.getKeyChar();
@@ -98,6 +100,19 @@ public class FrameEjercicio3 extends JFrame {
 		});
 
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comprobarRadioButtons(rdbtnWindows, rdbtnMac, rdbtnLinux)) {
+					if (comprobarCheckBoxes(chckbxProgramacin, chckbxAdministracin, chckbxDiseoGrfico)) {
+						if (validarTextField(txtfCantHoras)) {
+							FrameMsjEjercicio3 ventanaMsj = new FrameMsjEjercicio3();
+							
+							ventanaMsj.setVisible(true);
+						}
+					}
+				}
+			}
+		});
 		btnAceptar.setBounds(385, 227, 89, 23);
 		contentPane.add(btnAceptar);
 	}
@@ -109,4 +124,38 @@ public class FrameEjercicio3 extends JFrame {
 			JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
 		}
 	}
+	
+	private boolean comprobarRadioButtons(JRadioButton jrb1, JRadioButton jrb2, JRadioButton jrb3) {
+		boolean retorno = true;
+		
+		if (!jrb1.isSelected()||jrb2.isSelected()||jrb3.isSelected()) {
+			retorno = false;
+		}
+		
+		return retorno;
+	}
+	
+	private boolean comprobarCheckBoxes(JCheckBox jcb1, JCheckBox jcb2, JCheckBox jcb3) {
+		boolean retorno = true;
+		
+		if (!jcb1.isSelected()||jcb2.isSelected()||jcb3.isSelected()) {
+			retorno = false;
+		}
+		
+		return retorno;
+	}
+	
+	private boolean validarTextField(JTextField jtf) {
+		boolean retorno = false;
+		
+		String input = jtf.getText();
+		if (input.length() > 0) {
+			retorno = true;
+		}		
+		return retorno;
+	}
+	
+		
 }
+	
+
