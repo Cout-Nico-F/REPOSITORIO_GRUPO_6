@@ -128,7 +128,7 @@ public class FrameEjercicio3 extends JFrame {
 	private boolean comprobarRadioButtons(JRadioButton jrb1, JRadioButton jrb2, JRadioButton jrb3) {
 		boolean retorno = true;
 		
-		if (!(jrb1.isSelected()||jrb2.isSelected()||jrb3.isSelected())) {
+		if ((!(jrb1.isSelected()) && !(jrb2.isSelected()) && !(jrb3.isSelected()))) {
 			retorno = false;
 		}
 		
@@ -138,7 +138,7 @@ public class FrameEjercicio3 extends JFrame {
 	private boolean comprobarCheckBoxes(JCheckBox jcb1, JCheckBox jcb2, JCheckBox jcb3) {
 		boolean retorno = true;
 		
-		if (!(jcb1.isSelected()||jcb2.isSelected()||jcb3.isSelected())) {
+		if ((!(jcb1.isSelected()) && !(jcb2.isSelected()) && !(jcb3.isSelected()))) {
 			retorno = false;
 		}
 		
