@@ -115,11 +115,19 @@ public class FrameEjercicio3 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (comprobarRadioButtons(rdbtnWindows, rdbtnMac, rdbtnLinux)) {
 					if (comprobarCheckBoxes(chckbxProgramacin, chckbxAdministracin, chckbxDiseoGrfico)) {
-						if (validarTextField(txtfCantHoras)) {
+						if (validarTextField(txtfCantHoras) && txtfCantHoras.getText().length() > 0) {
 							JOptionPane.showMessageDialog(null, getInformacionSeleccionada());
+						} else {
+							JOptionPane.showMessageDialog(null, "Debe ingresar la cantidad de horas.");
 						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Debe seleccionar al menos una especialidad.");
 					}
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar un sistema operativo.");
 				}
+				
 			}
 		});
 		btnAceptar.setBounds(385, 227, 89, 23);
@@ -155,14 +163,26 @@ public class FrameEjercicio3 extends JFrame {
 	}
 	
 	private boolean validarTextField(JTextField jtf) {
-		boolean retorno = false;
+		boolean retorno = true;
 		
 		String input = jtf.getText();
 		if (input.length() > 0) {
-			retorno = true;
-		}		
+			try {
+				float horas = Integer.valueOf(input).intValue();
+				if (horas < 0 || horas > 24) {
+					JOptionPane.showMessageDialog(null, "La cantidad de horas ingresada esta fuera del rango permitido.\n Debe ser mayor o igual a 1 y menor o igual que 24");
+					System.out.println("Cant. de horas no valida");
+					retorno = false;
+				}
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+			
+		}	
+		
 		return retorno;
-	}
+		
+}
 	
 	private String getInformacionSeleccionada() {
 		String retorno;
