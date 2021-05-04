@@ -22,6 +22,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
+import java.awt.GridLayout;
 
 public class FrameEjercicio2 extends JFrame {
 
@@ -45,15 +47,9 @@ public class FrameEjercicio2 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNotasDelEstudiante = new JLabel("Notas del estudiante");
-		lblNotasDelEstudiante.setBounds(39, 11, 133, 14);
-		lblNotasDelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNotasDelEstudiante.setBackground(Color.LIGHT_GRAY);
-		contentPane.add(lblNotasDelEstudiante);
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(39, 29, 315, 209);
-		panel.setBorder(new LineBorder(SystemColor.activeCaption, 2, true));
+		panel.setBorder(new TitledBorder(null, "Notas del estudiante", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -151,8 +147,8 @@ public class FrameEjercicio2 extends JFrame {
 		panel.add(comboBox_TPS);
 		
 		JPanel panel2 = new JPanel();
-		panel2.setBounds(39, 286, 315, 113);
-		panel2.setBorder(new LineBorder(new Color(153, 180, 209), 2));
+		panel2.setBounds(39, 275, 315, 113);
+		panel2.setBorder(new TitledBorder(null, "Notas del estudiante", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panel2);
 		panel2.setLayout(null);
 		
@@ -178,12 +174,33 @@ public class FrameEjercicio2 extends JFrame {
 		tfCondicion.setEditable(false);
 		panel2.add(tfCondicion);
 		
-		JLabel lblNotasDelEstudiante_1 = new JLabel("Notas del estudiante");
-		lblNotasDelEstudiante_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNotasDelEstudiante_1.setBounds(39, 264, 133, 23);
-		contentPane.add(lblNotasDelEstudiante_1);
+		JPanel panelDeBotones = new JPanel();
+		panelDeBotones.setBounds(385, 140, 173, 137);
+		contentPane.add(panelDeBotones);
+		panelDeBotones.setLayout(new GridLayout(3, 0, 0, 15));
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panelDeBotones.add(btnSalir);
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		
+		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panelDeBotones.add(btnNuevo);
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LimpiarTxt(textbox_nota1,textbox_nota2,textbox_nota3,tfPromedio,tfCondicion);
+				comboBox_TPS.setSelectedIndex(-1);
+			}
+		});
 		
 		JButton btnCalcular = new JButton("Calcular");
+		btnCalcular.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panelDeBotones.add(btnCalcular);
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (ComprobarCampos()) {
@@ -191,27 +208,6 @@ public class FrameEjercicio2 extends JFrame {
 				}else JOptionPane.showMessageDialog(rootPane, "Todas las notas deben estar ingresadas para calcular");
 			}
 		});
-		btnCalcular.setBounds(399, 103, 146, 54);
-		contentPane.add(btnCalcular);
-		
-		JButton btnNuevo = new JButton("Nuevo");
-		btnNuevo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LimpiarTxt(textbox_nota1,textbox_nota2,textbox_nota3,tfPromedio,tfCondicion);
-				comboBox_TPS.setSelectedIndex(-1);
-			}
-		});
-		btnNuevo.setBounds(399, 168, 146, 54);
-		contentPane.add(btnNuevo);
-		
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		btnSalir.setBounds(399, 233, 146, 54);
-		contentPane.add(btnSalir);
 	}
 
 	private void CheckOnlyNumbers(char num,KeyEvent e) {
