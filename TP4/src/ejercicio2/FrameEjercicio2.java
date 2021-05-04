@@ -132,7 +132,7 @@ public class FrameEjercicio2 extends JFrame {
 		panel.add(lblTps);
 		
 		String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
-		comboBox_TPS = new JComboBox<String>(comboBox_TPS_Opciones);
+		comboBox_TPS = new JComboBox(comboBox_TPS_Opciones);
 		comboBox_TPS.setSelectedIndex(-1);
 		comboBox_TPS.setMaximumRowCount(2);
 		
