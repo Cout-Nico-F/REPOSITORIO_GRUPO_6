@@ -20,6 +20,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
 
 public class FrameEjercicio1 extends JFrame {
 
@@ -61,50 +63,6 @@ public class FrameEjercicio1 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombre.setBounds(54, 37, 56, 16);
-		contentPane.add(lblNombre);
-		
-		JLabel lblApellido = new JLabel("Apellido");
-		lblApellido.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblApellido.setBounds(54, 77, 56, 16);
-		contentPane.add(lblApellido);
-		
-		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTelefono.setBounds(54, 120, 56, 16);
-		contentPane.add(lblTelefono);
-		
-		JLabel lblFechaNac = new JLabel("Fecha Nac");
-		lblFechaNac.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaNac.setBounds(54, 149, 86, 25);
-		contentPane.add(lblFechaNac);
-		
-		txtNombre = new JTextField();
-		txtNombre.setBounds(142, 34, 173, 22);
-		txtNombre.setName("Nombre");
-		contentPane.add(txtNombre);
-		txtNombre.setColumns(10);
-		
-		txtApellido = new JTextField();
-		txtApellido.setBounds(142, 74, 173, 22);
-		txtApellido.setName("Apellido");
-		contentPane.add(txtApellido);
-		txtApellido.setColumns(10);
-		
-		txtTelefono = new JTextField();
-		txtTelefono.setName("Telefono");
-		txtTelefono.setBounds(142, 117, 173, 22);
-		contentPane.add(txtTelefono);
-		txtTelefono.setColumns(10);
-		
-		txtFechaNac = new JTextField();
-		txtFechaNac.setName("Fecha de nacimineto");
-		txtFechaNac.setBounds(142, 152, 173, 22);
-		contentPane.add(txtFechaNac);
-		txtFechaNac.setColumns(10);
-		
 		JLabel lblDatosIngresados = new JLabel("Los datos ingresados fueron:");
 		lblDatosIngresados.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDatosIngresados.setBounds(29, 224, 286, 16);
@@ -129,8 +87,57 @@ public class FrameEjercicio1 extends JFrame {
 			}
 		});
 		btnMostrar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnMostrar.setBounds(283, 187, 97, 25);
+		btnMostrar.setBounds(291, 171, 97, 25);
 		contentPane.add(btnMostrar);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 29, 378, 131);
+		contentPane.add(panel);
+		panel.setLayout(new GridLayout(4, 2, 0, 10));
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombre.setVerticalAlignment(SwingConstants.BOTTOM);
+		panel.add(lblNombre);
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		txtNombre = new JTextField();
+		panel.add(txtNombre);
+		txtNombre.setName("Nombre");
+		txtNombre.setColumns(10);
+		
+		JLabel lblApellido = new JLabel("Apellido");
+		lblApellido.setHorizontalAlignment(SwingConstants.CENTER);
+		lblApellido.setVerticalAlignment(SwingConstants.BOTTOM);
+		panel.add(lblApellido);
+		lblApellido.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		txtApellido = new JTextField();
+		panel.add(txtApellido);
+		txtApellido.setName("Apellido");
+		txtApellido.setColumns(10);
+		
+		JLabel lblTelefono = new JLabel("Telefono");
+		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTelefono.setVerticalAlignment(SwingConstants.BOTTOM);
+		panel.add(lblTelefono);
+		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		txtTelefono = new JTextField();
+		panel.add(txtTelefono);
+		txtTelefono.setName("Telefono");
+		txtTelefono.setColumns(10);
+		
+		JLabel lblFechaNac = new JLabel("Fecha Nac");
+		lblFechaNac.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFechaNac.setVerticalAlignment(SwingConstants.BOTTOM);
+		panel.add(lblFechaNac);
+		lblFechaNac.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		txtFechaNac = new JTextField();
+		panel.add(txtFechaNac);
+		txtFechaNac.setName("Fecha de nacimineto");
+		txtFechaNac.setColumns(10);
 	}
 	
 	
