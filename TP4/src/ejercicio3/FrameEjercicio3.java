@@ -22,9 +22,13 @@ import java.awt.event.ActionEvent;
 public class FrameEjercicio3 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private ButtonGroup buttonGroup;
 	private JPanel contentPane;
 	private JTextField txtfCantHoras;
+	private JCheckBox chckbxProgramacin;
+	private JCheckBox chckbxAdministracin;
+	private JCheckBox chckbxDiseoGrfico; 
 
 	public FrameEjercicio3() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,20 +49,23 @@ public class FrameEjercicio3 extends JFrame {
 		lblNewLabel.setBounds(10, 11, 165, 14);
 		panel.add(lblNewLabel);
 
-		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup = new ButtonGroup();
 
 		JRadioButton rdbtnWindows = new JRadioButton("Windows");
 		rdbtnWindows.setBounds(181, 7, 103, 23);
+		rdbtnWindows.setActionCommand("Windows");
 		panel.add(rdbtnWindows);
 		buttonGroup.add(rdbtnWindows);
 
 		JRadioButton rdbtnMac = new JRadioButton("Mac");
 		rdbtnMac.setBounds(286, 7, 91, 23);
+		rdbtnMac.setActionCommand("Mac");
 		panel.add(rdbtnMac);
 		buttonGroup.add(rdbtnMac);
 
 		JRadioButton rdbtnLinux = new JRadioButton("Linux");
 		rdbtnLinux.setBounds(379, 7, 79, 23);
+		rdbtnLinux.setActionCommand("Linux");
 		panel.add(rdbtnLinux);
 		buttonGroup.add(rdbtnLinux);
 
@@ -68,15 +75,16 @@ public class FrameEjercicio3 extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		JCheckBox chckbxProgramacin = new JCheckBox("Programaci\u00F3n");
+		
+		chckbxProgramacin = new JCheckBox("Programaci\u00F3n");
 		chckbxProgramacin.setBounds(264, 7, 194, 23);
 		panel_1.add(chckbxProgramacin);
 
-		JCheckBox chckbxAdministracin = new JCheckBox("Administraci\u00F3n");
+		chckbxAdministracin = new JCheckBox("Administraci\u00F3n");
 		chckbxAdministracin.setBounds(264, 33, 194, 23);
 		panel_1.add(chckbxAdministracin);
 
-		JCheckBox chckbxDiseoGrfico = new JCheckBox("Dise\u00F1o Gr\u00E1fico");
+		chckbxDiseoGrfico = new JCheckBox("Dise\u00F1o Gr\u00E1fico");
 		chckbxDiseoGrfico.setBounds(264, 59, 194, 23);
 		panel_1.add(chckbxDiseoGrfico);
 
@@ -97,6 +105,8 @@ public class FrameEjercicio3 extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char num = e.getKeyChar();
 				CheckOnlyNumbers(num, e);
+				//validar no mas de 24 hs.
+				//validar lo del @ y caracteres esperciales
 			}
 		});
 
@@ -106,9 +116,7 @@ public class FrameEjercicio3 extends JFrame {
 				if (comprobarRadioButtons(rdbtnWindows, rdbtnMac, rdbtnLinux)) {
 					if (comprobarCheckBoxes(chckbxProgramacin, chckbxAdministracin, chckbxDiseoGrfico)) {
 						if (validarTextField(txtfCantHoras)) {
-							FrameMsjEjercicio3 ventanaMsj = new FrameMsjEjercicio3();
-							
-							ventanaMsj.setVisible(true);
+							JOptionPane.showMessageDialog(null, getInformacionSeleccionada());
 						}
 					}
 				}
@@ -119,7 +127,7 @@ public class FrameEjercicio3 extends JFrame {
 	}
 
 	private void CheckOnlyNumbers(char num, KeyEvent e) {
-		if (Character.isLetter(num)) {
+		if (Character.isLetter(num) || num=='-' || num=='+') {
 			getToolkit().beep();
 			e.consume();
 			JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
@@ -156,7 +164,21 @@ public class FrameEjercicio3 extends JFrame {
 		return retorno;
 	}
 	
-		
+	private String getInformacionSeleccionada() {
+		String retorno;
+		retorno = buttonGroup.getSelection().getActionCommand() + " - ";
+		if(chckbxProgramacin.isSelected()) {
+			retorno += chckbxProgramacin.getText() + " - ";
+		}
+		if(chckbxAdministracin.isSelected()) {
+			retorno += chckbxAdministracin.getText() + " - ";
+		}
+		if(chckbxDiseoGrfico.isSelected()) {
+			retorno += chckbxDiseoGrfico.getText() + " - ";
+		}
+		retorno += txtfCantHoras.getText() + " Hs";
+		return retorno;
+	}
 }
 	
 
