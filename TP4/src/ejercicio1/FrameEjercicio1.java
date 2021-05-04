@@ -158,18 +158,26 @@ public class FrameEjercicio1 extends JFrame {
 		if(txtNombre.getText().length() == 0) {
 			txtNombre.setBackground(Color.RED);
 			listRetorno.add(txtNombre);
+		}else {
+			txtNombre.setBackground(Color.WHITE);
 		}
 		if(txtApellido.getText().length()== 0) {
 			txtApellido.setBackground(Color.RED);
 			listRetorno.add(txtApellido);
+		}else {
+			txtApellido.setBackground(Color.WHITE);
 		}
 		if(txtTelefono.getText().length() == 0) {
 			txtTelefono.setBackground(Color.RED);
 			listRetorno.add(txtTelefono);
+		}else {
+			txtTelefono.setBackground(Color.WHITE);
 		}
 		if(txtFechaNac.getText().length() == 0) {
 			txtFechaNac.setBackground(Color.RED);
 			listRetorno.add(txtFechaNac);
+		}else {
+			txtFechaNac.setBackground(Color.WHITE);
 		}
 		return listRetorno;
 	}
