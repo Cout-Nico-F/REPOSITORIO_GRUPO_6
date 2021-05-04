@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ejercicio2.FrameEjercicio2;
+import ejercicio3.FrameEjercicio3;
+
 public class Principal extends JFrame {
 
 	private JPanel contentPane;

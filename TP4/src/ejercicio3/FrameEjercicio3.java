@@ -1,4 +1,4 @@
-package menu;
+package ejercicio3;
 
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -15,6 +15,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

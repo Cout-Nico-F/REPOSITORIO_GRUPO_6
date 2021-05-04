@@ -1,4 +1,4 @@
-package menu;
+package ejercicio2;
 
 import java.awt.EventQueue;
 
