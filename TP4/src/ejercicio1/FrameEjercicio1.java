@@ -22,6 +22,8 @@ import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FrameEjercicio1 extends JFrame {
 
@@ -124,6 +126,11 @@ public class FrameEjercicio1 extends JFrame {
 		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		txtTelefono = new JTextField();
+		txtTelefono.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				validaIngresoNumeros(e);
+			}
+		});
 		panel.add(txtTelefono);
 		txtTelefono.setName("Telefono");
 		txtTelefono.setColumns(10);
@@ -135,6 +142,11 @@ public class FrameEjercicio1 extends JFrame {
 		lblFechaNac.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		txtFechaNac = new JTextField();
+		txtFechaNac.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				validaIngresoNumeros(e);
+			}
+		});
 		panel.add(txtFechaNac);
 		txtFechaNac.setName("Fecha de nacimineto");
 		txtFechaNac.setColumns(10);
@@ -171,5 +183,14 @@ public class FrameEjercicio1 extends JFrame {
 		txtFechaNac.setText("");
 		txtTelefono.setBackground(Color.WHITE);
 		txtTelefono.setText("");
+	}
+	
+	public void validaIngresoNumeros(KeyEvent e) {
+		char c = e.getKeyChar();
+		if (Character.isLetter(c)) {
+			getToolkit().beep();
+			e.consume();
+			JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+		}
 	}
 }
