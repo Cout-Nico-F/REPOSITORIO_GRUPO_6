@@ -170,7 +170,7 @@ public class FrameEjercicio3 extends JFrame {
 			try {
 				float horas = Integer.valueOf(input).intValue();
 				if (horas < 0 || horas > 24) {
-					JOptionPane.showMessageDialog(null, "La cantidad de horas ingresada esta fuera del rango permitido.\n Debe ser mayor o igual a 1 y menor o igual que 24");
+					JOptionPane.showMessageDialog(null, "La cantidad de horas ingresada esta fuera del rango permitido.\n Debe ser mayor o igual a 0 y menor o igual que 24");
 					System.out.println("Cant. de horas no valida");
 					retorno = false;
 				}
