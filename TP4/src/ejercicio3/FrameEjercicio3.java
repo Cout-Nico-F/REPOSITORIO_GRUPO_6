@@ -105,8 +105,7 @@ public class FrameEjercicio3 extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char num = e.getKeyChar();
 				CheckOnlyNumbers(num, e);
-				//validar no mas de 24 hs.
-				//validar lo del @ y caracteres esperciales
+
 			}
 		});
 
@@ -115,11 +114,12 @@ public class FrameEjercicio3 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (comprobarRadioButtons(rdbtnWindows, rdbtnMac, rdbtnLinux)) {
 					if (comprobarCheckBoxes(chckbxProgramacin, chckbxAdministracin, chckbxDiseoGrfico)) {
-						if (validarTextField(txtfCantHoras) && txtfCantHoras.getText().length() > 0) {
-							JOptionPane.showMessageDialog(null, getInformacionSeleccionada());
-						} else {
+						if (txtfCantHoras.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Debe ingresar la cantidad de horas.");
-						}
+						} else
+						if (validarTextField(txtfCantHoras)) {
+							JOptionPane.showMessageDialog(null, getInformacionSeleccionada());
+						} 
 					} else {
 						JOptionPane.showMessageDialog(null, "Debe seleccionar al menos una especialidad.");
 					}
@@ -178,7 +178,7 @@ public class FrameEjercicio3 extends JFrame {
 				e.printStackTrace();
 			}
 			
-		}	
+		}
 		
 		return retorno;
 		
