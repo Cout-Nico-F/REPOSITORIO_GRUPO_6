@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ejercicio1.FrameEjercicio1;
 import ejercicio2.FrameEjercicio2;
 import ejercicio3.FrameEjercicio3;
 
@@ -47,7 +48,9 @@ public class Principal extends JFrame {
 		
 		JButton btnEjercicio1 = new JButton("Ejercicio 1");
 		btnEjercicio1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
+			public void actionPerformed(ActionEvent arg0) {
+				FrameEjercicio1 e1 = new FrameEjercicio1();
+				e1.setVisible(true);
 			}
 		});
 		btnEjercicio1.setBounds(154, 63, 97, 25);
