@@ -1,22 +1,16 @@
 package ejercicio2;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -138,7 +132,7 @@ public class FrameEjercicio2 extends JFrame {
 		panel.add(lblTps);
 		
 		String comboBox_TPS_Opciones [] = {"Aprobado","Desaprobado"};
-		comboBox_TPS = new JComboBox(comboBox_TPS_Opciones);
+		comboBox_TPS = new JComboBox<String>(comboBox_TPS_Opciones);
 		comboBox_TPS.setSelectedIndex(-1);
 		comboBox_TPS.setMaximumRowCount(2);
 		

@@ -17,6 +17,10 @@ import ejercicio3.FrameEjercicio3;
 
 public class Principal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7492482302670126113L;
 	private JPanel contentPane;
 
 	/**
