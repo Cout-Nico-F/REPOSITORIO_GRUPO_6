@@ -117,9 +117,10 @@ public class FrameEjercicio3 extends JFrame {
 						if (txtfCantHoras.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Debe ingresar la cantidad de horas.");
 						} else
-						if (validarTextField(txtfCantHoras)) {
+						if(comprobarHorasIngresadas(txtfCantHoras)) {
 							JOptionPane.showMessageDialog(null, getInformacionSeleccionada());
-						} 
+						}
+						
 					} else {
 						JOptionPane.showMessageDialog(null, "Debe seleccionar al menos una especialidad.");
 					}
@@ -162,26 +163,27 @@ public class FrameEjercicio3 extends JFrame {
 		return retorno;
 	}
 	
-	private boolean validarTextField(JTextField jtf) {
+	private boolean comprobarHorasIngresadas(JTextField jtf) {
 		boolean retorno = true;
 		
 		String input = jtf.getText();
+		float horas = -1;	
 		if (input.length() > 0) {
 			try {
-				float horas = Float.valueOf(input).floatValue();
-				if (horas < 0 || horas > 24) {
-					JOptionPane.showMessageDialog(null, "La cantidad de horas ingresada esta fuera del rango permitido.\n Debe ser mayor o igual a 0 y menor o igual que 24");
-					System.out.println("Cant. de horas no valida");
-					retorno = false;
-				}
+				horas = Float.valueOf(input).floatValue();
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "La cantidad de horas ingresada no es valida.\n Utilice punto(.) para ingresar decimales, la coma no esta permitida");
+				System.out.println("Cant. de horas no valida");
+				retorno = false;
+			}
+			if (horas < 0 || horas > 24) {
+				JOptionPane.showMessageDialog(null, "La cantidad de horas ingresada no es valida. \n Debe estar entre 0 y 24 horas.");
+				retorno = false;
 			}
 			
 		}
 		
 		return retorno;
-		
 }
 	
 	private String getInformacionSeleccionada() {
