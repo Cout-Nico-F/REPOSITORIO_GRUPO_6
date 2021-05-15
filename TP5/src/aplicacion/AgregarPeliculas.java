@@ -6,6 +6,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
@@ -14,19 +15,23 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 
-public class AgregarPeliculas extends JFrame{
+public class AgregarPeliculas extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JComboBox<String> cbCategoria;
-	
-	
+	private JLabel lblNombreID;
+	private JLabel lblNombre;
+	private JLabel lblGenero;
+	private JLabel lblID;
+	private JButton btnAceptar;
 	
 	public AgregarPeliculas() {
 		setTitle("Programa");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(300, 200, 450, 300);
+		setBounds(300,200, 450, 288);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,16 +61,15 @@ public class AgregarPeliculas extends JFrame{
 		});
 		mnMenu.add(mntmListar);
 		
+		lblNombreID = new JLabel("ID");
+		lblNombreID.setBounds(69, 40, 46, 14);
+		contentPane.add(lblNombreID);
 		
-		JLabel lblNewLabel = new JLabel("ID");
-		lblNewLabel.setBounds(69, 40, 46, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(69, 77, 46, 14);
 		contentPane.add(lblNombre);
 		
-		JLabel lblGenero = new JLabel("Genero");
+		lblGenero = new JLabel("Genero");
 		lblGenero.setBounds(69, 121, 46, 14);
 		contentPane.add(lblGenero);
 		
@@ -74,7 +78,7 @@ public class AgregarPeliculas extends JFrame{
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblID = new JLabel("New label");
+		lblID = new JLabel("New label");
 		lblID.setBounds(160, 40, 46, 14);
 		contentPane.add(lblID);
 		
@@ -82,10 +86,9 @@ public class AgregarPeliculas extends JFrame{
 		cbCategoria.setBounds(161, 118, 136, 20);
 		contentPane.add(cbCategoria);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(66, 159, 119, 23);
 		contentPane.add(btnAceptar);
 		
-		setVisible(true);
 	}
 }
