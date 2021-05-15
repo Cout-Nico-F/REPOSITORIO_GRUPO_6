@@ -40,6 +40,7 @@ public class ListarPeliculas extends JFrame {
 		
 		tpPeliculas = new JTextPane();
 		tpPeliculas.setBounds(131, 11, 307, 248);
+		tpPeliculas.setEditable(false);
 		contentPane.add(tpPeliculas);
 		
 		JMenuBar menuBar = new JMenuBar();
