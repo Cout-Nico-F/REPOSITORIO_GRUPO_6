@@ -9,6 +9,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class MenuPeliculas extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
 	public MenuPeliculas() {
 		setTitle("Programa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
