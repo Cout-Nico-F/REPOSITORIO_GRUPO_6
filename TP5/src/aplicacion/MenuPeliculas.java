@@ -1,5 +1,6 @@
 package aplicacion;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,15 +8,23 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class MenuPeliculas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
 
 	public MenuPeliculas() {
 		setTitle("Programa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 200, 450, 300);
+		setBounds(350, 250, 450, 300);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5,5,5,5));
+		contentPane.setLayout(new BorderLayout(0,0));
+		setContentPane(contentPane);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -26,8 +35,11 @@ public class MenuPeliculas extends JFrame {
 		JMenuItem mntmAgregar = new JMenuItem("Agregar");
 		mntmAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AgregarPeliculas agregarPeliculas = new AgregarPeliculas();
-				agregarPeliculas.setVisible(true);
+				contentPane.removeAll();
+				PanelAgregarPelicula pap = new PanelAgregarPelicula();
+				contentPane.add(pap);
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		mnMenu.add(mntmAgregar);
@@ -35,8 +47,11 @@ public class MenuPeliculas extends JFrame {
 		JMenuItem mntmListar = new JMenuItem("Listar");
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ListarPeliculas listarPeliculas = new ListarPeliculas();
-				listarPeliculas.setVisible(true);
+				contentPane.removeAll();
+				PanelListarPelicula pap = new PanelListarPelicula();
+				contentPane.add(pap);
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		mnMenu.add(mntmListar);
