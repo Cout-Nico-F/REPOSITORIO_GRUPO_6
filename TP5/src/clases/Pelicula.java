@@ -37,4 +37,8 @@ public class Pelicula {
 		this.categoria = categoria;
 	}
 	
+	public static int getCount() {
+		return count;
+	}
+	
 }

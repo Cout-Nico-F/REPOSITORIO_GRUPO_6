@@ -3,6 +3,9 @@ package aplicacion;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import clases.Pelicula;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.Font;
@@ -54,10 +57,10 @@ public class PanelAgregarPelicula extends JPanel {
 		add(cbGenero);
 		
 		JLabel lblID = new JLabel("");
+		lblID.setText(String.valueOf(Pelicula.getCount()));
 		lblID.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblID.setBounds(161, 74, 56, 14);
 		add(lblID);
 
 	}
-
 }
