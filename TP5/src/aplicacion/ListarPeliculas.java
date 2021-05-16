@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
 import java.awt.Font;
+import javax.swing.JList;
 
 public class ListarPeliculas extends JFrame {
 	
@@ -20,7 +21,7 @@ public class ListarPeliculas extends JFrame {
 	
 	private JPanel contentPane;
 	private JLabel lblPelicula;
-	private JTextPane tpPeliculas;
+	private JList list;
 		
 	public ListarPeliculas() {
 		
@@ -38,10 +39,9 @@ public class ListarPeliculas extends JFrame {
 		lblPelicula.setBounds(60, 117, 73, 24);
 		contentPane.add(lblPelicula);
 		
-		tpPeliculas = new JTextPane();
-		tpPeliculas.setBounds(131, 11, 307, 248);
-		tpPeliculas.setEditable(false);
-		contentPane.add(tpPeliculas);
+		list = new JList();
+		list.setBounds(126, 11, 314, 270);
+		contentPane.add(list);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
