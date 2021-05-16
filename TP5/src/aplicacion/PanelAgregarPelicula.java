@@ -43,6 +43,12 @@ public class PanelAgregarPelicula extends JPanel {
 		add(btnAceptar);
 		
 		cbGenero = new JComboBox<String>();
+		cbGenero.addItem("Seleccione un genero");
+		cbGenero.addItem("Terror");
+		cbGenero.addItem("Accion");
+		cbGenero.addItem("Suspenso");
+		cbGenero.addItem("Romantica");
+		cbGenero.setToolTipText("Seleccione un genero");
 		cbGenero.setFont(new Font("Tahoma", Font.BOLD, 13));
 		cbGenero.setBounds(159, 158, 118, 20);
 		add(cbGenero);
