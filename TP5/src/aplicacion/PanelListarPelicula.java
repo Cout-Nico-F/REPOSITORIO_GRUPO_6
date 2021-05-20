@@ -23,14 +23,14 @@ public class PanelListarPelicula extends JPanel {
 		
 		JLabel lblPelicula = new JLabel("Pelicula");
 		lblPelicula.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblPelicula.setBounds(10, 130, 66, 14);
+		lblPelicula.setBounds(10, 92, 66, 14);
 		add(lblPelicula);
 		
 		
 
 
 		listaPeliculas.setFont(new Font("Tahoma", Font.BOLD, 13));
-		listaPeliculas.setBounds(90, 60, 286, 170);		
+		listaPeliculas.setBounds(90, 22, 510, 170);		
 		//MNL Set Model
 		listaPeliculas.setModel(dlmPeliculas);
 		add(listaPeliculas);

@@ -24,7 +24,7 @@ public class MenuPeliculas extends JFrame {
 		
 		setTitle("Programa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(350, 250, 450, 300);
+		setBounds(350, 250, 650, 300);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5,5,5,5));
