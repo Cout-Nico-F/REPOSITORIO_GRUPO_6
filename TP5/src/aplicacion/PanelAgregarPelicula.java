@@ -2,6 +2,7 @@ package aplicacion;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import clases.Categoria;
@@ -52,6 +53,15 @@ public class PanelAgregarPelicula extends JPanel {
 				pelicula.setNombre(tfNombre.getText());
 				pelicula.setCategoria((Categoria)cbGenero.getSelectedItem());
 				dlmListaPeliculas.addElement(pelicula);
+
+
+				if(cbGenero.getSelectedIndex()!=0 && tfNombre.getText()!="") {
+				PanelListarPelicula.lpModel.addElement(p);			
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "complete todos los datos");
+				}
+				//MNL Agregado de Evento Aceptar - Agregar pelicula a Model
 			}
 		});
 		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 13));
