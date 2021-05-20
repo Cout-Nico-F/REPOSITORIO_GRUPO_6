@@ -46,23 +46,47 @@ public class PanelAgregarPelicula extends JPanel {
 		add(tfNombre);
 		tfNombre.setColumns(30);
 		
+		JLabel lblID = new JLabel("");
+		lblID.setText(String.valueOf(Pelicula.getCount()));
+		lblID.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblID.setBounds(159, 41, 56, 14);
+		add(lblID);
+		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Pelicula pelicula = new Pelicula();
-				pelicula.setNombre(tfNombre.getText());
-				pelicula.setCategoria((Categoria)cbGenero.getSelectedItem());
-				dlmListaPeliculas.addElement(pelicula);
+			public void actionPerformed(ActionEvent e) {		
 
-
-				if(cbGenero.getSelectedIndex()!=0 && tfNombre.getText()!="") {
-				PanelListarPelicula.lpModel.addElement(pelicula);			
+				if (cbGenero.getSelectedIndex() != 0 && !tfNombre.getText().isEmpty()) {
+					Pelicula pelicula = new Pelicula();
+					pelicula.setNombre(tfNombre.getText());
+					pelicula.setCategoria((Categoria)cbGenero.getSelectedItem());
+					dlmListaPeliculas.addElement(pelicula);
+					JOptionPane.showMessageDialog(null, "Película añadida con éxito.");
+					limpiarPanel();
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "complete todos los datos");
+					String msjError = new String();
+					if (cbGenero.getSelectedIndex() == 0) {
+						msjError = "* Debe seleccionar un género de película. ";
+					}
+					if (tfNombre.getText().isEmpty()) {
+						msjError += "\n* Debe ingresar un nombre de película.";
+					}
+					JOptionPane.showMessageDialog(null, msjError);
 				}
 				//MNL Agregado de Evento Aceptar - Agregar pelicula a Model
+
+				
 			}
+
+			private void limpiarPanel() {
+				tfNombre.setText("");
+				cbGenero.setSelectedIndex(0);
+				lblID.setText(String.valueOf(Pelicula.getCount()));
+				
+			}
+			
+
 		});
 		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnAceptar.setBounds(71, 179, 89, 23);
@@ -80,13 +104,10 @@ public class PanelAgregarPelicula extends JPanel {
 		cbGenero.setBounds(157, 125, 170, 20);
 		add(cbGenero);
 		
-		JLabel lblID = new JLabel("");
-		lblID.setText(String.valueOf(Pelicula.getCount()));
-		lblID.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblID.setBounds(159, 41, 56, 14);
-		add(lblID);
+
 	}
 	
+
 
 	public void setDlmListaPeliculas(DefaultListModel<Pelicula> dlmListaPeliculas) {
 		this.dlmListaPeliculas = dlmListaPeliculas;

@@ -18,10 +18,9 @@ public class MenuPeliculas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private static DefaultListModel<Pelicula> dlmListaPeliculas;
+	private static DefaultListModel<Pelicula> dlmListaPeliculas = new DefaultListModel<Pelicula>();
 
 	public MenuPeliculas() {
-		dlmListaPeliculas = new DefaultListModel<Pelicula>();
 		
 		setTitle("Programa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,18 +49,19 @@ public class MenuPeliculas extends JFrame {
 				contentPane.revalidate();
 			}
 		});
-		
+
 		JMenuItem mntmListar = new JMenuItem("Listar");
 		mnMenu.add(mntmListar);
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contentPane.removeAll();
-				PanelListarPelicula plp = new PanelListarPelicula();
+				PanelListarPelicula plp = new PanelListarPelicula(dlmListaPeliculas);
 				contentPane.add(plp);
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
 		});
+		
 		
 		setVisible(true);
 	}

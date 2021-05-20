@@ -13,30 +13,30 @@ import java.awt.Font;
 public class PanelListarPelicula extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	//MNL Declarar JList y Model
-	public  JList<Pelicula> list= new JList<Pelicula>();
-	public static DefaultListModel<Pelicula> lpModel= new DefaultListModel<Pelicula>();
+	private static JList<Pelicula> listaPeliculas = new JList<Pelicula>();
+	//private DefaultListModel<Pelicula> dlmPeliculas;
+	
 
-	public PanelListarPelicula() {
+	public PanelListarPelicula(DefaultListModel<Pelicula> dlmPeliculas) {
 		setLayout(null);
+		//this.dlmPeliculas = dlmPeliculas;
 		
 		JLabel lblPelicula = new JLabel("Pelicula");
 		lblPelicula.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblPelicula.setBounds(57, 148, 66, 14);
+		lblPelicula.setBounds(10, 130, 66, 14);
 		add(lblPelicula);
+		
+		
 
 
-		list.setFont(new Font("Tahoma", Font.BOLD, 13));
-		list.setBounds(133, 28, 296, 261);		
+		listaPeliculas.setFont(new Font("Tahoma", Font.BOLD, 13));
+		listaPeliculas.setBounds(90, 60, 286, 170);		
 		//MNL Set Model
-		list.setModel(lpModel);
-		add(list);
-
+		listaPeliculas.setModel(dlmPeliculas);
+		add(listaPeliculas);
 
 
 	}
-
-
 
 }
 
