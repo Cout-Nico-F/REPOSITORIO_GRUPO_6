@@ -56,7 +56,7 @@ public class PanelAgregarPelicula extends JPanel {
 
 
 				if(cbGenero.getSelectedIndex()!=0 && tfNombre.getText()!="") {
-				PanelListarPelicula.lpModel.addElement(p);			
+				PanelListarPelicula.lpModel.addElement(pelicula);			
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "complete todos los datos");
