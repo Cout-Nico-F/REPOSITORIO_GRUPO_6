@@ -48,8 +48,8 @@ public class MenuPeliculas extends JFrame {
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contentPane.removeAll();
-				PanelListarPelicula pap = new PanelListarPelicula();
-				contentPane.add(pap);
+				PanelListarPelicula plp = new PanelListarPelicula();
+				contentPane.add(plp);
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

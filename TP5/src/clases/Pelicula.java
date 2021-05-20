@@ -40,5 +40,10 @@ public class Pelicula {
 	public static int getCount() {
 		return count;
 	}
+
+	@Override
+	public String toString() {
+		return "Pelicula id=" + id + ", nombre=" + nombre + ", categoria=" + categoria + "]";
+	}
 	
 }

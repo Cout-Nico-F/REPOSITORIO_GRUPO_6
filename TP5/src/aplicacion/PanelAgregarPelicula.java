@@ -2,15 +2,19 @@ package aplicacion;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import clases.Categoria;
 import clases.Pelicula;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class PanelAgregarPelicula extends JPanel {
+public class PanelAgregarPelicula extends JPanel  {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNombre;
@@ -41,6 +45,26 @@ public class PanelAgregarPelicula extends JPanel {
 		tfNombre.setColumns(10);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//MNL Agregado de Evento Aceptar - Agregar pelicula a Model
+				Categoria c = new Categoria();	
+				c.setNombre((String) cbGenero.getSelectedItem());		
+				
+				
+				Pelicula p = new Pelicula();
+				p.setCategoria(c);
+				p.setNombre(tfNombre.getText());
+				if(cbGenero.getSelectedIndex()!=0 && tfNombre.getText()!="") {
+				PanelListarPelicula.lpModel.addElement(p);			
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "complete todos los datos");
+				}
+				//MNL Agregado de Evento Aceptar - Agregar pelicula a Model
+			}
+		});
 		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnAceptar.setBounds(71, 179, 89, 23);
 		add(btnAceptar);
@@ -63,4 +87,5 @@ public class PanelAgregarPelicula extends JPanel {
 		add(lblID);
 
 	}
+
 }
