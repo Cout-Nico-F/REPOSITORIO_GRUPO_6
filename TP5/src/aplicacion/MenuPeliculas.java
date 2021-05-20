@@ -21,6 +21,8 @@ public class MenuPeliculas extends JFrame {
 	private static DefaultListModel<Pelicula> dlmListaPeliculas;
 
 	public MenuPeliculas() {
+		dlmListaPeliculas = new DefaultListModel<Pelicula>();
+		
 		setTitle("Programa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(350, 250, 450, 300);
