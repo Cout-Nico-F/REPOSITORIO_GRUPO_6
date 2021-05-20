@@ -2,7 +2,7 @@ package clases;
 
 public class Pelicula {
 
-	private static int count = 0;
+	private static int count = 1;
 	private final int id;
 	private String nombre;
 	private Categoria categoria;

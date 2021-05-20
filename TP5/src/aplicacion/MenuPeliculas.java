@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -11,10 +12,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clases.Pelicula;
+
 public class MenuPeliculas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private static DefaultListModel<Pelicula> dlmListaPeliculas;
 
 	public MenuPeliculas() {
 		setTitle("Programa");
@@ -28,23 +32,25 @@ public class MenuPeliculas extends JFrame {
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnMenu = new JMenu("Películas");
 		menuBar.add(mnMenu);
 		
 		JMenuItem mntmAgregar = new JMenuItem("Agregar");
+		mnMenu.add(mntmAgregar);
 		mntmAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contentPane.removeAll();
 				PanelAgregarPelicula pap = new PanelAgregarPelicula();
+				pap.setDlmListaPeliculas(dlmListaPeliculas);
 				contentPane.add(pap);
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
 		});
-		mnMenu.add(mntmAgregar);
 		
 		JMenuItem mntmListar = new JMenuItem("Listar");
+		mnMenu.add(mntmListar);
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contentPane.removeAll();
@@ -54,7 +60,6 @@ public class MenuPeliculas extends JFrame {
 				contentPane.revalidate();
 			}
 		});
-		mnMenu.add(mntmListar);
 		
 		setVisible(true);
 	}
