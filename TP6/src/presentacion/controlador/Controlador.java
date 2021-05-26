@@ -2,7 +2,9 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import entidad.Persona;
 import negocio.PersonaNegocio;
 import presentacion.vista.PanelAgregarPersonas;
 import presentacion.vista.PanelEliminarPersonas;
@@ -17,6 +19,8 @@ public class Controlador implements ActionListener {
 	private PanelEliminarPersonas pnlEliminarPersonas;
 	private PanelModificarPersonas pnlModificarPersonas;
 	private PanelListarPersonas pnlListarPersonas;
+	private PersonaNegocio pNeg;
+	private ArrayList<Persona> tablaPersonas;
 
 	public Controlador(VentanaPrincipal vista, PersonaNegocio pNeg)
 	{
@@ -55,6 +59,8 @@ public class Controlador implements ActionListener {
 		ventanaPrincipal.setSize(315, 350);
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
+		
+		this.refrescarTabla();
 	}
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
@@ -79,7 +85,13 @@ public class Controlador implements ActionListener {
 	{
 		this.ventanaPrincipal.setVisible(true);;
 	}
-
+	
+	private void refrescarTabla()
+	{
+		this.tablaPersonas = (ArrayList<Persona>) pNeg.readAll();
+		this.pnlIngresoPersonas.llenarTabla(this.tablaPersonas);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

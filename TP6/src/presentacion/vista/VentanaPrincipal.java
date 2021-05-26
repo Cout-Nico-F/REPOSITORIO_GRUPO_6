@@ -7,6 +7,8 @@ import javax.swing.JMenuItem;
 
 public class VentanaPrincipal extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private JMenuBar menuBar;
 	private JMenu mnPersonas;
 	private JMenuItem menuEliminar;

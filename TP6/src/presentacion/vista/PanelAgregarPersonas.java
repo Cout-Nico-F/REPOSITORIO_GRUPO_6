@@ -1,16 +1,29 @@
 package presentacion.vista;
 
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import entidad.Persona;
 
 public class PanelAgregarPersonas extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDNI;	
 	private JButton btnAceptar;
+	
+	private JTable tablaPersonas;
+	private String[] nombreColumnas = {"Nombre","Apellido","Dni"};
+	private DefaultTableModel modelPersonas;
 	
 	 public PanelAgregarPersonas() {
 		super();
@@ -100,4 +113,36 @@ public class PanelAgregarPersonas extends JPanel {
 	public void setTxtDNI(JTextField txtDNI) {
 		this.txtDNI = txtDNI;
 	}
+	public DefaultTableModel getModelPersonas() 
+	{
+		return modelPersonas;
+	}
+	
+	public JTable getTablaPersonas()
+	{
+		return tablaPersonas;
+	}
+
+	public String[] getNombreColumnas() 
+	{
+		return nombreColumnas;
+	}
+	
+	public void llenarTabla(List<Persona> personasEnTabla) {
+		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
+		this.getModelPersonas().setColumnCount(0);
+		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
+
+		for (Persona p : personasEnTabla)
+		{
+			String nombre = p.getNombre();
+			String ape = p.getApellido();
+			int dni = p.getDni();
+			Object[] fila = {nombre,ape,dni};
+			this.getModelPersonas().addRow(fila);
+		}
+		
+	}
+	
+	
 }
