@@ -6,6 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class PanelListarPersonas extends JPanel {
+	
 	private JTable tablaPersonas;
 	private DefaultTableModel modelPersonas;
 	private String[] nombreColumnas = {"Nombre", "Apellido", "Telefono"};
