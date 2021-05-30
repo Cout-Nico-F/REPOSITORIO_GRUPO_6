@@ -91,9 +91,18 @@ public class PanelAgregarPersonas extends JPanel {
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				boolean a = validaciones.ComprobarCampoVacio(ref,txtNombre);
-				boolean b = validaciones.ComprobarCampoVacio(ref,txtApellido);
-				boolean c =validaciones.ComprobarCampoVacio(ref,txtDNI);
+				boolean b,c;
+				if( !a ) return;
+				else {
+					b = validaciones.ComprobarCampoVacio(ref,txtApellido);
+					if( !b ) return;
+					else{
+						c =validaciones.ComprobarCampoVacio(ref,txtDNI);
+					}
+				}
+				
 				if( a && b && c ) {
 					//Agregar persona.
 					JOptionPane.showMessageDialog(getRootPane(), "Proximamente: Persona agregada");
