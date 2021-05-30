@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import entidad.Persona;
 import negocio.IValidacionesNegocio;
-import negocio.PersonaNegocio;
+import negocio.IPersonaNegocio;
 import negocioImpl.PersonaNegocioImpl;
 
 import java.awt.event.KeyAdapter;
@@ -187,7 +187,7 @@ public class PanelAgregarPersonas extends JPanel {
 	
 	private void Comprobar() {
 		
-		PersonaNegocio pneg = new PersonaNegocioImpl();
+		IPersonaNegocio pneg = new PersonaNegocioImpl();
 		boolean a = validaciones.ComprobarCampoVacio(ref,txtNombre);
 		boolean b,c;
 		

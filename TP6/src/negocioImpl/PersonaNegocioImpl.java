@@ -5,9 +5,9 @@ import java.util.List;
 import dao.PersonaDao;
 import daoImpl.PersonaDaoImpl;
 import entidad.Persona;
-import negocio.PersonaNegocio;
+import negocio.IPersonaNegocio;
 
-public class PersonaNegocioImpl implements PersonaNegocio{
+public class PersonaNegocioImpl implements IPersonaNegocio{
 
 	PersonaDao pdao = new PersonaDaoImpl();
 	

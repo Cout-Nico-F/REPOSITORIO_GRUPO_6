@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import entidad.Persona;
 import negocio.IValidacionesNegocio;
-import negocio.PersonaNegocio;
+import negocio.IPersonaNegocio;
 import negocioImpl.ValidacionesNegocioImpl;
 import presentacion.vista.PanelAgregarPersonas;
 import presentacion.vista.PanelEliminarPersonas;
@@ -21,10 +21,10 @@ public class Controlador implements ActionListener {
 	private PanelEliminarPersonas pnlEliminarPersonas;
 	private PanelModificarPersonas pnlModificarPersonas;
 	private PanelListarPersonas pnlListarPersonas;
-	private PersonaNegocio pNeg;
+	private IPersonaNegocio pNeg;
 	private ArrayList<Persona> tablaPersonas;
 
-	public Controlador(VentanaPrincipal vista, PersonaNegocio pNeg)
+	public Controlador(VentanaPrincipal vista, IPersonaNegocio pNeg)
 	{
 		//Guardo todas las instancias que recibo en el constructor
 		this.ventanaPrincipal = vista;
