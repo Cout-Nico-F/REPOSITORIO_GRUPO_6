@@ -1,5 +1,7 @@
 package presentacion.vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -14,15 +16,19 @@ import javax.swing.SwingConstants;
 
 import daoImpl.Conexion;
 import entidad.Persona;
+import negocio.IPersonaNegocio;
+import negocioImpl.PersonaNegocioImpl;
 
 public class PanelEliminarPersonas extends JPanel {
 	
 	JButton btnEliminar;
 	private DefaultListModel<Persona> dlmPersonas;
+	private JList<Persona> list;
+	
 	public PanelEliminarPersonas() {
 		setLayout(null);
 		
-		JList<Persona> list = new JList<Persona>();
+		list = new JList<Persona>();
 		list.setBounds(50, 36, 200, 182);
 		
 		
@@ -32,6 +38,18 @@ public class PanelEliminarPersonas extends JPanel {
 		add(lblEliminarUsuarios);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// No necesitamos validaciones
+				if(EliminarPersona()) {
+					//Mensaje de exito
+					JOptionPane.showMessageDialog(getRootPane(), "Persona Eliminada Correctamente");
+				}
+				else {
+					JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al editar el registro. No se hicieron modificaciones.");
+				}
+			}
+		});
 		btnEliminar.setBounds(50, 230, 200, 23);
 		add(btnEliminar);
 		
@@ -56,27 +74,13 @@ public class PanelEliminarPersonas extends JPanel {
 				p.setNombre(rs.getString("Nombre"));
 				
 				dlmPersonas.addElement(p);
-				
 			}
 			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 
-		
-		
-		
-		
-		/*
-		Persona p1 = new Persona(1, "lola", "cito");
-		Persona p2 = new Persona(2, "maria", "cach");
-		*/
-		
-
-		//
 		add(list);
 		
 	}
@@ -91,5 +95,19 @@ public class PanelEliminarPersonas extends JPanel {
 	public void mostrarMensaje(String mensaje)
 	{
 		JOptionPane.showMessageDialog(null, mensaje);
+	}
+	protected boolean EliminarPersona() {
+		IPersonaNegocio pneg = new PersonaNegocioImpl();
+		
+		//La persona debe ser la seleccionada
+		
+		Persona p = list.getSelectedValue();
+		
+		boolean delete = pneg.delete(p);				
+		//comprobar si se pudo agregar
+		if(delete == true) {
+			return true;
+		}
+		return false;
 	}
 }
