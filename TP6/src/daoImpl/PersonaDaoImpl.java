@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.PersonaDao;
+import dao.IPersonaDao;
 import entidad.Persona;
 
 
-public class PersonaDaoImpl implements PersonaDao
+public class PersonaDaoImpl implements IPersonaDao
 {
  	private static final String insert = "INSERT INTO personas(dni, nombre, telefono) VALUES(?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE dni = ?";

@@ -89,7 +89,7 @@ public class Controlador implements ActionListener {
 	
 	public void inicializar()
 	{
-		this.ventanaPrincipal.setVisible(true);;
+		this.ventanaPrincipal.setVisible(true);
 	}
 	
 	private void refrescarTabla()
