@@ -95,8 +95,8 @@ public class PersonaDaoImpl implements IPersonaDao
 	{
 		int id = resultSet.getInt("Dni");
 		String nombre = resultSet.getString("Nombre");
-		String tel = resultSet.getString("Telefono");
-		return new Persona(id, nombre, tel);
+		String apellido = resultSet.getString("Apellido");
+		return new Persona(id, nombre, apellido);
 	}
 
 	@Override
