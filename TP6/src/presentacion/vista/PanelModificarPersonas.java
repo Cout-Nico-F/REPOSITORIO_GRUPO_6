@@ -39,6 +39,7 @@ public class PanelModificarPersonas extends JPanel {
 	public PanelModificarPersonas() {
 		
 		//**este tramo de codigo es para simular que recibimos el defaultlist desde el set.
+		
 		dlmPersonas = new DefaultListModel<Persona>();
 		Persona p1 = new Persona(1, "juan", "cito");
 		Persona p2 = new Persona(2, "Andy", "cach");

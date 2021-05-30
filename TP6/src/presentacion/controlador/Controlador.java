@@ -68,7 +68,7 @@ public class Controlador implements ActionListener {
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
 		
-		this.refrescarTabla();
+		//this.refrescarTabla();
 	}
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
