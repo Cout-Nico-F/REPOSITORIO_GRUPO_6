@@ -109,7 +109,7 @@ public class PersonaDaoImpl implements PersonaDao
 		try {
 			statement = conexion.prepareStatement("SELECT * FROM personas WHERE dni ="+dni_persona_a_buscar);
 			resultSet = statement.executeQuery();
-			if(resultSet.wasNull()) found = true;
+			if( resultSet.wasNull() == false ) found = true;
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
