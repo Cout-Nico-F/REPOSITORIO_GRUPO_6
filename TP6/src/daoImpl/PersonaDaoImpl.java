@@ -13,7 +13,7 @@ import entidad.Persona;
 
 public class PersonaDaoImpl implements IPersonaDao
 {
- 	private static final String insert = "INSERT INTO personas(dni, nombre, telefono) VALUES(?, ?, ?)";
+ 	private static final String insert = "INSERT INTO personas(dni, nombre, apellido) VALUES(?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE dni = ?";
 	private static final String readall = "SELECT * FROM personas";
 
@@ -109,7 +109,8 @@ public class PersonaDaoImpl implements IPersonaDao
 		try {
 			statement = conexion.prepareStatement("SELECT * FROM personas WHERE dni ="+dni_persona_a_buscar);
 			resultSet = statement.executeQuery();
-			if( resultSet.wasNull() == false ) found = true;
+			
+			if( resultSet.next() == true ) found = true;
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
