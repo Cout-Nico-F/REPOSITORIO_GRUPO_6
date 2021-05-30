@@ -104,7 +104,11 @@ public class PanelAgregarPersonas extends JPanel {
 				}
 				
 				if( a && b && c ) {
-					//Agregar persona.
+					//Armar un registro de persona
+					Persona p = new Persona(Integer.parseInt(txtDNI.getText()),txtNombre.getText(), txtApellido.getText());
+					//Agregar persona
+					AgregarPersona(p);
+					//Avisar
 					JOptionPane.showMessageDialog(getRootPane(), "Proximamente: Persona agregada");
 				}
 			}
@@ -196,5 +200,13 @@ public class PanelAgregarPersonas extends JPanel {
 		this.validaciones = validaciones;
 	}
 	
+	public void AgregarPersona(Persona p) {
+		//ver si el dni ya existe en base de datos
+		
+		 //SI Existe: Avisar y salir
+		
+		 //NO Existe: Agregar y avisar si fue posible
+		
+	}
 	
 }
