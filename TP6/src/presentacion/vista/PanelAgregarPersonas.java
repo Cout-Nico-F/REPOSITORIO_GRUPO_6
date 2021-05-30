@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import entidad.Persona;
+import negocio.IValidacionesNegocio;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -26,6 +28,9 @@ public class PanelAgregarPersonas extends JPanel {
 	private JTable tablaPersonas;
 	private String[] nombreColumnas = {"Nombre","Apellido","Dni"};
 	private DefaultTableModel modelPersonas;
+	private IValidacionesNegocio validaciones;
+	
+	private PanelAgregarPersonas ref;
 	
 	 public PanelAgregarPersonas() {
 		super();
@@ -42,6 +47,7 @@ public class PanelAgregarPersonas extends JPanel {
 	
 	private void initialize() 
 	{
+		ref = this;
 		this.setBounds(100, 100, 439, 222);
 		this.setLayout(null);
 		
@@ -62,7 +68,7 @@ public class PanelAgregarPersonas extends JPanel {
 		txtNombre.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				ComprobarSoloLetras(k);
+				validaciones.ComprobarSoloLetras(k, ref);
 			}
 		});
 		txtNombre.setColumns(10);
@@ -73,7 +79,7 @@ public class PanelAgregarPersonas extends JPanel {
 		txtApellido.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				ComprobarSoloLetras(k);
+				validaciones.ComprobarSoloLetras(k, ref);
 			}
 		});
 		txtApellido.setColumns(10);
@@ -93,7 +99,7 @@ public class PanelAgregarPersonas extends JPanel {
 		txtDNI.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				ComprobarSoloNumeros(k);
+				validaciones.ComprobarSoloNumeros(k, ref );
 			}
 		});
 		lblDni.setBounds(30, 78, 170, 14);
@@ -162,6 +168,10 @@ public class PanelAgregarPersonas extends JPanel {
 			this.getModelPersonas().addRow(fila);
 		}
 		
+	}
+
+	public void ConfigurarControladorValidaciones(IValidacionesNegocio validaciones) {
+		this.validaciones = validaciones;
 	}
 	
 	

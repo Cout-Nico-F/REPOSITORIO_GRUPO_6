@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import entidad.Persona;
+import negocio.IValidacionesNegocio;
 import negocio.PersonaNegocio;
+import negocioImpl.ValidacionesNegocioImpl;
 import presentacion.vista.PanelAgregarPersonas;
 import presentacion.vista.PanelEliminarPersonas;
 import presentacion.vista.PanelListarPersonas;
@@ -43,7 +45,11 @@ public class Controlador implements ActionListener {
 	
 	//EventoClickMenu abrir PanelAgregarPersonas
 	public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
-	{		
+	{	
+		IValidacionesNegocio validaciones = new ValidacionesNegocioImpl();
+		pnlAgregarPersonas.ConfigurarControladorValidaciones(validaciones);
+		//estas validaciones se pueden usar en todas las otras ventanas del proyecto para validad campos
+		
 		ventanaPrincipal.getContentPane().removeAll();
 		ventanaPrincipal.getContentPane().add(pnlAgregarPersonas);
 		ventanaPrincipal.setSize(440, 300);
