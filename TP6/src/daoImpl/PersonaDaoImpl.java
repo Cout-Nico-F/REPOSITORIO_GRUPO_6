@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.Statement;
+
 import dao.IPersonaDao;
 import entidad.Persona;
 
@@ -116,5 +118,31 @@ public class PersonaDaoImpl implements IPersonaDao
 			e.printStackTrace();
 		}
 		return found;
+	}
+
+	@Override
+	public boolean Edit(Persona persona_a_editar) {
+		
+		
+		int rows;
+		String stringQuery = "UPDATE personas SET Nombre =\""+ persona_a_editar.getNombre() +"\", Apellido =\""+ persona_a_editar.getApellido() +"\" WHERE Dni =\""+ String.valueOf(persona_a_editar.getDni()) + "\"";
+		Connection conexion;
+		try {
+			conexion = Conexion.getConexion().getSQLConexion();
+			Statement statement = conexion.createStatement();
+			rows = statement.executeUpdate(stringQuery);
+			
+			if(rows == 1 ) {
+				conexion.commit();
+				System.out.println("Resultado fue "+rows+" StringQuery: "+stringQuery);
+				return true;			
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Resultado fue diferente de 1");
+		
+		return false;	
 	}
 }

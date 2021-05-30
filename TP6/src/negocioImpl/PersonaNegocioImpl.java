@@ -44,4 +44,10 @@ public class PersonaNegocioImpl implements IPersonaNegocio{
 		else return false;
 	}
 
+	@Override
+	public boolean edit(Persona persona_a_editar) {
+		if( pdao.Edit(persona_a_editar) ) return true;
+		else return false;
+	}
+
 }
