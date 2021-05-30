@@ -99,23 +99,6 @@ public class PanelAgregarPersonas extends JPanel {
 		lblDni.setBounds(30, 78, 170, 14);
 		panel_1.add(lblDni);
 	}
-	
-	protected void ComprobarSoloNumeros(KeyEvent k) {
-		if(Character.isDigit(k.getKeyChar()) == false) { //Si no es un digito:
-			getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
-			k.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
-		JOptionPane.showMessageDialog(getRootPane(), "Ingresar solo numeros");
-		}
-		
-	}
-
-	protected void ComprobarSoloLetras(KeyEvent k) {
-		if(Character.isLetter(k.getKeyChar()) == false) { //Si no es una letra:
-			getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
-			k.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
-		JOptionPane.showMessageDialog(getRootPane(), "Ingresar solo letras");
-		}
-	}
 
 	public void show()
 	{
