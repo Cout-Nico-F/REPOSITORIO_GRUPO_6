@@ -15,6 +15,8 @@ import negocio.IValidacionesNegocio;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelAgregarPersonas extends JPanel {
 	
@@ -87,6 +89,17 @@ public class PanelAgregarPersonas extends JPanel {
 		panel_1.add(txtApellido);
 		
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean a = validaciones.ComprobarCampoVacio(ref,txtNombre);
+				boolean b = validaciones.ComprobarCampoVacio(ref,txtApellido);
+				boolean c =validaciones.ComprobarCampoVacio(ref,txtDNI);
+				if( a && b && c ) {
+					//Agregar persona.
+					JOptionPane.showMessageDialog(getRootPane(), "Proximamente: Persona agregada");
+				}
+			}
+		});
 		btnAceptar.setBounds(30, 119, 89, 23);
 		panel_1.add(btnAceptar);
 		
