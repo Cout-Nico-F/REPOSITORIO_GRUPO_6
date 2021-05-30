@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import entidad.Persona;
 import negocio.IValidacionesNegocio;
 import negocio.IPersonaNegocio;
+import negocioImpl.PersonaNegocioImpl;
 import negocioImpl.ValidacionesNegocioImpl;
 import presentacion.vista.PanelAgregarPersonas;
 import presentacion.vista.PanelEliminarPersonas;
@@ -26,6 +27,7 @@ public class Controlador implements ActionListener {
 
 	public Controlador(VentanaPrincipal vista, IPersonaNegocio pNeg)
 	{
+		
 		//Guardo todas las instancias que recibo en el constructor
 		this.ventanaPrincipal = vista;
 		
@@ -93,7 +95,9 @@ public class Controlador implements ActionListener {
 	}
 	
 	private void refrescarTabla()
-	{
+	{	
+		//inicializamos pNeg;
+		pNeg = new PersonaNegocioImpl();
 		this.tablaPersonas = (ArrayList<Persona>) pNeg.readAll();
 		this.pnlAgregarPersonas.llenarTabla(this.tablaPersonas);
 	}
