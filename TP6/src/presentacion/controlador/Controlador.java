@@ -72,7 +72,10 @@ public class Controlador implements ActionListener {
 	}
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
-	{		
+	{	
+		IValidacionesNegocio validaciones = new ValidacionesNegocioImpl();
+		pnlModificarPersonas.setValidaciones(validaciones);
+		
 		ventanaPrincipal.getContentPane().removeAll();
 		ventanaPrincipal.getContentPane().add(pnlModificarPersonas);
 		ventanaPrincipal.setSize(460, 350);

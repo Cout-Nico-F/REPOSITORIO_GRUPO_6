@@ -47,4 +47,10 @@ public class Persona
 	{
 		this.apellido = apellido;
 	}
+
+	@Override
+	public String toString() {
+		return "Nombre: "+ nombre +"  Apellido: "+ apellido + "  Dni: "+dni;
+	}
+	
 }
