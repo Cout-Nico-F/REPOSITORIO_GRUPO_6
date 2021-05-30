@@ -14,6 +14,8 @@ public class ValidacionesNegocioImpl implements IValidacionesNegocio{
 
 	@Override
 	public void ComprobarSoloLetras(KeyEvent k, JPanel panel) {
+		if(k.getKeyChar() == 08f) return; //Ignora la tecla de borrar (Backspace, 08 en ascii )
+		
 		if(Character.isLetter(k.getKeyChar()) == false && k.getKeyChar() != ' ') { //Si no es una letra:
 			panel.getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
 			k.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
@@ -23,6 +25,8 @@ public class ValidacionesNegocioImpl implements IValidacionesNegocio{
 
 	@Override
 	public void ComprobarSoloNumeros(KeyEvent k, JPanel panel) {
+		if(k.getKeyChar() == 08f) return; //Ignora la tecla de borrar (Backspace, 08 en ascii )
+		
 		if(Character.isDigit(k.getKeyChar()) == false)  { //Si no es una letra:
 			panel.getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
 			k.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
