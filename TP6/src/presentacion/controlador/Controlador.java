@@ -15,7 +15,7 @@ import presentacion.vista.VentanaPrincipal;
 
 public class Controlador implements ActionListener {
 	private VentanaPrincipal ventanaPrincipal;
-	private PanelAgregarPersonas pnlIngresoPersonas;
+	private PanelAgregarPersonas pnlAgregarPersonas;
 	private PanelEliminarPersonas pnlEliminarPersonas;
 	private PanelModificarPersonas pnlModificarPersonas;
 	private PanelListarPersonas pnlListarPersonas;
@@ -28,7 +28,7 @@ public class Controlador implements ActionListener {
 		this.ventanaPrincipal = vista;
 		
 		//Instancio los paneles
-		this.pnlIngresoPersonas = new PanelAgregarPersonas();
+		this.pnlAgregarPersonas = new PanelAgregarPersonas();
 		this.pnlEliminarPersonas = new PanelEliminarPersonas();
 		this.pnlModificarPersonas = new PanelModificarPersonas();
 		this.pnlListarPersonas = new PanelListarPersonas();
@@ -45,7 +45,7 @@ public class Controlador implements ActionListener {
 	public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
 	{		
 		ventanaPrincipal.getContentPane().removeAll();
-		ventanaPrincipal.getContentPane().add(pnlIngresoPersonas);
+		ventanaPrincipal.getContentPane().add(pnlAgregarPersonas);
 		ventanaPrincipal.setSize(440, 300);
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
@@ -89,7 +89,7 @@ public class Controlador implements ActionListener {
 	private void refrescarTabla()
 	{
 		this.tablaPersonas = (ArrayList<Persona>) pNeg.readAll();
-		this.pnlIngresoPersonas.llenarTabla(this.tablaPersonas);
+		this.pnlAgregarPersonas.llenarTabla(this.tablaPersonas);
 	}
 	
 	@Override
