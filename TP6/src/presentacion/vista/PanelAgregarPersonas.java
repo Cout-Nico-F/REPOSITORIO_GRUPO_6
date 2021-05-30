@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import entidad.Persona;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelAgregarPersonas extends JPanel {
 	
@@ -57,11 +59,23 @@ public class PanelAgregarPersonas extends JPanel {
 		panel_1.add(lblApellido);
 		
 		txtNombre = new JTextField();
+		txtNombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent k) {
+				ComprobarSoloLetras(k);
+			}
+		});
 		txtNombre.setColumns(10);
 		txtNombre.setBounds(204, 13, 164, 20);
 		panel_1.add(txtNombre);
 		
 		txtApellido = new JTextField();
+		txtApellido.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent k) {
+				ComprobarSoloLetras(k);
+			}
+		});
 		txtApellido.setColumns(10);
 		txtApellido.setBounds(204, 44, 164, 20);
 		panel_1.add(txtApellido);
@@ -76,10 +90,33 @@ public class PanelAgregarPersonas extends JPanel {
 		panel_1.add(txtDNI);
 		
 		JLabel lblDni = new JLabel("DNI");
+		txtDNI.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent k) {
+				ComprobarSoloNumeros(k);
+			}
+		});
 		lblDni.setBounds(30, 78, 170, 14);
 		panel_1.add(lblDni);
 	}
 	
+	protected void ComprobarSoloNumeros(KeyEvent k) {
+		if(Character.isDigit(k.getKeyChar()) == false) { //Si no es un digito:
+			getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
+			k.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
+		JOptionPane.showMessageDialog(getRootPane(), "Ingresar solo numeros");
+		}
+		
+	}
+
+	protected void ComprobarSoloLetras(KeyEvent k) {
+		if(Character.isLetter(k.getKeyChar()) == false) { //Si no es una letra:
+			getToolkit().beep(); //Get a sound -> si esta comentado se bugea el sonido de error
+			k.consume(); //Funciona para no llamar a mas eventos como el KeyListener -> si esta comentado no borra la tecla erronea ingresada
+		JOptionPane.showMessageDialog(getRootPane(), "Ingresar solo letras");
+		}
+	}
+
 	public void show()
 	{
 		this.setVisible(true);
