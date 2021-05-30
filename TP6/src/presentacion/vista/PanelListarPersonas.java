@@ -9,7 +9,7 @@ public class PanelListarPersonas extends JPanel {
 	
 	private JTable tablaPersonas;
 	private DefaultTableModel modelPersonas;
-	private String[] nombreColumnas = {"Nombre", "Apellido", "Telefono"};
+	private String[] nombreColumnas = {"Nombre", "Apellido", "Dni"};
 	
 	public PanelListarPersonas() {
 		setLayout(null);
