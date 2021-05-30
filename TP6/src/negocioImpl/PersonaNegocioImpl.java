@@ -37,4 +37,11 @@ public class PersonaNegocioImpl implements PersonaNegocio{
 		return pdao.readAll();
 	}
 
+	@Override
+	public boolean Exists(int dni_persona_a_buscar) {
+		
+		if( pdao.Exists(dni_persona_a_buscar) ) return true;
+		else return false;
+	}
+
 }

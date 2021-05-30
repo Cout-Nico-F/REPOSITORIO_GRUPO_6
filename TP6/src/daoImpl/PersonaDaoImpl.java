@@ -16,7 +16,7 @@ public class PersonaDaoImpl implements PersonaDao
  	private static final String insert = "INSERT INTO personas(dni, nombre, telefono) VALUES(?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE dni = ?";
 	private static final String readall = "SELECT * FROM personas";
-		
+
 	public boolean insert(Persona persona)
 	{
 		PreparedStatement statement;
@@ -68,7 +68,7 @@ public class PersonaDaoImpl implements PersonaDao
 		}
 		return isdeleteExitoso;
 	}
-	
+
 	public List<Persona> readAll()
 	{
 		PreparedStatement statement;
@@ -97,5 +97,23 @@ public class PersonaDaoImpl implements PersonaDao
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
 		return new Persona(id, nombre, tel);
+	}
+
+	@Override
+	public boolean Exists(int dni_persona_a_buscar) {
+		PreparedStatement statement;
+		ResultSet resultSet;
+		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean found = false;
+		try {
+			statement = conexion.prepareStatement("SELECT * FROM personas WHERE dni ="+dni_persona_a_buscar);
+			resultSet = statement.executeQuery();
+			if(resultSet.wasNull()) found = true;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return found;
 	}
 }

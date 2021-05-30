@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 import entidad.Persona;
 import negocio.IValidacionesNegocio;
+import negocio.PersonaNegocio;
+import negocioImpl.PersonaNegocioImpl;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -92,25 +94,7 @@ public class PanelAgregarPersonas extends JPanel {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				boolean a = validaciones.ComprobarCampoVacio(ref,txtNombre);
-				boolean b,c;
-				if( !a ) return;
-				else {
-					b = validaciones.ComprobarCampoVacio(ref,txtApellido);
-					if( !b ) return;
-					else{
-						c =validaciones.ComprobarCampoVacio(ref,txtDNI);
-					}
-				}
-				
-				if( a && b && c ) {
-					//Armar un registro de persona
-					Persona p = new Persona(Integer.parseInt(txtDNI.getText()),txtNombre.getText(), txtApellido.getText());
-					//Agregar persona
-					AgregarPersona(p);
-					//Avisar
-					JOptionPane.showMessageDialog(getRootPane(), "Proximamente: Persona agregada");
-				}
+				Comprobar();
 			}
 		});
 		btnAceptar.setBounds(30, 119, 89, 23);
@@ -200,13 +184,43 @@ public class PanelAgregarPersonas extends JPanel {
 		this.validaciones = validaciones;
 	}
 	
-	public void AgregarPersona(Persona p) {
-		//ver si el dni ya existe en base de datos
+	
+	private void Comprobar() {
 		
-		 //SI Existe: Avisar y salir
+		PersonaNegocio pneg = new PersonaNegocioImpl();
+		boolean a = validaciones.ComprobarCampoVacio(ref,txtNombre);
+		boolean b,c;
 		
-		 //NO Existe: Agregar y avisar si fue posible
+		if( !a ) return;
+		else {
+			b = validaciones.ComprobarCampoVacio(ref,txtApellido);
+			if( !b ) return;
+			else{
+				c =validaciones.ComprobarCampoVacio(ref,txtDNI);
+			}
+		}
 		
+		if( a && b && c ) {
+			//Armar un registro de persona
+			Persona p = new Persona(Integer.parseInt(txtDNI.getText()),txtNombre.getText(), txtApellido.getText());
+			//Agregar persona
+			
+			boolean result = pneg.Exists(p.getDni());
+			
+			if(result == true) {
+				//Avisar persona ya existente
+				JOptionPane.showMessageDialog(getRootPane(), "Esta persona ya existe en la base de datos");
+			}
+			else {
+				//Agregar();
+				boolean inserted = pneg.insert(p);
+				//comprobar si se pudo agregar
+				if(inserted == true)
+				//avisar carga exitosa de persona
+				JOptionPane.showMessageDialog(getRootPane(), "Persona agregada Correctamente");
+				else JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al agregar el registro. No se hicieron modificaciones.");
+			}
+		}
 	}
 	
 }
