@@ -51,6 +51,8 @@ public class PanelAgregarPersonas extends JPanel {
 	
 	private void initialize() 
 	{
+		modelPersonas = new DefaultTableModel();
+		
 		ref = this;
 		this.setBounds(100, 100, 439, 222);
 		this.setLayout(null);
@@ -165,9 +167,9 @@ public class PanelAgregarPersonas extends JPanel {
 	}
 	
 	public void llenarTabla(List<Persona> personasEnTabla) {
-		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
-		this.getModelPersonas().setColumnCount(0);
-		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
+		modelPersonas.setRowCount(0); //Para vaciar la tabla
+		modelPersonas.setColumnCount(0);
+		modelPersonas.setColumnIdentifiers(this.getNombreColumnas());
 
 		for (Persona p : personasEnTabla)
 		{

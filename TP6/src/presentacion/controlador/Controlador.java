@@ -36,6 +36,7 @@ public class Controlador implements ActionListener {
 		this.pnlEliminarPersonas = new PanelEliminarPersonas();
 		this.pnlModificarPersonas = new PanelModificarPersonas();
 		this.pnlListarPersonas = new PanelListarPersonas();
+		refrescarTabla();
 
 		//Eventos menu del Frame principal llamado Ventana
 		this.ventanaPrincipal.getMenuAgregar().addActionListener(a->EventoClickMenu_AbrirPanel_AgregarPersona(a));
@@ -43,7 +44,7 @@ public class Controlador implements ActionListener {
 		this.ventanaPrincipal.getMenuModificar().addActionListener(a->EventoClickMenu_AbrirPanel_ModificarPersona(a));
 		this.ventanaPrincipal.getMenuListar().addActionListener(a->EventoClickMenu_AbrirPanel_ListarPersona(a));
 
-		}
+	}
 	
 	//EventoClickMenu abrir PanelAgregarPersonas
 	public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
@@ -68,7 +69,7 @@ public class Controlador implements ActionListener {
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
 		
-		//this.refrescarTabla();
+		this.refrescarTabla();
 	}
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
@@ -99,10 +100,9 @@ public class Controlador implements ActionListener {
 	
 	private void refrescarTabla()
 	{	
-		//inicializamos pNeg;
 		pNeg = new PersonaNegocioImpl();
-		this.tablaPersonas = (ArrayList<Persona>) pNeg.readAll();
-		this.pnlAgregarPersonas.llenarTabla(this.tablaPersonas);
+		tablaPersonas = (ArrayList<Persona>) pNeg.readAll();
+		pnlAgregarPersonas.llenarTabla(tablaPersonas);
 	}
 	
 	@Override
