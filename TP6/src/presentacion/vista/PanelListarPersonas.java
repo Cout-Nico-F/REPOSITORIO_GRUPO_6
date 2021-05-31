@@ -22,11 +22,9 @@ public class PanelListarPersonas extends JPanel {
 	public PanelListarPersonas() {
 		setLayout(null);
 		
-		IPersonaNegocio pneg = new PersonaNegocioImpl();
-		List<Persona> listaPersonas = pneg.readAll();
-		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
 		//modelPersonas.
+		
 		
 		tablaPersonas = new JTable(modelPersonas);
 		tablaPersonas.setBounds(10, 11, 380, 253);
@@ -50,5 +48,20 @@ public class PanelListarPersonas extends JPanel {
 
 	}
 
+	public void llenarTabla(List<Persona> personasEnTabla) {
+		modelPersonas.setRowCount(0); //Para vaciar la tabla
+		modelPersonas.setColumnCount(0);
+		modelPersonas.setColumnIdentifiers(nombreColumnas);
+
+		for (Persona p : personasEnTabla)
+		{
+			String nombre = p.getNombre();
+			String apellido = p.getApellido();
+			int dni = p.getDni(); 
+			Object[] fila = {nombre, apellido, dni};
+			modelPersonas.addRow(fila);
+		}
+	}
+	
 }
 
