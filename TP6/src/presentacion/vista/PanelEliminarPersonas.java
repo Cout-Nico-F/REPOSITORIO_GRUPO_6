@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -29,6 +31,7 @@ public class PanelEliminarPersonas extends JPanel {
 		setLayout(null);
 		
 		list = new JList<Persona>();
+		
 		list.setBounds(50, 36, 200, 182);
 		
 		
@@ -44,6 +47,8 @@ public class PanelEliminarPersonas extends JPanel {
 				if(EliminarPersona()) {
 					//Mensaje de exito
 					JOptionPane.showMessageDialog(getRootPane(), "Persona Eliminada Correctamente");
+					listarPersona();
+					
 				}
 				else {
 					JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al editar el registro. No se hicieron modificaciones.");
@@ -55,36 +60,39 @@ public class PanelEliminarPersonas extends JPanel {
 		
 		//Comienzo desarrollo eliminar 
 		
+	    listarPersona();
+		//add(list);
+		
+	}
+	
+	//Mostrar Lista DB
+
+	public void listarPersona(){
+		
 		dlmPersonas = new DefaultListModel<Persona>();
-		list.setModel(dlmPersonas);
-		
-		String query= "SELECT * from personas";
-		
+		list.setModel(dlmPersonas);		
+		String query= "SELECT * from personas";	
 		try {
 			Conexion cn = new Conexion();
 			Connection sql= cn.getSQLConexion();
 			Statement st = sql.createStatement();
-			ResultSet rs=st.executeQuery(query);
-			
+			ResultSet rs=st.executeQuery(query);			
 			while(rs.next())
 			{
 				Persona p =new Persona();
 				p.setDni(rs.getInt("Dni"));
 				p.setApellido(rs.getString("Apellido"));
-				p.setNombre(rs.getString("Nombre"));
-				
+				p.setNombre(rs.getString("Nombre"));			
 				dlmPersonas.addElement(p);
-			}
-			
+			}			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-
-		add(list);
-		
+		this.add(list);	
 	}
-
+	
+	
 	public JButton getBtnEliminar() {
 		return btnEliminar;
 	}
@@ -103,11 +111,13 @@ public class PanelEliminarPersonas extends JPanel {
 		
 		Persona p = list.getSelectedValue();
 		
-		boolean delete = pneg.delete(p);				
+		boolean delete = pneg.delete(p);		
+		
 		//comprobar si se pudo agregar
 		if(delete == true) {
 			return true;
 		}
 		return false;
+		
 	}
 }
