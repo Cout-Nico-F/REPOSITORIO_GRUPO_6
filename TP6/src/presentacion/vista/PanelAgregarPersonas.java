@@ -209,20 +209,34 @@ public class PanelAgregarPersonas extends JPanel {
 			
 			boolean result = pneg.Exists(p.getDni());
 			
-			if(result == true) {
+			if(result) {
 				//Avisar persona ya existente
-				JOptionPane.showMessageDialog(getRootPane(), "Esta persona ya existe en la base de datos");
+				JOptionPane.showMessageDialog(getRootPane(), "El Dni ingresado ya se encuentra registrado en la base de datos");
+				vaciarTextFields();
 			}
 			else {
 				//Agregar();
 				boolean inserted = pneg.insert(p);
 				//comprobar si se pudo agregar
-				if(inserted == true)
+				if(inserted) {
+					JOptionPane.showMessageDialog(getRootPane(), "Persona agregada Correctamente");
+					vaciarTextFields();
+				}
 				//avisar carga exitosa de persona
-				JOptionPane.showMessageDialog(getRootPane(), "Persona agregada Correctamente");
-				else JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al agregar el registro. No se hicieron modificaciones.");
+				
+				else {
+					JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al agregar el registro. No se hicieron modificaciones.");
+					vaciarTextFields();
+				}
 			}
 		}
+	}
+
+	private void vaciarTextFields() {
+		txtNombre.setText("");
+		txtApellido.setText("");
+		txtDNI.setText("");
+		
 	}
 	
 }
