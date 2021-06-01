@@ -55,9 +55,9 @@ public class Controlador implements ActionListener {
 		
 		//Eventos PanelEliminarPersonas
 		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
-
+		 //TODO: mover eventos de eliminar personas a esta sección/capa
 		//Eventos PanelModificarPersona
-		 
+		//TODO: mover eventos de modificar personas a esta sección/capa
 	
 	}
 	
