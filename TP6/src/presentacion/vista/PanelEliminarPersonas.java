@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -22,6 +20,8 @@ import negocio.IPersonaNegocio;
 import negocioImpl.PersonaNegocioImpl;
 
 public class PanelEliminarPersonas extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	
 	JButton btnEliminar;
 	private DefaultListModel<Persona> dlmPersonas;
@@ -33,8 +33,7 @@ public class PanelEliminarPersonas extends JPanel {
 		list = new JList<Persona>();
 		
 		list.setBounds(50, 36, 200, 182);
-		
-		
+	
 		JLabel lblEliminarUsuarios = new JLabel("Eliminar usuarios");
 		lblEliminarUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEliminarUsuarios.setBounds(50, 11, 200, 14);
@@ -43,30 +42,16 @@ public class PanelEliminarPersonas extends JPanel {
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// No necesitamos validaciones
-				if(EliminarPersona()) {
-					//Mensaje de exito
-					JOptionPane.showMessageDialog(getRootPane(), "Persona Eliminada Correctamente");
-					listarPersona();
-					
-				}
-				else {
-					JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al editar el registro. No se hicieron modificaciones.");
-				}
+				ConfirmacionEliminar();
 			}
 		});
 		btnEliminar.setBounds(50, 230, 200, 23);
 		add(btnEliminar);
 		
-		//Comienzo desarrollo eliminar 
-		
 	    listarPersona();
-		//add(list);
-		
 	}
 	
 	//Mostrar Lista DB
-
 	public void listarPersona(){
 		
 		dlmPersonas = new DefaultListModel<Persona>();
@@ -107,17 +92,40 @@ public class PanelEliminarPersonas extends JPanel {
 	protected boolean EliminarPersona() {
 		IPersonaNegocio pneg = new PersonaNegocioImpl();
 		
-		//La persona debe ser la seleccionada
+		int index;
+		boolean delete;
 		
 		Persona p = list.getSelectedValue();
 		
-		boolean delete = pneg.delete(p);		
+		delete = pneg.delete(p);		
 		
-		//comprobar si se pudo agregar
+		//Comprobar si se pudo eliminar
 		if(delete == true) {
+			//En caso de que si guarda el index el indice del registro seleccionado y lo remueve del modelo
+			index = list.getSelectedIndex();
+			dlmPersonas.removeElementAt(index);
 			return true;
 		}
 		return false;
+	}
+	public void ConfirmacionEliminar() {
+		//Capturo lo que devuelve el JOptionPane en input
+		int input = JOptionPane.showConfirmDialog(getRootPane(),"¿Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
+				JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		
+		System.out.println(input);
+		
+		//Despues pregunto si la opcion que elije el usuario es Si, si es asi elimina el registro de la persona y se muestra un cartel ademas de actualizar la lista
+		if(input == JOptionPane.YES_OPTION) {
+			if(EliminarPersona()) { //Elimina el registro y actualiza
+				JOptionPane.showMessageDialog(getRootPane(), "Persona eliminada correctamente");
+			}
+			else {
+				JOptionPane.showMessageDialog(getRootPane(), "Hubo un problema al eliminar el registro");
+			}
+		}
+		else {
+			JOptionPane.showMessageDialog(getRootPane(), "No se elimino el registro");
+		}	
 	}
 }
