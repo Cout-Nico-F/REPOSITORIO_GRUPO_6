@@ -40,11 +40,12 @@ public class PanelListarPersonas extends JPanel {
 		
 		//cargar la lista desde base de datos (comunicarse con negocio)
 		//ComunicarseConNegocio();
+		/*
 		List<Persona> listaPersonas = new ArrayList<Persona>();
 		PersonaNegocioImpl pni = new PersonaNegocioImpl();
 		listaPersonas = pni.obtenerTodas();
 		llenarTabla(listaPersonas);
-		
+		*/
 		
 		JScrollPane spPersonas = new JScrollPane();
 		
