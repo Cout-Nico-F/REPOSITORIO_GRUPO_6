@@ -49,5 +49,9 @@ public class PersonaNegocioImpl implements IPersonaNegocio{
 		if( pdao.Edit(persona_a_editar) ) return true;
 		else return false;
 	}
+	
+	public List<Persona> obtenerTodas() {
+		return pdao.obtenerTodas();
+	}
 
 }

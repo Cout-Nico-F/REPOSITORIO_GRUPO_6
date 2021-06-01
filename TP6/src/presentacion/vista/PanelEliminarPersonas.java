@@ -114,7 +114,7 @@ public class PanelEliminarPersonas extends JPanel {
 		boolean delete = pneg.delete(p);		
 		
 		//comprobar si se pudo agregar
-		if(delete == true) {
+		if(delete) {
 			return true;
 		}
 		return false;

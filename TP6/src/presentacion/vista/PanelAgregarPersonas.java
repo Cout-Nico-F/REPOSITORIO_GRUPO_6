@@ -219,7 +219,7 @@ public class PanelAgregarPersonas extends JPanel {
 				boolean inserted = pneg.insert(p);
 				//comprobar si se pudo agregar
 				if(inserted) {
-					JOptionPane.showMessageDialog(getRootPane(), "Persona agregada Correctamente");
+					JOptionPane.showMessageDialog(getRootPane(), "Persona agregada correctamente");
 					vaciarTextFields();
 				}
 				//avisar carga exitosa de persona
