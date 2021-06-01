@@ -145,4 +145,49 @@ public class PersonaDaoImpl implements IPersonaDao
 		
 		return false;	
 	}
+	
+	public Persona convertir(ResultSet rs) throws SQLException {
+		
+		int dni = Integer.parseInt(rs.getString("dni"));
+		String nombre = rs.getString("nombre");
+		String apellido = rs.getString("apellido");	
+		Persona persona = new Persona(dni, nombre, apellido);
+		return persona;
+	}
+	
+	public List<Persona> obtenerTodas() {
+		Connection conn = Conexion.getConexion().getSQLConexion();
+		PreparedStatement stat = null;
+		ResultSet rs = null;
+		List<Persona> listaPersonas = new ArrayList<Persona>();
+		
+		try {
+			stat = conn.prepareStatement(readall);
+			rs = stat.executeQuery();
+			while (rs.next()) {
+				listaPersonas.add(convertir(rs));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (stat != null) {
+				try {
+					stat.close();
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+		return listaPersonas;
+	}
 }

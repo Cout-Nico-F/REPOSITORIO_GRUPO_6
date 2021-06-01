@@ -100,17 +100,16 @@ public class PanelEliminarPersonas extends JPanel {
 		delete = pneg.delete(p);		
 		
 		//Comprobar si se pudo eliminar
-		if(delete == true) {
+		if(delete) {
 			//En caso de que si guarda el index el indice del registro seleccionado y lo remueve del modelo
 			index = list.getSelectedIndex();
 			dlmPersonas.removeElementAt(index);
-			return true;
 		}
 		return false;
 	}
 	public void ConfirmacionEliminar() {
 		//Capturo lo que devuelve el JOptionPane en input
-		int input = JOptionPane.showConfirmDialog(getRootPane(),"¿Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
+		int input = JOptionPane.showConfirmDialog(getRootPane(),"Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
 				JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		
 		System.out.println(input);

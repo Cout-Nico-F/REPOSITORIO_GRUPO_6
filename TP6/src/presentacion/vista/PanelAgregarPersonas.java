@@ -93,12 +93,7 @@ public class PanelAgregarPersonas extends JPanel {
 		panel_1.add(txtApellido);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
 				
-				Comprobar();
-			}
-		});
 		btnAceptar.setBounds(30, 119, 89, 23);
 		panel_1.add(btnAceptar);
 		
@@ -179,50 +174,10 @@ public class PanelAgregarPersonas extends JPanel {
 			Object[] fila = {nombre,ape,dni};
 			this.getModelPersonas().addRow(fila);
 		}
-		
 	}
 
 	public void ConfigurarControladorValidaciones(IValidacionesNegocio validaciones) {
 		this.validaciones = validaciones;
-	}
-	
-	
-	private void Comprobar() {
-		
-		IPersonaNegocio pneg = new PersonaNegocioImpl();
-		boolean a = validaciones.ComprobarCampoVacio(ref,txtNombre);
-		boolean b,c;
-		
-		if( !a ) return;
-		else {
-			b = validaciones.ComprobarCampoVacio(ref,txtApellido);
-			if( !b ) return;
-			else{
-				c =validaciones.ComprobarCampoVacio(ref,txtDNI);
-			}
-		}
-		
-		if( a && b && c ) {
-			//Armar un registro de persona
-			Persona p = new Persona(Integer.parseInt(txtDNI.getText()),txtNombre.getText(), txtApellido.getText());
-			//Agregar persona
-			
-			boolean result = pneg.Exists(p.getDni());
-			
-			if(result == true) {
-				//Avisar persona ya existente
-				JOptionPane.showMessageDialog(getRootPane(), "Esta persona ya existe en la base de datos");
-			}
-			else {
-				//Agregar();
-				boolean inserted = pneg.insert(p);
-				//comprobar si se pudo agregar
-				if(inserted == true)
-				//avisar carga exitosa de persona
-				JOptionPane.showMessageDialog(getRootPane(), "Persona agregada Correctamente");
-				else JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al agregar el registro. No se hicieron modificaciones.");
-			}
-		}
 	}
 	
 }

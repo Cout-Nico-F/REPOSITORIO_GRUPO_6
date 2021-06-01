@@ -1,5 +1,6 @@
 package presentacion.vista;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JList;
@@ -18,6 +19,7 @@ public class PanelListarPersonas extends JPanel {
 	private JTable tablaPersonas;
 	private DefaultTableModel modelPersonas;
 	private String[] nombreColumnas = {"Nombre", "Apellido", "Dni"};
+	private PersonaNegocioImpl pni;
 	
 	public PanelListarPersonas() {
 		setLayout(null);
@@ -38,6 +40,12 @@ public class PanelListarPersonas extends JPanel {
 		
 		//cargar la lista desde base de datos (comunicarse con negocio)
 		//ComunicarseConNegocio();
+		/*
+		List<Persona> listaPersonas = new ArrayList<Persona>();
+		PersonaNegocioImpl pni = new PersonaNegocioImpl();
+		listaPersonas = pni.obtenerTodas();
+		llenarTabla(listaPersonas);
+		*/
 		
 		JScrollPane spPersonas = new JScrollPane();
 		
