@@ -2,6 +2,7 @@ package presentacion.vista;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -77,23 +78,12 @@ public class PanelModificarPersonas extends JPanel {
 		add(btnModificar);
 		
 		txtNombre = new JTextField();
-		txtNombre.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k);
-			}
-		});
 		txtNombre.setBounds(50, 229, 76, 22);
 		add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtApellido = new JTextField();
-		txtApellido.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k);
-			}
-		});
+
 		txtApellido.setColumns(10);
 		txtApellido.setBounds(136, 229, 76, 22);
 		add(txtApellido);

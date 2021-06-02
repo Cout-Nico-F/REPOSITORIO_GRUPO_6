@@ -2,6 +2,8 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -68,6 +70,19 @@ public class Controlador implements ActionListener {
 		
 		this.pnlModificarPersonas.getList().addListSelectionListener(s-> EventoSeleccionCambiada_pnlModificarPersonas(s));
 		this.pnlModificarPersonas.getBtnModificar().addActionListener(s-> EventoClickBoton_Modificar_pnlModificarPersonas(s));
+		this.pnlModificarPersonas.getTxtNombre().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent k) {
+				validaciones.ComprobarSoloLetras(k);
+			}
+		});
+		
+		this.pnlModificarPersonas.getTxtNombre().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent k) {
+				validaciones.ComprobarSoloLetras(k);
+			}
+		});
 	}
 	
 	private void EventoSeleccionCambiada_pnlModificarPersonas(ListSelectionEvent s) {
