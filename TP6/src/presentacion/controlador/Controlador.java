@@ -100,7 +100,7 @@ public class Controlador implements ActionListener {
 	}
 	
 	private void EventoClickBoton_Eliminar_pnlEliminarPersonas(ActionEvent a) {		
-		ConfirmacionEliminar(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
+		ConfirmacionEliminar();
 		refrescarListas();
 	}
 	
@@ -233,16 +233,17 @@ public class Controlador implements ActionListener {
 		pnlAgregarPersonas.getTxtDNI().setText("");
 	}
 	
-	public void ConfirmacionEliminar( JList<Persona> list , DefaultListModel<Persona> dlmPersonas) {
+	public void ConfirmacionEliminar() {
+		
 		//Capturo lo que devuelve el JOptionPane en input
 		int input = JOptionPane.showConfirmDialog(null,"Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
 				JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		
-		System.out.println(input);
+		//System.out.println(input);
 		
 		//Despues pregunto si la opcion que elije el usuario es Si, si es asi elimina el registro de la persona y se muestra un cartel ademas de actualizar la lista
 		if(input == JOptionPane.YES_OPTION) {
-			if(EliminarPersona(list, dlmPersonas)) { //Elimina el registro y actualiza
+			if(EliminarPersona()) { //Elimina el registro y actualiza
 				JOptionPane.showMessageDialog(null, "Persona eliminada correctamente");
 			}
 			else {
@@ -254,22 +255,25 @@ public class Controlador implements ActionListener {
 		}	
 	}
 	
-	protected boolean EliminarPersona( JList<Persona> list, DefaultListModel<Persona> dlmPersonas ) {
+	protected boolean EliminarPersona() {
+		
+		
 		IPersonaNegocio pneg = new PersonaNegocioImpl();
 		
 		int index;
 		boolean delete;
 		
 		
-		Persona p = list.getSelectedValue();
+		Persona p = pnlEliminarPersonas.getList().getSelectedValue(); /*list.getSelectedValue();*/
 		
 		delete = pneg.delete(p);		
 		
 		//Comprobar si se pudo eliminar
 		if(delete) {
 			//En caso de que si guarda el index el indice del registro seleccionado y lo remueve del modelo
-			index = list.getSelectedIndex();
-			dlmPersonas.removeElementAt(index);
+			index = pnlEliminarPersonas.getList().getSelectedIndex();
+			pnlEliminarPersonas.getDlm().removeElementAt(index);
+			
 			return true;
 		}
 		return false;
