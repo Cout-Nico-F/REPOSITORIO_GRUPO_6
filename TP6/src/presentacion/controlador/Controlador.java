@@ -2,17 +2,11 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import daoImpl.Conexion;
 import entidad.Persona;
 import negocio.IValidacionesNegocio;
 import negocio.IPersonaNegocio;
@@ -33,9 +27,8 @@ public class Controlador implements ActionListener {
 	private PanelListarPersonas pnlListarPersonas;
 	private IPersonaNegocio pNeg;
 	private ArrayList<Persona> tablaPersonas;
-	private IValidacionesNegocio validaciones;	
-	
-	
+	private IValidacionesNegocio validaciones;
+
 	public Controlador(VentanaPrincipal vista, IPersonaNegocio pNeg)
 	{
 		validaciones = new ValidacionesNegocioImpl();
@@ -63,9 +56,7 @@ public class Controlador implements ActionListener {
 		
 		//Eventos PanelEliminarPersonas
 		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
-
-		 //TODO: mover eventos de eliminar personas a esta sección/capa
-		 this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_Eliminar_pnlEliminarPersonas(s));
+		//TODO mover eventos de eliminar personas a esta sección/capa
 		 
 		//Eventos PanelModificarPersona
 		 this.pnlModificarPersonas.getBtnModificar().addActionListener(a->EventoClickBoton_Modificar_pnlModificarPersonas(a));
@@ -105,13 +96,6 @@ public class Controlador implements ActionListener {
 		ComprobarAgregarPersona();
 		refrescarTabla();
 	}
-	
-	private void EventoClickBoton_Eliminar_pnlEliminarPersonas(ActionEvent a) {
-		
-		//EliminarPersona(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
-		ConfirmacionEliminar(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
-		refrescarTabla();
-	}
 
 	//EventoClickMenu abrir PanelAgregarPersonas
 	public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
@@ -130,13 +114,11 @@ public class Controlador implements ActionListener {
 	//EventoClickMenu abrir PanelEliminarPersonas
 	public void EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent a)
 	{		
-		this.refrescarTabla();
 		ventanaPrincipal.getContentPane().removeAll();
 		ventanaPrincipal.getContentPane().add(pnlEliminarPersonas);
-		ventanaPrincipal.setSize(460, 350);
+		ventanaPrincipal.setSize(315, 350);
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
-
 	}
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
@@ -173,12 +155,7 @@ public class Controlador implements ActionListener {
 		pnlAgregarPersonas.llenarTabla(tablaPersonas);
 		pnlListarPersonas.llenarTabla(tablaPersonas);
 		pnlModificarPersonas.llenarModel(tablaPersonas);
-		pnlEliminarPersonas.llenarLista(tablaPersonas);
 	}
-
-	
-
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -239,53 +216,4 @@ public class Controlador implements ActionListener {
 		pnlAgregarPersonas.getTxtApellido().setText("");
 		pnlAgregarPersonas.getTxtDNI().setText("");
 	}
-	
-	
-	public void ConfirmacionEliminar( JList<Persona> list , DefaultListModel<Persona> dlmPersonas) {
-		//Capturo lo que devuelve el JOptionPane en input
-		int input = JOptionPane.showConfirmDialog(null,"Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
-				JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-		
-		System.out.println(input);
-		
-		//Despues pregunto si la opcion que elije el usuario es Si, si es asi elimina el registro de la persona y se muestra un cartel ademas de actualizar la lista
-		if(input == JOptionPane.YES_OPTION) {
-			if(EliminarPersona(list, dlmPersonas)) { //Elimina el registro y actualiza
-				JOptionPane.showMessageDialog(null, "Persona eliminada correctamente");
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Hubo un problema al eliminar el registro");
-			}
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "No se elimino el registro");
-		}	
-	}
-	
-	protected boolean EliminarPersona( JList<Persona> list, DefaultListModel<Persona> dlmPersonas ) {
-		IPersonaNegocio pneg = new PersonaNegocioImpl();
-		
-		int index;
-		boolean delete;
-		
-		
-		Persona p = list.getSelectedValue();
-		
-		delete = pneg.delete(p);		
-		
-		//Comprobar si se pudo eliminar
-		if(delete) {
-			//En caso de que si guarda el index el indice del registro seleccionado y lo remueve del modelo
-			index = list.getSelectedIndex();
-			dlmPersonas.removeElementAt(index);
-			return true;
-		}
-		return false;
-	}
-	
 }
-
-
-
-
-
