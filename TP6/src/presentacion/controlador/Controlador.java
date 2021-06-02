@@ -56,6 +56,24 @@ public class Controlador implements ActionListener {
 		
 		//Eventos PanelAgregarPersonas
 		 this.pnlAgregarPersonas.getBtnAceptar().addActionListener(a->EventoClickBoton_Aceptar_pnlAgregarPersonas(a));
+		 this.pnlAgregarPersonas.getTxtNombre().addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent k) {
+					validaciones.ComprobarSoloLetras(k);
+				}
+			});
+		 this.pnlAgregarPersonas.getTxtApellido().addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent k) {
+					validaciones.ComprobarSoloLetras(k);
+				}
+			});
+		 this.pnlAgregarPersonas.getTxtDNI().addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent k) {
+					validaciones.ComprobarSoloNumeros(k);
+				}
+			});
 
 		
 		//Eventos PanelEliminarPersonas
@@ -77,7 +95,7 @@ public class Controlador implements ActionListener {
 			}
 		});
 		
-		this.pnlModificarPersonas.getTxtNombre().addKeyListener(new KeyAdapter() {
+		this.pnlModificarPersonas.getTxtApellido().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
 				validaciones.ComprobarSoloLetras(k);
@@ -147,6 +165,10 @@ public class Controlador implements ActionListener {
 		ventanaPrincipal.setSize(460, 350);
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
+		
+		pnlModificarPersonas.getTxtNombre().setText("");
+		pnlModificarPersonas.getTxtApellido().setText("");
+		pnlModificarPersonas.getTxtDNI().setText("");
 	}
 	
 	public void EventoClickMenu_AbrirPanel_ListarPersona(ActionEvent a)
@@ -206,7 +228,7 @@ public class Controlador implements ActionListener {
 			
 			if(result) {
 				//Avisar persona ya existente
-				JOptionPane.showMessageDialog(pnlAgregarPersonas.getRootPane(), "El Dni ingresado ya se encuentra registrado en la base de datos");
+				JOptionPane.showMessageDialog(pnlAgregarPersonas.getRootPane(), "El DNI ingresado ya se encuentra registrado en la base de datos");
 				vaciarTextFields();
 			}
 			else {
@@ -290,7 +312,7 @@ public class Controlador implements ActionListener {
 		//comprobar si se pudo editar
 		if(edited == true)
 		//avisar edicion exitosa de persona
-			JOptionPane.showMessageDialog(null, "Persona editada Correctamente");
+			JOptionPane.showMessageDialog(null, "Persona editada correctamente");
 		else 
 			JOptionPane.showMessageDialog(null, "Hubo un error al editar el registro. No se hicieron modificaciones.");
 		return true;

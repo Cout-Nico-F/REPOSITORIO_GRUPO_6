@@ -1,17 +1,13 @@
 package presentacion.vista;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import entidad.Persona;
-import negocio.IPersonaNegocio;
 import negocioImpl.PersonaNegocioImpl;
 
 public class PanelListarPersonas extends JPanel {
