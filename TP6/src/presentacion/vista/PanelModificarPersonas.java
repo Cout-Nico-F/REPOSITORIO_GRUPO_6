@@ -38,13 +38,6 @@ public class PanelModificarPersonas extends JPanel {
 	private IValidacionesNegocio validaciones;
 	private JList<Persona> lista;
 	
-	public JList<Persona> getLista() {
-		return lista;
-	}
-
-	public void setLista(JList<Persona> lista) {
-		this.lista = lista;
-	}
 
 	public PanelModificarPersonas() {
 		setLayout(null);
@@ -53,8 +46,6 @@ public class PanelModificarPersonas extends JPanel {
 		
 		lista.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				//se carga el registro dentro de un objeto de tipo persona o se castea el model a tipo persona.
-				//asignamos a los textfield su contenido desde el registr
 				txtNombre.setText(lista.getSelectedValue().getNombre());
 				txtApellido.setText( lista.getSelectedValue().getApellido() );
 				txtDNI.setText( String.valueOf( lista.getSelectedValue().getDni()) );
@@ -154,5 +145,12 @@ public class PanelModificarPersonas extends JPanel {
 		this.validaciones = validaciones;
 	}
 	
+	public JList<Persona> getLista() {
+		return lista;
+	}
+
+	public void setLista(JList<Persona> lista) {
+		this.lista = lista;
+	}
 	
 }

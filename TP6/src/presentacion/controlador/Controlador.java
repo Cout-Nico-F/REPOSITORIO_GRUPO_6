@@ -7,8 +7,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+<<<<<<< Updated upstream
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+=======
+import javax.swing.JFrame;
+>>>>>>> Stashed changes
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -93,12 +97,7 @@ public class Controlador implements ActionListener {
 		else 
 			JOptionPane.showMessageDialog(pnlModificarPersonas, "Hubo un error al editar el registro. No se hicieron modificaciones.");
 		
-		refrescarTabla();
-		ventanaPrincipal.getContentPane().removeAll();
-		ventanaPrincipal.getContentPane().add(pnlModificarPersonas);
-		ventanaPrincipal.setSize(460, 350);
-		ventanaPrincipal.getContentPane().repaint();
-		ventanaPrincipal.getContentPane().revalidate();
+		EventoClickMenu_AbrirPanel_ModificarPersona(e);
 	}
 
 	private void EventoClickBoton_Aceptar_pnlAgregarPersonas(ActionEvent a) {
