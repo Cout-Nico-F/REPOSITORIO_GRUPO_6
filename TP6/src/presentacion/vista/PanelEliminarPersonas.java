@@ -1,10 +1,5 @@
 package presentacion.vista;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -16,10 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import daoImpl.Conexion;
 import entidad.Persona;
-import negocio.IPersonaNegocio;
-import negocioImpl.PersonaNegocioImpl;
+
 
 public class PanelEliminarPersonas extends JPanel {
 
@@ -29,6 +22,24 @@ public class PanelEliminarPersonas extends JPanel {
 	private DefaultListModel<Persona> dlmPersonas;
 	private JList<Persona> list;
 	
+	public DefaultListModel<Persona> getDlm() {
+		return dlmPersonas;
+	}
+
+	public void setDlm(DefaultListModel<Persona> dlmPersonas) {
+		this.dlmPersonas = dlmPersonas;
+	}
+	
+	public JList<Persona> getList() {
+		return list;
+	}
+
+
+	public void setList(JList<Persona> list) {
+		this.list = list;
+	}
+
+
 	public PanelEliminarPersonas() {
 		setLayout(null);
 		
@@ -49,7 +60,6 @@ public class PanelEliminarPersonas extends JPanel {
 
 	}
 	
-
 	
 	public JButton getBtnEliminar() {
 		return btnEliminar;

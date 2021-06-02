@@ -32,9 +32,8 @@ public class Controlador implements ActionListener {
 	private PanelListarPersonas pnlListarPersonas;
 	private IPersonaNegocio pNeg;
 	private ArrayList<Persona> tablaPersonas;
-	private IValidacionesNegocio validaciones;
-	private DefaultListModel<Persona> dlmPersonas;
-	private JList<Persona> list;
+	private IValidacionesNegocio validaciones;	
+	
 	
 	public Controlador(VentanaPrincipal vista, IPersonaNegocio pNeg)
 	{
@@ -81,8 +80,8 @@ public class Controlador implements ActionListener {
 	
 	private void EventoClickBoton_Eliminar_pnlEliminarPersonas(ActionEvent a) {
 		
-		EliminarPersona();
-		ConfirmacionEliminar();
+		//EliminarPersona(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
+		ConfirmacionEliminar(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
 		refrescarTabla();
 	}
 
@@ -212,7 +211,7 @@ public class Controlador implements ActionListener {
 	}
 	
 	
-	public void ConfirmacionEliminar() {
+	public void ConfirmacionEliminar( JList<Persona> list , DefaultListModel<Persona> dlmPersonas) {
 		//Capturo lo que devuelve el JOptionPane en input
 		int input = JOptionPane.showConfirmDialog(null,"Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
 				JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -221,7 +220,7 @@ public class Controlador implements ActionListener {
 		
 		//Despues pregunto si la opcion que elije el usuario es Si, si es asi elimina el registro de la persona y se muestra un cartel ademas de actualizar la lista
 		if(input == JOptionPane.YES_OPTION) {
-			if(EliminarPersona()) { //Elimina el registro y actualiza
+			if(EliminarPersona(list, dlmPersonas)) { //Elimina el registro y actualiza
 				JOptionPane.showMessageDialog(null, "Persona eliminada correctamente");
 			}
 			else {
@@ -233,11 +232,12 @@ public class Controlador implements ActionListener {
 		}	
 	}
 	
-	protected boolean EliminarPersona() {
+	protected boolean EliminarPersona( JList<Persona> list, DefaultListModel<Persona> dlmPersonas ) {
 		IPersonaNegocio pneg = new PersonaNegocioImpl();
 		
 		int index;
 		boolean delete;
+		
 		
 		Persona p = list.getSelectedValue();
 		
@@ -252,7 +252,6 @@ public class Controlador implements ActionListener {
 		}
 		return false;
 	}
-	
 	
 }
 
