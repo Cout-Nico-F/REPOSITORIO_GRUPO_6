@@ -14,7 +14,7 @@ public class Conexion
 		try
 		{
 			//Class.forName("com.mysql.jdbc.Driver"); // quitar si no es necesario
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdpersonas","root","1990294");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdpersonas","root","root");
 			this.connection.setAutoCommit(false);
 		}
 		catch(Exception e)

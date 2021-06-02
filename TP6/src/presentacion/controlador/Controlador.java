@@ -7,10 +7,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+<<<<<<< Updated upstream
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+=======
 import javax.swing.JFrame;
+>>>>>>> Stashed changes
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import daoImpl.Conexion;
 import entidad.Persona;
@@ -64,10 +68,13 @@ public class Controlador implements ActionListener {
 		//Eventos PanelEliminarPersonas
 		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
 
-		 //TODO: mover eventos de eliminar personas a esta secciÃ³n/capa
+		 //TODO: mover eventos de eliminar personas a esta sección/capa
 		 this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_Eliminar_pnlEliminarPersonas(s));
-
 		 
+		//Eventos PanelModificarPersona
+		 this.pnlModificarPersonas.getBtnModificar().addActionListener(a->EventoClickBoton_Modificar_pnlModificarPersonas(a));
+	}
+	
 	private void EventoClickBoton_Modificar_pnlModificarPersonas(ActionEvent e) {
 
 		boolean a = validaciones.ComprobarCampoVacio(pnlModificarPersonas,pnlModificarPersonas.getTxtApellido());
@@ -92,7 +99,7 @@ public class Controlador implements ActionListener {
 		
 		EventoClickMenu_AbrirPanel_ModificarPersona(e);
 	}
-	
+
 	private void EventoClickBoton_Aceptar_pnlAgregarPersonas(ActionEvent a) {
 		ComprobarAgregarPersona();
 		refrescarTabla();
@@ -133,6 +140,7 @@ public class Controlador implements ActionListener {
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
 	{	
+		this.refrescarTabla();
 		IValidacionesNegocio validaciones = new ValidacionesNegocioImpl();
 		pnlModificarPersonas.setValidaciones(validaciones);
 		
@@ -173,7 +181,7 @@ public class Controlador implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 	}
 	
 	private void ComprobarAgregarPersona() {

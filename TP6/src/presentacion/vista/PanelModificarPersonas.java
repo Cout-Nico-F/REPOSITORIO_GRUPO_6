@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class PanelModificarPersonas extends JPanel {
 
@@ -33,32 +35,24 @@ public class PanelModificarPersonas extends JPanel {
 	private JTextField txtApellido;
 	private JTextField txtDNI;
 	private DefaultListModel<Persona> dlmPersonas;
-
 	private IValidacionesNegocio validaciones;
+	private JList<Persona> lista;
 	
+
 	public PanelModificarPersonas() {
-		
-		//**este tramo de codigo es para simular que recibimos el defaultlist desde el set.
-		
-		dlmPersonas = new DefaultListModel<Persona>();
-		Persona p1 = new Persona(1, "juan", "cito");
-		Persona p2 = new Persona(2, "Andy", "cach");
-		dlmPersonas.addElement(p1);
-		dlmPersonas.addElement(p2);
-		//**
 		setLayout(null);
+		dlmPersonas = new DefaultListModel<Persona>();
+		lista = new JList<>(dlmPersonas);//seteamos el modelo
 		
-		JList<Persona> list = new JList<Persona>(dlmPersonas);//seteamos el modelo
-		
-		list.addListSelectionListener(new ListSelectionListener() {
+		lista.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				txtNombre.setText(lista.getSelectedValue().getNombre());
 				txtApellido.setText( lista.getSelectedValue().getApellido() );
 				txtDNI.setText( String.valueOf( lista.getSelectedValue().getDni()) );
 			}
 		});
-		list.setBounds(50, 36, 350, 182);
-		add(list);
+		lista.setBounds(50, 36, 350, 182);
+		add(lista);
 		
 		JLabel lblModificar = new JLabel("Seleccione la persona que desea modificar");
 		lblModificar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -66,19 +60,6 @@ public class PanelModificarPersonas extends JPanel {
 		add(lblModificar);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//al presionar el boton modificar:
-				//validar que este seleccionado un registro
-				//validar que los datos ingresados sean correctos ( no vacio )
-				
-				
-				//comunicarse con negocio.
-				ComunicarseConNegocio();
-				
-				
-			}
-		});
 		btnModificar.setBounds(308, 229, 92, 23);
 		add(btnModificar);
 		
@@ -112,25 +93,12 @@ public class PanelModificarPersonas extends JPanel {
 
 	}
 
-	protected boolean ComunicarseConNegocio() {
-		IPersonaNegocio pneg = new PersonaNegocioImpl();
-		boolean a = validaciones.ComprobarCampoVacio( (JPanel) getParent(), txtNombre);
-		boolean b;
-		if(!a) return false;
-		b = validaciones.ComprobarCampoVacio( (JPanel) getParent(), txtApellido);
-		if(!b) return false;
-		
-		Persona p = new Persona(Integer.parseInt(txtDNI.getText()),txtNombre.getText(), txtApellido.getText());
-		
-		//Agregar();
-		boolean edited = pneg.edit(p);				
-		//comprobar si se pudo agregar
-		if(edited == true)
-		//avisar carga exitosa de persona
-			JOptionPane.showMessageDialog(getRootPane(), "Persona editada Correctamente");
-		else 
-			JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al editar el registro. No se hicieron modificaciones.");
-		return true;
+	public void llenarModel(ArrayList<Persona> listaPersonas) {
+		dlmPersonas.setSize(0); //para vaciar el model
+		ListIterator<Persona> i = listaPersonas.listIterator();
+		while(i.hasNext()) {
+			dlmPersonas.addElement(i.next());			
+		}
 	}
 
 	public JButton getBtnModificar() {
