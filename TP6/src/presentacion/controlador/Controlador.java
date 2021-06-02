@@ -75,14 +75,14 @@ public class Controlador implements ActionListener {
 	
 	private void EventoClickBoton_Aceptar_pnlAgregarPersonas(ActionEvent a) {
 		ComprobarAgregarPersona();
-		refrescarTabla();
+		refrescarListas();
 	}
 	
 	private void EventoClickBoton_Eliminar_pnlEliminarPersonas(ActionEvent a) {
 		
 		//EliminarPersona(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
 		ConfirmacionEliminar(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
-		refrescarTabla();
+		refrescarListas();
 	}
 
 	//EventoClickMenu abrir PanelAgregarPersonas
@@ -102,7 +102,7 @@ public class Controlador implements ActionListener {
 	//EventoClickMenu abrir PanelEliminarPersonas
 	public void EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent a)
 	{		
-		this.refrescarTabla();
+		this.refrescarListas();
 		ventanaPrincipal.getContentPane().removeAll();
 		ventanaPrincipal.getContentPane().add(pnlEliminarPersonas);
 		ventanaPrincipal.setSize(460, 350);
@@ -113,8 +113,10 @@ public class Controlador implements ActionListener {
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
 	{	
+		refrescarListas();
 		IValidacionesNegocio validaciones = new ValidacionesNegocioImpl();
 		pnlModificarPersonas.setValidaciones(validaciones);
+		
 		
 		ventanaPrincipal.getContentPane().removeAll();
 		ventanaPrincipal.getContentPane().add(pnlModificarPersonas);
@@ -125,7 +127,7 @@ public class Controlador implements ActionListener {
 	
 	public void EventoClickMenu_AbrirPanel_ListarPersona(ActionEvent a)
 	{	
-		this.refrescarTabla();
+		this.refrescarListas();
 		ventanaPrincipal.getContentPane().removeAll();
 		ventanaPrincipal.getContentPane().add(pnlListarPersonas);
 		ventanaPrincipal.setSize(420, 350);
@@ -138,18 +140,15 @@ public class Controlador implements ActionListener {
 		this.ventanaPrincipal.setVisible(true);
 	}
 	
-	private void refrescarTabla()
+	private void refrescarListas()
 	{	
 		tablaPersonas = (ArrayList<Persona>) pNeg.readAll();
 		pnlAgregarPersonas.llenarTabla(tablaPersonas);
 		pnlListarPersonas.llenarTabla(tablaPersonas);
 		pnlEliminarPersonas.llenarLista(tablaPersonas);
+		pnlModificarPersonas.llenarLista(tablaPersonas);
 	}
 
-	
-
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
