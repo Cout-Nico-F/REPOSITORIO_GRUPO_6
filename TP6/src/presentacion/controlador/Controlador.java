@@ -7,14 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-<<<<<<< Updated upstream
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-=======
-import javax.swing.JFrame;
->>>>>>> Stashed changes
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import daoImpl.Conexion;
 import entidad.Persona;
@@ -67,39 +62,17 @@ public class Controlador implements ActionListener {
 		
 		//Eventos PanelEliminarPersonas
 		// this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_BorrarPesona_PanelEliminarPersonas(s));
-
 		 //TODO: mover eventos de eliminar personas a esta sección/capa
 		 this.pnlEliminarPersonas.getBtnEliminar().addActionListener(s->EventoClickBoton_Eliminar_pnlEliminarPersonas(s));
 		 
+		 
+		 
+		 
 		//Eventos PanelModificarPersona
-		 this.pnlModificarPersonas.getBtnModificar().addActionListener(a->EventoClickBoton_Modificar_pnlModificarPersonas(a));
+		//TODO: mover eventos de modificar personas a esta sección/capa
+	
 	}
 	
-	private void EventoClickBoton_Modificar_pnlModificarPersonas(ActionEvent e) {
-
-		boolean a = validaciones.ComprobarCampoVacio(pnlModificarPersonas,pnlModificarPersonas.getTxtApellido());
-		boolean b;
-		if(!a) return;
-		b = validaciones.ComprobarCampoVacio(pnlModificarPersonas,pnlModificarPersonas.getTxtNombre());
-		if(!b) return;
-		
-		String apellido = pnlModificarPersonas.getTxtApellido().getText();
-		String nombre = pnlModificarPersonas.getTxtNombre().getText();
-		String dni = pnlModificarPersonas.getTxtDNI().getText();
-		Persona p = new Persona(Integer.parseInt(dni),nombre, apellido);
-		
-		//Agregar();
-		boolean edited = pNeg.edit(p);				
-		//comprobar si se pudo agregar
-		if(edited == true)
-		//avisar carga exitosa de persona
-			JOptionPane.showMessageDialog(pnlModificarPersonas, "Persona editada Correctamente");
-		else 
-			JOptionPane.showMessageDialog(pnlModificarPersonas, "Hubo un error al editar el registro. No se hicieron modificaciones.");
-		
-		EventoClickMenu_AbrirPanel_ModificarPersona(e);
-	}
-
 	private void EventoClickBoton_Aceptar_pnlAgregarPersonas(ActionEvent a) {
 		ComprobarAgregarPersona();
 		refrescarTabla();
@@ -140,7 +113,6 @@ public class Controlador implements ActionListener {
 	
 	public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a)
 	{	
-		this.refrescarTabla();
 		IValidacionesNegocio validaciones = new ValidacionesNegocioImpl();
 		pnlModificarPersonas.setValidaciones(validaciones);
 		
@@ -171,7 +143,6 @@ public class Controlador implements ActionListener {
 		tablaPersonas = (ArrayList<Persona>) pNeg.readAll();
 		pnlAgregarPersonas.llenarTabla(tablaPersonas);
 		pnlListarPersonas.llenarTabla(tablaPersonas);
-		pnlModificarPersonas.llenarModel(tablaPersonas);
 		pnlEliminarPersonas.llenarLista(tablaPersonas);
 	}
 
@@ -181,7 +152,7 @@ public class Controlador implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//  Auto-generated method stub
+		// TODO Auto-generated method stub
 	}
 	
 	private void ComprobarAgregarPersona() {
