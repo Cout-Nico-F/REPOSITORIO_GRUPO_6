@@ -1,11 +1,11 @@
 package negocioImpl;
 
 import java.awt.event.KeyEvent;
+
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.mysql.cj.util.StringUtils;
+import com.mysql.jdbc.StringUtils;
 
 import negocio.IValidacionesNegocio;
 

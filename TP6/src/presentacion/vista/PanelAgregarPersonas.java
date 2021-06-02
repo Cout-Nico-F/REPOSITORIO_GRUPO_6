@@ -1,5 +1,7 @@
 package presentacion.vista;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -12,13 +14,6 @@ import javax.swing.table.DefaultTableModel;
 
 import entidad.Persona;
 import negocio.IValidacionesNegocio;
-import negocio.IPersonaNegocio;
-import negocioImpl.PersonaNegocioImpl;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class PanelAgregarPersonas extends JPanel {
 	
@@ -68,23 +63,11 @@ public class PanelAgregarPersonas extends JPanel {
 		panel_1.add(lblApellido);
 		
 		txtNombre = new JTextField();
-		txtNombre.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k);
-			}
-		});
 		txtNombre.setColumns(10);
 		txtNombre.setBounds(204, 13, 164, 20);
 		panel_1.add(txtNombre);
 		
 		txtApellido = new JTextField();
-		txtApellido.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k);
-			}
-		});
 		txtApellido.setColumns(10);
 		txtApellido.setBounds(204, 44, 164, 20);
 		panel_1.add(txtApellido);
@@ -100,12 +83,6 @@ public class PanelAgregarPersonas extends JPanel {
 		panel_1.add(txtDNI);
 		
 		JLabel lblDni = new JLabel("DNI");
-		txtDNI.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloNumeros(k);
-			}
-		});
 		lblDni.setBounds(30, 78, 170, 14);
 		panel_1.add(lblDni);
 	}
