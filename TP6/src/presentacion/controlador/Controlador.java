@@ -2,16 +2,12 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
 
-import daoImpl.Conexion;
 import entidad.Persona;
 import negocio.IValidacionesNegocio;
 import negocio.IPersonaNegocio;
@@ -69,8 +65,18 @@ public class Controlador implements ActionListener {
 		 
 		 
 		//Eventos PanelModificarPersona
-		//TODO: mover eventos de modificar personas a esta sección/capa
+		
+		this.pnlModificarPersonas.getList().addListSelectionListener(s-> EventoSeleccionCambiada_pnlModificarPersonas(s));
+		this.pnlModificarPersonas.getBtnModificar().addActionListener(s-> EventoClickBoton_Modificar_pnlModificarPersonas(s));
+	}
 	
+	private void EventoSeleccionCambiada_pnlModificarPersonas(ListSelectionEvent s) {
+		if(pnlModificarPersonas.getList().getSelectedValue() == null) {
+			return;
+		}
+		pnlModificarPersonas.getTxtNombre().setText(pnlModificarPersonas.getList().getSelectedValue().getNombre());
+		pnlModificarPersonas.getTxtApellido().setText( pnlModificarPersonas.getList().getSelectedValue().getApellido() );
+		pnlModificarPersonas.getTxtDNI().setText( String.valueOf(pnlModificarPersonas.getList().getSelectedValue().getDni()) );	
 	}
 	
 	private void EventoClickBoton_Aceptar_pnlAgregarPersonas(ActionEvent a) {
@@ -78,10 +84,13 @@ public class Controlador implements ActionListener {
 		refrescarListas();
 	}
 	
-	private void EventoClickBoton_Eliminar_pnlEliminarPersonas(ActionEvent a) {
-		
-		//EliminarPersona(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
+	private void EventoClickBoton_Eliminar_pnlEliminarPersonas(ActionEvent a) {		
 		ConfirmacionEliminar(pnlEliminarPersonas.getList(), pnlEliminarPersonas.getDlm());
+		refrescarListas();
+	}
+	
+	private void EventoClickBoton_Modificar_pnlModificarPersonas(ActionEvent a) {		
+		ComunicarseConNegocio();
 		refrescarListas();
 	}
 
@@ -157,15 +166,15 @@ public class Controlador implements ActionListener {
 	private void ComprobarAgregarPersona() {
 		
 		IPersonaNegocio pneg = new PersonaNegocioImpl();
-		boolean a = validaciones.ComprobarCampoVacio(pnlAgregarPersonas,pnlAgregarPersonas.getTxtNombre());
+		boolean a = validaciones.ComprobarCampoVacio(pnlAgregarPersonas.getTxtNombre());
 		boolean b,c;
 		
 		if( !a ) return;
 		else {
-			b = validaciones.ComprobarCampoVacio(pnlAgregarPersonas,pnlAgregarPersonas.getTxtApellido());
+			b = validaciones.ComprobarCampoVacio(pnlAgregarPersonas.getTxtApellido());
 			if( !b ) return;
 			else{
-				c =validaciones.ComprobarCampoVacio(pnlAgregarPersonas,pnlAgregarPersonas.getTxtDNI());
+				c =validaciones.ComprobarCampoVacio(pnlAgregarPersonas.getTxtDNI());
 			}
 		}
 		
@@ -209,7 +218,6 @@ public class Controlador implements ActionListener {
 		pnlAgregarPersonas.getTxtDNI().setText("");
 	}
 	
-	
 	public void ConfirmacionEliminar( JList<Persona> list , DefaultListModel<Persona> dlmPersonas) {
 		//Capturo lo que devuelve el JOptionPane en input
 		int input = JOptionPane.showConfirmDialog(null,"Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
@@ -252,6 +260,26 @@ public class Controlador implements ActionListener {
 		return false;
 	}
 	
+	protected boolean ComunicarseConNegocio() {
+		IPersonaNegocio pneg = new PersonaNegocioImpl();
+		boolean a = validaciones.ComprobarCampoVacio(pnlModificarPersonas.getTxtNombre());
+		boolean b;
+		if(!a) return false;
+		b = validaciones.ComprobarCampoVacio(pnlModificarPersonas.getTxtApellido());
+		if(!b) return false;
+		
+		Persona p = new Persona(Integer.parseInt(pnlModificarPersonas.getTxtDNI().getText()),pnlModificarPersonas.getTxtNombre().getText(), pnlModificarPersonas.getTxtApellido().getText());
+		
+		//Editar
+		boolean edited = pneg.edit(p);				
+		//comprobar si se pudo editar
+		if(edited == true)
+		//avisar edicion exitosa de persona
+			JOptionPane.showMessageDialog(null, "Persona editada Correctamente");
+		else 
+			JOptionPane.showMessageDialog(null, "Hubo un error al editar el registro. No se hicieron modificaciones.");
+		return true;
+	}
 }
 
 

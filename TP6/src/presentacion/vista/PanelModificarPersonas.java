@@ -20,12 +20,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class PanelModificarPersonas extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5663498475142431779L;
 	
 	JButton btnModificar;
@@ -33,34 +31,40 @@ public class PanelModificarPersonas extends JPanel {
 	private JTextField txtApellido;
 	private JTextField txtDNI;
 	private DefaultListModel<Persona> dlmPersonas;
-
+	private JList<Persona> list;
 	private IValidacionesNegocio validaciones;
+	//getters and setters suelen ubicarse arriba del constructor, separados de los otros metodos que van abajo
+	public JList<Persona> getList(){
+		return list;
+	}
+	
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public JTextField getTxtApellido() {
+		return txtApellido;
+	}
+
+	public JTextField getTxtDNI() {
+		return txtDNI;
+	}
+
+	public void setValidaciones(IValidacionesNegocio validaciones) {
+		this.validaciones = validaciones;
+	}
+	
+	public JButton getBtnModificar() {
+		return btnModificar;
+	}
 	
 	public PanelModificarPersonas() {
-		
-		//**este tramo de codigo es para simular que recibimos el defaultlist desde el set.
-		
-		dlmPersonas = new DefaultListModel<Persona>();
-		Persona p1 = new Persona(1, "juan", "cito");
-		Persona p2 = new Persona(2, "Andy", "cach");
-		dlmPersonas.addElement(p1);
-		dlmPersonas.addElement(p2);
-		//**
 		setLayout(null);
 		
-		JList<Persona> list = new JList<Persona>(dlmPersonas);//seteamos el modelo
-		
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				//se carga el registro dentro de un objeto de tipo persona o se castea el model a tipo persona.
-				//asignamos a los textfield su contenido desde el registr
-				txtNombre.setText( list.getSelectedValue().getNombre() );
-				txtApellido.setText( list.getSelectedValue().getApellido() );
-				txtDNI.setText( String.valueOf( list.getSelectedValue().getDni()) );
-			}
-		});
+		list = new JList<Persona>();
 		list.setBounds(50, 36, 350, 182);
 		add(list);
+		
 		
 		JLabel lblModificar = new JLabel("Seleccione la persona que desea modificar");
 		lblModificar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,19 +72,7 @@ public class PanelModificarPersonas extends JPanel {
 		add(lblModificar);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//al presionar el boton modificar:
-				//validar que este seleccionado un registro
-				//validar que los datos ingresados sean correctos ( no vacio )
-				
-				
-				//comunicarse con negocio.
-				ComunicarseConNegocio();
-				
-				
-			}
-		});
+		
 		btnModificar.setBounds(308, 229, 92, 23);
 		add(btnModificar);
 		
@@ -88,7 +80,7 @@ public class PanelModificarPersonas extends JPanel {
 		txtNombre.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k, (JPanel) getParent());
+				validaciones.ComprobarSoloLetras(k);
 			}
 		});
 		txtNombre.setBounds(50, 229, 76, 22);
@@ -99,7 +91,7 @@ public class PanelModificarPersonas extends JPanel {
 		txtApellido.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k, (JPanel) getParent());
+				validaciones.ComprobarSoloLetras(k);
 			}
 		});
 		txtApellido.setColumns(10);
@@ -113,71 +105,22 @@ public class PanelModificarPersonas extends JPanel {
 		add(txtDNI);
 
 	}
-
-	protected boolean ComunicarseConNegocio() {
-		IPersonaNegocio pneg = new PersonaNegocioImpl();
-		boolean a = validaciones.ComprobarCampoVacio( (JPanel) getParent(), txtNombre);
-		boolean b;
-		if(!a) return false;
-		b = validaciones.ComprobarCampoVacio( (JPanel) getParent(), txtApellido);
-		if(!b) return false;
-		
-		Persona p = new Persona(Integer.parseInt(txtDNI.getText()),txtNombre.getText(), txtApellido.getText());
-		
-		//Agregar();
-		boolean edited = pneg.edit(p);				
-		//comprobar si se pudo agregar
-		if(edited == true)
-		//avisar carga exitosa de persona
-			JOptionPane.showMessageDialog(getRootPane(), "Persona editada Correctamente");
-		else 
-			JOptionPane.showMessageDialog(getRootPane(), "Hubo un error al editar el registro. No se hicieron modificaciones.");
-		return true;
-	}
-
-	public JButton getBtnModificar() {
-		return btnModificar;
-	}
-	public void setBtnModificar(JButton btnModificar) {
-		this.btnModificar = btnModificar;
-	}
 	
 	public void mostrarMensaje(String mensaje)
 	{
 		JOptionPane.showMessageDialog(null, mensaje);
 	}
 
-	public JTextField getTxtNombre() {
-		return txtNombre;
-	}
 
-	public void setTxtNombre(JTextField txtNombre) {
-		this.txtNombre = txtNombre;
-	}
-
-	public JTextField getTxtApellido() {
-		return txtApellido;
-	}
-
-	public void setTxtApellido(JTextField txtApellido) {
-		this.txtApellido = txtApellido;
-	}
-
-	public JTextField getTxtDNI() {
-		return txtDNI;
-	}
-
-	public void setTxtDNI(JTextField txtDNI) {
-		this.txtDNI = txtDNI;
-	}
-
-	public void setDlmPersonas(DefaultListModel<Persona> dlmPersonas) { //Metodo que usa el controlador para setear el model que viene de dao
-		this.dlmPersonas = dlmPersonas;
-	}
+	public void llenarLista(ArrayList<Persona> lista) {
+		dlmPersonas = new DefaultListModel<Persona>();
+		list.setModel(dlmPersonas);		
+		for (Persona p : lista ) {
+						
+			dlmPersonas.addElement(p);			
+		}
 	
-	public void setValidaciones(IValidacionesNegocio validaciones) {
-		this.validaciones = validaciones;
+	this.add(list);
 	}
-	
 	
 }

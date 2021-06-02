@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public interface IValidacionesNegocio {
-	void ComprobarSoloLetras(KeyEvent k, JPanel panel);
-	void ComprobarSoloNumeros(KeyEvent k, JPanel panel);
-	boolean ComprobarCampoVacio(JPanel panel, JTextField jtext);
+	void ComprobarSoloLetras(KeyEvent k);
+	void ComprobarSoloNumeros(KeyEvent k);
+	boolean ComprobarCampoVacio(JTextField jtext);
 }

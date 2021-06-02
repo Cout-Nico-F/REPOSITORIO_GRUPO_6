@@ -34,8 +34,6 @@ public class PanelAgregarPersonas extends JPanel {
 	private DefaultTableModel modelPersonas;
 	private IValidacionesNegocio validaciones;
 	
-	private PanelAgregarPersonas ref;
-	
 	 public PanelAgregarPersonas() {
 		super();
 		initialize();
@@ -52,8 +50,7 @@ public class PanelAgregarPersonas extends JPanel {
 	private void initialize() 
 	{
 		modelPersonas = new DefaultTableModel();
-		
-		ref = this;
+
 		this.setBounds(100, 100, 439, 222);
 		this.setLayout(null);
 		
@@ -74,7 +71,7 @@ public class PanelAgregarPersonas extends JPanel {
 		txtNombre.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k, ref);
+				validaciones.ComprobarSoloLetras(k);
 			}
 		});
 		txtNombre.setColumns(10);
@@ -85,7 +82,7 @@ public class PanelAgregarPersonas extends JPanel {
 		txtApellido.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloLetras(k, ref);
+				validaciones.ComprobarSoloLetras(k);
 			}
 		});
 		txtApellido.setColumns(10);
@@ -106,7 +103,7 @@ public class PanelAgregarPersonas extends JPanel {
 		txtDNI.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent k) {
-				validaciones.ComprobarSoloNumeros(k, ref );
+				validaciones.ComprobarSoloNumeros(k);
 			}
 		});
 		lblDni.setBounds(30, 78, 170, 14);

@@ -32,8 +32,7 @@ public class PanelEliminarPersonas extends JPanel {
 
 	public PanelEliminarPersonas() {
 		setLayout(null);
-		
-		
+			
 		list = new JList<Persona>();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(50, 36, 341, 181);
@@ -48,9 +47,7 @@ public class PanelEliminarPersonas extends JPanel {
 		btnEliminar.setBounds(126, 230, 200, 23);
 		add(btnEliminar);
 		
-
 	}
-	
 	
 	public JButton getBtnEliminar() {
 		return btnEliminar;
@@ -64,24 +61,15 @@ public class PanelEliminarPersonas extends JPanel {
 		JOptionPane.showMessageDialog(null, mensaje);
 	}
 	
-	
-	
 public void llenarLista(ArrayList<Persona> lista){
 		dlmPersonas = new DefaultListModel<Persona>();
 		list.setModel(dlmPersonas);		
 		for (Persona p : lista ) {
 						
 			dlmPersonas.addElement(p);			
-		}
-	
+		}	
 	this.add(list);
 	
 	}
-	
-
-	
-
-
-	
 
 }
