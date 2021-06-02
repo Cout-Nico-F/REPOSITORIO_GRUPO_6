@@ -38,15 +38,6 @@ public class PanelListarPersonas extends JPanel {
 		tablaPersonas.getColumnModel().getColumn(2).setPreferredWidth(100);
 		tablaPersonas.getColumnModel().getColumn(2).setResizable(false);
 		
-		//cargar la lista desde base de datos (comunicarse con negocio)
-		//ComunicarseConNegocio();
-		/*
-		List<Persona> listaPersonas = new ArrayList<Persona>();
-		PersonaNegocioImpl pni = new PersonaNegocioImpl();
-		listaPersonas = pni.obtenerTodas();
-		llenarTabla(listaPersonas);
-		*/
-		
 		JScrollPane spPersonas = new JScrollPane();
 		
 		spPersonas.setBounds(15, 11, 380, 250);
