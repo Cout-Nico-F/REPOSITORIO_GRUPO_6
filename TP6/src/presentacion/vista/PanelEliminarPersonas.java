@@ -25,23 +25,14 @@ public class PanelEliminarPersonas extends JPanel {
 	public DefaultListModel<Persona> getDlm() {
 		return dlmPersonas;
 	}
-
-	public void setDlm(DefaultListModel<Persona> dlmPersonas) {
-		this.dlmPersonas = dlmPersonas;
-	}
 	
 	public JList<Persona> getList() {
 		return list;
 	}
 
-
-	public void setList(JList<Persona> list) {
-		this.list = list;
-	}
-
-
 	public PanelEliminarPersonas() {
 		setLayout(null);
+		
 		
 		list = new JList<Persona>();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -79,10 +70,8 @@ public void llenarLista(ArrayList<Persona> lista){
 		dlmPersonas = new DefaultListModel<Persona>();
 		list.setModel(dlmPersonas);		
 		for (Persona p : lista ) {
-			
-			
-			dlmPersonas.addElement(p);
-			
+						
+			dlmPersonas.addElement(p);			
 		}
 	
 	this.add(list);
