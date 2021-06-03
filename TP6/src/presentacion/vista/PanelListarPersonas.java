@@ -21,8 +21,18 @@ public class PanelListarPersonas extends JPanel {
 	public PanelListarPersonas() {
 		setLayout(null);
 		
-		modelPersonas = new DefaultTableModel(null,nombreColumnas);
-		//modelPersonas.
+		modelPersonas = new DefaultTableModel(null,nombreColumnas) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //impide que el usuario pueda editar el contenido
+		       return false;
+		    }
+		};
 		
 		
 		tablaPersonas = new JTable(modelPersonas);
@@ -34,6 +44,7 @@ public class PanelListarPersonas extends JPanel {
 		tablaPersonas.getColumnModel().getColumn(1).setResizable(false);
 		tablaPersonas.getColumnModel().getColumn(2).setPreferredWidth(100);
 		tablaPersonas.getColumnModel().getColumn(2).setResizable(false);
+
 		
 		JScrollPane spPersonas = new JScrollPane();
 		
@@ -58,6 +69,7 @@ public class PanelListarPersonas extends JPanel {
 			modelPersonas.addRow(fila);
 		}
 	}
+	
 	
 }
 
