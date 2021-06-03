@@ -8,15 +8,16 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import entidad.Persona;
-import negocioImpl.PersonaNegocioImpl;
 
 public class PanelListarPersonas extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable tablaPersonas;
 	private DefaultTableModel modelPersonas;
 	private String[] nombreColumnas = {"Nombre", "Apellido", "Dni"};
-	private PersonaNegocioImpl pni;
-	
 	public PanelListarPersonas() {
 		setLayout(null);
 		

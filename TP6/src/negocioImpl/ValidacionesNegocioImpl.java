@@ -5,8 +5,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.mysql.jdbc.StringUtils;
-
+import com.mysql.cj.util.StringUtils;
 import negocio.IValidacionesNegocio;
 
 

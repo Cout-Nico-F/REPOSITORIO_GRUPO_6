@@ -2,7 +2,6 @@ package negocio;
 
 import java.awt.event.KeyEvent;
 
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public interface IValidacionesNegocio {

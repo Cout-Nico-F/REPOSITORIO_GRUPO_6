@@ -1,7 +1,5 @@
 package presentacion.vista;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -26,7 +24,6 @@ public class PanelModificarPersonas extends JPanel {
 	private JTextField txtDNI;
 	private DefaultListModel<Persona> dlmPersonas;
 	private JList<Persona> list;
-	private IValidacionesNegocio validaciones;
 	//getters and setters suelen ubicarse arriba del constructor, separados de los otros metodos que van abajo
 	public JList<Persona> getList(){
 		return list;
@@ -45,7 +42,6 @@ public class PanelModificarPersonas extends JPanel {
 	}
 
 	public void setValidaciones(IValidacionesNegocio validaciones) {
-		this.validaciones = validaciones;
 	}
 	
 	public JButton getBtnModificar() {

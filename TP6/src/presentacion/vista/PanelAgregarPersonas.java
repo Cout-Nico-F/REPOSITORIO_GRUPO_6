@@ -1,7 +1,5 @@
 package presentacion.vista;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -27,9 +25,7 @@ public class PanelAgregarPersonas extends JPanel {
 	private JTable tablaPersonas;
 	private String[] nombreColumnas = {"Nombre","Apellido","Dni"};
 	private DefaultTableModel modelPersonas;
-	private IValidacionesNegocio validaciones;
-	
-	 public PanelAgregarPersonas() {
+	public PanelAgregarPersonas() {
 		super();
 		initialize();
 	}
@@ -151,7 +147,6 @@ public class PanelAgregarPersonas extends JPanel {
 	}
 
 	public void ConfigurarControladorValidaciones(IValidacionesNegocio validaciones) {
-		this.validaciones = validaciones;
 	}
 	
 }
