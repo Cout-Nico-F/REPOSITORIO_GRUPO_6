@@ -256,6 +256,10 @@ public class Controlador implements ActionListener {
 	public void ConfirmacionEliminar() {
 		
 		//Capturo lo que devuelve el JOptionPane en input
+		if (pnlEliminarPersonas.getList().getSelectedValue() == null) {
+			JOptionPane.showMessageDialog(null, "Debe seleccionar una persona para eliminarla");
+		} else {
+
 		int input = JOptionPane.showConfirmDialog(null,"Seguro que desea eliminar el registro seleccionado?","Mensaje de Advertencia",
 				JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		
@@ -273,6 +277,7 @@ public class Controlador implements ActionListener {
 		else {
 			JOptionPane.showMessageDialog(null, "No se elimino el registro");
 		}	
+	  }
 	}
 	
 	protected boolean EliminarPersona() {
