@@ -1,0 +1,74 @@
+@charset "ISO-8859-1";
+
+body{
+		margin: 0;
+		padding: 0;
+		background: url(https://cdn.pixabay.com/photo/2018/09/16/22/08/software-3682509_960_720.jpg) no-repeat center top;
+		background-size: cover;
+		font-family: sans-serif;
+		height: 100vh;
+	}
+	.login-box{
+		width: 65vh;
+		height: 90vh;
+		background: #000;
+		color: #fff;
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%,-50%);
+		box-sizing: border-box;
+		padding: 50px 50px;
+	}
+	.login-box h1{
+		text-align: center;
+		text-transform: uppercase;
+		padding: 2px 20px;
+	}
+	.login-box input{
+		widht: 100%;
+		margin-bottom: 30px;
+	}
+	.login-box input[type="text"],
+	.login-box input[type="password"],
+	.login-box input[type="number"],
+	.login-box input[type="date"],
+	.login-box input[type="email"],
+	.login-box select{
+		border: none;
+		border-bottom: 2px solid #fff;
+		background: transparent;
+		outline: none;
+		width: 220px;
+		height: 40px;
+		color: #fff;
+		font-size: 16px;
+	}
+	.login-box select option{
+		background: transparent;
+		color: #000;
+	}
+	.login-box input[type="submit"]{
+		border: none;
+		outline: none;
+		width: 150px;
+		height: 40px;
+		background: #b80f22;
+		color: #fff;
+		font-size: 20px;
+		border-radius: 0px;
+	}
+	.login-box a{
+		text-decoration: none;
+		font-size: 16px;
+		line-height: 20px;
+		color: darkgrey;
+	}
+	.login-box a:hover{
+		color: #fff;
+	}
+	.login-box .two-columns{
+		-webkit-column-count: 2; /* Chrome, Safari, Opera */
+    	-moz-column-count: 2; /* Firefox */
+    	column-count: 2;
+	}
