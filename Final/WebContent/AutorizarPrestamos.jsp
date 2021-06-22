@@ -51,11 +51,12 @@
 </table>
 
 <div align="center" >
-	<input type="submit" value="Volver" class="centrado">
-	<input type="submit" value="Volver" class="centrado"><br>
+	<input type="submit" value="Aceptar" class="centrado">
+	<input type="submit" value="Rechazar" class="centrado"><br>
        
         <div class="form">
          
+    </div>
     </div>	
 </body>
 </html>
