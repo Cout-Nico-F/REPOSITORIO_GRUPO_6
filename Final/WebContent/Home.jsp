@@ -5,10 +5,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pagina de inicio</title>
+<!-- Icons8 -->
+ <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+ <!-- CSS -->
 <link href="style-home.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
+	 <!-- Sidebar -->
+        <input type="checkbox" id="nav-toggle">
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <h2><span class="lab la-accusoft"></span><span> Bank</span></h2> <!-- Dentro de span hay un icono -->
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="" class="active"><span class="las la-igloo"></span> <!-- Cambiar los iconos -->
+                            <span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href=""><span class="las la-igloo"></span>
+                            <span>Iniciar Sesion</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- -->
+        
+	<!-- Lo comento por ahora
 	<div id="sidebar">
       <div class="toggle-btn">
         <span>&#9776;</span>
@@ -17,7 +42,7 @@
         <li>
           <!-- Aca iria el logo de la empresa  -->
           <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8pForLrTVdXB6YPUH27eNUao8tDH3vypHmg&usqp=CAU" alt="Logo Bank" class="logo"> -->
-        </li>
+        <!-- </li>
         <a href="Home.jsp"><li>Home</li></a>
         <a href="Prestamos.jsp"><li>Prestamos</li></a>
         <a href="Login.jsp"><li>Crear cuenta</li></a>
@@ -32,7 +57,7 @@
       document.getElementById('sidebar').classList.toggle('active');
       console.log(document.getElementById('sidebar'))
     });
-    </script>
+    </script> -->
 
 </body>
 </html>
