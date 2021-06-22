@@ -16,13 +16,15 @@
         </div>
         <div class="form">
          <div class="inputfield">
-              <label>Cuenta destino:</label>
-              <input type="number" class="input">
+              <label>CBU Cuenta Destino:</label>
+              <input type="number" class="input" >
            </div>    
           <div class="inputfield">
-              <label style="width: 243px; height: 26px">Cantidad a transferir en Pesos:</label>
+              <label style="width: 243px; height: 26px">Cantidad a Transferir en Pesos:</label>
               <input type="number" class="input" >
-           </div> 
+           </div>
+          <br><br>
+          <input type="submit" value="Transferir">
     </div>	
 </body>
 </html>
