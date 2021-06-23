@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Transferencia de dinero</title>
+<title>Historial de Movimientos</title>
 <link href="style-prestamos.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -27,8 +27,10 @@
     <td>20.000</td>
   </tr>
 </table>
-	
+	<div align="center">
 	<input type="submit" value="Volver" align="middle"><br>
+	</div>
+	
         
         <div class="form">
          

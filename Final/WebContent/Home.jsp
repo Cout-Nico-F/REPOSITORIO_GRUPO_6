@@ -5,10 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pagina de inicio</title>
+<!-- Icons8 -->
+ <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+ <!-- CSS -->
 <link href="style-home.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+        
 	<div id="sidebar">
       <div class="toggle-btn">
         <span>&#9776;</span>
@@ -32,7 +35,7 @@
       document.getElementById('sidebar').classList.toggle('active');
       console.log(document.getElementById('sidebar'))
     });
-    </script>
+    </script> 
 
 </body>
 </html>
