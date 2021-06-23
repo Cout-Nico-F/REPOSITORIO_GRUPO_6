@@ -6,6 +6,8 @@ use bdlabo;
 
 create table if not exists clientes (
 	IdUsuario int unsigned not null, #Es autoincrementable
+    IdNacionalidad int not null,
+    IdLocalidad int not null,
 	Dni int unique not null, #unique el valor ingresado no se puede repetir en registros posteriores
     Cuil bigint unique not null, 
     Nombre varchar(45) not null,
@@ -66,6 +68,20 @@ create table if not exists tiposMovimientos (
 	IdTipoMovimiento tinyint unsigned unique not null,
     Descripcion varchar(45) not null
 );
+create table if not exists nacionalidad (
+	IdNacionalidad int not null,
+    Descripcion varchar(45) not null
+);
+create table if not exists localidad (
+	IdLocalidad int not null,
+    IdProvincia int not null,
+    Descripcion varchar(45) not null
+);
+create table if not exists provincia (
+	IdProvincia int not null,
+    Descripcion varchar(45) not null
+);
+
 
 #Primary Key
 
@@ -96,6 +112,18 @@ alter table cuenta add primary key (NumeroCuenta);
 # -- Tipo Cuentas --
 alter table tipoCuenta add primary key (IdTipoCuenta);
 
+# -- Nacionalidad --
+alter table nacionalidad add primary key (IdNacionalidad);
+alter table nacionalidad modify IdNacionalidad int unsigned auto_increment;
+
+# -- Localidad --
+alter table localidad add primary key (IdLocalidad);
+alter table localidad modify IdLocalidad int unsigned auto_increment;
+
+# -- Provincia --
+alter table provincia add primary key (IdProvincia);
+alter table provincia modify IdProvincia int unsigned auto_increment;
+
 # FOREIGN KEY
 
 # --Clientes --
@@ -124,6 +152,18 @@ alter table movimientos add foreign key (Dni) references clientes (Dni);
 
 # -- Tipos Movimientos --
 alter table tiposMovimientos add foreign key (IdTipoMovimiento) references movimientos (IdTipoMovimiento);
+
+# Estos datos van a ser harcodeados por nosotros supongo
+
+# -- Nacionalidad --
+alter table nacionalidad add foreign key (IdNacionalidad) references clientes (IdNacionalidad);
+
+# -- Localidad --
+alter table localidad add foreign key (IdLocalidad) references clientes (IdLocalidad);
+
+# -- Provincia --
+alter table provincia add foreign key (IdProvincia) references localidad (IdProvincia);
+
 
 # Agregando un cliente
 Insert into clientes (Dni,Cuil,Nombre,Apellido,Sexo,Nacionalidad,FechaNacimiento,Direccion,Localidad,Provincia,CorreoElectronico,Telefono) 
