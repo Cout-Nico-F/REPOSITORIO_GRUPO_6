@@ -9,52 +9,38 @@
  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
  <!-- CSS -->
  <link href="style-vistaadmin.css" rel="stylesheet" type="text/css">
+ <!-- Agrego el admin header -->
+ <%@ include file="AdminHeader.jsp" %>  
 </head>
 <body>
-	 <!-- Sidebar -->
-        <input type="checkbox" id="nav-toggle">
-        <div class="sidebar">
-            <div class="sidebar-brand">
-                <h2><span class="lab la-accusoft"></span><span> Bank</span></h2> <!-- Dentro de span hay un icono -->
-            </div>
-            <div class="sidebar-menu">
-                <ul>
-                    <li>
-                        <a href="" class="active"><span class="las la-igloo"></span> <!-- Cambiar los iconos -->
-                            <span>Dashboard</span></a>
-                    </li>
-                    <li>
-                        <a href=""><span class="las la-igloo"></span>
-                            <span>Iniciar Sesion</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- -->
-
-        <div class="main-content">
-            <header>
-                   <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                        Dashboard
-                    </label>
-                   </h2>
-                   <!-- Buscador -->
-                   <!-- 
-                   <div class="search-wrapper">
-                        <span class="las la-search"></span>
-                        <input type="search" placeholder="Buscar"/>
-                   </div>
-                    -->
-                   <div class="user-wrapper">
-                       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfeGINlGtetp2-gZRw4gLauZ5-2rhTpmNR4A&usqp=CAU" width="40px" height="40px" alt="user-image">
-                       <div>
-                           <h4>Alonso Huarcaya</h4> <!-- Aca va el nomobre del usuario que viene de la base de datos -->
-                           <small>Admin</small> <!-- Aca la descripcion del tipo de usuario (admin o cliente) -->
-                       </div>
-                   </div>
-            </header>
+	 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Banco</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="ABMLClientes.jsp">ABML Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ABMLCuentas.jsp">ABML Cuentas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Autorización de préstamos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Reportes</a>
+        </li>
+      </ul>
+      <div class="ml-auto">
+       <span>Usuario banco</span>
+       <button type="button" class="btn btn-secondary">Cerrar sesión</button>
+       </div>
+    </div>
+  </div>
+</nav>
 
             <main>
                 <div class="cards">
