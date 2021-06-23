@@ -1,16 +1,16 @@
 #use bdpersonas;
 #drop database bdlabo;
- 
 
 create database bdlabo;
 use bdlabo;
 
 create table if not exists clientes (
-	IdUsuario int unsigned not null,
+	IdUsuario int unsigned not null, #Es autoincrementable
 	Dni int unique not null, #unique el valor ingresado no se puede repetir en registros posteriores
+    Cuil bigint unique not null, 
     Nombre varchar(45) not null,
     Apellido varchar(45) not null,
-    Sexo char not null,
+    Sexo varchar(20) not null, #Serian masculino - femenino - otro enviamos directamente la cadena las opciones van a ser seleccionables no es un input de texto
     Nacionalidad varchar(45) not null,
     FechaNacimiento datetime not null,
     Direccion varchar(45) not null,
@@ -22,30 +22,31 @@ create table if not exists clientes (
 );
 create table if not exists usuarios (
 	IdUsuario int unsigned not null,
-    IdTipoUsuario char not null,
+    IdTipoUsuario tinyint unsigned unique not null, 
+    #Error 1822: Para la relacion de foreign key, la columna de la tabla principal en la que se esta creando la relacion debe ser unique o primary y deben tener el mismo datatype y size.
     NombreUsuario varchar(45) not null,
     Contrasenia varchar(45) not null
 );
 create table if not exists tiposUsuarios (
-	IdTipoUsuario char not null,
+	IdTipoUsuario tinyint unsigned unique not null,
     Descripcion varchar(45) not null
 );
 create table if not exists cuenta (
-	NumeroCuenta int unique not null,
+	NumeroCuenta bigint unique not null, #Hay que validar que sean numeros 
     Dni int unique not null,
-    IdTipoCuenta tinyint unsigned not null,
+    IdTipoCuenta tinyint unsigned unique not null,
     Saldo decimal not null,
     Cbu int unique not null,
     FechaCreacion datetime not null
 );
 create table if not exists tipoCuenta (
-	IdTipoCuenta tinyint unsigned not null,
+	IdTipoCuenta tinyint unsigned unique not null,
     Descripcion varchar(45) not null
 );
 create table if not exists prestamos (
 	IdPrestamos int unsigned,
 	Dni int unique not null,
-    NumeroCuenta int unique not null, #Los numeros de  cuenta no se repiten? por las dudas unique
+    NumeroCuenta bigint unique not null, #Los numeros de  cuenta no se repiten? por las dudas unique
     Fecha datetime not null,
     ImporteSolicitado decimal not null,
     ImporteAPagar decimal not null,
@@ -55,14 +56,14 @@ create table if not exists prestamos (
 );
 create table if not exists movimientos (
 	Dni int unique not null,
-    IdTipoMovimiento char not null,
+    IdTipoMovimiento tinyint unsigned unique not null,
     Fecha datetime not null,
-    Detalles text not null, 
+    Detalles text not null,
     Importe decimal not null,
     Primary Key (Dni,IdTipoMovimiento) #Creo que de esta manera se puede concatenar pks
 );
 create table if not exists tiposMovimientos (
-	IdTipoMovimiento char not null,
+	IdTipoMovimiento tinyint unsigned unique not null,
     Descripcion varchar(45) not null
 );
 
@@ -80,6 +81,8 @@ alter table tiposUsuarios add primary key (IdTipoUsuario);
 
 # -- Prestamos --
 alter table prestamos add primary key (IdPrestamos);
+alter table prestamos modify IdPrestamos int unsigned auto_increment; #De forma predeterminada empieza en 1
+#Dato el atributo auto_increment no es compatible con el datatype tinyint 
 
 # -- Movimientos --
 #Las pks estan declarados en la tabla
@@ -102,7 +105,7 @@ alter table tipoCuenta add primary key (IdTipoCuenta);
 alter table usuarios add foreign key (IdUsuario) references clientes (IdUsuario);
  
 # -- Tipos usuarios --
-alter table tiposUsuarios add foreign key (IdTipoUsuarios) references usuarios (IdTiposUsuarios); #Por defecto cuando se crea una cuenta se setea en 1
+alter table tiposUsuarios add foreign key (IdTipoUsuario) references usuarios (IdTipoUsuario); #Por defecto cuando se crea una cuenta se setea en 1
 
 # -- Cuenta --
 alter table cuenta add foreign key (Dni) references clientes (Dni);
@@ -122,6 +125,9 @@ alter table movimientos add foreign key (Dni) references clientes (Dni);
 # -- Tipos Movimientos --
 alter table tiposMovimientos add foreign key (IdTipoMovimiento) references movimientos (IdTipoMovimiento);
 
+# Agregando un cliente
+Insert into clientes (Dni,Cuil,Nombre,Apellido,Sexo,Nacionalidad,FechaNacimiento,Direccion,Localidad,Provincia,CorreoElectronico,Telefono) 
+values (14302823,11111111111,"Simon","Molina","Masculino","Argentino","2021/06/23","Av.Brasil 1233","Boulogne Sur Mer","Buenos Aires","prueba@gmail.com",47103847);
 
-
-
+Insert into clientes (Dni,Cuil,Nombre,Apellido,Sexo,Nacionalidad,FechaNacimiento,Direccion,Localidad,Provincia,CorreoElectronico) 
+values (24302823,22222222222,"Ramon","Molina","Masculino","Argentino","2021/06/23","Av.Brasil 1233","Boulogne Sur Mer","Buenos Aires","prueba@gmail.com"); #El telefono es opcional 
