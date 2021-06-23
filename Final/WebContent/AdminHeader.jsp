@@ -28,9 +28,6 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Reportes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="AltaAdmin.jsp">Alta Administrador</a>
-        </li>
       </ul>
       <div class="ml-auto">
        <span>Usuario banco</span>
@@ -39,3 +36,4 @@
     </div>
   </div>
 </nav>
+
