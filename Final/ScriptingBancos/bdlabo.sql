@@ -13,11 +13,8 @@ create table if not exists clientes (
     Nombre varchar(45) not null,
     Apellido varchar(45) not null,
     Sexo varchar(20) not null, #Serian masculino - femenino - otro enviamos directamente la cadena las opciones van a ser seleccionables no es un input de texto
-    Nacionalidad varchar(45) not null,
     FechaNacimiento datetime not null,
     Direccion varchar(45) not null,
-    Localidad varchar(45) not null,
-    Provincia varchar(45) not null,
     CorreoElectronico varchar(45) not null,
     Telefono int unsigned null, #unsigned hacer que no se acepten valores negativos por lo tanto puede almacenar el doble de valores positivos
 	primary Key (IdUsuario,Dni)
@@ -166,8 +163,15 @@ alter table provincia add foreign key (IdProvincia) references localidad (IdProv
 
 
 # Agregando un cliente
-Insert into clientes (Dni,Cuil,Nombre,Apellido,Sexo,Nacionalidad,FechaNacimiento,Direccion,Localidad,Provincia,CorreoElectronico,Telefono) 
-values (14302823,11111111111,"Simon","Molina","Masculino","Argentino","2021/06/23","Av.Brasil 1233","Boulogne Sur Mer","Buenos Aires","prueba@gmail.com",47103847);
+Insert into clientes (idNacionalidad,IdLocalidad,Dni,Cuil,Nombre,Apellido,Sexo,Nacionalidad,FechaNacimiento,Direccion,Localidad,Provincia,CorreoElectronico,Telefono) 
+values (1,1,14302823,11111111111,"Simon","Molina","Masculino",1,"2021/06/23","Av.Brasil 1233","Boulogne Sur Mer","Buenos Aires","prueba@gmail.com",47103847);
 
-Insert into clientes (Dni,Cuil,Nombre,Apellido,Sexo,Nacionalidad,FechaNacimiento,Direccion,Localidad,Provincia,CorreoElectronico) 
-values (24302823,22222222222,"Ramon","Molina","Masculino","Argentino","2021/06/23","Av.Brasil 1233","Boulogne Sur Mer","Buenos Aires","prueba@gmail.com"); #El telefono es opcional 
+Insert into clientes (idNacionalidad,IdLocalidad,Dni,Cuil,Nombre,Apellido,Sexo,Nacionalidad,FechaNacimiento,Direccion,Localidad,Provincia,CorreoElectronico) 
+values (1,1,24302823,22222222222,"Ramon","Molina","Masculino","Argentino","2021/06/23","Av.Brasil 1233","Boulogne Sur Mer","Buenos Aires","prueba@gmail.com"); #El telefono es opcional 
+
+# Datos harcodeados
+# Creo que la relacion localidad - provincia esta al reves
+insert into nacionalidad (descripcion) values ("Argentina"); #Como el campo es ai entonces tendra como id = 1;
+insert into localidad (descripcion) values ("San isidro");
+insert into provincia (descripcion) values ("Buenos Aires");
+
