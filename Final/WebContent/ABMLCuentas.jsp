@@ -532,16 +532,19 @@
                 	data: 'dni'
                 },
                 {
-                	data: 'numero'
+                	data: 'numero',
+                	className: 'dt-body-right'
                 },
                 {
                 	data: 'cbu'
                 },
                 {
-                	data: 'fecha'
+                	data: 'fecha',
+                	className: 'dt-body-center'
                 }, 
                 {
-                	data: 'saldo'
+                	data: 'saldo',
+                	className: 'dt-body-right'
                 },
                 {
                 	data: null,
@@ -593,7 +596,10 @@
                 <input type="number" class="form-control" id="saldo" placeholder="Ingrese el Saldo">
               </div>
             </div>
+            <div class="mt-3">
             <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn btn-secondary">Limpiar</button>
+            </div>
           </fieldset>
         </form>
       </div>

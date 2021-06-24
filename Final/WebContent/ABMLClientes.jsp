@@ -461,7 +461,10 @@
                 <input type="password" class="form-control" id="contrasena" placeholder="Ingrese la contraseña">
               </div>
             </div>
+            <div class="mt-3">
             <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="submit" class="btn btn-secondary">Limpiar</button>
+            </div>
           </fieldset>
         </form>
       </div>
