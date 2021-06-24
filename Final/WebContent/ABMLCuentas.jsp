@@ -601,10 +601,10 @@
         <table id="clientes" class="table table-hover nowrap">
           <thead>
             <tr>
-              <th scope="col" class="text-center">DNI</th>
-              <th scope="col" class="text-center">Apellido</th>
+              <th scope="col" class="text-center">Usuario</th>
               <th scope="col" class="text-center">Nombre</th>
-              <th scope="col" class="text-center">Tipo de cuenta</th>
+              <th scope="col" class="text-center">Apellido</th>
+              <th scope="col" class="text-center">DNI</th>
               <th scope="col" class="text-center">Número de cuenta</th>
               <th scope="col" class="text-center">CBU</th>
               <th scope="col" class="text-center">Fecha de creación</th>
