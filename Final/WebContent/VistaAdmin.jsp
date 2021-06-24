@@ -8,7 +8,7 @@
  <!-- Icons8 -->
  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
  <!-- CSS -->
- <link href="style-vistaadmin.css" rel="stylesheet" type="text/css">
+ <link href="recursos/style-vistaadmin.css" rel="stylesheet" type="text/css">
  <!-- Agrego el admin header -->
  <%@ include file="HeaderAdmin.jsp" %>  
 </head>

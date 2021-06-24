@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Autorización de Prestamos</title>
-<link href="style-AutorizacionPrestamos.css" rel="stylesheet" type="text/css">
+<link href="recursos/style-AutorizacionPrestamos.css" rel="stylesheet" type="text/css">
+<%@ include file="HeaderAdmin.jsp" %> 
 </head>
 <body>
 

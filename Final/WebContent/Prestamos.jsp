@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Solicitud de prestamo</title>
-<link href="style-prestamos.css" rel="stylesheet" type="text/css">
+<link href="recursos/style-prestamos.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 

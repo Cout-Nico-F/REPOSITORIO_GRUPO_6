@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registro usuario</title>
-<link href="style-altausuario.css" rel="stylesheet" type="text/css">
+<link href="recursos/style-altausuario.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Iniciar Sesion</title>
-<link href="style-login.css" rel="stylesheet" type="text/css">
+<link href="recursos/style-login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
