@@ -5,36 +5,66 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Historial de Movimientos</title>
-<link href="recursos/style-prestamos.css" rel="stylesheet" type="text/css">
+<link href="recursos/style-movimientos.css" rel="stylesheet" type="text/css">
 <%@ include file="HeaderCliente.jsp" %> 
 </head>
 <body>
 
-        <br><br><br><br><br><br><br>
-        <div class="wrapper">
-        <div class="title">
-          Historial de Movimientos Realizados
-        </div>
-        
-        <table align="center">
-  <tr>
-    <th>Fecha y hora</th>
-    <th>Tipo de Movimiento</th>
-    <th>Cantidad en Pesos</th>
-  </tr>
-  <tr>
-    <td>2/2/2020 14:56:12</td>
-    <td>Transferencia</td>
-    <td>20.000</td>
-  </tr>
-</table>
-	<div align="center">
-	<input type="submit" value="Volver" align="middle"><br>
+	<br>
+	<br>
+	<div class="titleMovimientos">Historial de Movimientos</div>
+	<br>
+
+	<div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button"
+			id="dropdownMenuButton1" data-bs-toggle="dropdown"
+			aria-expanded="false"> Seleccione su cuenta </button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+			<li><a class="dropdown-item" href="HistorialMovimientos.jsp">Caja de Ahorro</a></li>
+			<li><a class="dropdown-item" href="HistorialMovimientos.jsp">Cuenta Corriente</a></li>
+			<li><a class="dropdown-item" href="HistorialMovimientos.jsp">Caja de Ahorro 2</a></li>
+		</ul>
 	</div>
-	
-        
-        <div class="form">
-         
-    </div>	
+
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col" class="text-center">Fecha</th>
+					<th scope="col" class="text-center">Detalle</th>
+					<th scope="col" class="text-center">Tipo de Movimiento</th>
+					<th scope="col" class="text-center">CBU Cuenta destino</th>
+					<th scope="col" class="text-center">Importe</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- acá cargaríamos c/ cliente con un foreach -->
+				<tr>
+					<th>24/08/2020</th>
+					<th>Pago Servicio Telecentro</th>
+					<th>Transferencia</th>
+					<th>02900001-00000000058382</th>
+					<th>1.750</th>
+				</tr>
+
+				<tr>
+					<th>22/11/2020</th>
+					<th>Pago Honorarios Programador</th>
+					<th>Transferencia</th>
+					<th>02900001-00000000058382</th>
+					<th>100.000.000</th>
+				</tr>
+
+
+				<tr>
+					<th>05/01/2021</th>
+					<th>Prestamo Personal Nro:1</th>
+					<th>Pago de Prestamo</th>
+					<th>02900001-00000000058382</th>
+					<th>1.750</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
