@@ -23,3 +23,6 @@
 hs_err_pid*
 /bin/
 TP6/.classpath
+Final/.classpath
+/.settings
+Final/.settings/org.eclipse.wst.common.project.facet.core.xml
