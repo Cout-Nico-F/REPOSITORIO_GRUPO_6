@@ -17,57 +17,58 @@
 	<div class="titleMovimientos">Historial de Movimientos</div>
 	<br>
 
-	<div align="center">
-		<label for="standard-select">Seleccione la cuenta</label>
-		<div class="select">
-			<select id="standard-select">
-				<option value="Option 1">Caja de Ahorro</option>
-				<option value="Option 2">Cuenta Corriente</option>
-				<option value="Option 3">Caja de Ahorro 2</option>
-			</select> <span class="focus"></span>
+		<div align="center">
+			<label for="standard-select">Seleccione la cuenta</label>
+			<div class="select">
+				<select id="standard-select">
+					<option value="Option 1">Caja de Ahorro</option>
+					<option value="Option 2">Cuenta Corriente</option>
+					<option value="Option 3">Caja de Ahorro 2</option>
+				</select> <span class="focus"></span>
+			</div>
 		</div>
-	</div>
-	<br>
+		<br>
+			<div class="container">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col" class="text-center">Fecha</th>
+						<th scope="col" class="text-center">Detalle</th>
+						<th scope="col" class="text-center">Tipo de Movimiento</th>
+						<th scope="col" class="text-center">CBU Cuenta destino</th>
+						<th scope="col" class="text-center">Importe</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- 			acá cargaríamos c/ movimiento con un foreach -->
+					<tr>
+						<th scope="col" class="text-center">24/08/2020</th>
+						<th scope="col" class="text-center">Pago Servicio Telecentro</th>
+						<th scope="col" class="text-center">Transferencia</th>
+						<th scope="col" class="text-center">02900001-00000000058382</th>
+						<th scope="col" class="text-center">1.750</th>
+					</tr>
 
-	<div class="table-responsive">
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col" class="text-center">Fecha</th>
-					<th scope="col" class="text-center">Detalle</th>
-					<th scope="col" class="text-center">Tipo de Movimiento</th>
-					<th scope="col" class="text-center">CBU Cuenta destino</th>
-					<th scope="col" class="text-center">Importe</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- 			acá cargaríamos c/ movimiento con un foreach -->
-				<tr>
-					<th>24/08/2020</th>
-					<th>Pago Servicio Telecentro</th>
-					<th>Transferencia</th>
-					<th>02900001-00000000058382</th>
-					<th>1.750</th>
-				</tr>
-
-				<tr>
-					<th>22/11/2020</th>
-					<th>Pago Honorarios Programador</th>
-					<th>Transferencia</th>
-					<th>02900001-00000000058382</th>
-					<th>100.000.000</th>
-				</tr>
+					<tr>
+						<th scope="col" class="text-center">22/11/2020</th>
+						<th scope="col" class="text-center">Pago Honorarios Programador</th>
+						<th scope="col" class="text-center">Transferencia</th>
+						<th scope="col" class="text-center">02900001-00000000058382</th>
+						<th scope="col" class="text-center">100.000.000</th>
+					</tr>
 
 
-				<tr>
-					<th>05/01/2021</th>
-					<th>Prestamo Personal Nro:1</th>
-					<th>Pago de Prestamo</th>
-					<th>02900001-00000000058382</th>
-					<th>1.750</th>
-				</tr>
-			</tbody>
-		</table>
+					<tr>
+						<th scope="col" class="text-center">05/01/2021</th>
+						<th scope="col" class="text-center">Prestamo Personal Nro:1</th>
+						<th scope="col" class="text-center">Pago de Prestamo</th>
+						<th scope="col" class="text-center">02900001-00000000058382</th>
+						<th scope="col" class="text-center">1.750</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
