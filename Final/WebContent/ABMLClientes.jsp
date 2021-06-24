@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>ABML Clientes</title>
-    <%@ include file="AdminHeader.jsp" %>  
+    <%@ include file="HeaderAdmin.jsp" %>  
     <script>
     $(document).ready(function() {
         var table = $('#clientes').DataTable( {
