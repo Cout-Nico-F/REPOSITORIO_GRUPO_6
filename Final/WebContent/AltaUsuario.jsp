@@ -10,61 +10,61 @@
 <body>
 
  <div class="login-box">
- 	<h1>User registration</h1>
+ 	<h1>Registro usuario</h1>
  	<form action="" method="post"> <!--  Si el method esta vacio te redirige a la misma pagina -->
  		<div class="two-columns">
  		
  		<label for="dni">DNI</label><br>
- 		<input type="number" placeholder="Enter DNI"><br>
+ 		<input type="number" placeholder="Ingrese DNI"><br>
  		<label for="cuil">CUIL</label><br>
- 		<input type="text" placeholder="Enter CUIL"><br>
+ 		<input type="text" placeholder="Ingrese CUIL"><br>
  		
  		</div>
  		
  		<div class="two-columns">
  		
- 		<label for="name">First Name</label><br>
- 		<input type="number" placeholder="Enter First Name"><br>
- 		<label for="last-name">Last Name</label><br>
- 		<input type="text" placeholder="Enter Last Name"><br>
+ 		<label for="name">Nombre</label><br>
+ 		<input type="number" placeholder="Ingrese nombre"><br>
+ 		<label for="last-name">Apellido</label><br>
+ 		<input type="text" placeholder="Ingrese apellido"><br>
  		
  		</div>
  		
  		<div class="two-columns">
  		
- 		<label for="date-of-birth">Date of birth</label><br>
- 		<input type="date" placeholder="Enter Date of birth"><br>
- 		<label for="direction">Direction</label><br>
- 		<input type="text" placeholder="Enter Direction"><br>
+ 		<label for="date-of-birth">Fecha de nacimiento</label><br>
+ 		<input type="date" placeholder="Ingrese fecha nac."><br>
+ 		<label for="direction">Direccion</label><br>
+ 		<input type="text" placeholder="Ingrese Direccion"><br>
  		
  		</div>
  		
  		<div class="two-columns">
- 		<label for="location">Location</label><br>
+ 		<label for="location">Localidad</label><br>
  		<select>
- 			<option>Select</option>
+ 			<option>Seleccionar</option>
  			<option>Localidad 1</option>
  			<option>Localidad 2</option>
  		</select><br><br>
  		
- 		<label for="province">Province</label><br>
+ 		<label for="province">Provincia</label><br>
  		<select>
- 			<option>Select</option>
+ 			<option>Seleccionar</option>
  			<option>Buenos Aires</option>
  		</select><br><br>
  		</div>
  		
  		<div class="two-columns">
- 		<label for="gender">Gender</label><br>
+ 		<label for="gender">Genero</label><br>
  		<select>
- 			<option>Select</option>
- 			<option>Male</option>
- 			<option>Female</option>
+ 			<option>Seleccionar</option>
+ 			<option>Masculino</option>
+ 			<option>Femenino</option>
  		</select><br><br>
  		
- 		<label for="nationality">Nationality</label><br>
+ 		<label for="nationality">Nacionalidad</label><br>
  		<select>
- 			<option>Select</option>
+ 			<option>Seleccionar</option>
  			<option>Argentina</option>
  			<option>Brasil</option>
  		</select><br><br>
@@ -74,15 +74,15 @@
  		<div class="two-columns">
  		
  		<label for="email">Email</label><br>
- 		<input type="email" placeholder="Enter Email"><br>
- 		<label for="phone">Number phone</label><br>
- 		<input type="number" placeholder="Enter Number Phone"><br>
+ 		<input type="email" placeholder="Ingrese Email"><br>
+ 		<label for="phone">Numero de telefono</label><br>
+ 		<input type="number" placeholder="Ingrese numero de telefono"><br>
  		
  		</div>
  		 
- 		<input type="submit" value="Register"><br>
+ 		<input type="submit" value="Registrarse"><br>
  		 
- 		<a href="Login.jsp">Log in</a><br>
+ 		<a href="Login.jsp">Loguearse</a><br>
  		
  	</form>
  	

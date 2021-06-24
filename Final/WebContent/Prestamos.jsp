@@ -12,7 +12,7 @@
         <br><br><br><br><br><br><br>
         <div class="wrapper">
         <div class="title">
-          Bank loan application
+          Solicitud de prestamo
         </div>
         <div class="form">
            <div class="inputfield">
@@ -20,10 +20,10 @@
               <input type="number" class="input"> <!-- Only numbers-->
            </div>
            <div class="inputfield">
-            <label>Account</label>
+            <label>Cuenta</label>
             <div class="custom_select">
               <select>
-                <option value="">Select</option> <!-- Esto esta harcodeado nose si va el numero de cuenta a seleccionar o el nombre de la cuenta seleccionada -->
+                <option value="">Seleccionar</option> <!-- Esto esta harcodeado nose si va el numero de cuenta a seleccionar o el nombre de la cuenta seleccionada -->
                 <option value="credito">1212321312312312313213131231312</option>
                 <option value="debito">2333333333333333333111111111114</option>
                 <option value="corriente">3665555555677777777775666666665</option>
@@ -31,34 +31,30 @@
             </div>
          </div>   
             <div class="inputfield">
-              <label>Date</label>
+              <label>Fecha</label>
               <input type="date" class="input">
            </div> 
           <div class="inputfield">
-              <label>Amount requested</label>
+              <label>Cantidad solicitada</label>
               <input type="number" class="input">
            </div> 
           <div class="inputfield">
-              <label>Total amount to pay</label> <!-- Esto se calculara y se mostrara un monto dependiendo de el importe solicitado -->
+              <label>Cantidad total a pagar</label> <!-- Esto se calculara y se mostrara un monto dependiendo de el importe solicitado -->
               <input type="number" class="input">
            </div> 
           <div class="inputfield">
-              <label>payment term in months</label>
+              <label>Plazo de pago</label>
               <input type="number" class="input">
            </div> 
-           <div class="inputfield">
-            <label>Amount requested</label>
+         <div class="inputfield">
+            <label>Monto mensual</label>
             <input type="number" class="input">
          </div>
          <div class="inputfield">
-            <label>Monthly amount</label>
-            <input type="number" class="input">
-         </div>
-         <div class="inputfield">
-            <label>Dues</label>
+            <label>Debe</label>
             <div class="custom_select">
               <select>
-                <option value="">Select</option> <!-- Esto esta harcodeado supongo que traeremos de bd la cantidad de cuotas disponible para el tipo de prestamo -->
+                <option value="">Seleccionar</option> <!-- Esto esta harcodeado supongo que traeremos de bd la cantidad de cuotas disponible para el tipo de prestamo -->
                 <option value="6">6</option>
                 <option value="12">12</option>
                 <option value="24">24</option>
@@ -71,10 +67,10 @@
                 <input type="checkbox">
                 <span class="checkmark"></span>
               </label>
-              <p>Agreed to terms and conditions</p>
+              <p>Acepta terminos y condiciones</p>
            </div> 
           <div class="inputfield">
-            <input type="submit" value="Apply for" class="btn">
+            <input type="submit" value="Solicitar" class="btn">
           </div>
         </div>
     </div>	
