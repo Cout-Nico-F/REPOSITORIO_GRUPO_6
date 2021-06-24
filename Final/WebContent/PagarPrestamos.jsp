@@ -23,7 +23,7 @@
             		    "importePedido": "$7000000",
             		    "plazo": 190,
             		    "montoPorMes": "$39473",
-            		    "cuotas": 190
+            		    "cuotas": "61/190"
             		  },
             		  {
             		    "fecha": "2018-04-29",
@@ -31,7 +31,7 @@
             		    "importePedido": "$2500000",
             		    "plazo": 120,
             		    "montoPorMes": "$22083",
-            		    "cuotas": 120
+            		    "cuotas": "38/120"
             		  },
             		  {
             		    "fecha": "2019-03-06",
@@ -39,7 +39,7 @@
             		    "importePedido": "$500000",
             		    "plazo": 75,
             		    "montoPorMes": "$7000",
-            		    "cuotas": 75
+            		    "cuotas": "36/75"
             		  }
             		],
             columns: [
@@ -92,7 +92,7 @@
               <th scope="col" class="text-center">Importe pedido</th>
               <th scope="col" class="text-center">Plazo de pago (meses)</th>
               <th scope="col" class="text-center">Monto por mes</th>
-              <th scope="col" class="text-center">Cuotas</th>
+              <th scope="col" class="text-center">Número de cuota</th>
               <th scope="col" class="text-center">Cuenta a debitar</th>
               <th scope="col" class="text-center">Pagar</th>
             </tr>
