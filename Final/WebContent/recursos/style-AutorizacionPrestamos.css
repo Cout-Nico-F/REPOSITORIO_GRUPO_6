@@ -8,11 +8,14 @@
     }
     body{
       background: #000;
-      background-image: url(https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmFua3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80);
-      background-size: cover;
       padding: 0 10px;
     }
     
+    body::after{
+      background-image: url(https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmFua3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80);
+      background-size: cover;
+      opacity: 0.5;
+    }
     
     .centrado{
     text-align: center;
@@ -31,6 +34,15 @@
     .wrapper .title{
       font-size: 24px;
       font-weight: 700;
+      margin-bottom: 25px;
+      color: #fec107;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    
+    .titlePrestamos{
+      font-size: 36px;
+      font-weight: 900;
       margin-bottom: 25px;
       color: #fec107;
       text-transform: uppercase;
