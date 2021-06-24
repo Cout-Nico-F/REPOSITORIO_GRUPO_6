@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Iniciar Sesion</title>
 <link href="recursos/style-login.css" rel="stylesheet" type="text/css">
+<%@ include file="HeaderCliente.jsp" %>
 </head>
 <body>
 

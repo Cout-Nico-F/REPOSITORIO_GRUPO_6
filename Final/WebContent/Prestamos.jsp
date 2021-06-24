@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Solicitud de prestamo</title>
 <link href="recursos/style-prestamos.css" rel="stylesheet" type="text/css">
+<%@ include file="HeaderCliente.jsp" %>
 </head>
 <body>
-
-        <br><br><br><br><br><br><br>
+		<br><br><br>
         <div class="wrapper">
         <div class="title">
           Solicitud de prestamo

@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registro usuario</title>
 <link href="recursos/style-altausuario.css" rel="stylesheet" type="text/css">
+<%@ include file="HeaderCliente.jsp" %>
 </head>
 <body>
 

@@ -28,7 +28,7 @@
           <a class="nav-link" href="HistorialMovimientos.jsp">Cuentas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="HistorialMovimientos.jsp">Transferir dinero</a>
+          <a class="nav-link" href="Transferencias.jsp">Transferir dinero</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Prestamos.jsp">Pedir un préstamo</a>
@@ -37,7 +37,7 @@
           <a class="nav-link" href="PagarPrestamos.jsp">Pagar un préstamo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="HistorialMovimientos.jsp">Datos personales</a>
+          <a class="nav-link" href="DatosPersonales.jsp">Datos personales</a>
         </li>
       </ul>
       <div class="ml-auto">
