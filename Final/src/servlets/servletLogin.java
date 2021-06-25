@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 // Error the import javax.servlet cannot be resolved
 // solucion: https://stackoverflow.com/questions/4119448/the-import-javax-servlet-cant-be-resolved
 // Donde econtrar servet api.jar http://es.uwenku.com/question/p-dfvukhbm-o.html
