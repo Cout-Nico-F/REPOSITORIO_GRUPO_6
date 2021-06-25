@@ -13,88 +13,78 @@
 	<div class="titleMovimientos">Historial de Movimientos</div>
 	<br>
 
-		<div align="center">
-			<label for="standard-select">Seleccione la cuenta</label>
-			<div class="select">
-				<select id="standard-select">
-					<option value="Option 1">Caja de Ahorro</option>
-					<option value="Option 2">Cuenta Corriente</option>
-					<option value="Option 3">Caja de Ahorro 2</option>
-				</select> <span class="focus"></span>
-			</div>
+	<div align="center">
+		<label for="standard-select">Seleccione la cuenta</label>
+		<div class="select">
+			<select id="standard-select">
+				<option value="Option 1">Caja de Ahorro</option>
+				<option value="Option 2">Cuenta Corriente</option>
+				<option value="Option 3">Caja de Ahorro 2</option>
+			</select> <span class="focus"></span>
 		</div>
-		<br>
+	</div>
+	<br>
 
 
-    <script>
-    $(document).ready(function() {
-        var table = $('#movimientos').DataTable( {
-            language: {
-                zeroRecords: "No hay resultados",
-                info: "Pagina _PAGE_ de _PAGES_",
-                infoEmpty: "No hay registros",
-                infoFiltered: "(filtrada de _MAX_ registros totales)",
-                search: "Buscar: "
-            },
-            lengthChange: false,
-            data: [
-            	  {
-            		    "Fecha": "2016-05-28",
-            		    "Detalle": "Transferencia Abogado",
-            		    "Tipo de Movimiento": "Transferencia",
-            		    "CBU Cuenta destino": 5250000456,
-            		    "Importe": "$39473"
-            		  },
-            		  {
-            			 "Fecha": "2015-03-18",
-              		    "Detalle": "Apertura de cuenta",
-              		    "Tipo de Movimiento": "Alta cuenta",
-              		    "CBU Cuenta destino": 5250445891020456,
-              		    "Importe": "$10000"
-              		  },
-            		  {
-              			"Fecha": "2021-05-28",
-             		    "Detalle": "Pago Universidad",
-             		    "Tipo de Movimiento": "Transferencia",
-             		    "CBU Cuenta destino": 52500004554686,
-             		    "Importe": "$10850"
-             		  },
-            		],
-            columns: [
-                {
-                    data: 'Fecha'
-                },
-                {
-                    data: 'Detalle'
-                },
-                {
-                    data: 'Tipo de Movimiento'
-                },
-                {
-                	data: 'CBU Cuenta destino'
-                },
-                {
-                	data: 'Importe'
-                },
-            ]
-        } );
-    } );
-    </script>
-  </head>
-  <body>
-      <div class="container pt-5">
-        <table id="movimientos" class="table table-hover nowrap">
-          <thead>
-            <tr>
-              <th scope="col" class="text-center">Fecha</th>
-              <th scope="col" class="text-center">Detalle</th>
-              <th scope="col" class="text-center">Tipo de Movimiento</th>
-              <th scope="col" class="text-center">CBU Cuenta destino</th>
-              <th scope="col" class="text-center">Importe</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-  </body>
+	<script>
+		$(document).ready(function() {
+			var table = $('#movimientos').DataTable({
+				language : {
+					zeroRecords : "No hay resultados",
+					info : "Página _PAGE_ de _PAGES_",
+					infoEmpty : "No hay registros",
+					infoFiltered : "(filtrada de _MAX_ registros totales)",
+					search : "Buscar: "
+				},
+				lengthChange : false,
+				data : [ {
+					"Fecha" : "2016-05-28",
+					"Detalle" : "Transferencia Abogado",
+					"Tipo de Movimiento" : "Transferencia",
+					"CBU Cuenta destino" : 5250000456,
+					"Importe" : "$39473"
+				}, {
+					"Fecha" : "2015-03-18",
+					"Detalle" : "Apertura de cuenta",
+					"Tipo de Movimiento" : "Alta cuenta",
+					"CBU Cuenta destino" : 5250445891020456,
+					"Importe" : "$10000"
+				}, {
+					"Fecha" : "2021-05-28",
+					"Detalle" : "Pago Universidad",
+					"Tipo de Movimiento" : "Transferencia",
+					"CBU Cuenta destino" : 52500004554686,
+					"Importe" : "$10850"
+				}, ],
+				columns : [ {
+					data : 'Fecha'
+				}, {
+					data : 'Detalle'
+				}, {
+					data : 'Tipo de Movimiento'
+				}, {
+					data : 'CBU Cuenta destino'
+				}, {
+					data : 'Importe'
+				}, ]
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="container pt-5">
+		<table id="movimientos" class="table table-hover nowrap">
+			<thead>
+				<tr>
+					<th scope="col" class="text-left">Fecha</th>
+					<th scope="col" class="text-left">Detalle</th>
+					<th scope="col" class="text-left">Tipo de Movimiento</th>
+					<th scope="col" class="text-left">CBU Cuenta destino</th>
+					<th scope="col" class="text-left">Importe</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</body>
 
 </html>
