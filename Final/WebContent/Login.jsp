@@ -13,14 +13,7 @@
  	<img class="avatar" src="https://cdn.pixabay.com/photo/2018/11/13/22/01/instagram-3814081_960_720.png" alt="logo">
  	<h1>Login</h1>
  	<form action="" method="post">
- 		<% 
- 		if(request.getAtrribute("tipoMensaje") != null && session.getAttribute("mensaje") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
- 			<div class="alert alert-<%=request.getAtrribute("tipoMensaje").toString() %>" role="alert">
-  				<%=session.getAtrribute("mensaje") %> 
-			</div>
- 		<% } %>
  	
- 		%>
  		<!-- Username -->
  		<label for="username">Nombre de usuario</label><br>
  		<input type="text" name="txtNombreUsuario" placeholder="Ingrese nombre de usuario"><br>
@@ -37,15 +30,11 @@
  </div>
  
  <%
-    int filas = 0;
- 	if(request.getAtrribute("cantFilas") != null){
- 		filas = request.getAtrribute("cantFilas");
- 		
- 		if(filas == 1){
- 			
- 		}
- 		
- 	}
+    //int filas = 0;
+ 	//if(request.getAtrribute("cantFilas") != null){
+ 		//filas = request.getAtrribute("cantFilas");
+
+ 	//}
  	
  	
  %>

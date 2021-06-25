@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UsuarioDao;
+import entidad.Usuario;
+
 /**
  * Servlet implementation class servletLogin
  */
@@ -43,7 +46,7 @@ public class servletLogin extends HttpServlet {
 			u.setContrasenia(request.getParameter("txtContrasenia"));
 			
 			UsuarioDao udao = new UsuarioDao();
-			usuarioEncontrado = traerUsuario(u); //Envio el nombre y contrasenia y hago un where en la bd si coinciden lo traigo
+			usuarioEncontrado = getUsuario(u); //Envio el nombre y contrasenia y hago un where en la bd si coinciden lo traigo
 			//Traer usuario devuelve un boolean
 		}
 		if(usuarioEncontrado) { //Si es true
