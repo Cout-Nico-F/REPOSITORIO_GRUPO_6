@@ -76,7 +76,8 @@ create table if not exists cuotas (
     NumeroCuenta bigint unique not null,
     Importe decimal not null, # que tipo de importe es?
     FechaVencimiento datetime not null,
-    FechaPago datetime not null
+    FechaPago datetime not null,
+    Primary Key (IdPrestamos,NumeroCuenta)
 );
 create table if not exists movimientos (
 	IdMovimientos int unsigned unique, #primero hacemos que sea pk y despues lo modificamos para que sea autoincrementable
@@ -96,8 +97,8 @@ create table if not exists tiposMovimientos (
 #Primary Key
 
 # -- Clientes --
-#Las pks estan declarados en la tabla
-alter table clientes modify IdUsuario int unsigned auto_increment; #para que pueda ser autoincrementable primero tiene que ser pk
+alter table clientes add primary key (Dni);
+#alter table clientes modify IdUsuario int unsigned auto_increment; #para que pueda ser autoincrementable primero tiene que ser pk
 
 # -- Usuarios --
 alter table usuarios add primary key (IdUsuario);
@@ -105,22 +106,8 @@ alter table usuarios add primary key (IdUsuario);
 # -- Tipos de usuarios --
 alter table tiposUsuarios add primary key (IdTipoUsuario);
 
-# -- Prestamos --
-alter table prestamos add primary key (IdPrestamos);
-alter table prestamos modify IdPrestamos int unsigned auto_increment; #De forma predeterminada empieza en 1
-#Dato el atributo auto_increment no es compatible con el datatype tinyint 
-
-# -- Movimientos --
-#Las pks estan declarados en la tabla
-
-# -- Tipos Movimientos --
-alter table tiposMovimientos add primary key (IdTipoMovimiento);
-
-# -- Cuenta --
-alter table cuenta add primary key (NumeroCuenta);
-
-# -- Tipo Cuentas --
-alter table tipoCuenta add primary key (IdTipoCuenta);
+# -- Telefonos --
+# Los pks estan declarados en la tabla
 
 # -- Nacionalidad --
 alter table nacionalidad add primary key (IdNacionalidad);
@@ -133,6 +120,28 @@ alter table localidad modify IdLocalidad int unsigned auto_increment;
 # -- Provincia --
 alter table provincia add primary key (IdProvincia);
 alter table provincia modify IdProvincia int unsigned auto_increment;
+
+# -- Cuenta --
+alter table cuenta add primary key (NumeroCuenta);
+
+# -- Tipo Cuentas --
+alter table tipoCuenta add primary key (IdTipoCuenta);
+
+# -- Prestamos --
+alter table prestamos add primary key (IdPrestamos);
+alter table prestamos modify IdPrestamos int unsigned auto_increment; #De forma predeterminada empieza en 1
+#Dato el atributo auto_increment no es compatible con el datatype tinyint 
+
+# -- Cuotas --
+# Los pks estan declarados en la tabla
+
+# -- Movimientos --
+alter table movimientos add primary key (IdMovimientos);
+alter table movimientos modify IdMovimientos int unsigned unique auto_increment;
+
+# -- Tipos Movimientos --
+alter table tiposMovimientos add primary key (IdTipoMovimiento);
+
 
 # FOREIGN KEY
 
