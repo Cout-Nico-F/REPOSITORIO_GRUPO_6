@@ -13,22 +13,42 @@
  	<img class="avatar" src="https://cdn.pixabay.com/photo/2018/11/13/22/01/instagram-3814081_960_720.png" alt="logo">
  	<h1>Login</h1>
  	<form action="" method="post">
+ 		<% 
+ 		if(request.getAtrribute("tipoMensaje") != null && session.getAttribute("mensaje") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 			<div class="alert alert-<%=request.getAtrribute("tipoMensaje").toString() %>" role="alert">
+  				<%=session.getAtrribute("mensaje") %> 
+			</div>
+ 		<% } %>
  	
+ 		%>
  		<!-- Username -->
  		<label for="username">Nombre de usuario</label><br>
- 		<input type="text" placeholder="Ingrese nombre de usuario"><br>
+ 		<input type="text" name="txtNombreUsuario" placeholder="Ingrese nombre de usuario"><br>
  		
  		<!-- Password -->
- 		<label for="password">Contraseña</label><br>
- 		<input type="text" placeholder="Ingrese Contraseña"><br>
+ 		<label for="password">ContraseÃ±a</label><br>
+ 		<input type="text" name="txtContrasenia" placeholder="Ingrese ContraseÃ±a"><br>
  		 
- 		<input type="submit" value="Loguearse"><br>
+ 		<input type="submit" value="Loguearse" name="btnLogin"><br>
  		 
- 		<a href="#">Olvido su contraseña?</a><br>
+ 		<a href="#">Olvido su contraseÃ±a?</a><br>
  		<a href="AltaUsuario.jsp">No tiene una cuenta?</a>
- 		
  	</form>
  </div>
+ 
+ <%
+    int filas = 0;
+ 	if(request.getAtrribute("cantFilas") != null){
+ 		filas = request.getAtrribute("cantFilas");
+ 		
+ 		if(filas == 1){
+ 			
+ 		}
+ 		
+ 	}
+ 	
+ 	
+ %>
 
 </body>
 </html>
