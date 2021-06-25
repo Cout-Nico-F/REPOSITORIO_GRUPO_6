@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import dao.UsuarioDao;
 import daoImpl.UsuarioDaoImpl;
 import entidad.Usuario;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class servletLogin
@@ -44,24 +46,33 @@ public class servletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession sessionMensaje =request.getSession();  
+		HttpSession sessionMensaje = request.getSession();  
 		
-		boolean usuarioEncontrado;
+		boolean usuarioEncontrado = false;
+		
 		if(request.getParameter("btnLogin") != null) {
 			Usuario u = new Usuario();
 			u.setNombreUsuario(request.getParameter("txtNombreUsuario"));
 			u.setContrasenia(request.getParameter("txtContrasenia"));
 			
 			UsuarioDaoImpl udao = new UsuarioDaoImpl();
-			usuarioEncontrado = udao.getUsuario(u); //Envio el nombre y contrasenia y hago un where en la bd si coinciden lo traigo
-			//Traer usuario devuelve un boolean
+			try {
+				
+				usuarioEncontrado = udao.buscarUsuario(u); //Envio el nombre y contrasenia y hago un where en la bd si coinciden lo traigo
+				//buscarUsuario devuelve un boolean
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
 		}
 		if(usuarioEncontrado) { //Si es true
-			session.setAtrribute("mensaje","Usuario correcto");
+			sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
 			request.setAttribute("tipoMensaje","succes");
 		}
 		else {
-			session.setAtrribute("mensaje","Usuario no encontrado");
+			sessionMensaje.setAttribute("mensaje","Usuario no encontrado");
 			request.setAttribute("tipoMensaje","danger"); 
 		}
 		
