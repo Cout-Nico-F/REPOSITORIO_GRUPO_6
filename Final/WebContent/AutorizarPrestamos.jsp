@@ -33,63 +33,63 @@
 			<tbody>
 <!-- 			acá iría un foreach -->
 				<tr>
-					<th>pedro2020</th>
-					<th>Pedro</th>
-					<th>Gonzalez</th>
-					<th>11.111.111</th>
-					<th>24/08/2020</th>
-					<th>$20.000</th>
-					<th>6</th>
-					<th>$4.000</th>
-					<th><div class="btn-group" role="group"
+					<th class="text-center">pedro2020</th>
+					<th class="text-center">Pedro</th>
+					<th class="text-center">Gonzalez</th>
+					<th class="text-center">11.111.111</th>
+					<th class="text-center">24/08/2020</th>
+					<th class="text-center">$20.000</th>
+					<th class="text-center">6</th>
+					<th class="text-center">$4.000</th>
+					<th class="text-center"><div class="btn-group" role="group"
 							aria-label="Basic mixed styles example">
 							<button type="button" class="btn btn-success">Autorizar</button>
 							<button type="button" class="btn btn-danger">Denegar</button>
 						</div></th>
 				</tr>
 				
-								<tr>
-					<th>pedro2020</th>
-					<th>Pedro</th>
-					<th>Gonzalez</th>
-					<th>11.111.111</th>
-					<th>24/08/2020</th>
-					<th>$20.000</th>
-					<th>6</th>
-					<th>$4.000</th>
-					<th><div class="btn-group" role="group"
+					<tr>
+					<th class="text-center">pedro2020</th>
+					<th class="text-center">Pedro</th>
+					<th class="text-center">Gonzalez</th>
+					<th class="text-center">11.111.111</th>
+					<th class="text-center">24/08/2020</th>
+					<th class="text-center">$20.000</th>
+					<th class="text-center">6</th>
+					<th class="text-center">$4.000</th>
+					<th class="text-center"><div class="btn-group" role="group"
 							aria-label="Basic mixed styles example">
 							<button type="button" class="btn btn-success">Autorizar</button>
 							<button type="button" class="btn btn-danger">Denegar</button>
 						</div></th>
 				</tr>
 				
-								<tr>
-					<th>pedro2020</th>
-					<th>Pedro</th>
-					<th>Gonzalez</th>
-					<th>11.111.111</th>
-					<th>24/08/2020</th>
-					<th>$20.000</th>
-					<th>6</th>
-					<th>$4.000</th>
-					<th><div class="btn-group" role="group"
+							<tr>
+					<th class="text-center">pedro2020</th>
+					<th class="text-center">Pedro</th>
+					<th class="text-center">Gonzalez</th>
+					<th class="text-center">11.111.111</th>
+					<th class="text-center">24/08/2020</th>
+					<th class="text-center">$20.000</th>
+					<th class="text-center">6</th>
+					<th class="text-center">$4.000</th>
+					<th class="text-center"><div class="btn-group" role="group"
 							aria-label="Basic mixed styles example">
 							<button type="button" class="btn btn-success">Autorizar</button>
 							<button type="button" class="btn btn-danger">Denegar</button>
 						</div></th>
 				</tr>
 				
-								<tr>
-					<th>pedro2020</th>
-					<th>Pedro</th>
-					<th>Gonzalez</th>
-					<th>11.111.111</th>
-					<th>24/08/2020</th>
-					<th>$20.000</th>
-					<th>6</th>
-					<th>$4.000</th>
-					<th><div class="btn-group" role="group"
+					<tr>
+					<th class="text-center">pedro2020</th>
+					<th class="text-center">Pedro</th>
+					<th class="text-center">Gonzalez</th>
+					<th class="text-center">11.111.111</th>
+					<th class="text-center">24/08/2020</th>
+					<th class="text-center">$20.000</th>
+					<th class="text-center">6</th>
+					<th class="text-center">$4.000</th>
+					<th class="text-center"><div class="btn-group" role="group"
 							aria-label="Basic mixed styles example">
 							<button type="button" class="btn btn-success">Autorizar</button>
 							<button type="button" class="btn btn-danger">Denegar</button>
