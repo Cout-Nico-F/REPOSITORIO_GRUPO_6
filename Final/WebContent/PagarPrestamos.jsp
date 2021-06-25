@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>Pagar un préstamo</title>
-    <%@ include file="HeaderCliente.jsp" %>  
+    <%@ include file="HeaderCliente.jsp" %>
     <script>
     $(document).ready(function() {
         var table = $('#clientes').DataTable( {

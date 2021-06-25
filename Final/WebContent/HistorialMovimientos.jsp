@@ -5,9 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Historial de Movimientos</title>
-<link href="recursos/style-movimientos.css" rel="stylesheet"
-	type="text/css">
-<link href="recursos/style-select.css" rel="stylesheet" type="text/css">
 <%@ include file="HeaderCliente.jsp"%>
 </head>
 <body>
