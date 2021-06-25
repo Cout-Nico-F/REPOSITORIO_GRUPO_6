@@ -214,4 +214,3 @@ alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovim
 
 
 
-
