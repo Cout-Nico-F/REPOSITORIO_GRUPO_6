@@ -16,69 +16,82 @@ create table if not exists clientes (
     FechaNacimiento datetime not null,
     Direccion varchar(45) not null,
     CorreoElectronico varchar(45) not null,
-    Telefono int unsigned null, #unsigned hacer que no se acepten valores negativos por lo tanto puede almacenar el doble de valores positivos
 	primary Key (IdUsuario,Dni)
 );
 create table if not exists usuarios (
 	IdUsuario int unsigned not null,
-    IdTipoUsuario tinyint unsigned unique not null, 
+    IdTipoUsuario tinyint(1) unsigned unique not null, #tinyint(1) ya que en MySQL no hay un tipo de datos booleano 
     #Error 1822: Para la relacion de foreign key, la columna de la tabla principal en la que se esta creando la relacion debe ser unique o primary y deben tener el mismo datatype y size.
     NombreUsuario varchar(45) not null,
     Contrasenia varchar(45) not null
 );
 create table if not exists tiposUsuarios (
-	IdTipoUsuario tinyint unsigned unique not null,
+	IdTipoUsuario tinyint(1) unsigned unique not null,
     Descripcion varchar(45) not null
+);
+create table if not exists telefonos(
+	Dni int unique not null,
+    Telefono int unique not null,
+    Primary Key(Dni,Telefono)
+);
+create table if not exists nacionalidad (
+	IdNacionalidad int not null,
+    Nombre varchar(45) not null
+);
+create table if not exists localidad (
+	IdLocalidad int not null,
+    IdProvincia int not null,
+    Nombre varchar(45) not null
+);
+create table if not exists provincia (
+	IdProvincia int not null,
+    Nombre varchar(45) not null
 );
 create table if not exists cuenta (
 	NumeroCuenta bigint unique not null, #Hay que validar que sean numeros 
     Dni int unique not null,
-    IdTipoCuenta tinyint unsigned unique not null,
+    IdTipoCuenta tinyint(1) unsigned unique not null, #Solo hay 2 tipos de cuentas por eso tinyint(1)
     Saldo decimal not null,
     Cbu int unique not null,
     FechaCreacion datetime not null
 );
 create table if not exists tipoCuenta (
-	IdTipoCuenta tinyint unsigned unique not null,
+	IdTipoCuenta tinyint(1) unsigned unique not null,
     Descripcion varchar(45) not null
 );
 create table if not exists prestamos (
-	IdPrestamos int unsigned,
-	Dni int unique not null,
+	IdPrestamos int unsigned unique, #primero hacemos que sea pk y despues lo modificamos para que sea autoincrementable
     NumeroCuenta bigint unique not null, #Los numeros de  cuenta no se repiten? por las dudas unique
+	Dni int unique not null,
     Fecha datetime not null,
     ImporteSolicitado decimal not null,
     ImporteAPagar decimal not null,
     PlazoPagoMeses decimal not null,
     MontoMensual decimal not null,
-    Cuotas tinyint unsigned not null
+    Cuotas tinyint unsigned not null,
+    Estado tinyint(1) not null #En MySQL, cero se considera falso y el valor distinto de cero se considera verdadero. Para usar literales booleanos,
+);
+create table if not exists cuotas (
+	IdPrestamos int unsigned unique,
+    NumeroCuenta bigint unique not null,
+    Importe decimal not null, # que tipo de importe es?
+    FechaVencimiento datetime not null,
+    FechaPago datetime not null
 );
 create table if not exists movimientos (
+	IdMovimientos int unsigned unique, #primero hacemos que sea pk y despues lo modificamos para que sea autoincrementable
+	IdTipoMovimiento tinyint unsigned unique not null,
 	Dni int unique not null,
-    IdTipoMovimiento tinyint unsigned unique not null,
+    CuentaOrigen bigint unique not null,
+    CuentaDestino bigint unique not null,	
     Fecha datetime not null,
     Detalles text not null,
-    Importe decimal not null,
-    Primary Key (Dni,IdTipoMovimiento) #Creo que de esta manera se puede concatenar pks
+    Importe decimal not null
 );
 create table if not exists tiposMovimientos (
 	IdTipoMovimiento tinyint unsigned unique not null,
     Descripcion varchar(45) not null
 );
-create table if not exists nacionalidad (
-	IdNacionalidad int not null,
-    Descripcion varchar(45) not null
-);
-create table if not exists localidad (
-	IdLocalidad int not null,
-    IdProvincia int not null,
-    Descripcion varchar(45) not null
-);
-create table if not exists provincia (
-	IdProvincia int not null,
-    Descripcion varchar(45) not null
-);
-
 
 #Primary Key
 
