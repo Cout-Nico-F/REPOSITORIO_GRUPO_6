@@ -2,31 +2,31 @@ package entidad;
 
 public class Usuario {
 	
-	private string nombreUsuario;
-	private string contrasenia;
+	private String nombreUsuario;
+	private String contrasenia;
 	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(string nombreUsuario,string contrasenia) {
+	public Usuario(String nombreUsuario,String contrasenia) {
 		this.nombreUsuario = nombreUsuario;
 		this.contrasenia = contrasenia;
 	}
 
-	public string getNombreUsuario() {
+	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-	public void setNombreUsuario(string nombreUsuario) {
+	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public string getContrasenia() {
+	public String getContrasenia() {
 		return contrasenia;
 	}
 
-	public void setContrasenia(string contrasenia) {
+	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
 	
