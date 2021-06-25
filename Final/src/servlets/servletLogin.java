@@ -67,7 +67,7 @@ public class servletLogin extends HttpServlet {
 		}
 		if(usuarioEncontrado) { //Si es true
 			sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
-			request.setAttribute("tipoMensaje","succes");
+			request.setAttribute("tipoMensaje","success");
 		}
 		else {
 			sessionMensaje.setAttribute("mensaje","Usuario no encontrado");
