@@ -12,7 +12,7 @@
  <div class="login-box">
  	<img class="avatar" src="https://cdn.pixabay.com/photo/2018/11/13/22/01/instagram-3814081_960_720.png" alt="logo">
  	<h1>Login</h1>
- 	<form>
+ 	<form action="" method="post">
  	
  		<!-- Username -->
  		<label for="username">Nombre de usuario</label><br>
