@@ -25,7 +25,7 @@
             		  "dni": 5326650,
             		  "apellido": "Levine",
             		  "nombre": "Staci",
-            		  "saldo": "$3882"
+            		  "saldo": "$3,882.00"
             		  }
             		],
             columns: [
@@ -79,7 +79,7 @@
              <div class="form-group row my-2">
               <label for="dni" class="col-sm-3 col-form-label">DNI del cliente</label>
               <div class="col-sm-9">      
-                <input type="number" class="form-control" placeholder="Ingrese el DNI" id="dniCli" list="listaClientes">
+                <input type="text" class="form-control" placeholder="Ingrese el DNI" id="dniCli" list="listaClientes">
                 <datalist id="listaClientes">
 <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
 	                <option> Esteban Quito - DNI 34567890 </option>
@@ -111,7 +111,7 @@
             <div class="form-group row my-2">
               <label for="saldo" class="col-sm-3 col-form-label">Saldo</label>
               <div class="col-sm-9">      
-                <input type="number" class="form-control" id="saldo" placeholder="Ingrese el Saldo">
+                <input type="money" readonly value="$10,000.00" class="form-control" id="saldo">
               </div>
             </div>
             <div class="mt-3">
