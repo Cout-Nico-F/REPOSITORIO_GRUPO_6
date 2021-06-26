@@ -9,14 +9,17 @@
 </head>
 <body>
 
-<% if(request.getAttribute("tipoMensaje") != null && session.getAttribute("mensaje") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 	<div class="col px-2 py-4">
+ 		<div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensaje") != null && session.getAttribute("mensaje") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
  		<div class="alert alert-<%=request.getAttribute("tipoMensaje")%> alert-dismissible fade show" role="alert">
   			<strong><%=session.getAttribute("mensaje") %></strong>
-  			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
-<% } %>
-
- 	<div class="col px-2 py-4">
+		<% session.removeAttribute("mensaje"); } %>
+ 		</div>
+ 		
         <form action="servletLogin" method="post">
           <fieldset>
             <legend class="d-flex justify-content-center">Iniciar Sesion</legend>
@@ -41,26 +44,10 @@
          </form>
        </div>
 
-<!--  
- <div class="login-box">
- 	<img class="avatar" src="https://cdn.pixabay.com/photo/2018/11/13/22/01/instagram-3814081_960_720.png" alt="logo">
- 	<h1>Iniciar Sesion</h1>
- 	<form action="servletLogin" method="post">
- 		<!-- Username 
- 		<label for="username">Nombre de usuario</label><br>
- 		<input type="text" name="txtNombreUsuario" placeholder="Ingrese nombre de usuario"><br>
- 		
- 		<!-- Password 
- 		<label for="password">Contraseña</label><br>
- 		<input type="text" name="txtContrasenia" placeholder="Ingrese Contraseña"><br>
- 		 
- 		<input type="submit" value="Loguearse" name="btnLogin"><br>
- 		 
- 		<a href="#">Olvido su contraseña?</a><br>
- 		<a href="AltaUsuario.jsp">No tiene una cuenta?</a>
- 	</form>
- </div>
- -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.esm.min.js"></script>
 
 </body>
 </html>

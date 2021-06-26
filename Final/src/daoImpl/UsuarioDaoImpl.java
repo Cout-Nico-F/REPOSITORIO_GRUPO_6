@@ -24,16 +24,15 @@ public class UsuarioDaoImpl {
 			statement.setString(1,u.getNombreUsuario());
 			statement.setString(2,u.getContrasenia());
 			rs = statement.executeQuery();
-			if(rs.absolute(1)) //Mueve el cursor a la primera fila devuelve 1 - si trajo 1 entonces es que los datos coinciden
+			while(rs.next())
 			{
-				return true;
+				busquedaExitosa = true;
+				return busquedaExitosa;
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return busquedaExitosa;
 	}
 }
