@@ -15,7 +15,7 @@
  		<% if(request.getAttribute("tipoMensaje") != null && session.getAttribute("mensaje") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
  		<div class="alert alert-<%=request.getAttribute("tipoMensaje")%> alert-dismissible fade show" role="alert">
   			<strong><%=session.getAttribute("mensaje") %></strong>
-  			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			
 		</div>
 		<% session.removeAttribute("mensaje"); } %>
  		</div>

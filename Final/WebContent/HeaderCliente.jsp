@@ -49,11 +49,12 @@
        <span>Usuario: <%= request.getSession().getAttribute("nombreUsuarioLogeado") %></span>
        <form method="post" action="servletLogin">
        <input type="submit" name="btnCerrarSesion" value= "Cerrar Sesión" class="btn btn-secondary">
-       </form>
+       
       <% }
      else{%>
-     <input href="Login.jsp" value="Iniciar Sesión" class= "btn btn-secondary">
-     <%} %>     
+     <input  type="submit" value="Iniciar Sesión" name="btnIniciarSesion" class= "btn btn-secondary">     
+     <%}%> 
+     </form>     
        <!--  TODO: Eliminar aca los atributos nombreusuariologeado y tipousuariologeado ?  -->
        </div>
     </div>
