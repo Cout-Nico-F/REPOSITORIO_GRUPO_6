@@ -52,7 +52,7 @@
        
       <% }
      else{%>
-     <input  type="submit" value="Iniciar Sesión" name="btnIniciarSesion" class= "btn btn-secondary">     
+     <input type="submit" value="Iniciar Sesión" class= "btn btn-secondary" onclick="location.href='Login.jsp'">     
      <%}%> 
      </form>     
        <!--  TODO: Eliminar aca los atributos nombreusuariologeado y tipousuariologeado ?  -->
