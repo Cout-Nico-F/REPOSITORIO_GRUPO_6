@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpSession;
 // Error the import javax.servlet cannot be resolved
 // solucion: https://stackoverflow.com/questions/4119448/the-import-javax-servlet-cant-be-resolved
 // Donde econtrar servet api.jar http://es.uwenku.com/question/p-dfvukhbm-o.html
-import daoImpl.UsuarioDaoImpl;
 import entidad.Usuario;
 import negocio.UsuarioNegocio;
 import negocioImpl.UsuarioNegocioImpl;
@@ -48,8 +45,7 @@ public class servletLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession sessionMensaje = request.getSession();
 		HttpSession sessionUsuario = request.getSession();
-		
-		
+				
 		UsuarioNegocio uNeg = new UsuarioNegocioImpl();
 		Usuario u = new Usuario();
 		
@@ -59,8 +55,7 @@ public class servletLogin extends HttpServlet {
 			u.setContrasenia(request.getParameter("txtContrasenia"));
 			
 			u = uNeg.buscarUsuario(u);			
-			
-			
+						
 			if(u != null) {//si no es null es porque la conexion no falló
 				
 				if (u.getNombreUsuario().equals("")) { //si vino vacío es que no lo encontró.
@@ -71,14 +66,10 @@ public class servletLogin extends HttpServlet {
 					sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
 					request.setAttribute("tipoMensaje","success");
 					sessionUsuario.setAttribute("nombreUsuario", u);
-				}
-				
-			}		
-			
+				}				
+			}					
 			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 			rd.forward(request,response);
 		}
 	}
-
-
 }
