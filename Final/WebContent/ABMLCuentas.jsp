@@ -79,7 +79,7 @@
              <div class="form-group row my-2">
               <label for="dni" class="col-sm-3 col-form-label">DNI del cliente</label>
               <div class="col-sm-9">      
-                <input type="text" class="form-control" placeholder="Ingrese el DNI" id="dniCli" list="listaClientes">
+                <input type="number" class="form-control" placeholder="Ingrese el DNI" id="dniCli" list="listaClientes">
                 <datalist id="listaClientes">
 <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
 	                <option> Esteban Quito - DNI 34567890 </option>
