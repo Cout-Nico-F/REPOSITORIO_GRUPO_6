@@ -73,5 +73,13 @@ public class servletLogin extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 			rd.forward(request,response);
 		}
+		
+		if(request.getParameter("btnCerrarSesion") != null) {
+			sessionUsuario.removeAttribute("tipoUsuarioLogeado");
+			sessionUsuario.removeAttribute("nombreUsuarioLogeado");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+			rd.forward(request,response);
+		}
 	}
 }

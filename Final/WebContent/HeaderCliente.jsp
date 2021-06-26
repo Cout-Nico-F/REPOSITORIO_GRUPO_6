@@ -1,3 +1,4 @@
+<%@page import="com.sun.corba.se.spi.orbutil.fsm.Input"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -43,9 +44,17 @@
         </li>
       </ul>
       <div class="ml-auto">
-     
+     <% if( request.getSession().getAttribute("nombreUsuarioLogeado") != null){ %>
+     	
        <span>Usuario: <%= request.getSession().getAttribute("nombreUsuarioLogeado") %></span>
-       <button type="button" class="btn btn-secondary">Cerrar sesión</button>
+       <form method="post" action="servletLogin">
+       <input type="submit" name="btnCerrarSesion" value= "Cerrar Sesión" class="btn btn-secondary">
+       </form>
+      <% }
+     else{%>
+     <input href="Login.jsp" value="Iniciar Sesión" class= "btn btn-secondary">
+     <%} %>     
+       <!--  TODO: Eliminar aca los atributos nombreusuariologeado y tipousuariologeado ?  -->
        </div>
     </div>
   </div>
