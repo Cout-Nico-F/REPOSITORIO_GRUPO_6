@@ -38,6 +38,7 @@ public class UsuarioDaoImpl {
 			e.printStackTrace();
 			return x;
 		}
+		x.setNombreUsuario("");
 		return x;
 	}
 }
