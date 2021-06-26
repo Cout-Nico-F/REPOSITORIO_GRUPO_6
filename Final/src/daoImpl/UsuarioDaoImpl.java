@@ -28,8 +28,8 @@ public class UsuarioDaoImpl {
 			while(rs.next())
 			{				
 				//cargamos el objeto usuario que viajara por sesión								
-				x.setNombreUsuario(rs.getNString("nombreUsuario"));
-				x.setTipoUsuario(rs.getInt("tipoUsuario"));
+				x.setNombreUsuario(rs.getNString("NombreUsuario"));
+				x.setTipoUsuario(rs.getInt("IdTipoUsuario"));
 				return x;
 			}
 		}

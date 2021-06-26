@@ -43,7 +43,8 @@
         </li>
       </ul>
       <div class="ml-auto">
-       <span>Usuario cliente</span>
+     
+       <span>Usuario: <%= request.getSession().getAttribute("nombreUsuarioLogeado") %></span>
        <button type="button" class="btn btn-secondary">Cerrar sesión</button>
        </div>
     </div>
