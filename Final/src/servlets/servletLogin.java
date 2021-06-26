@@ -65,7 +65,7 @@ public class servletLogin extends HttpServlet {
 				} else {
 					sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
 					request.setAttribute("tipoMensaje","success");
-					sessionUsuario.setAttribute("nombreUsuario", u);
+					sessionUsuario.setAttribute("usuarioLogeado", u);
 				}				
 			}					
 			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
