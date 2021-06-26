@@ -18,7 +18,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Andres/OneDrive/Escritorio/LABORATORIO 4/LABORATORIO 4 ECLIPSE PROYECTS/TP1_GRUPO_6 propio/REPOSITORIO_GRUPO_6/Final/tomcat-servlet-api-9.0.4.jar">
+	<classpathentry kind="lib" path="C:/Users/Cristian Paolini/Desktop/TP Final Laboratorio IV/REPOSITORIO_GRUPO_6/tomcat-servlet-api-9.0.4.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
