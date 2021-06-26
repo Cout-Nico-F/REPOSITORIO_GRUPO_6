@@ -11,28 +11,33 @@ public class UsuarioDaoImpl {
 	
 	private static final String searchUser = "Select * From usuarios Where nombreUsuario=? and contrasenia=?";
 	
-	public boolean buscarUsuario(Usuario u) throws SQLException
+	public Usuario buscarUsuario(Usuario u)
 	{
 		//Codigo para buscar el usuario y que devuelve un bool en caso de existir
 		//Cuando la bd este terminada haria un procedimiento almacenado
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs = null;
-		boolean busquedaExitosa = false;
+		Usuario x = new Usuario();
+		
 		try {
 			statement = conexion.prepareStatement(searchUser);
 			statement.setString(1,u.getNombreUsuario());
 			statement.setString(2,u.getContrasenia());
 			rs = statement.executeQuery();
 			while(rs.next())
-			{
-				busquedaExitosa = true;
-				return busquedaExitosa;
+			{				
+				//cargamos el objeto usuario que viajara por sesión								
+				x.setNombreUsuario(rs.getNString("nombreUsuario"));
+				x.setTipoUsuario(rs.getInt("tipoUsuario"));
+				return x;
 			}
 		}
 		catch(SQLException e) {
+			x = null;
 			e.printStackTrace();
+			return x;
 		}
-		return busquedaExitosa;
+		return x;
 	}
 }

@@ -46,32 +46,39 @@ public class servletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession sessionMensaje = request.getSession();  
+		HttpSession sessionMensaje = request.getSession();
+		HttpSession sessionUsuario = request.getSession();
 		
-		boolean usuarioEncontrado = false;
+		
+		UsuarioNegocio uNeg = new UsuarioNegocioImpl();
+		Usuario u = new Usuario();
 		
 		if(request.getParameter("btnLogin") != null) {
-			Usuario u = new Usuario();
+			u = new Usuario();
 			u.setNombreUsuario(request.getParameter("txtNombreUsuario"));
 			u.setContrasenia(request.getParameter("txtContrasenia"));
 			
-			UsuarioNegocio Uneg = new UsuarioNegocioImpl();			
+			u = uNeg.buscarUsuario(u);			
 			
-			usuarioEncontrado = Uneg.buscarUsuario(u); //Envio el nombre y contrasenia y hago un where en la bd si coinciden lo traigo
-			//buscarUsuario devuelve un boolean		
+			
+			if(u != null) {//si no es null es porque la conexion no falló
+				
+				if (u.getNombreUsuario().equals("")) { //si vino vacío es que no lo encontró.
+					sessionMensaje.setAttribute("mensaje","Usuario no encontrado");
+					request.setAttribute("tipoMensaje","danger"); 
+					
+				} else {
+					sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
+					request.setAttribute("tipoMensaje","success");
+					sessionUsuario.setAttribute("nombreUsuario", u);
+				}
+				
+			}		
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+			rd.forward(request,response);
 		}
-		
-		if(usuarioEncontrado) { //Si es true
-			sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
-			request.setAttribute("tipoMensaje","success");
-		}
-		else {
-			sessionMensaje.setAttribute("mensaje","Usuario no encontrado");
-			request.setAttribute("tipoMensaje","danger"); 
-		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
-		rd.forward(request,response);
 	}
+
 
 }

@@ -4,6 +4,6 @@ import entidad.Usuario;
 
 public interface UsuarioNegocio {
 	
-	public boolean buscarUsuario(Usuario u);
+	public Usuario buscarUsuario(Usuario u);
 
 }
