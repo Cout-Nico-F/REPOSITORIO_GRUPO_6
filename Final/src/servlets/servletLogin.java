@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 // Error the import javax.servlet cannot be resolved
 // solucion: https://stackoverflow.com/questions/4119448/the-import-javax-servlet-cant-be-resolved
 // Donde econtrar servet api.jar http://es.uwenku.com/question/p-dfvukhbm-o.html
-import dao.UsuarioDao;
 import daoImpl.UsuarioDaoImpl;
 import entidad.Usuario;
-import javax.servlet.http.HttpSession;
+import negocio.UsuarioNegocio;
+import negocioImpl.UsuarioNegocioImpl;
+
 
 /**
  * Servlet implementation class servletLogin
@@ -55,18 +55,12 @@ public class servletLogin extends HttpServlet {
 			u.setNombreUsuario(request.getParameter("txtNombreUsuario"));
 			u.setContrasenia(request.getParameter("txtContrasenia"));
 			
-			UsuarioDaoImpl udao = new UsuarioDaoImpl();
-			try {
-				
-				usuarioEncontrado = udao.buscarUsuario(u); //Envio el nombre y contrasenia y hago un where en la bd si coinciden lo traigo
-				//buscarUsuario devuelve un boolean
+			UsuarioNegocio Uneg = new UsuarioNegocioImpl();			
 			
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			
+			usuarioEncontrado = Uneg.buscarUsuario(u); //Envio el nombre y contrasenia y hago un where en la bd si coinciden lo traigo
+			//buscarUsuario devuelve un boolean		
 		}
+		
 		if(usuarioEncontrado) { //Si es true
 			sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
 			request.setAttribute("tipoMensaje","success");
