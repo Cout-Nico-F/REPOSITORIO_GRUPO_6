@@ -4,6 +4,7 @@ public class Usuario {
 	
 	private String nombreUsuario;
 	private String contrasenia;
+	private int tipoUsuario;
 	
 	public Usuario() {
 		
@@ -30,5 +31,12 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 	}
 	
+	public void setTipoUsuario(int tipo) {
+		this.tipoUsuario = tipo;
+	}
+	
+	public int getTipoUsuario () {
+		return this.tipoUsuario;
+	}
 	
 }
