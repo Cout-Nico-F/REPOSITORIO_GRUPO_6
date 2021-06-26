@@ -19,6 +19,15 @@
 		});
 	});
 </script>
+
+<style>
+	img{
+		width: 22px;
+		height: 22px;
+		border-radius: 12px;
+	}
+</style>
+
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Banco</a>
@@ -44,12 +53,15 @@
         </li>
       </ul>
       <div class="ml-auto">
-     <% if( request.getSession().getAttribute("nombreUsuarioLogeado") != null){ %>
-     	
-       <span>Usuario: <%= request.getSession().getAttribute("nombreUsuarioLogeado") %></span>
-       <form method="post" action="servletLogin">
+      <form method="post" action="servletLogin">
+     	<% if( request.getSession().getAttribute("nombreUsuarioLogeado") != null){ %>
+     		<% if((int)session.getAttribute("tipoUsuarioLogeado") == 1){ %> <!-- Hago el casteo asi porque es un objeto -->
+     			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSriFFJXaLLV3g1bFT8PrDRFbD50XjQ7lm_0g&usqp=CAU" >
+     		<% } else { %>
+     			<img src="https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/104-512.png" >		
+     		<% } %>
+       <span><%= request.getSession().getAttribute("nombreUsuarioLogeado") %></span>
        <input type="submit" name="btnCerrarSesion" value= "Cerrar Sesión" class="btn btn-secondary">
-       
       <% }
      else{%>
      <input type="submit" value="Iniciar Sesión" class= "btn btn-secondary" onclick="location.href='Login.jsp'">     
