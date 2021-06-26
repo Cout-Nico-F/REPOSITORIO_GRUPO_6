@@ -78,6 +78,8 @@ public class servletLogin extends HttpServlet {
 		if(request.getParameter("btnCerrarSesion") != null) {
 			sessionUsuario.removeAttribute("tipoUsuarioLogeado");
 			sessionUsuario.removeAttribute("nombreUsuarioLogeado");
+			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+			rd.forward(request,response);
 			return;
 		}
 		

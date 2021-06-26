@@ -15,24 +15,24 @@
  		<% if(request.getAttribute("tipoMensaje") != null && session.getAttribute("mensaje") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
  		<div class="alert alert-<%=request.getAttribute("tipoMensaje")%> alert-dismissible fade show" role="alert">
   			<strong><%=session.getAttribute("mensaje") %></strong>
-  			
 		</div>
-		<% session.removeAttribute("mensaje"); } %>
+		<% session.removeAttribute("mensaje");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
  		</div>
- 		
         <form action="servletLogin" method="post">
           <fieldset>
             <legend class="d-flex justify-content-center">Iniciar Sesion</legend>
             <div class="d-flex justify-content-center">
-              <div class="col-sm-6"> 
-               	 <label for="nombre" class="col-sm-3 col-form-label">Nombre de usuario</label>
+              <div class="col-sm-4"> 
+              	 <label for="nombre" class="col-sm-6 col-form-label">Nombre de usuario</label>
                	 <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="txtNombreUsuario">
                </div>
               </div>
              <div class="d-flex justify-content-center">
-               <div class="col-sm-6">  
+               <div class="col-sm-4">  
                 <label for="apellido" class="col-sm-3 col-form-label">Contrasenia</label>
-                <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="txtContrasenia">
+                <input type="text" class="form-control" id="apellido" placeholder="Contrasenia" name="txtContrasenia">
               </div>
             </div>
             <div class="d-flex justify-content-center">
