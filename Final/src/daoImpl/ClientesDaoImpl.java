@@ -13,6 +13,11 @@ public class ClientesDaoImpl {
 	private static final String insertCliente = "insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico) "
 			+ "values ('?','?','?','?','?','?','?','?','?','?','?');";
 	private static final String traerClientes = "Select * From clientes";
+	private static final String traerClientesMaxCuentas = "Select cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, \r\n" + 
+			"cli.Direccion, cli.CorreoElectronico From clientes cli left join cuentas ctas on cli.Dni = ctas.Dni\r\n" + 
+			"group by cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, \r\n" + 
+			"cli.Direccion, cli.CorreoElectronico\r\n" + 
+			"having count(*) <=2";
 	
 	public Cliente insertCliente(Cliente c) {
 		
@@ -63,5 +68,30 @@ public class ClientesDaoImpl {
 			return listaCli; //Lo envio vacio
 		}
 	}
-	//Comento porque marcaba error el IDE
+	
+	public ArrayList<Cliente> traerClientes(int cantMaxCuentas){
+		PreparedStatement statement;
+		ArrayList<Cliente> listaCli = new ArrayList<Cliente>();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(traerClientesMaxCuentas);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				Cliente c = new Cliente();
+				c.setDni(rs.getInt("Dni"));
+				c.setNombre(rs.getNString("Nombre"));
+				c.setApellido(rs.getNString("Apellido"));
+				c.setDireccion(rs.getNString("Direccion"));
+				c.setCorreoElectronico(rs.getNString("CorreoElectronico"));
+				
+				listaCli.add(c);
+			}
+			return listaCli; //Envio la lista completa
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return listaCli; //Lo envio vacio
+		}
+	}
 }
