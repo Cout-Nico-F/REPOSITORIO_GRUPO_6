@@ -20,6 +20,13 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		ClientesDaoImpl cdao = new ClientesDaoImpl();
 		return cdao.traerClientes();
 	}
+
+	@Override
+	public ArrayList<Cliente> traerClientes(int cantMaxCuentas) {
+		// TODO Auto-generated method stub
+		ClientesDaoImpl cdao = new ClientesDaoImpl();
+		return cdao.traerClientes(cantMaxCuentas);
+	}
 	
 	
 	
