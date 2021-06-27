@@ -38,7 +38,7 @@ public class ClientesDaoImpl {
 		}
 		return cli = null;
 	}
-	public ArrayList<Cliente> traerClientes(){
+	/*public ArrayList<Cliente> traerClientes(){
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs = null;
@@ -49,6 +49,6 @@ public class ClientesDaoImpl {
 			e.printStackTrace();
 			return cli;
 		}
-	}
-	
+	}*/
+	//Comento porque marcaba error el IDE
 }

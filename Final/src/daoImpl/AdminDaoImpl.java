@@ -21,24 +21,29 @@ public class AdminDaoImpl implements IAdminDao {
 	public boolean AgregarCuenta(Cuenta c) {
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean inserto =false;
+		boolean inserto = false;
 		
 		try {
-			ps= conexion.prepareStatement(insert);
-			ps.setString(1,c.getNumeroCuenta());
-			ps.setString(2,c.getDNI());
+			
+			ps = conexion.prepareStatement(insert);
+			ps.setString(1, c.getNumeroCuenta());
+			ps.setString(2, c.getDNI());
 			ps.setShort(3, c.getIdTipodeCuenta());
-			ps.setBigDecimal(4,c.getSaldo());
+			ps.setBigDecimal(4, c.getSaldo());
 			ps.setString(5, c.getCBU());
-			ps.setTimestamp(6,c.getFecha());
-			if(ps.executeUpdate()>0) {
+			ps.setTimestamp(6, c.getFecha());
+			
+			if(ps.executeUpdate() > 0) {
+				
 				conexion.commit();
-				inserto=true;
+				inserto = true;
 			}
 			
 		}
 		catch(SQLException e){
+			
 			e.printStackTrace();
+			
 			try {
 				
 				conexion.rollback();
@@ -49,13 +54,8 @@ public class AdminDaoImpl implements IAdminDao {
 			}
 		}
 		
-		
-	
-		
 		return inserto;
 	}
 
-	
-	
 	
 }

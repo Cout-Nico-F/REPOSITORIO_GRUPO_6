@@ -3,6 +3,7 @@ package entidad;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 public class Cuenta {
 
@@ -28,10 +29,6 @@ public class Cuenta {
 		this.idTipodeCuenta = idTipodeCuenta;
 		this.saldo = saldo;
 		this.fecha= fecha;
- 
-		
-
-		//DB es tipo datetime
 
 	}
 	
@@ -43,12 +40,10 @@ public class Cuenta {
 		CBU = cBU;
 		DNI = dNI;
 		this.idTipodeCuenta = idTipodeCuenta;
-		this.saldo = BigDecimal.valueOf(10000);
-		java.util.Date fechaAux = new java.util.Date();
-		fechaAux = java.util.Calendar.getInstance().getTime(); 
-		
-		this.fecha = new Timestamp(fechaAux.getYear(),fechaAux.getMonth(),fechaAux.getDate(),fechaAux.getHours(),fechaAux.getMinutes(),fechaAux.getSeconds(),0);
-	}
+		saldo = BigDecimal.valueOf(10000);
+		fecha = new Timestamp(Calendar.getInstance().getTime().getTime()); //el 1er getTime obtiene un Date,  
+		                                                                   //el 2do cantidad de milisegundos transcurridos desde el 1ro de enero de 1970 00:00 GMT, hasta la fecha de sistema
+	}                                                                     //con eso se elimina el deprecated del constructor anterior
 	//Constructor para crear cuenta sin cliente asignado
 	public Cuenta(String numeroCuenta, String cBU, short idTipodeCuenta)
 	{
@@ -56,11 +51,8 @@ public class Cuenta {
 		this.numeroCuenta = numeroCuenta;
 		CBU = cBU;	
 		this.idTipodeCuenta = idTipodeCuenta;
-		this.saldo = BigDecimal.valueOf(10000);
-		java.util.Date fechaAux = new java.util.Date();
-		fechaAux = java.util.Calendar.getInstance().getTime(); 
-		
-		this.fecha = new Timestamp(fechaAux.getYear(),fechaAux.getMonth(),fechaAux.getDate(),fechaAux.getHours(),fechaAux.getMinutes(),fechaAux.getSeconds(),0);
+		saldo = BigDecimal.valueOf(10000);
+		fecha = new Timestamp(Calendar.getInstance().getTime().getTime());
 	}
 
 	public java.sql.Timestamp getFecha() {
@@ -123,8 +115,8 @@ public class Cuenta {
 
 	@Override
 	public String toString() {
-		return "Cuenta [numeroCuenta=" + numeroCuenta + ", CBU=" + CBU + ", DNI=" + DNI + ", idTipodeCuenta="
-				+ idTipodeCuenta + ", saldo=" + saldo + "]";
+		return "Número de cuenta: " + numeroCuenta + ", CBU: " + CBU + ", DNI: " + DNI + ", ID Tipo de Cuenta: "
+				+ idTipodeCuenta + ", Saldo: " + "$" + saldo + ".";
 	}
 	
 	
