@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import entidad.Cliente;
 
@@ -11,6 +12,7 @@ public class ClientesDaoImpl {
 	
 	private static final String insertCliente = "insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico) "
 			+ "values ('?','?','?','?','?','?','?','?','?','?','?');";
+	private static final String traerClientes = "Select * From clientes";
 	
 	public Cliente insertCliente(Cliente c) {
 		
@@ -35,6 +37,18 @@ public class ClientesDaoImpl {
 			return cli;
 		}
 		return cli = null;
+	}
+	public ArrayList<Cliente> traerClientes(){
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(insertCliente);
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return cli;
+		}
 	}
 	
 }
