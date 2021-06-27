@@ -43,11 +43,11 @@ public class Cuenta {
 		CBU = cBU;
 		DNI = dNI;
 		this.idTipodeCuenta = idTipodeCuenta;
-		this.saldo =BigDecimal.valueOf(10000);
-		java.util.Date fecha = new java.util.Date();
-		fecha =java.util.Calendar.getInstance().getTime(); 
+		this.saldo = BigDecimal.valueOf(10000);
+		java.util.Date fechaAux = new java.util.Date();
+		fechaAux = java.util.Calendar.getInstance().getTime(); 
 		
-		fecha =new Timestamp(fecha.getYear(),fecha.getMonth(),fecha.getDay(),fecha.getHours(),fecha.getMinutes(),fecha.getSeconds(),0);;
+		this.fecha = new Timestamp(fechaAux.getYear(),fechaAux.getMonth(),fechaAux.getDate(),fechaAux.getHours(),fechaAux.getMinutes(),fechaAux.getSeconds(),0);
 	}
 	//Constructor para crear cuenta sin cliente asignado
 	public Cuenta(String numeroCuenta, String cBU, short idTipodeCuenta)
@@ -57,7 +57,10 @@ public class Cuenta {
 		CBU = cBU;	
 		this.idTipodeCuenta = idTipodeCuenta;
 		this.saldo = BigDecimal.valueOf(10000);
-		fecha =java.util.Calendar.getInstance().getTime(); 
+		java.util.Date fechaAux = new java.util.Date();
+		fechaAux = java.util.Calendar.getInstance().getTime(); 
+		
+		this.fecha = new Timestamp(fechaAux.getYear(),fechaAux.getMonth(),fechaAux.getDate(),fechaAux.getHours(),fechaAux.getMinutes(),fechaAux.getSeconds(),0);
 	}
 
 	public java.sql.Timestamp getFecha() {

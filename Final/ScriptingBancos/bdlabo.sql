@@ -1,5 +1,5 @@
 #use bdpersonas;
-#drop database bdlabo;
+drop database if exists bdlabo;
 
 create database bdlabo;
 use bdlabo;
@@ -55,7 +55,7 @@ create table if not exists localidades (
 );
 create table if not exists cuentas (
 	NumeroCuenta bigint not null, #Hay que validar que sean numeros 
-    Dni int not null,
+    Dni int null,
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
     Saldo decimal not null,
     Cbu int unique not null,
@@ -175,11 +175,13 @@ alter table cuentas add foreign key (Dni) references clientes (Dni);
 alter table cuentas add foreign key (IdTipoCuenta) references tiposDeCuenta (IdTipoCuenta);
 
 # -- Tipo Cuentas --
-alter table tiposDeCuenta add foreign key (IdTipoCuenta) references cuentas (IdTipoCuenta);
+#alter table tiposDeCuenta add foreign key (IdTipoCuenta) references cuentas (IdTipoCuenta); Esta foreign key no corresponde
+#alter table tiposdecuenta drop constraint `tiposdecuenta_ibfk_1`;
 
 # -- Prestamos --
 alter table prestamos add foreign key (Dni) references clientes (Dni);
 alter table prestamos add foreign key (NumeroCuenta) references cuentas (NumeroCuenta);
+
 
 # -- Cuotas --
 alter table cuotas add foreign key (IdPrestamos) references prestamos (IdPrestamos);
@@ -233,6 +235,28 @@ alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovim
 #alter table prestamos modify IdPrestamos int unsigned auto_increment;
 
 #SET Foreign_key_checks = 1; # Lo volvemos a activar
+
+
+# -- Harcodeo algunos registros --
+insert into nacionalidades (Nombre) values ("Agentina");
+insert into provincias (Nombre) values ("Buenos Aires");
+insert into localidades (IdProvincia,Nombre) values (1,"Escobar");
+
+# -- Para crear un cliente primero tiene que tener un cuenta 
+insert into tiposusuarios (Descripcion) values ("Admin"); #El primer tipo de usuario ingresado es 1 
+insert into tiposusuarios (Descripcion) values ("Cliente"); 
+
+
+-- Agrego un usuario para probar el login --
+insert into usuarios (IdTipoUsuario,NombreUsuario,Contrasenia) values (2,"AlonsoHS20","12345"); #tendriamos que encriptar la contrasenia el primer usuario va a tener IdUsuario 1 se supone
+
+# -- Agrego un cliente y a ese cliente le creo un usuario --
+insert into usuarios (IdTipoUsuario,NombreUsuario,Contrasenia) values (1,"Nose","123"); #tendriamos que encriptar la contrasenia -- tiene que tener un usuario antes para que pueda ser cliente?
+insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico) 
+values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av.Siempre viva 123","prueba@gmail.com");
+
+insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
+insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
 
 
