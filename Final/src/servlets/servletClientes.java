@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +36,11 @@ public class servletClientes extends HttpServlet {
 		
 		if(op.equals("mostrarClientes")) {
 			c = cNeg.traerClientes();
+			
+			request.setAttribute("listaClientes",c);//Envio la lista de clientes cargada a ABMLClientes
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
+			rd.forward(request,response);
 		}
 	}
 

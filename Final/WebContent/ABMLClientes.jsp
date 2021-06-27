@@ -1,3 +1,5 @@
+<%@page import = "entidad.Cliente" %>
+<%@page import = "java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,319 +19,31 @@
             },
             lengthChange: false,
             data: [
-            	  {
-            		    "usuario": "WillieBenton",
-            		    "nombre": "Hartman",
-            		    "apellido": "Holman",
-            		    "dni": 34886802
-            		  },
+            	 <% ArrayList<Cliente> listaCli = null;
+             	if(request.getAttribute("listaClientes") != null) { 
+             		listaCli = (ArrayList<Cliente>) request.getAttribute("listaClientes"); //La advertencia puede ser porque Cliente va con minuscula
+            	  for(Cliente cli : listaCli) { %>
             		  {
-            		    "usuario": "BritneyRollins",
-            		    "nombre": "Donna",
-            		    "apellido": "Walsh",
-            		    "dni": 18415869
+            		    "dni": "1231231", //Pense que no se cargaba la lista pero tampoco me deja agregarlo a mano
+            		    "nombre y apellido": <%= cli.getApellido() + "," +  cli.getNombre() %>,
+            		    "direccion": <%= cli.getDireccion() %>,
+            		    "correo electronico": <%= cli.getCorreoElectronico() %>,
             		  },
-            		  {
-            		    "usuario": "LandryWilliam",
-            		    "nombre": "Hatfield",
-            		    "apellido": "Ford",
-            		    "dni": 19251677
-            		  },
-            		  {
-            		    "usuario": "CarverFarrell",
-            		    "nombre": "Kasey",
-            		    "apellido": "Holcomb",
-            		    "dni": 8779556
-            		  },
-            		  {
-            		    "usuario": "WebsterMason",
-            		    "nombre": "Trevino",
-            		    "apellido": "Flynn",
-            		    "dni": 17039425
-            		  },
-            		  {
-            		    "usuario": "LydiaOrtega",
-            		    "nombre": "Vanessa",
-            		    "apellido": "Mcknight",
-            		    "dni": 44215459
-            		  },
-            		  {
-            		    "usuario": "DanielleMiddleton",
-            		    "nombre": "Crosby",
-            		    "apellido": "Freeman",
-            		    "dni": 27120512
-            		  },
-            		  {
-            		    "usuario": "ShannaNavarro",
-            		    "nombre": "Kirkland",
-            		    "apellido": "Greer",
-            		    "dni": 14895148
-            		  },
-            		  {
-            		    "usuario": "KatelynMoreno",
-            		    "nombre": "Wendi",
-            		    "apellido": "Harmon",
-            		    "dni": 49490435
-            		  },
-            		  {
-            		    "usuario": "GloverPugh",
-            		    "nombre": "Turner",
-            		    "apellido": "Mcmillan",
-            		    "dni": 1534883
-            		  },
-            		  {
-            		    "usuario": "MorganMayer",
-            		    "nombre": "Carla",
-            		    "apellido": "Page",
-            		    "dni": 21150386
-            		  },
-            		  {
-            		    "usuario": "DarlaFerguson",
-            		    "nombre": "Barrett",
-            		    "apellido": "Snyder",
-            		    "dni": 25065382
-            		  },
-            		  {
-            		    "usuario": "WheelerWeiss",
-            		    "nombre": "Rachelle",
-            		    "apellido": "Nash",
-            		    "dni": 13210152
-            		  },
-            		  {
-            		    "usuario": "HurstWalters",
-            		    "nombre": "Florence",
-            		    "apellido": "Dean",
-            		    "dni": 50426189
-            		  },
-            		  {
-            		    "usuario": "TanishaHouston",
-            		    "nombre": "Roy",
-            		    "apellido": "Bullock",
-            		    "dni": 31229807
-            		  },
-            		  {
-            		    "usuario": "PittmanSullivan",
-            		    "nombre": "Hernandez",
-            		    "apellido": "Carpenter",
-            		    "dni": 15689770
-            		  },
-            		  {
-            		    "usuario": "BallRamos",
-            		    "nombre": "Woodard",
-            		    "apellido": "Barber",
-            		    "dni": 27443717
-            		  },
-            		  {
-            		    "usuario": "WilkinsBoone",
-            		    "nombre": "Mckay",
-            		    "apellido": "Larsen",
-            		    "dni": 29858217
-            		  },
-            		  {
-            		    "usuario": "RenaOconnor",
-            		    "nombre": "Chelsea",
-            		    "apellido": "Kirk",
-            		    "dni": 50111542
-            		  },
-            		  {
-            		    "usuario": "PopeRichardson",
-            		    "nombre": "Pugh",
-            		    "apellido": "Horton",
-            		    "dni": 54351674
-            		  },
-            		  {
-            		    "usuario": "MarshallSellers",
-            		    "nombre": "Audra",
-            		    "apellido": "Hensley",
-            		    "dni": 35916914
-            		  },
-            		  {
-            		    "usuario": "MaynardKnox",
-            		    "nombre": "Reid",
-            		    "apellido": "Stout",
-            		    "dni": 44789472
-            		  },
-            		  {
-            		    "usuario": "DarleneGarza",
-            		    "nombre": "Jordan",
-            		    "apellido": "Garrett",
-            		    "dni": 15934095
-            		  },
-            		  {
-            		    "usuario": "MarleneMathews",
-            		    "nombre": "Kathy",
-            		    "apellido": "Pruitt",
-            		    "dni": 48268726
-            		  },
-            		  {
-            		    "usuario": "ElisabethCleveland",
-            		    "nombre": "Angelina",
-            		    "apellido": "Pitts",
-            		    "dni": 51640836
-            		  },
-            		  {
-            		    "usuario": "BenitaJimenez",
-            		    "nombre": "Sweeney",
-            		    "apellido": "Owen",
-            		    "dni": 26723416
-            		  },
-            		  {
-            		    "usuario": "LanePotter",
-            		    "nombre": "Estela",
-            		    "apellido": "Wiley",
-            		    "dni": 43378012
-            		  },
-            		  {
-            		    "usuario": "NellPena",
-            		    "nombre": "Knight",
-            		    "apellido": "Puckett",
-            		    "dni": 36372011
-            		  },
-            		  {
-            		    "usuario": "NortonMorton",
-            		    "nombre": "Bowen",
-            		    "apellido": "Bradford",
-            		    "dni": 43089496
-            		  },
-            		  {
-            		    "usuario": "ShepherdNoble",
-            		    "nombre": "Clemons",
-            		    "apellido": "Lindsay",
-            		    "dni": 29077884
-            		  },
-            		  {
-            		    "usuario": "TateHammond",
-            		    "nombre": "Cleveland",
-            		    "apellido": "Gilliam",
-            		    "dni": 44217120
-            		  },
-            		  {
-            		    "usuario": "McgowanHickman",
-            		    "nombre": "Walls",
-            		    "apellido": "Knight",
-            		    "dni": 13903189
-            		  },
-            		  {
-            		    "usuario": "HouseBoyd",
-            		    "nombre": "Christi",
-            		    "apellido": "Chavez",
-            		    "dni": 17196421
-            		  },
-            		  {
-            		    "usuario": "CindyGlass",
-            		    "nombre": "Rosario",
-            		    "apellido": "Brock",
-            		    "dni": 13257742
-            		  },
-            		  {
-            		    "usuario": "ConcepcionBradley",
-            		    "nombre": "Barron",
-            		    "apellido": "Mosley",
-            		    "dni": 14415340
-            		  },
-            		  {
-            		    "usuario": "BerniceWheeler",
-            		    "nombre": "Sanders",
-            		    "apellido": "Atkins",
-            		    "dni": 51488102
-            		  },
-            		  {
-            		    "usuario": "DenaDixon",
-            		    "nombre": "Jacobson",
-            		    "apellido": "Black",
-            		    "dni": 11949850
-            		  },
-            		  {
-            		    "usuario": "RosalesYork",
-            		    "nombre": "Liz",
-            		    "apellido": "Johns",
-            		    "dni": 29116051
-            		  },
-            		  {
-            		    "usuario": "BlackBaxter",
-            		    "nombre": "Decker",
-            		    "apellido": "Park",
-            		    "dni": 11574098
-            		  },
-            		  {
-            		    "usuario": "RobertChan",
-            		    "nombre": "Cara",
-            		    "apellido": "Lawson",
-            		    "dni": 10202164
-            		  },
-            		  {
-            		    "usuario": "JacobsHardin",
-            		    "nombre": "Mayo",
-            		    "apellido": "Bridges",
-            		    "dni": 37621653
-            		  },
-            		  {
-            		    "usuario": "SpencerPatton",
-            		    "nombre": "Lindsay",
-            		    "apellido": "Jefferson",
-            		    "dni": 27309123
-            		  },
-            		  {
-            		    "usuario": "AliciaMoss",
-            		    "nombre": "Fern",
-            		    "apellido": "Dennis",
-            		    "dni": 25779993
-            		  },
-            		  {
-            		    "usuario": "TamikaChang",
-            		    "nombre": "Gladys",
-            		    "apellido": "Garcia",
-            		    "dni": 1511327
-            		  },
-            		  {
-            		    "usuario": "BrowningHale",
-            		    "nombre": "Grant",
-            		    "apellido": "Jensen",
-            		    "dni": 18534064
-            		  },
-            		  {
-            		    "usuario": "LesleyBauer",
-            		    "nombre": "Gutierrez",
-            		    "apellido": "Franco",
-            		    "dni": 20920635
-            		  },
-            		  {
-            		    "usuario": "JeniferMarshall",
-            		    "nombre": "Mueller",
-            		    "apellido": "Carey",
-            		    "dni": 53720619
-            		  },
-            		  {
-            		    "usuario": "BrandyAvery",
-            		    "nombre": "Torres",
-            		    "apellido": "Wolfe",
-            		    "dni": 37718537
-            		  },
-            		  {
-            		    "usuario": "BarbraBecker",
-            		    "nombre": "Celeste",
-            		    "apellido": "Mcclure",
-            		    "dni": 39212235
-            		  },
-            		  {
-            		    "usuario": "SingletonAnderson",
-            		    "nombre": "Berry",
-            		    "apellido": "Roy",
-            		    "dni": 35916145
-            		  }
             		],
+            		<% } %>
+            	<% } %>
             columns: [
                 {
-                    data: 'usuario'
+                    data: 'dni'
                 },
                 {
-                    data: 'nombre'
+                    data: 'nombre y apellido'
                 },
                 {
-                    data: 'apellido'
+                    data: 'direccion'
                 },
                 {
-                	data: 'dni'
+                	data: 'correo electronico'
                 },
                 {
                 	data: null,
