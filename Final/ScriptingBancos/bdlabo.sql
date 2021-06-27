@@ -1,4 +1,3 @@
-#use bdpersonas;
 drop database if exists bdlabo;
 
 create database bdlabo;
@@ -57,7 +56,7 @@ create table if not exists cuentas (
 	NumeroCuenta bigint not null, #Hay que validar que sean numeros 
     Dni int null,
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
-    Saldo decimal not null,
+    Saldo decimal(12,2) not null,
     Cbu int unique not null,
     FechaCreacion datetime not null,
     Primary Key (NumeroCuenta)
