@@ -345,7 +345,7 @@
   <body>
     <div class="row">
       <div class="col  px-4 py-2">
-        <form>
+        <form method="post" action="servletClientes">
           <fieldset>
             <legend>Nuevo cliente</legend>
             <div class="form-group row my-2">
@@ -387,21 +387,6 @@
               </select>
               </div>
             </div>
-            <!-- <fieldset class="form-group row my-2">
-              <label for="sexo" class="col-sm-3 col-form-label">Sexo</label>
-              <div class="col-sm-9">
-              <div class="form-check">
-                <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="sexo" id="femenino" value="femenino" checked>Femenino
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="sexo" id="masculino" value="masculino">Masculino
-                </label>
-              </div>
-              </div>
-            </fieldset> -->
              <div class="form-group row my-2">
               <label for="nacionalidad" class="col-sm-3 col-form-label">Nacionalidad</label>
                 <div class="col-sm-9">      
@@ -431,12 +416,6 @@
               </select>
               </div>
             </div>
-            <!-- <div class="form-group row my-2">
-              <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
-              <div class="col-sm-9">      
-                <input type="text" class="form-control" id="localidad" placeholder="Ingrese el nombre">
-              </div>
-            </div> -->
              <div class="form-group row my-2">
               <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>
               <div class="col-sm-9">      
@@ -461,8 +440,8 @@
                 <input type="password" class="form-control" id="contrasena" placeholder="Ingrese la contraseña">
               </div>
             </div>
-            <div class="mt-3">
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <div class="mt-3 py-4">
+            <input type="submit" class="btn btn-primary" value="Registrar" name="btnRegistrar">
             <button type="submit" class="btn btn-secondary">Limpiar</button>
             </div>
           </fieldset>
