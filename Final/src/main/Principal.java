@@ -17,9 +17,11 @@ public class Principal {
 		
 		IAdminDao adm = new AdminDaoImpl();
 		
+		/*
 		if(adm.AgregarCuenta(c) && adm.AgregarCuenta(csharp)) {
 			System.out.println("Se insertaron");
 		}
+		*/
 		
 	}
 
