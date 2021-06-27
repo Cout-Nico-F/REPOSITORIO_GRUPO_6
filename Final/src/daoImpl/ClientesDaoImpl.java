@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import entidad.Cliente;
+import daoImpl.Conexion;
 
 public class ClientesDaoImpl {
 	
@@ -18,7 +18,7 @@ public class ClientesDaoImpl {
 		
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		ResultSet rs = null;
+		//ResultSet rs = null;
 		Cliente cli = new Cliente();
 		
 		try {
@@ -38,17 +38,30 @@ public class ClientesDaoImpl {
 		}
 		return cli = null;
 	}
-	/*public ArrayList<Cliente> traerClientes(){
+	public ArrayList<Cliente> traerClientes(){
 		PreparedStatement statement;
+		ArrayList<Cliente> listaCli = new ArrayList<Cliente>();
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs = null;
 		try {
-			statement = conexion.prepareStatement(insertCliente);
+			statement = conexion.prepareStatement(traerClientes);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				Cliente c = new Cliente();
+				c.setDni(rs.getInt("Dni"));
+				c.setNombre(rs.getNString("Nombre"));
+				c.setApellido(rs.getNString("Apellido"));
+				c.setDireccion(rs.getNString("Direccion"));
+				c.setCorreoElectronico(rs.getNString("CorreoElectronico"));
+				
+				listaCli.add(c);
+			}
+			return listaCli; //Envio la lista completa
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
-			return cli;
+			return listaCli; //Lo envio vacio
 		}
-	}*/
+	}
 	//Comento porque marcaba error el IDE
 }

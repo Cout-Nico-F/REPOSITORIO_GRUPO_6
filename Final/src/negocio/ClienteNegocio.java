@@ -1,7 +1,6 @@
 package negocio;
 
 import java.util.ArrayList;
-
 import entidad.Cliente;
 
 public interface ClienteNegocio {

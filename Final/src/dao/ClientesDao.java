@@ -1,6 +1,6 @@
 package dao;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import entidad.Cliente;
 
 public interface ClientesDao {
