@@ -1,7 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +23,7 @@ import negocio.ClienteNegocio;
 import negocio.UsuarioNegocio;
 import negocioImpl.ClienteNegocioImpl;
 import negocioImpl.UsuarioNegocioImpl;
+import java.time.LocalDate;
 
 @WebServlet("/servletClientes")
 public class servletClientes extends HttpServlet {
@@ -79,7 +83,7 @@ public class servletClientes extends HttpServlet {
 			c.setNombre(request.getParameter("txtNombre"));
 			c.setApellido(request.getParameter("txtApellido"));
 			c.setSexo("Masculino"); //Esta harcodeado
-			c.setFechaNacimiento(Timestamp.valueOf(request.getParameter("txtNacimiento")));
+			c.setFechaNacimiento(Date.valueOf(request.getParameter("txtNacimiento")));
 			c.setDireccion(request.getParameter("txtDireccion"));
 			c.setCorreoElectronico(request.getParameter("txtCorreoElectronico"));
 			
@@ -87,11 +91,16 @@ public class servletClientes extends HttpServlet {
 			
 			if(rowsAfectadas > 1) {
 				//
-				request.setAttribute("mensajeModal", "Cliente agregado con exito");
+				request.setAttribute("mensajeModal", "Cliente agregado con exito :)");
+			}
+			if (rowsAfectadas == 1) {
+				request.setAttribute("mensajeModal", "Hubo un problema en la base de datos :(");
 			}
 			else {
-				request.setAttribute("mensajeModal", "No se pudo agregar el cliente");
+				request.setAttribute("mensajeModal", "No se pudo agregar el cliente :!");
 			}
+			RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
+			rd.forward(request,response);
 		}
 	}
 

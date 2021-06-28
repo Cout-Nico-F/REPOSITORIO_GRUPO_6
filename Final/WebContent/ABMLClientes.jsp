@@ -53,11 +53,15 @@
                 }
             ]
         } );
-    } );
+     );
+    }
     </script>
   </head>
   <body>
     <div class="row">
+    <% if(request.getAttribute("mensajeModal") != null) { %>
+    		<%=request.getAttribute("mensajeModal") %>
+    <% } %>
       <div class="col  px-4 py-2">
         <form method="post" action="servletClientes">
           <fieldset>
@@ -131,6 +135,12 @@
               </div>
             </div>
              <div class="form-group row my-2">
+              <label for="direccion" class="col-sm-3 col-form-label">Direccion</label>
+              <div class="col-sm-9">      
+                <input type="text" class="form-control" id="direccion" placeholder="Ingrese su Direccion" name="txtDireccion">
+              </div>
+              </div>
+             <div class="form-group row my-2">
               <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>
               <div class="col-sm-9">      
                 <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono" name="txtTelefono">
@@ -165,6 +175,7 @@
             </div>
             <div class="mt-3 py-4">
             <input type="submit" class="btn btn-primary" value="Registrar" name="btnRegistrar">
+            <input type="submit" class="btn btn-primary" value="Ver Modal" onclick="mostrarModal()">
             <button type="submit" class="btn btn-secondary">Limpiar</button>
             </div>
           </fieldset>
