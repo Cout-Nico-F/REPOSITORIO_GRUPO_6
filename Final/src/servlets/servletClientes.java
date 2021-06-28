@@ -29,19 +29,22 @@ public class servletClientes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Se ejecuta sin llamarlo?
 		ClienteNegocio cNeg = new ClienteNegocioImpl();
-		ArrayList<Cliente> c = new ArrayList<Cliente>();
+		ArrayList<Cliente> mostrarClientes = new ArrayList<Cliente>();
+		
 		String op;
-		op = (request.getParameter("op") != null) ? request.getParameter("op") : "mostrarClientes"; 
+		op = (request.getParameter("op") != null) ? request.getParameter("op") : "cargarDatosClientes"; 
 		//Como no esta recibiendo nada por parametro primero el String op va a ser igual a list
 		
-		if(op.equals("mostrarClientes")) {
-			c = cNeg.traerClientes();
+		if(op.equals("cargarDatosClientes")) {
+			mostrarClientes = cNeg.traerClientes();
 			
-			request.setAttribute("listaClientes",c);//Envio la lista de clientes cargada a ABMLClientes
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
-			rd.forward(request,response);
+			request.setAttribute("listaClientes",mostrarClientes);//Envio la lista de clientes cargada a ABMLClientes
+			
 		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
+		rd.forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
