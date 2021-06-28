@@ -2,11 +2,17 @@ package dao;
 
 import java.util.ArrayList;
 import entidad.Cliente;
+import entidad.Localidad;
+import entidad.Nacionalidad;
+import entidad.Provincia;
 
 public interface ClientesDao {
 	
-	public Cliente insertCliente(Cliente c);
+	public Cliente insertCliente(Cliente c);//Hay que cambiarlo por el procedimiento almacenado
 	public ArrayList<Cliente> traerClientes();
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
 	public Cliente buscarCliente(int Dni);
+	public ArrayList<Nacionalidad> traerNacionalidades();
+	public ArrayList<Provincia> traerProvincia();
+	public ArrayList<Localidad> traerLocalidades(int idProvincia);//Para filtrar las localidades
 }
