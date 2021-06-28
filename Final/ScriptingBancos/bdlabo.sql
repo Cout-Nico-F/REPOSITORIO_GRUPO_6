@@ -12,7 +12,7 @@ create table if not exists clientes (
     Nombre varchar(45) not null,
     Apellido varchar(45) not null,
     Sexo varchar(20) not null, #Serian masculino - femenino - otro enviamos directamente la cadena las opciones van a ser seleccionables no es un input de texto
-    FechaNacimiento datetime not null,
+    FechaNacimiento date not null,
     Direccion varchar(45) not null,
     CorreoElectronico varchar(45) not null,
     Eliminado boolean default false not null,
