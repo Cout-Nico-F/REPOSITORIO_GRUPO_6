@@ -31,7 +31,7 @@ public class AdminDaoImpl implements IAdminDao {
 			
 			ps = conexion.prepareStatement(insert);
 			ps.setString(1, c.getNumeroCuenta());
-			ps.setString(2, c.getDNI());
+			ps.setInt(2, c.getDNI());
 			ps.setShort(3, c.getIdTipodeCuenta());
 			ps.setBigDecimal(4, c.getSaldo());
 			ps.setString(5, c.getCBU());
@@ -99,7 +99,7 @@ public class AdminDaoImpl implements IAdminDao {
 			while (rs.next()) {
 				Cuenta cuenta = new Cuenta();
 				cuenta.setNumeroCuenta(rs.getString("numerocuenta"));
-				cuenta.setDNI(rs.getString("dni"));
+				cuenta.setDNI(rs.getInt("dni"));
 				cuenta.setIdTipodeCuenta(rs.getShort("idtipocuenta"));
 				cuenta.setSaldo(rs.getBigDecimal("saldo"));
 				cuenta.setCBU(rs.getString("cbu"));

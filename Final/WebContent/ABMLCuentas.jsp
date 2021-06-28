@@ -1,3 +1,4 @@
+<%@page import="com.sun.org.apache.xpath.internal.operations.Div"%>
 <%@page import="entidad.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
@@ -7,6 +8,7 @@
   <head>
     <title>ABML Cuentas</title>
     <%@ include file="HeaderAdmin.jsp" %>  
+    <form method="post" action="ServletABMLCuentas">
     <script>
     $(document).ready(function() {
         var table = $('#cuentas').DataTable( {
@@ -18,18 +20,27 @@
                 search: "Buscar: "
             },
             lengthChange: false,
-            data: [
-            	  {
-            		  "nroCuenta": 5050505,
+            data: <% 
+            ArrayList<Cuenta> listaCuentas = null;
+            ArrayList<Cliente> listaClientesDeCuentas = null;
+            if(request.getAttribute("listaCuentas")!=null){
+            	listaCuentas = (ArrayList<Cuenta>)request.getAttribute("listaCuentas");
+            	listaClientesDeCuentas = (ArrayList<Cliente>)request.getAttribute("listaClientesDeCuentas");
+				if(listaCuentas != null){
+					for(int i=0; i<listaCuentas.size();i++){
+            		%>[
+            	  	  {
+            		  "nroCuenta": "<%=listaCuentas.get(i).getNumeroCuenta()%>",
             		  "tipoCuenta": "Caja de Ahorros",
-            		  "cbu": 44843806526,
+            		  "cbu": <%=listaCuentas.get(i).getCBU()%>,
             		  "fechaCreacion": "2018-01-25",
-            		  "dni": 5326650,
-            		  "apellido": "Levine",
-            		  "nombre": "Staci",
-            		  "saldo": "$3,882.00"
+            		  "dni": <%=listaCuentas.get(i).getDNI()%>,
+            		  "apellido": "<%=listaClientesDeCuentas.get(i).getApellido() %>",
+            		  "nombre": "<%=listaClientesDeCuentas.get(i).getNombre() %>",
+            		  "saldo": "<%=listaCuentas.get(i).getSaldo()%>"
             		  }
             		],
+            		<%}%>
             columns: [
                 {
                     data: 'nroCuenta',
@@ -71,6 +82,7 @@
         } );
     } );
     </script>
+    </form>
   </head>
   <body>
     <div class="row">

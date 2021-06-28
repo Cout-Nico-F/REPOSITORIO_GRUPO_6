@@ -8,7 +8,7 @@ public class Cuenta {
 
 	private String numeroCuenta;
 	private String CBU;
-	private String DNI;
+	private int DNI;
 	private short idTipodeCuenta;
 	private BigDecimal saldo;
 	private Timestamp fecha;
@@ -19,7 +19,7 @@ public class Cuenta {
 	}
 	//Constructor para registrar movimientos de saldo en cuentas
 	
-	public Cuenta(String numeroCuenta, String cBU, String dNI, short idTipodeCuenta,BigDecimal saldo,Timestamp fecha)
+	public Cuenta(String numeroCuenta, String cBU, int dNI, short idTipodeCuenta,BigDecimal saldo,Timestamp fecha)
 	{
 		super();
 		this.numeroCuenta = numeroCuenta;
@@ -32,7 +32,7 @@ public class Cuenta {
 	}
 	
 	//Constructor para crear cuenta con cliente asignado
-	public Cuenta(String numeroCuenta, String cBU, String dNI, short idTipodeCuenta)
+	public Cuenta(String numeroCuenta, String cBU, int dNI, short idTipodeCuenta)
 	{
 		super();
 		this.numeroCuenta = numeroCuenta;
@@ -82,12 +82,12 @@ public class Cuenta {
 		CBU = cBU;
 	}
 
-	public String getDNI() 
+	public int getDNI() 
 	{
 		return DNI;
 	}
 
-	public void setDNI(String dNI) 
+	public void setDNI(int dNI) 
 	{
 		DNI = dNI;
 	}

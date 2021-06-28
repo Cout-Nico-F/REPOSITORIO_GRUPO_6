@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidad.Cliente;
+import entidad.Cuenta;
 import entidad.VariablesGlobales;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
@@ -21,7 +22,9 @@ import negocioImpl.ClienteNegocioImpl;
 @WebServlet("/ServletABMLCuentas")
 public class ServletABMLCuentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private IAdminNegocio admNeg = new AdminNegocioImpl();
+    private ClienteNegocio cliNeg = new ClienteNegocioImpl(); 
+	
     public ServletABMLCuentas() {
         super();
     }
@@ -31,22 +34,29 @@ public class ServletABMLCuentas extends HttpServlet {
 		{
 			if(request.getParameter("firstLoad").equals("1")) 
 			{
-				IAdminNegocio admNeg = new AdminNegocioImpl();
 				ArrayList<String> listaTiposCta = admNeg.listarTiposCuenta();
 				request.setAttribute("listaTiposCta", listaTiposCta);
 				request.setAttribute("firstLoad", null);
 			
-			
-				ClienteNegocio cliNeg = new ClienteNegocioImpl();
 				ArrayList<Cliente> listaClientes = cliNeg.traerClientes(VariablesGlobales.cantMaxCuentasPorCliente);
 				request.setAttribute("listaClientes", listaClientes);
-			}
+			}	
+		}
 		
-			
-			
+		//Listamos las cuentas con los clientes.
+		//Guardamos todas las cuentas
+		ArrayList<Cuenta> listaCuentas = admNeg.listarCuentas();
+		request.setAttribute("listaCuentas", listaCuentas);
+		
+		//Guardamos los clientes
+		ArrayList<Cliente> listaClientesDeCuentas = new ArrayList<Cliente>();
+		for (Cuenta cuenta : listaCuentas) {
+			listaClientesDeCuentas.add(admNeg.buscarCliente(cuenta.getDNI()));
+		}
+		request.setAttribute("listaClientesDeCuentas", listaClientesDeCuentas);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");   
 		rd.forward(request, response);
-		}
 	}
 	
 	
