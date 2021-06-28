@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import dao.ClientesDao;
 import entidad.Cliente;
 import daoImpl.Conexion;
 
-public class ClientesDaoImpl {
+public class ClientesDaoImpl implements ClientesDao {
 	
 	private static final String insertCliente = "insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico) "
 			+ "values ('?','?','?','?','?','?','?','?','?','?','?');";
@@ -93,5 +95,37 @@ public class ClientesDaoImpl {
 			e.printStackTrace();
 			return listaCli; //Lo envio vacio
 		}
+	}
+	@Override
+	public Cliente buscarCliente(int Dni) {
+		String query = "select * from clientes where dni = "+ Dni;
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		Cliente aux = new Cliente();
+		try {
+			ps = conexion.prepareStatement(query);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				aux.setDni(rs.getInt("dni"));
+				aux.setIdUsuario(rs.getInt("idusuario"));
+				aux.setIdNacionalidad(rs.getInt("idnacionalidad"));
+				aux.setIdLocalidad(rs.getInt("idlocalidad"));
+				aux.setCuil(rs.getInt("cuil"));
+				aux.setNombre(rs.getString("nombre"));		
+				aux.setApellido(rs.getString("apellido"));		
+				aux.setSexo(rs.getString("sexo"));
+				//aux.setFechaNacimiento(rs.getDate("fechanacimiento"));
+				aux.setDireccion(rs.getString("direccion"));
+				aux.setCorreoElectronico(rs.getString("correoelectronico"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new Cliente();
+		}
+		
+		return aux;
 	}
 }

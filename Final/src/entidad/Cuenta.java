@@ -1,7 +1,6 @@
 package entidad;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
@@ -12,7 +11,7 @@ public class Cuenta {
 	private String DNI;
 	private short idTipodeCuenta;
 	private BigDecimal saldo;
-	private java.sql.Timestamp fecha;
+	private Timestamp fecha;
 	
 	public Cuenta()
 	{
