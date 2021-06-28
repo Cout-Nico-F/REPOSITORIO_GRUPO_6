@@ -115,7 +115,7 @@ public class Cuenta {
 	@Override
 	public String toString() {
 		return "Número de cuenta: " + numeroCuenta + ", CBU: " + CBU + ", DNI: " + DNI + ", ID Tipo de Cuenta: "
-				+ idTipodeCuenta + ", Saldo: " + "$" + saldo + ".";
+				+ idTipodeCuenta + ", Saldo: " + "$" + saldo + ", Fecha de creación: " + fecha + ".";
 	}
 	
 	

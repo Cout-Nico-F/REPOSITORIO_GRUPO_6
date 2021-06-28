@@ -57,7 +57,7 @@ create table if not exists cuentas (
     Dni int null,
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
     Saldo decimal(12,2) not null,
-    Cbu int unique not null,
+    Cbu varchar(22) unique not null,
     FechaCreacion datetime not null,
     Primary Key (NumeroCuenta)
 );
@@ -256,6 +256,8 @@ values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av
 
 insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
+
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,CURRENT_TIMESTAMP());
 
 
 

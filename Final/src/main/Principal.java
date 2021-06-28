@@ -1,18 +1,21 @@
 package main;
 
-import dao.ClientesDao;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import dao.IAdminDao;
 import daoImpl.AdminDaoImpl;
-import daoImpl.ClientesDaoImpl;
-import entidad.Cliente;
 import entidad.Cuenta;
 
 public class Principal {
 
 	public static void main(String[] args) {
-		ClientesDao cliDao = new ClientesDaoImpl();	
-		Cliente c = cliDao.buscarCliente(14203944);
-		System.out.println(c.toString());
+		IAdminDao AdmDao = new AdminDaoImpl();	
+		ArrayList<Cuenta> listaCuentas = AdmDao.listarCuentas();
+		for (Iterator iterator = listaCuentas.iterator(); iterator.hasNext();) {
+			Cuenta cuenta = (Cuenta) iterator.next();
+			System.out.println(cuenta.toString());
+		}
 	}
 
 }

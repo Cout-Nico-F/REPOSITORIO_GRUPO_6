@@ -8,4 +8,5 @@ public interface IAdminDao {
 
 	public boolean AgregarCuenta (Cuenta c);
 	public ArrayList<String> listarTiposCuentas ();
+	public ArrayList<Cuenta> listarCuentas();
 }

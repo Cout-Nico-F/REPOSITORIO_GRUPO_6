@@ -17,6 +17,7 @@ public class AdminDaoImpl implements IAdminDao {
 
 	private static final String readTiposCuentas = "select descripcion from tiposdecuenta";
 	private static final String insert = "insert into cuentas (NumeroCuenta,Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?,?)";
+	private static final String listarCuentas = "select * from cuentas";
 	//private static final String delete = "DELETE FROM cuentas WHERE dni = ?";
 	//private static final String readall = "SELECT * FROM cuentas";
 	
@@ -82,5 +83,38 @@ public class AdminDaoImpl implements IAdminDao {
 		}
 		
 		return ListaTipos;
+	}
+
+
+	@Override
+	public ArrayList<Cuenta> listarCuentas() {
+
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		ArrayList<Cuenta> listaCuentas = new ArrayList<>();
+		try {
+			ps = conexion.prepareStatement(listarCuentas);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Cuenta cuenta = new Cuenta();
+				cuenta.setNumeroCuenta(rs.getString("numerocuenta"));
+				cuenta.setDNI(rs.getString("dni"));
+				cuenta.setIdTipodeCuenta(rs.getShort("idtipocuenta"));
+				cuenta.setSaldo(rs.getBigDecimal("saldo"));
+				cuenta.setCBU(rs.getString("cbu"));
+				cuenta.setFecha(rs.getTimestamp("fechacreacion"));
+				
+				listaCuentas.add(cuenta);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return listaCuentas; //Acá la devolvería vacía
+		}
+		
+		return listaCuentas;
+		
 	}
 }
