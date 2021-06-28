@@ -13,6 +13,6 @@ public interface ClientesDao {
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
 	public Cliente buscarCliente(int Dni);
 	public ArrayList<Nacionalidad> traerNacionalidades();
-	public ArrayList<Provincia> traerProvincia();
+	public ArrayList<Provincia> traerProvincias(); //TODO:Traer provincia tambien tiene que recibir un id nacionalidad
 	public ArrayList<Localidad> traerLocalidades(int idProvincia);//Para filtrar las localidades
 }

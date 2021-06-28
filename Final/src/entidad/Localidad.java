@@ -1,14 +1,9 @@
 package entidad;
 
-public class Localidad extends Provincia {
+public class Localidad { //Tiene que extender de provincia?
 	
 	private int idLocalidad;
 	private String nombre;
-	
-	public Localidad() {
-		super();
-		this.nombre = "";
-	}
 	
 	public int getIdLocalidad() {
 		return idLocalidad;
@@ -25,6 +20,7 @@ public class Localidad extends Provincia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 
 	
 	

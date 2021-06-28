@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidad.Cliente;
+import entidad.Localidad;
+import entidad.Nacionalidad;
+import entidad.Provincia;
 import entidad.Usuario;
 import negocio.ClienteNegocio;
 import negocio.UsuarioNegocio;
@@ -30,6 +33,9 @@ public class servletClientes extends HttpServlet {
 		//Se ejecuta sin llamarlo?
 		ClienteNegocio cNeg = new ClienteNegocioImpl();
 		ArrayList<Cliente> mostrarClientes = new ArrayList<Cliente>();
+		ArrayList<Nacionalidad> listaNac = new ArrayList<Nacionalidad>();
+		ArrayList<Provincia> listaPro = new ArrayList<Provincia>();
+		
 		
 		String op;
 		op = (request.getParameter("op") != null) ? request.getParameter("op") : "cargarDatosClientes"; 
@@ -37,10 +43,18 @@ public class servletClientes extends HttpServlet {
 		
 		if(op.equals("cargarDatosClientes")) {
 			mostrarClientes = cNeg.traerClientes();
-			
-			
+			listaNac = cNeg.traerNacionalidades();
+			listaPro = cNeg.traerProvincia();
 			request.setAttribute("listaClientes",mostrarClientes);//Envio la lista de clientes cargada a ABMLClientes
+			request.setAttribute("listaNacionalidades", listaNac);
+		}
+		if(request.getParameter("idProvincia") != null) {
 			
+			ArrayList<Localidad> listaLo = new ArrayList<Localidad>();
+			int idProvincia = Integer.parseInt(request.getParameter("idProvincia"));
+			listaLo = cNeg.traerLocalidades(idProvincia); //Tengo que ver la forma que cuando seleccione una provincia envie ese id y traiga la lista
+			
+			request.setAttribute("listaLocalidades", listaLo); //Le envio ya la lista filtrada
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");

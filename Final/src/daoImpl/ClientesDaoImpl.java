@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import dao.ClientesDao;
 import entidad.Cliente;
+import entidad.Localidad;
+import entidad.Nacionalidad;
+import entidad.Provincia;
 import daoImpl.Conexion;
 
 public class ClientesDaoImpl implements ClientesDao {
@@ -19,7 +22,11 @@ public class ClientesDaoImpl implements ClientesDao {
 			"cli.Direccion, cli.CorreoElectronico From clientes cli left join cuentas ctas on cli.Dni = ctas.Dni\r\n" + 
 			"group by cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, \r\n" + 
 			"cli.Direccion, cli.CorreoElectronico\r\n" + 
-			"having count(*) <=2";
+			"having count(*) <=2";		
+	private static final String traerNacionalidades = "Select * From nacionalidades";
+	private static final String traerProvincias = "Select * From provincias";
+	private static final String traerLocalidades = "Select * From localidades Where idProvincia = '?'";
+	
 	
 	public Cliente insertCliente(Cliente c) {
 		
@@ -127,5 +134,75 @@ public class ClientesDaoImpl implements ClientesDao {
 		}
 		
 		return aux;
+	}
+	@Override
+	public ArrayList<Nacionalidad> traerNacionalidades() {
+		// TODO Auto-generated method stub
+		PreparedStatement statement;
+		ArrayList<Nacionalidad> listaNa = new ArrayList<Nacionalidad>();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(traerNacionalidades);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				Nacionalidad n = new Nacionalidad();
+				n.setIdNacionalidad(rs.getInt("idNacionalidad"));
+				n.setNombre(rs.getNString("Nombre"));
+				listaNa.add(n);
+			}
+			return listaNa; //Envio la lista completa
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return listaNa = null;
+	}
+	@Override
+	public ArrayList<Provincia> traerProvincias() {
+		// TODO Auto-generated method stub
+		PreparedStatement statement;
+		ArrayList<Provincia> listaPro = new ArrayList<Provincia>();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(traerNacionalidades);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				Provincia p = new Provincia();
+				p.setIdProvincia(rs.getInt("idProvincia"));
+				p.setNombre(rs.getNString("Nombre"));
+				listaPro.add(p);
+			}
+			return listaPro; //Envio la lista completa
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return listaPro = null;
+	}
+	@Override
+	public ArrayList<Localidad> traerLocalidades(int idProvincia) {
+		// TODO Auto-generated method stub
+		PreparedStatement statement;
+		ArrayList<Localidad> listaLo = new ArrayList<Localidad>();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(traerLocalidades);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				Localidad lo = new Localidad();
+				lo.setIdLocalidad(rs.getInt("idLocalidad"));
+				lo.setNombre(rs.getNString("Nombre"));
+				
+				listaLo.add(lo);
+			}
+			return listaLo;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return listaLo = null;
 	}
 }
