@@ -1,5 +1,6 @@
 package entidad;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Cliente {
 	
@@ -7,11 +8,11 @@ public class Cliente {
 	private int idUsuario;
 	private int idNacionalidad;
 	private int idLocalidad;
-	private int cuil;
+	private String cuil;
 	private String nombre;
 	private String apellido;
 	private String sexo;
-	private Date fechaNacimiento;
+	private Timestamp fechaNacimiento;
 	private String direccion;
 	private String correoElectronico;
 	
@@ -40,10 +41,10 @@ public class Cliente {
 	public void setIdLocalidad(int idLocalidad) {
 		this.idLocalidad = idLocalidad;
 	}
-	public int getCuil() {
+	public String getCuil() {
 		return cuil;
 	}
-	public void setCuil(int cuil) {
+	public void setCuil(String cuil) {
 		this.cuil = cuil;
 	}
 	public String getNombre() {
@@ -64,10 +65,10 @@ public class Cliente {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public Date getFechaNacimiento() {
+	public Timestamp getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(Timestamp fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public String getDireccion() {
@@ -82,6 +83,14 @@ public class Cliente {
 	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
+	@Override
+	public String toString() {
+		return "Cliente [dni=" + dni + ", idUsuario=" + idUsuario + ", idNacionalidad=" + idNacionalidad
+				+ ", idLocalidad=" + idLocalidad + ", cuil=" + cuil + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento + ", direccion=" + direccion
+				+ ", correoElectronico=" + correoElectronico + "]";
+	}
+	
 	
 	
 	

@@ -111,11 +111,11 @@ public class ClientesDaoImpl implements ClientesDao {
 				aux.setIdUsuario(rs.getInt("idusuario"));
 				aux.setIdNacionalidad(rs.getInt("idnacionalidad"));
 				aux.setIdLocalidad(rs.getInt("idlocalidad"));
-				aux.setCuil(rs.getInt("cuil"));
+				aux.setCuil(rs.getString("cuil"));
 				aux.setNombre(rs.getString("nombre"));		
 				aux.setApellido(rs.getString("apellido"));		
 				aux.setSexo(rs.getString("sexo"));
-				//aux.setFechaNacimiento(rs.getDate("fechanacimiento"));
+				aux.setFechaNacimiento(rs.getTimestamp("fechanacimiento"));
 				aux.setDireccion(rs.getString("direccion"));
 				aux.setCorreoElectronico(rs.getString("correoelectronico"));
 				
