@@ -1,3 +1,4 @@
+<%@page import="entidad.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
   <%@ page import="java.util.ArrayList" %>
@@ -83,8 +84,21 @@
                 <input type="text" class="form-control" placeholder="Ingrese el DNI" id="dniCli" list="listaClientes">
                 <datalist id="listaClientes">
 <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
-	                <option> Esteban Quito - DNI 34567890 </option>
-	                <option> Ricardo Milos - DNI 13523167</option>
+					<%
+					ArrayList<Cliente> listaCli = null;
+					if(request.getAttribute("listaClientes")!=null){
+						listaCli = (ArrayList<Cliente>)request.getAttribute("listaClientes");
+						if(listaCli != null){
+							for(Cliente cli : listaCli){
+								String aux = cli.getNombre() +" "+ cli.getApellido() + " - " + String.valueOf(cli.getDni());
+								%> <option> <%=aux %> </option> <%
+							}
+						}else{
+							%> <option> No se encontraron Cliente disponibles </option>
+							<%
+						}
+					}
+					%>
 	            </datalist>
               </div>
             </div>
