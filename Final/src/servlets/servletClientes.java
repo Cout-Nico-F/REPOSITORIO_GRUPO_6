@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -63,12 +64,34 @@ public class servletClientes extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ClienteNegocio cNeg = new ClienteNegocioImpl();
+		int rowsAfectadas = 0;
 		Cliente c = new Cliente();
 		Usuario u = new Usuario();
 		
 		if(request.getParameter("btnRegistrar") != null) {
+			u.setNombreUsuario(request.getParameter("txtUsuario"));
+			u.setContrasenia(request.getParameter("txtContrasenia"));
+			u.setTipoUsuario(Integer.parseInt(request.getParameter("RTipoUsuario")));//Se ve horrible el radio pero para probar sirve
+			c.setDni(Integer.parseInt(request.getParameter("txtDni")));
+			c.setIdNacionalidad(1); //Esta harcodeado
+			c.setIdLocalidad(1); //Esta harcodeado
+			c.setCuil(request.getParameter("txtCuil"));
+			c.setNombre(request.getParameter("txtNombre"));
+			c.setApellido(request.getParameter("txtApellido"));
+			c.setSexo("Masculino"); //Esta harcodeado
+			c.setFechaNacimiento(Timestamp.valueOf(request.getParameter("txtNacimiento")));
+			c.setDireccion(request.getParameter("txtDireccion"));
+			c.setCorreoElectronico(request.getParameter("txtCorreoElectronico"));
 			
-			c.
+			rowsAfectadas = cNeg.insertCliente(u, c); //Devuelve las rows afectadas
+			
+			if(rowsAfectadas > 1) {
+				//
+				request.setAttribute("mensajeModal", "Cliente agregado con exito");
+			}
+			else {
+				request.setAttribute("mensajeModal", "No se pudo agregar el cliente");
+			}
 		}
 	}
 

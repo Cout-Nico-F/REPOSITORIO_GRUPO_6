@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.cj.jdbc.CallableStatement;
+
 import dao.ClientesDao;
 import entidad.Cliente;
 import entidad.Localidad;
@@ -30,29 +32,32 @@ public class ClientesDaoImpl implements ClientesDao {
 	
 	
 	public int insertCliente(Usuario u,Cliente c) { //La idea es que devuelva las row
-		
-		PreparedStatement statement;
+		//https://programandoointentandolo.com/2013/11/como-ejecutar-un-procedimiento-almacenado-desde-java-con-jdbc.html
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		//ResultSet rs = null;
-		Cliente cli = new Cliente();
-		Usuario u = new Usuario();
+		int rowsAfectadas = 0;
 		
 		try {
-			//Este metodo recibe un objeto Cliente cargado con los datos desde los inputs de ABML Cliente
-			statement = conexion.prepareStatement(insertCliente);
-			statement.setInt(1,cli.getDni());
-			statement.setInt(2,cli.getIdUsuario()); //Para esto primero el cliente debe tener un usuario no?
-			//Tenemos que hacer un procedimiento almacenado primero un insert en usuario se crea el id y recuperar ese
-			//id para poder hacerlo cliente - usemos como referencia el script de pa que entregamos en labo 3 ahi
-			//hicimos algo parecido
-		}
+			//Este metodo recibe un objeto Cliente y un usuario cargado con los datos desde los inputs de ABML Cliente
+			java.sql.CallableStatement cst = conexion.prepareCall("{call sp_altaCliente (?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			//Definimos los parametros del procedimiento almacenado
+			cst.setString(1, u.getNombreUsuario());
+			cst.setString(2, u.getContrasenia());
+			cst.setInt(3,u.getTipoUsuario());
 			
-		catch(SQLException e) {
-			cli = null;
-			e.printStackTrace();
-			return cli;
+			
+			//definimos los parametros de salida del PA
+			cst.registerOutParameter(14,java.sql.Types.INTEGER); //Va a ser las rows afectadas
+			
+			cst.execute(); //Ejecutamos el procedimiento almacenado
+			
+			rowsAfectadas = cst.getInt(14);
+			
+			return rowsAfectadas;
 		}
-		return cli = null;
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return rowsAfectadas;
 	}
 	public ArrayList<Cliente> traerClientes(){
 		PreparedStatement statement;
