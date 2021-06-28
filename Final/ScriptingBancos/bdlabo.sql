@@ -21,7 +21,7 @@ create table if not exists usuarios (
 	IdUsuario int unsigned not null auto_increment,
     IdTipoUsuario tinyint unsigned not null, #tinyint(1) ya que en MySQL no hay un tipo de datos booleano 
     #Error 1822: Para la relacion de foreign key, la columna de la tabla principal en la que se esta creando la relacion debe ser unique o primary y deben tener el mismo datatype y size.
-    NombreUsuario varchar(45) not null,
+    NombreUsuario varchar(45) unique not null,
     Contrasenia varchar(45) not null,
 	Primary Key (IdUsuario)
     
@@ -258,7 +258,6 @@ insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,CURRENT_TIMESTAMP());
-
 
 
 
