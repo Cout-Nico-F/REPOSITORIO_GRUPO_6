@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
+  <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -73,7 +74,7 @@
   <body>
     <div class="row">
       <div class="col  px-4 py-2">
-        <form>
+        <form method="post" action="ServletABMLCuentas">
           <fieldset>
             <legend>Nueva cuenta</legend>
              <div class="form-group row my-2">
@@ -91,8 +92,13 @@
               <label for="tipo" class="col-sm-3 col-form-label">Tipo de cuenta</label>
                 <div class="col-sm-9">      
                 <select class="form-control" id="tipo">
-                <option>Caja de ahorro</option>
-                <option>Cuenta corriente</option>
+                <%if(request.getAttribute("listaTiposCta")!=null){
+                	ArrayList<String> listaTipos = (ArrayList<String>)request.getAttribute("listaTiposCta");
+            		for(String tipo : listaTipos){
+            			%> <option> <%=tipo %> </option> <%
+            		}
+                }
+                %>
               </select>
               </div>
             </div>

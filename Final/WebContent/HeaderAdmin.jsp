@@ -29,7 +29,7 @@
           <a class="nav-link" href="ABMLClientes.jsp">ABML Clientes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="ABMLCuentas.jsp">ABML Cuentas</a>
+          <a class="nav-link" href="ServletABMLCuentas?firstLoad=1">ABML Cuentas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="AutorizarPrestamos.jsp">Autorización de préstamos</a>

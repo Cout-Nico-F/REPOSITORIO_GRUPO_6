@@ -27,7 +27,4 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		ClientesDaoImpl cdao = new ClientesDaoImpl();
 		return cdao.traerClientes(cantMaxCuentas);
 	}
-	
-	
-	
 }
