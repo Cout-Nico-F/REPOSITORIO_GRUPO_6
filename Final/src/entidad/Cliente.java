@@ -1,5 +1,5 @@
 package entidad;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Cliente {
 	
@@ -11,7 +11,7 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private String sexo;
-	private Timestamp fechaNacimiento;
+	private Date fechaNacimiento;
 	private String direccion;
 	private String correoElectronico;
 	
@@ -64,10 +64,10 @@ public class Cliente {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public Timestamp getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(Timestamp fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public String getDireccion() {

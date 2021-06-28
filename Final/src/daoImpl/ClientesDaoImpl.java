@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.mysql.cj.jdbc.CallableStatement;
@@ -34,16 +35,25 @@ public class ClientesDaoImpl implements ClientesDao {
 	public int insertCliente(Usuario u,Cliente c) { //La idea es que devuelva las row
 		//https://programandoointentandolo.com/2013/11/como-ejecutar-un-procedimiento-almacenado-desde-java-con-jdbc.html
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		int rowsAfectadas = 0;
+		int rowsAfectadas = 2;
 		
 		try {
 			//Este metodo recibe un objeto Cliente y un usuario cargado con los datos desde los inputs de ABML Cliente
-			java.sql.CallableStatement cst = conexion.prepareCall("{call sp_altaCliente (?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			java.sql.CallableStatement cst = conexion.prepareCall("{call sp_altaCliente (?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			//Definimos los parametros del procedimiento almacenado
 			cst.setString(1, u.getNombreUsuario());
 			cst.setString(2, u.getContrasenia());
 			cst.setInt(3,u.getTipoUsuario());
-			
+			cst.setInt(4, c.getDni());
+			cst.setInt(5,c.getIdNacionalidad());
+			cst.setInt(6, c.getIdLocalidad());
+			cst.setLong(7, Long.parseLong(c.getCuil()));
+			cst.setString(8,c.getNombre());
+			cst.setString(9,c.getApellido());
+			cst.setString(10,c.getSexo());
+			cst.setDate(11,c.getFechaNacimiento());
+			cst.setString(12, c.getDireccion());
+			cst.setString(13, c.getCorreoElectronico());
 			
 			//definimos los parametros de salida del PA
 			cst.registerOutParameter(14,java.sql.Types.INTEGER); //Va a ser las rows afectadas
@@ -129,7 +139,7 @@ public class ClientesDaoImpl implements ClientesDao {
 				aux.setNombre(rs.getString("nombre"));		
 				aux.setApellido(rs.getString("apellido"));		
 				aux.setSexo(rs.getString("sexo"));
-				aux.setFechaNacimiento(rs.getTimestamp("fechanacimiento"));
+				aux.setFechaNacimiento(rs.getDate("fechanacimiento"));
 				aux.setDireccion(rs.getString("direccion"));
 				aux.setCorreoElectronico(rs.getString("correoelectronico"));
 				
@@ -173,7 +183,7 @@ public class ClientesDaoImpl implements ClientesDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs = null;
 		try {
-			statement = conexion.prepareStatement(traerNacionalidades);
+			statement = conexion.prepareStatement(traerProvincias);
 			rs = statement.executeQuery();
 			while(rs.next()) {
 				Provincia p = new Provincia();
