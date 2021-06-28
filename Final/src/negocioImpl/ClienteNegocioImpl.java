@@ -20,13 +20,13 @@ import negocio.ClienteNegocio;
 public class ClienteNegocioImpl implements ClienteNegocio{
 	
 	@Override
-	public Cliente insertCliente(Cliente c) {
+	public boolean insertCliente(Cliente c) {
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
 		UsuarioDaoImpl udao = new UsuarioDaoImpl();
 		Usuario usuarioCreado = udao.insertarUsuario(c.getUsuario());
 		c.setUsuario(usuarioCreado);
 		Cliente clienteCreado = cdao.insertCliente(c);
-		return clienteCreado;
+		return clienteCreado != null;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import entidad.Nacionalidad;
 import entidad.Provincia;
 
 public interface ClienteNegocio {
-	public Cliente insertCliente(Cliente c);
+	public boolean insertCliente(Cliente c);
 	public ArrayList<Cliente> traerClientes();
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
 	public Cliente traerCliente(int dni);

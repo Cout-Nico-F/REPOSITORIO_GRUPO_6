@@ -59,9 +59,8 @@ public class ClienteDaoImpl implements ClienteDao {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			return c;
 		}
-		return c = null;
+		return c;
 	}
 	@Override
 	public int eliminarCliente (int dni) {

@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidad.*;
+import entidad.Cliente;
+import entidad.Localidad;
+import entidad.Nacionalidad;
+import entidad.Usuario;
 import negocio.ClienteNegocio;
 import negocioImpl.ClienteNegocioImpl;
 
@@ -49,9 +52,14 @@ public class servletClientes extends HttpServlet {
 			Usuario u = new Usuario();
 			u.setNombreUsuario(request.getParameter("usuario"));
 			u.setContrasenia(request.getParameter("contrasena"));
-			u.setEsAdmin(false);
+			u.setEsAdmin("Administrador".equals(request.getParameter("tipo")));
 			c.setUsuario(u);
-			cNeg.insertCliente(c);
+			if(cNeg.insertCliente(c)) {
+				request.setAttribute("mensajeModal", "Cliente agregado con exito :)");
+			}
+			else {
+				request.setAttribute("mensajeModal", "No se pudo agregar el cliente :!");
+			}
 		}
 		if(request.getParameter("btnActualizar") != null) {
 			Cliente c = new Cliente();

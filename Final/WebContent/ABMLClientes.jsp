@@ -37,6 +37,9 @@
   </head>
   <body>
     <div class="row">
+    <% if(request.getAttribute("mensajeModal") != null) { %>
+    		<%=request.getAttribute("mensajeModal") %>
+    <% } %>
       <div class="col  px-4 py-2">
         <form method="get" action="Clientes">
           <fieldset>
@@ -122,6 +125,12 @@
               <label for="correo" class="col-sm-3 col-form-label">Correo electrónico</label>
               <div class="col-sm-9">      
                 <input type="email" class="form-control" id="correo" value="<%=cActual.getCorreoElectronico()%>" readonly>
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label for="tipo" class="col-sm-3 col-form-label">Tipo de usuario</label>
+              <div class="col-sm-9">      
+                <input type="text" class="form-control" id="tipo" value="<%=cActual.getUsuario().getEsAdmin() ? "Administrador" : "Cliente"%>" readonly>
               </div>
             </div>
             <div class="form-group row my-2">
@@ -244,6 +253,12 @@
               <label for="correo" class="col-sm-3 col-form-label">Correo electrónico</label>
               <div class="col-sm-9">      
                 <input type="email" class="form-control" id="correo" name="correo" value="<%=cActual.getCorreoElectronico()%>">
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label for="tipo" class="col-sm-3 col-form-label">Tipo de usuario</label>
+              <div class="col-sm-9">      
+                 <input type="text" class="form-control" id="tipo" value="<%=cActual.getUsuario().getEsAdmin() ? "Administrador" : "Cliente"%>" readonly>
               </div>
             </div>
             <div class="form-group row my-2">
@@ -370,6 +385,15 @@
               <label for="correo" class="col-sm-3 col-form-label">Correo electrónico</label>
               <div class="col-sm-9">      
                 <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese el correo electrónico">
+              </div>
+            </div>
+            <div class="form-group row my-2">
+              <label for="tipo" class="col-sm-3 col-form-label">Tipo de usuario</label>
+              <div class="col-sm-9">      
+              <select class="form-control" id="tipo" name="tipo">
+                <option>Cliente</option>
+                <option>Administrador</option>
+                </select>
               </div>
             </div>
             <div class="form-group row my-2">
