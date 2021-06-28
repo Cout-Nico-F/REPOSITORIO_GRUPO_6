@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import entidad.Cliente;
 import entidad.Cuenta;
-import entidad.TiposDeCuenta;
+import entidad.TipoDeCuenta;
 
 public interface IAdminNegocio {
-	public ArrayList<TiposDeCuenta> listarTiposCuenta();
+	public ArrayList<TipoDeCuenta> listarTiposCuenta();
 	public ArrayList<Cuenta> listarCuentas();
 	public Cliente buscarCliente(int dni);
 }

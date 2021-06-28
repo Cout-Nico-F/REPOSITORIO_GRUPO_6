@@ -1,10 +1,18 @@
 package entidad;
 
 public class Nacionalidad {
+	int idNacionalidad;
+	String nombre;
 	
-	private int idNacionalidad;
-	private String nombre;
+	public Nacionalidad(int idNacionalidad, String nombre) {
+		this.idNacionalidad = idNacionalidad;
+		this.nombre = nombre;
+	}
 	
+	public Nacionalidad() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdNacionalidad() {
 		return idNacionalidad;
 	}
@@ -17,6 +25,4 @@ public class Nacionalidad {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 }

@@ -1,44 +1,27 @@
 package entidad;
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Cliente {
 	
 	private int dni;
-	private int idUsuario;
-	private int idNacionalidad;
-	private int idLocalidad;
 	private String cuil;
+	private Nacionalidad nacionalidad;
+	private Localidad localidad;
 	private String nombre;
 	private String apellido;
 	private String sexo;
-	private Timestamp fechaNacimiento;
+	private Date fechaNacimiento;
 	private String direccion;
 	private String correoElectronico;
-	
+	private Usuario usuario;
+	private String telefonoFijo;
+	private String celular;
 	
 	public int getDni() {
 		return dni;
 	}
 	public void setDni(int dni) {
 		this.dni = dni;
-	}
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-	public int getIdNacionalidad() {
-		return idNacionalidad;
-	}
-	public void setIdNacionalidad(int idNacionalidad) {
-		this.idNacionalidad = idNacionalidad;
-	}
-	public int getIdLocalidad() {
-		return idLocalidad;
-	}
-	public void setIdLocalidad(int idLocalidad) {
-		this.idLocalidad = idLocalidad;
 	}
 	public String getCuil() {
 		return cuil;
@@ -64,10 +47,10 @@ public class Cliente {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public Timestamp getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(Timestamp fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public String getDireccion() {
@@ -84,14 +67,39 @@ public class Cliente {
 	}
 	@Override
 	public String toString() {
-		return "Cliente [dni=" + dni + ", idUsuario=" + idUsuario + ", idNacionalidad=" + idNacionalidad
-				+ ", idLocalidad=" + idLocalidad + ", cuil=" + cuil + ", nombre=" + nombre + ", apellido=" + apellido
+		return "Cliente [dni=" + dni + ", usuario=" + usuario.getNombreUsuario() + ", nacionalidad=" + nacionalidad.getNombre()
+				+ ", idLocalidad=" + localidad.getNombre() + ", cuil=" + cuil + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento + ", direccion=" + direccion
 				+ ", correoElectronico=" + correoElectronico + "]";
 	}
-	
-	
-	
-	
-	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public Nacionalidad getNacionalidad() {
+		return nacionalidad;
+	}
+	public void setNacionalidad(Nacionalidad nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
+	}
+	public String getTelefonoFijo() {
+		return telefonoFijo;
+	}
+	public void setTelefonoFijo(String telefonoFijo) {
+		this.telefonoFijo = telefonoFijo;
+	}
+	public String getCelular() {
+		return celular;
+	}
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
 }

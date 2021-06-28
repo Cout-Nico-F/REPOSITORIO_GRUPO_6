@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidad.Cliente;
 import entidad.Cuenta;
-import entidad.TiposDeCuenta;
+import entidad.TipoDeCuenta;
 import entidad.VariablesGlobales;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
@@ -35,7 +35,7 @@ public class ServletABMLCuentas extends HttpServlet {
 		{
 			if(request.getParameter("firstLoad").equals("1")) 
 			{
-				ArrayList<TiposDeCuenta> listaTiposCta = admNeg.listarTiposCuenta();
+				ArrayList<TipoDeCuenta> listaTiposCta = admNeg.listarTiposCuenta();
 				request.setAttribute("listaTiposCta", listaTiposCta);
 				request.setAttribute("firstLoad", null);
 			

@@ -1,16 +1,14 @@
 package daoImpl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.IAdminDao;
 import entidad.Cuenta;
-import entidad.TiposDeCuenta;
+import entidad.TipoDeCuenta;
 
 
 
@@ -64,20 +62,20 @@ public class AdminDaoImpl implements IAdminDao {
 
 
 	@Override
-	public ArrayList<TiposDeCuenta> listarTiposCuentas() {
+	public ArrayList<TipoDeCuenta> listarTiposCuentas() {
 		ResultSet rs;
 		PreparedStatement ps;
-		ArrayList<TiposDeCuenta> ListaTipos = new ArrayList<>();
+		ArrayList<TipoDeCuenta> ListaTipos = new ArrayList<>();
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		TiposDeCuenta tiposDeCuenta = new TiposDeCuenta();
+		TipoDeCuenta tipoDeCuenta = new TipoDeCuenta();
 		
 		try {
 			ps = conexion.prepareStatement(readTiposCuentas);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				tiposDeCuenta.setDescripcion(rs.getString("descripcion"));
-				tiposDeCuenta.setIdTipoCuenta(rs.getShort("idTipoCuenta"));
-				ListaTipos.add(tiposDeCuenta);
+				tipoDeCuenta.setDescripcion(rs.getString("descripcion"));
+				tipoDeCuenta.setIdTipoCuenta(rs.getShort("idTipoCuenta"));
+				ListaTipos.add(tipoDeCuenta);
 			}
 			
 		} catch(SQLException e) {

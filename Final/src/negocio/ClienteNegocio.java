@@ -1,18 +1,20 @@
 package negocio;
 
 import java.util.ArrayList;
+
 import entidad.Cliente;
 import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
-import entidad.Usuario;
 
 public interface ClienteNegocio {
-	
-	public int insertCliente(Usuario u,Cliente c);
+	public Cliente insertCliente(Cliente c);
 	public ArrayList<Cliente> traerClientes();
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
+	public Cliente traerCliente(int dni);
+	public void actualizarCliente(Cliente cliente);
+	public void eliminarCliente(int dni);
+	public ArrayList<Localidad> traerLocalidades();
 	public ArrayList<Nacionalidad> traerNacionalidades();
-	public ArrayList<Provincia> traerProvincia();
-	public ArrayList<Localidad> traerLocalidades(int idProvincia);//Para filtrar las localidades
+	public ArrayList<Provincia> traerProvincias();
 }

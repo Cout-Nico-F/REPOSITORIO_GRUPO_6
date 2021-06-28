@@ -1,10 +1,18 @@
 package entidad;
 
 public class Provincia {
+	int idProvincia;
+	String nombre;
 	
-	private int idProvincia;
-	private String nombre;
+	public Provincia(int idProvincia, String nombre) {
+		this.idProvincia = idProvincia;
+		this.nombre = nombre;
+	}
 	
+	public Provincia() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdProvincia() {
 		return idProvincia;
 	}
@@ -17,5 +25,4 @@ public class Provincia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
 }

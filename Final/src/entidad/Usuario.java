@@ -2,9 +2,10 @@ package entidad;
 
 public class Usuario {
 	
+	private int idUsuario;
 	private String nombreUsuario;
 	private String contrasenia;
-	private int tipoUsuario;
+	private boolean esAdmin;
 	
 	public Usuario() {
 		
@@ -31,12 +32,20 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 	}
 	
-	public void setTipoUsuario(int tipo) {
-		this.tipoUsuario = tipo;
+	public void setEsAdmin(boolean esAdmin) {
+		this.esAdmin = esAdmin;
 	}
 	
-	public int getTipoUsuario () {
-		return this.tipoUsuario;
+	public boolean getEsAdmin () {
+		return this.esAdmin;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 }

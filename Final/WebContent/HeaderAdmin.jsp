@@ -26,7 +26,7 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="ABMLClientes.jsp">ABML Clientes</a>
+          <a class="nav-link" href="Clientes">ABML Clientes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="ServletABMLCuentas?firstLoad=1">ABML Cuentas</a>

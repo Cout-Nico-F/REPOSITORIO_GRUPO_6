@@ -8,33 +8,24 @@ create table if not exists clientes (
 	IdUsuario int unsigned not null, #Es autoincrementable le agregue unique porque sino no dejaba que tipoUsuarios lo tenga como FK
     IdNacionalidad int not null,
     IdLocalidad int not null,
-    Cuil bigint unique not null, 
+    Cuil varchar(15) unique not null, 
     Nombre varchar(45) not null,
     Apellido varchar(45) not null,
     Sexo varchar(20) not null, #Serian masculino - femenino - otro enviamos directamente la cadena las opciones van a ser seleccionables no es un input de texto
     FechaNacimiento datetime not null,
     Direccion varchar(45) not null,
     CorreoElectronico varchar(45) not null,
+    Eliminado boolean default false not null,
+    TelefonoFijo varchar(20),
+    Celular varchar(20),
     Primary Key (Dni)
 );
 create table if not exists usuarios (
 	IdUsuario int unsigned not null auto_increment,
-    IdTipoUsuario tinyint unsigned not null, #tinyint(1) ya que en MySQL no hay un tipo de datos booleano 
-    #Error 1822: Para la relacion de foreign key, la columna de la tabla principal en la que se esta creando la relacion debe ser unique o primary y deben tener el mismo datatype y size.
+    EsAdmin boolean default false not null,
     NombreUsuario varchar(45) not null,
     Contrasenia varchar(45) not null,
 	Primary Key (IdUsuario)
-    
-);
-create table if not exists tiposUsuarios (
-	IdTipoUsuario tinyint unsigned auto_increment,
-    Descripcion varchar(45) not null,
-	Primary Key (IdTipoUsuario)
-);
-create table if not exists telefonos(
-	Dni int not null,
-    Telefono int not null,
-    Primary Key(Dni,Telefono)
 );
 create table if not exists nacionalidades (
 	IdNacionalidad int auto_increment,
@@ -59,6 +50,7 @@ create table if not exists cuentas (
     Saldo decimal(12,2) not null,
     Cbu varchar(22) unique not null,
     FechaCreacion datetime not null,
+    Eliminado boolean default false not null,
     Primary Key (NumeroCuenta)
 );
 create table if not exists tiposDeCuenta (
@@ -112,12 +104,6 @@ create table if not exists tiposMovimientos (
 # -- Usuarios --
 #alter table usuarios add primary key (IdUsuario);
 
-# -- Tipos de usuarios --
-#alter table tiposUsuarios add primary key (IdTipoUsuario);
-
-# -- Telefonos --
-# Los pks estan declarados en la tabla
-
 # -- Nacionalidad --
 #alter table nacionalidades add primary key (IdNacionalidad);
 
@@ -151,18 +137,6 @@ create table if not exists tiposMovimientos (
 alter table clientes add foreign key (IdUsuario) references usuarios (IdUsuario); #Error 1822 IdUsuario tenia que ser unique o pk
 alter table clientes add foreign key (IdLocalidad) references localidades (IdLocalidad);
 alter table clientes add foreign key (IdNacionalidad) references nacionalidades (IdNacionalidad);
-
-# -- Usuarios --
-alter table usuarios add foreign key (IdTipoUsuario) references tiposUsuarios (IdTipoUsuario); #Por defecto cuando se crea una cuenta se setea en 1
-
-# -- Tipos usuarios --
-
-
-# -- Telefono --
-alter table telefonos add foreign key (Dni) references clientes (Dni);
- 
-# -- Nacionalidad --
-
 
 # -- Localidad --
 alter table localidades add foreign key (IdProvincia) references provincias (IdProvincia);
@@ -241,25 +215,15 @@ insert into nacionalidades (Nombre) values ("Agentina");
 insert into provincias (Nombre) values ("Buenos Aires");
 insert into localidades (IdProvincia,Nombre) values (1,"Escobar");
 
-# -- Para crear un cliente primero tiene que tener un cuenta 
-insert into tiposusuarios (Descripcion) values ("Admin"); #El primer tipo de usuario ingresado es 1 
-insert into tiposusuarios (Descripcion) values ("Cliente"); 
-
-
 -- Agrego un usuario para probar el login --
-insert into usuarios (IdTipoUsuario,NombreUsuario,Contrasenia) values (2,"AlonsoHS20","12345"); #tendriamos que encriptar la contrasenia el primer usuario va a tener IdUsuario 1 se supone
+insert into usuarios (NombreUsuario,Contrasenia,EsAdmin) values ("AlonsoHS20","12345",true); #tendriamos que encriptar la contrasenia el primer usuario va a tener IdUsuario 1 se supone
 
 # -- Agrego un cliente y a ese cliente le creo un usuario --
-insert into usuarios (IdTipoUsuario,NombreUsuario,Contrasenia) values (1,"Nose","123"); #tendriamos que encriptar la contrasenia -- tiene que tener un usuario antes para que pueda ser cliente?
-insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico) 
-values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av.Siempre viva 123","prueba@gmail.com");
+insert into usuarios (NombreUsuario,Contrasenia,EsAdmin) values ("Nose","123",false); #tendriamos que encriptar la contrasenia -- tiene que tener un usuario antes para que pueda ser cliente?
+insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico,TelefonoFijo,Celular) 
+values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av.Siempre viva 123","prueba@gmail.com",01123948373, 1523344556);
 
 insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,CURRENT_TIMESTAMP());
-
-
-
-
-

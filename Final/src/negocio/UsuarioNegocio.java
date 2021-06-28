@@ -1,7 +1,5 @@
 package negocio;
 
-import java.util.ArrayList;
-
 import entidad.Usuario;
 
 public interface UsuarioNegocio {

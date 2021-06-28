@@ -53,7 +53,7 @@ public class servletLogin extends HttpServlet {
 					sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
 					request.setAttribute("tipoMensaje","success");
 					
-					sessionUsuario.setAttribute("tipoUsuarioLogeado", u.getTipoUsuario());
+					sessionUsuario.setAttribute("tipoUsuarioLogeado", u.getEsAdmin());
 					sessionUsuario.setAttribute("nombreUsuarioLogeado", u.getNombreUsuario());
 				}				
 			}					

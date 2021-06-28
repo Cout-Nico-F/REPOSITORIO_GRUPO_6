@@ -1,4 +1,4 @@
-<%@page import="entidad.TiposDeCuenta"%>
+<%@page import="entidad.TipoDeCuenta"%>
 <%@page import="com.sun.org.apache.xpath.internal.operations.Div"%>
 <%@page import="entidad.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

@@ -2,19 +2,19 @@ package negocioImpl;
 
 import java.util.ArrayList;
 
-import dao.ClientesDao;
+import dao.ClienteDao;
 import dao.IAdminDao;
 import daoImpl.AdminDaoImpl;
-import daoImpl.ClientesDaoImpl;
+import daoImpl.ClienteDaoImpl;
 import entidad.Cliente;
 import entidad.Cuenta;
-import entidad.TiposDeCuenta;
+import entidad.TipoDeCuenta;
 import negocio.IAdminNegocio;
 
 public class AdminNegocioImpl implements IAdminNegocio{
 
 	@Override
-	public ArrayList<TiposDeCuenta> listarTiposCuenta() {
+	public ArrayList<TipoDeCuenta> listarTiposCuenta() {
 		IAdminDao dao = new AdminDaoImpl();
 		return dao.listarTiposCuentas();
 	}
@@ -27,7 +27,7 @@ public class AdminNegocioImpl implements IAdminNegocio{
 
 	@Override
 	public Cliente buscarCliente(int dni) {
-		ClientesDao dao = new ClientesDaoImpl();
-		return dao.buscarCliente(dni);
+		ClienteDao dao = new ClienteDaoImpl();
+		return dao.traerCliente(dni);
 	}
 }

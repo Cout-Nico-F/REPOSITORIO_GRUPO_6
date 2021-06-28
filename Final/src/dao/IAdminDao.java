@@ -7,6 +7,6 @@ import entidad.*;
 public interface IAdminDao {
 
 	public boolean AgregarCuenta (Cuenta c);
-	public ArrayList<TiposDeCuenta> listarTiposCuentas ();
+	public ArrayList<TipoDeCuenta> listarTiposCuentas ();
 	public ArrayList<Cuenta> listarCuentas();
 }
