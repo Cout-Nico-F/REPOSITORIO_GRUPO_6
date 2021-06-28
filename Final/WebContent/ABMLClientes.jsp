@@ -65,37 +65,37 @@
             <div class="form-group row my-2">
               <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
               <div class="col-sm-9">      
-                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre">
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" name="txtNombre">
               </div>
             </div>
              <div class="form-group row my-2">
               <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
               <div class="col-sm-9">      
-                <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido">
+                <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido" name="txtApellido">
               </div>
             </div>
              <div class="form-group row my-2">
               <label for="dni" class="col-sm-3 col-form-label">DNI</label>
               <div class="col-sm-9">      
-                <input type="number" class="form-control" id="dni" placeholder="Ingrese el DNI">
+                <input type="number" class="form-control" id="dni" placeholder="Ingrese el DNI" name="txtDni">
               </div>
             </div>
              <div class="form-group row my-2">
               <label for="cuil" class="col-sm-3 col-form-label">CUIL</label>
               <div class="col-sm-9">      
-                <input type="number" class="form-control" id="cuil" placeholder="Ingrese el CUIL">
+                <input type="number" class="form-control" id="cuil" placeholder="Ingrese el CUIL" name="txtCuil">
               </div>
             </div>
             <div class="form-group row my-2">
               <label for="fecha" class="col-sm-3 col-form-label">Fecha de nacimiento</label>
               <div class="col-sm-9">      
-                <input type="date" class="form-control" id="fecha" value="2000-01-01">
+                <input type="date" class="form-control" id="fecha" value="2000-01-01" name="txtNacimiento">
               </div>
             </div>
             <div class="form-group row my-2">
               <label for="sexo" class="col-sm-3 col-form-label">Sexo</label>
                 <div class="col-sm-9">      
-                <select class="form-control" id="sexo">
+                <select class="form-control" id="sexo" name="SLSexo">
                 <option>Femenino</option>
                 <option>Masculino</option>
               </select>
@@ -104,7 +104,7 @@
              <div class="form-group row my-2">
               <label for="nacionalidad" class="col-sm-3 col-form-label">Nacionalidad</label>
                 <div class="col-sm-9">      
-                <select class="form-control" id="nacionalidad">
+                <select class="form-control" id="nacionalidad" name="SLNacionalidad">
                 <option>Argentina</option>
                 <option>Otra</option>
               </select>
@@ -113,7 +113,7 @@
              <div class="form-group row my-2">
               <label for="provincia" class="col-sm-3 col-form-label">Provincia</label>
                 <div class="col-sm-9">      
-                <select class="form-control" id="provincia">
+                <select class="form-control" id="provincia" name="SLProvincia">
                 <option>Buenos Aires</option>
  				<option>Capital Federal</option>
                 <option>Otra</option>
@@ -123,7 +123,7 @@
             <div class="form-group row my-2">
               <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>
                 <div class="col-sm-9">      
-                <select class="form-control" id="localidad">
+                <select class="form-control" id="localidad" name="SLLocalidad">
                 <option>Tigre</option>
  				<option>Don Torcuato</option>
                 <option>Otra</option>
@@ -133,25 +133,34 @@
              <div class="form-group row my-2">
               <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>
               <div class="col-sm-9">      
-                <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
+                <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono" name="txtTelefono">
               </div>
             </div>
             <div class="form-group row my-2">
               <label for="correo" class="col-sm-3 col-form-label">Correo electrónico</label>
               <div class="col-sm-9">      
-                <input type="email" class="form-control" id=correo placeholder="Ingrese el correo electrónico">
+                <input type="email" class="form-control" id=correo placeholder="Ingrese el correo electrónico" name="txtCorreoElectronico">
+              </div>
+            </div>
+            <div class="form-group row my-2 d-flex content-center"> 
+              <label class="col-sm-3 col-form-label">Tipo Usuario</label>
+              <div class="">
+              	<label for="admin" class="col-sm-3 col-form-label">Admin</label>      
+                <input type="radio" class="form-control" id="admin" name="RTipoUsuario" value="1">
+              	<label for="cliente" class="col-sm-3 col-form-label">Cliente</label>
+              	<input type="radio" class="form-control" id="cliente" name="RTipoUsuario" value="2">
               </div>
             </div>
             <div class="form-group row my-2">
               <label for="usuario" class="col-sm-3 col-form-label">Usuario</label>
               <div class="col-sm-9">      
-                <input type="text" class="form-control" id="usuario" placeholder="Ingrese el usuario">
+                <input type="text" class="form-control" id="usuario" placeholder="Ingrese el usuario" name="txtUsuario">
               </div>
             </div>
             <div class="form-group row my-2">
               <label for="contrasena" class="col-sm-3 col-form-label">Contraseña</label>
               <div class="col-sm-9">      
-                <input type="password" class="form-control" id="contrasena" placeholder="Ingrese la contraseña">
+                <input type="password" class="form-control" id="contrasena" placeholder="Ingrese la contraseña" name="txtContrasenia">
               </div>
             </div>
             <div class="mt-3 py-4">
