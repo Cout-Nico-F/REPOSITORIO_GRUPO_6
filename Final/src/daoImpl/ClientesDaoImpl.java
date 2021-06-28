@@ -11,12 +11,13 @@ import entidad.Cliente;
 import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
+import entidad.Usuario;
 import daoImpl.Conexion;
 
 public class ClientesDaoImpl implements ClientesDao {
 	
-	private static final String insertCliente = "insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico) "
-			+ "values ('?','?','?','?','?','?','?','?','?','?','?');";
+	//private static final String insertCliente = "insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico) "
+		//	+ "values ('?','?','?','?','?','?','?','?','?','?','?');";
 	private static final String traerClientes = "Select * From clientes";
 	private static final String traerClientesMaxCuentas = "Select cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, \r\n" + 
 			"cli.Direccion, cli.CorreoElectronico From clientes cli left join cuentas ctas on cli.Dni = ctas.Dni\r\n" + 
@@ -28,12 +29,13 @@ public class ClientesDaoImpl implements ClientesDao {
 	private static final String traerLocalidades = "Select * From localidades Where idProvincia = '?'";
 	
 	
-	public Cliente insertCliente(Cliente c) {
+	public int insertCliente(Usuario u,Cliente c) { //La idea es que devuelva las row
 		
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		//ResultSet rs = null;
 		Cliente cli = new Cliente();
+		Usuario u = new Usuario();
 		
 		try {
 			//Este metodo recibe un objeto Cliente cargado con los datos desde los inputs de ABML Cliente
@@ -74,8 +76,8 @@ public class ClientesDaoImpl implements ClientesDao {
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
-			return listaCli; //Lo envio vacio
 		}
+		return listaCli = null;
 	}
 	
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas){

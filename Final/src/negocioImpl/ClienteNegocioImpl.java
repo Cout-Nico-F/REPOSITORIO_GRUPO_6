@@ -7,14 +7,16 @@ import entidad.Cliente;
 import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Provincia;
+import entidad.Usuario;
 import negocio.ClienteNegocio;
 
 public class ClienteNegocioImpl implements ClienteNegocio{
-
+	
 	@Override
-	public Cliente insertCliente(Cliente c) {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertCliente(Usuario u, Cliente c) {
+		ClientesDaoImpl cdao = new ClientesDaoImpl();
+		int rowAfectadas = cdao.insertCliente(u, c);
+		return rowAfectadas;
 	}
 
 	@Override
@@ -48,4 +50,6 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		ClientesDaoImpl cdao = new ClientesDaoImpl();
 		return cdao.traerLocalidades(idProvincia);
 	}
+
+
 }

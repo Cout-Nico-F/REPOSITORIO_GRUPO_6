@@ -36,10 +36,9 @@ public class servletClientes extends HttpServlet {
 		ArrayList<Nacionalidad> listaNac = new ArrayList<Nacionalidad>();
 		ArrayList<Provincia> listaPro = new ArrayList<Provincia>();
 		
-		
 		String op;
 		op = (request.getParameter("op") != null) ? request.getParameter("op") : "cargarDatosClientes"; 
-		//Como no esta recibiendo nada por parametro primero el String op va a ser igual a list
+		//Como no esta recibiendo nada por parametro primero el String op va a ser igual a cargarDatosClientes
 		
 		if(op.equals("cargarDatosClientes")) {
 			mostrarClientes = cNeg.traerClientes();
@@ -63,8 +62,13 @@ public class servletClientes extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ClienteNegocio cNeg = new ClienteNegocioImpl();
+		Cliente c = new Cliente();
+		Usuario u = new Usuario();
+		
 		if(request.getParameter("btnRegistrar") != null) {
 			
+			c.
 		}
 	}
 

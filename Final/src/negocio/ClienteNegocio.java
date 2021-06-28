@@ -9,7 +9,7 @@ import entidad.Usuario;
 
 public interface ClienteNegocio {
 	
-	public Cliente insertCliente(Cliente c);
+	public int insertCliente(Usuario u,Cliente c);
 	public ArrayList<Cliente> traerClientes();
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
 	public ArrayList<Nacionalidad> traerNacionalidades();
