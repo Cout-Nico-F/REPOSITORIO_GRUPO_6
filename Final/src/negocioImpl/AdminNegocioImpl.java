@@ -8,12 +8,13 @@ import daoImpl.AdminDaoImpl;
 import daoImpl.ClientesDaoImpl;
 import entidad.Cliente;
 import entidad.Cuenta;
+import entidad.TiposDeCuenta;
 import negocio.IAdminNegocio;
 
 public class AdminNegocioImpl implements IAdminNegocio{
 
 	@Override
-	public ArrayList<String> listarTiposCuenta() {
+	public ArrayList<TiposDeCuenta> listarTiposCuenta() {
 		IAdminDao dao = new AdminDaoImpl();
 		return dao.listarTiposCuentas();
 	}

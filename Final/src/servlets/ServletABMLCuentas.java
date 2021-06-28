@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidad.Cliente;
 import entidad.Cuenta;
+import entidad.TiposDeCuenta;
 import entidad.VariablesGlobales;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
@@ -34,7 +35,7 @@ public class ServletABMLCuentas extends HttpServlet {
 		{
 			if(request.getParameter("firstLoad").equals("1")) 
 			{
-				ArrayList<String> listaTiposCta = admNeg.listarTiposCuenta();
+				ArrayList<TiposDeCuenta> listaTiposCta = admNeg.listarTiposCuenta();
 				request.setAttribute("listaTiposCta", listaTiposCta);
 				request.setAttribute("firstLoad", null);
 			
@@ -47,6 +48,7 @@ public class ServletABMLCuentas extends HttpServlet {
 		//Guardamos todas las cuentas
 		ArrayList<Cuenta> listaCuentas = admNeg.listarCuentas();
 		request.setAttribute("listaCuentas", listaCuentas);
+		
 		
 		//Guardamos los clientes
 		ArrayList<Cliente> listaClientesDeCuentas = new ArrayList<Cliente>();

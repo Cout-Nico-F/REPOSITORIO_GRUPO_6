@@ -1,3 +1,4 @@
+<%@page import="entidad.TiposDeCuenta"%>
 <%@page import="com.sun.org.apache.xpath.internal.operations.Div"%>
 <%@page import="entidad.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -30,8 +31,15 @@
 					for(int i=0; i<listaCuentas.size();i++){
             		%>[
             	  	  {
-            		  "nroCuenta": "<%=listaCuentas.get(i).getNumeroCuenta()%>",
-            		  "tipoCuenta": "Caja de Ahorros",
+            		  "nroCuenta": "
+            		  <%=listaCuentas.get(i).getNumeroCuenta()%>
+            	  	  ",
+            		  "tipoCuenta": "
+            		  <% if(request.getAttribute("listaTiposCta")!=null){
+                  		ArrayList<TiposDeCuenta> listaTipos = (ArrayList<TiposDeCuenta>)request.getAttribute("listaTiposCta");
+            		  	int index = listaTipos.indexOf(x->x.getIdTipoCuenta()==listaCuentas.get(i).getIdTipodeCuenta());
+            		  	listaTipos.get(index).getDescripcion(); %>
+            		  ",
             		  "cbu": <%=listaCuentas.get(i).getCBU()%>,
             		  "fechaCreacion": "2018-01-25",
             		  "dni": <%=listaCuentas.get(i).getDNI()%>,
@@ -119,9 +127,9 @@
                 <div class="col-sm-9">      
                 <select class="form-control" id="tipo">
                 <%if(request.getAttribute("listaTiposCta")!=null){
-                	ArrayList<String> listaTipos = (ArrayList<String>)request.getAttribute("listaTiposCta");
-            		for(String tipo : listaTipos){
-            			%> <option> <%=tipo %> </option> <%
+                	ArrayList<TiposDeCuenta> listaTipos = (ArrayList<TiposDeCuenta>)request.getAttribute("listaTiposCta");
+            		for(TiposDeCuenta tipo : listaTipos){
+            			%> <option> <%=tipo.getDescripcion() %> </option> <%
             		}
                 }
                 %>

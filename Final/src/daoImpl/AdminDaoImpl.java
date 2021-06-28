@@ -10,12 +10,13 @@ import java.util.ArrayList;
 
 import dao.IAdminDao;
 import entidad.Cuenta;
+import entidad.TiposDeCuenta;
 
 
 
 public class AdminDaoImpl implements IAdminDao {
 
-	private static final String readTiposCuentas = "select descripcion from tiposdecuenta";
+	private static final String readTiposCuentas = "select * from tiposdecuenta";
 	private static final String insert = "insert into cuentas (NumeroCuenta,Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?,?)";
 	private static final String listarCuentas = "select * from cuentas";
 	//private static final String delete = "DELETE FROM cuentas WHERE dni = ?";
@@ -63,18 +64,20 @@ public class AdminDaoImpl implements IAdminDao {
 
 
 	@Override
-	public ArrayList<String> listarTiposCuentas() {
+	public ArrayList<TiposDeCuenta> listarTiposCuentas() {
 		ResultSet rs;
 		PreparedStatement ps;
-		ArrayList<String> ListaTipos = new ArrayList<>();
+		ArrayList<TiposDeCuenta> ListaTipos = new ArrayList<>();
 		Connection conexion = Conexion.getConexion().getSQLConexion();
+		TiposDeCuenta tiposDeCuenta = new TiposDeCuenta();
 		
 		try {
 			ps = conexion.prepareStatement(readTiposCuentas);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				String aux = rs.getString("descripcion");
-				ListaTipos.add(aux);
+				tiposDeCuenta.setDescripcion(rs.getString("descripcion"));
+				tiposDeCuenta.setIdTipoCuenta(rs.getShort("idTipoCuenta"));
+				ListaTipos.add(tiposDeCuenta);
 			}
 			
 		} catch(SQLException e) {
