@@ -59,6 +59,12 @@ public class ServletABMLCuentas extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if (request.getParameter("btnEliminarCuenta") != null) {
+			
+			String numeroCuenta = request.getParameter("nroCuenta");
+			ArrayList<Cuenta> listaCuentas = admNeg.listarCuentas();
+			
+		}
 	}
 
 }

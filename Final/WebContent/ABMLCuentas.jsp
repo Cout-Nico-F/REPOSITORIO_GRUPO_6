@@ -138,14 +138,14 @@
 					%>
 						<tr>
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%></td>
-							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%> </td>
+							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%> <input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input> </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
 							<td class="dt-body-center"> <%=listaCuentas.get(i).getFecha() %></td>
 							<td > <%=(listaCuentas.get(i).getDNI()==0)?"Sin asignar":listaCuentas.get(i).getDNI()%></td>
 							<td class="dt-body-center"><%=(listaClientes.get(i).getApellido()==null)?"Sin asignar":listaClientes.get(i).getApellido()%></td>
 							<td class="dt-body-center"><%=(listaClientes.get(i).getNombre()==null)?"Sin asignar":listaClientes.get(i).getNombre()%></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getSaldo()%></td>
-							<td><div class="text-center"><button class="btn"><i class="bi bi-pencil-fill"></i></button><button class="btn"><i class="bi bi-trash-fill"></i></button></div>
+							<td><div class="text-center"><button type="submit" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button><button type="submit" name="btnEliminarCuenta" value="eliminarCuenta" class="btn"><i class="bi bi-trash-fill"></i></button></div>
 							</td>
 						</tr>
 						<%} 

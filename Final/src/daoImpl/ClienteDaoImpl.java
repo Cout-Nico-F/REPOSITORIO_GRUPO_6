@@ -243,4 +243,9 @@ public class ClienteDaoImpl implements ClienteDao {
 			return listaCli; //Lo envio vacio
 		}
 	}
+	@Override
+	public String validacionesClientes(Cliente c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
