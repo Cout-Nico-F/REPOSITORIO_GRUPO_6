@@ -49,7 +49,7 @@ create table if not exists cuentas (
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
     Saldo decimal(12,2) not null,
     Cbu varchar(22) unique not null,
-    FechaCreacion datetime not null,
+    FechaCreacion date not null,
     Eliminado boolean default false not null,
     Primary Key (NumeroCuenta)
 );
@@ -62,7 +62,7 @@ create table if not exists prestamos (
 	IdPrestamos int unsigned auto_increment, #primero hacemos que sea pk y despues lo modificamos para que sea autoincrementable
     NumeroCuenta bigint not null, #Los numeros de  cuenta no se repiten? por las dudas unique
 	Dni int not null,
-    Fecha datetime not null,
+    Fecha date not null,
     ImporteSolicitado decimal not null,
     ImporteAPagar decimal not null,
     PlazoPagoMeses decimal not null,
@@ -75,8 +75,8 @@ create table if not exists cuotas (
 	IdPrestamos int unsigned not null,
     NumeroCuota tinyint not null,
     Importe decimal not null, # que tipo de importe es?
-    FechaVencimiento datetime not null,
-    FechaPago datetime not null,
+    FechaVencimiento date not null,
+    FechaPago date not null,
     Primary Key (IdPrestamos,NumeroCuota)
 );
 create table if not exists movimientos (
@@ -226,4 +226,4 @@ values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av
 insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,CURRENT_TIMESTAMP());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,current_date());

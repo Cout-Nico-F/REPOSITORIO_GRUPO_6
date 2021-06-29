@@ -1,9 +1,8 @@
 package entidad;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.*;
 
 public class Cuenta {
 
@@ -12,7 +11,7 @@ public class Cuenta {
 	private int DNI;
 	private short idTipodeCuenta;
 	private BigDecimal saldo;
-	private Timestamp fecha;
+	private Date fecha;
 	
 	public Cuenta()
 	{
@@ -20,7 +19,7 @@ public class Cuenta {
 	}
 	//Constructor para registrar movimientos de saldo en cuentas
 	
-	public Cuenta(String numeroCuenta, String cBU, int dNI, short idTipodeCuenta,BigDecimal saldo,Timestamp fecha)
+	public Cuenta(String numeroCuenta, String cBU, int dNI, short idTipodeCuenta,BigDecimal saldo,Date fecha)
 	{
 		super();
 		this.numeroCuenta = numeroCuenta;
@@ -41,9 +40,9 @@ public class Cuenta {
 		DNI = dNI;
 		this.idTipodeCuenta = idTipodeCuenta;
 		saldo = BigDecimal.valueOf(10000);
-		fecha = new Timestamp(Calendar.getInstance().getTime().getTime()); //el 1er getTime obtiene un Date,  
-		                                                                   //el 2do cantidad de milisegundos transcurridos desde el 1ro de enero de 1970 00:00 GMT, hasta la fecha de sistema
-	}                                                                     //con eso se elimina el deprecated del constructor anterior
+		fecha = (Date)Calendar.getInstance().getTime(); 
+	}                                                                    
+	
 	//Constructor para crear cuenta sin cliente asignado
 	public Cuenta(String numeroCuenta, String cBU, short idTipodeCuenta)
 	{
@@ -52,14 +51,14 @@ public class Cuenta {
 		CBU = cBU;	
 		this.idTipodeCuenta = idTipodeCuenta;
 		saldo = BigDecimal.valueOf(10000);
-		fecha = new Timestamp(Calendar.getInstance().getTime().getTime());
+		fecha = (Date)Calendar.getInstance().getTime();
 	}
 
-	public java.sql.Timestamp getFecha() {
+	public java.sql.Date getFecha() {
 		return fecha;
 	}
 	
-	public void setFecha(java.sql.Timestamp fecha) {
+	public void setFecha(java.sql.Date fecha) {
 		this.fecha = fecha;
 	}
 

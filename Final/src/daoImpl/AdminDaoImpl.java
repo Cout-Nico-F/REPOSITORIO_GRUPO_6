@@ -34,7 +34,7 @@ public class AdminDaoImpl implements IAdminDao {
 			ps.setShort(3, c.getIdTipodeCuenta());
 			ps.setBigDecimal(4, c.getSaldo());
 			ps.setString(5, c.getCBU());
-			ps.setTimestamp(6, c.getFecha());
+			ps.setDate(6, c.getFecha());
 			
 			if(ps.executeUpdate() > 0) {
 				
@@ -104,7 +104,7 @@ public class AdminDaoImpl implements IAdminDao {
 				cuenta.setIdTipodeCuenta(rs.getShort("idtipocuenta"));
 				cuenta.setSaldo(rs.getBigDecimal("saldo"));
 				cuenta.setCBU(rs.getString("cbu"));
-				cuenta.setFecha(rs.getTimestamp("fechacreacion"));
+				cuenta.setFecha(rs.getDate("fechacreacion"));
 				
 				listaCuentas.add(cuenta);
 				
