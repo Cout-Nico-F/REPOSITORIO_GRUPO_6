@@ -10,4 +10,5 @@ public interface IAdminNegocio {
 	public ArrayList<TipoDeCuenta> listarTiposCuenta();
 	public ArrayList<Cuenta> listarCuentas();
 	public Cliente buscarCliente(int dni);
+	public void eliminarCuenta(String nroCuenta);
 }

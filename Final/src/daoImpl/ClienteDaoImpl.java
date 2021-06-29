@@ -276,7 +276,7 @@ public class ClienteDaoImpl implements ClienteDao {
 					return "El nombre de usuario debe ser menor a 45 caracteres";
 			}
 			if(c.getUsuario().getContrasenia().length() > 45) {
-				return "La contraseña ingresada debe ser menor a 45 caracteres";
+				return "La contraseï¿½a ingresada debe ser menor a 45 caracteres";
 			}
 		}*/
 		return "Cliente agregado con exito";
@@ -292,5 +292,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			return "El campo dni esta vacio";
 		}*/
 		return "No hay campos vacios";
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

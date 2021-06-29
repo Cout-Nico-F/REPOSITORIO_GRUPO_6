@@ -10,22 +10,19 @@ import dao.IAdminDao;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;
 
-
-
 public class AdminDaoImpl implements IAdminDao {
 
-	private static final String readTiposCuentas = "select * from tiposdecuenta";
 	private static final String insert = "insert into cuentas (NumeroCuenta,Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?,?)";
 	private static final String listarCuentas = "select * from cuentas";
-	//private static final String delete = "DELETE FROM cuentas WHERE dni = ?";
-	//private static final String readall = "SELECT * FROM cuentas";
-	
+	private static final String eliminarCuenta = "update cuentas set eliminado = true where numerocuenta = ?";
+	// private static final String readall = "SELECT * FROM cuentas";
+
 	@Override
 	public boolean AgregarCuenta(Cuenta c) {
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean inserto = false;
-		
+
 		try {
 			ps = conexion.prepareStatement(insert);
 			ps.setString(1, c.getNumeroCuenta());
@@ -34,28 +31,26 @@ public class AdminDaoImpl implements IAdminDao {
 			ps.setBigDecimal(4, c.getSaldo());
 			ps.setString(5, c.getCBU());
 			ps.setDate(6, c.getFecha());
-			
-			if(ps.executeUpdate() > 0) {
-				
+
+			if (ps.executeUpdate() > 0) {
+
 				conexion.commit();
 				inserto = true;
 			}
-			
-		}
-		catch(SQLException e){
-			
+
+		} catch (SQLException e) {
+
 			e.printStackTrace();
-			
+
 			try {
-				
+
 				conexion.rollback();
-			}
-			catch(SQLException f) {
-				
+			} catch (SQLException f) {
+
 				f.printStackTrace();
 			}
 		}
-		
+
 		return inserto;
 	}
 
@@ -78,14 +73,41 @@ public class AdminDaoImpl implements IAdminDao {
 				cuenta.setSaldo(rs.getBigDecimal("saldo"));
 				cuenta.setCBU(rs.getString("cbu"));
 				cuenta.setFecha(rs.getDate("fechacreacion"));
-				
+
 				listaCuentas.add(cuenta);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return listaCuentas; //Acá la devolvería vacía
+			return listaCuentas; // Acá la devolvería vacía
 		}
 		return listaCuentas;
+	}
+
+	@Override
+	public int eliminarCuenta(String nroCuenta) {
+
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		int resultado = -1;
+
+		try {
+			ps = conexion.prepareStatement(eliminarCuenta);
+			ps.setLong(1, Long.parseLong(nroCuenta));
+			resultado = ps.executeUpdate();
+
+			if (resultado > 0) {
+				conexion.commit();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		return resultado;
 	}
 }
