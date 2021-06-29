@@ -17,4 +17,5 @@ public interface ClienteNegocio {
 	public ArrayList<Localidad> traerLocalidades();
 	public ArrayList<Nacionalidad> traerNacionalidades();
 	public ArrayList<Provincia> traerProvincias();
+	public String validacionesClientes(Cliente c);
 }

@@ -81,4 +81,10 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		ProvinciaDao dao = new ProvinciaDaoImpl();
 		return dao.traerProvincias();
 	}
+
+	@Override
+	public String validacionesClientes(Cliente c) {
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		return cdao.validacionesClientes(c);
+	}
 }

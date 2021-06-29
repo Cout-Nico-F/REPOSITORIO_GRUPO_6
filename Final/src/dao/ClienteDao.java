@@ -12,4 +12,5 @@ public interface ClienteDao {
 	public Cliente traerCliente(int dni);
 	public int actualizarCliente(Cliente cliente);
 	public int eliminarCliente(int dni);
+	public String validacionesClientes(Cliente c);
 }
