@@ -3,6 +3,7 @@ package entidad;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Cuenta {
 
@@ -57,7 +58,7 @@ public class Cuenta {
 	public java.sql.Timestamp getFecha() {
 		return fecha;
 	}
-
+	
 	public void setFecha(java.sql.Timestamp fecha) {
 		this.fecha = fecha;
 	}
