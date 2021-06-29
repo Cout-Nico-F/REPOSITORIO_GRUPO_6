@@ -31,18 +31,13 @@ public class ServletABMLCuentas extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("firstLoad")!=null) 
-		{
-			if(request.getParameter("firstLoad").equals("1")) 
-			{
-				ArrayList<TipoDeCuenta> listaTiposCta = admNeg.listarTiposCuenta();
-				request.setAttribute("listaTiposCta", listaTiposCta);
-				request.setAttribute("firstLoad", null);
-			
-				ArrayList<Cliente> listaClientes = cliNeg.traerClientes(VariablesGlobales.cantMaxCuentasPorCliente);
-				request.setAttribute("listaClientes", listaClientes);
-			}	
-		}
+
+		ArrayList<TipoDeCuenta> listaTiposCta = admNeg.listarTiposCuenta();
+		request.setAttribute("listaTiposCta", listaTiposCta);
+	
+		ArrayList<Cliente> listaClientes = cliNeg.traerClientes(VariablesGlobales.cantMaxCuentasPorCliente);
+		request.setAttribute("listaClientes", listaClientes);
+
 		
 		//Listamos las cuentas con los clientes.
 		//Guardamos todas las cuentas
