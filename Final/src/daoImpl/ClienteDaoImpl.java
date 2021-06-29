@@ -243,4 +243,54 @@ public class ClienteDaoImpl implements ClienteDao {
 			return listaCli; //Lo envio vacio
 		}
 	}
+	@Override
+	public String validacionesClientes(Cliente c) {
+		
+		/*if(campoVacio(c).equals("No hay campos vacios")) {
+			
+			if(c.getNombre().length() > 45) {
+				return "El nombre ingresado supera los 45 caracteres";
+			}
+			if(c.getApellido().length() > 45) {
+				return "El apellido ingresado supera los 45 caracteres";
+			}
+			/*if(c.getDni()) { //tengo que hacer que vaya a la base de datos y compare
+				return "El dni ingresado ya se encuentra en la base de datos";
+			}
+			if(c.getCuil()) { //tengo que hacer que vaya a la base de datos y compare
+				
+			}*/
+			/*if(c.getFechaNacimiento())) { //Ya recibe una fecha de nacimiento valida?
+				
+			}*/
+			/*if(c.getSexo()) { //Como es un select tiene opciones ya predeterminadas
+				
+			}*//*
+			if(c.getDireccion().length() > 45) {
+				return "El campo direccion no puede superar los 45 digitos";
+			}
+			if(Integer.parseInt(c.getTelefonoFijo()) > 20) {
+				return "El telefono fijo no puede superar los 20 digitos";
+			}
+			if(c.getUsuario().getNombreUsuario().length() > 45) {
+					return "El nombre de usuario debe ser menor a 45 caracteres";
+			}
+			if(c.getUsuario().getContrasenia().length() > 45) {
+				return "La contraseña ingresada debe ser menor a 45 caracteres";
+			}
+		}*/
+		return "Cliente agregado con exito";
+	}
+	public String campoVacio(Cliente c) {
+		if(c.getNombre().isEmpty()) {
+			return "El campo nombre esta vacio";
+		}
+		if(c.getApellido().isEmpty()) {
+			return "El campo apellido esta vacio";
+		}
+		/*if(c.getDni() == ) {
+			return "El campo dni esta vacio";
+		}*/
+		return "No hay campos vacios";
+	}
 }
