@@ -32,4 +32,10 @@ public class AdminNegocioImpl implements IAdminNegocio{
 		ClienteDao dao = new ClienteDaoImpl();
 		return dao.traerCliente(dni);
 	}
+
+	@Override
+	public void eliminarCuenta(String nroCuenta) {
+		IAdminDao dao = new AdminDaoImpl();
+		dao.eliminarCuenta(nroCuenta);
+	}
 }
