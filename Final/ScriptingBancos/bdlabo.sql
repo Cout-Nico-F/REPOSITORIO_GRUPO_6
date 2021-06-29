@@ -209,7 +209,6 @@ alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovim
 
 #SET Foreign_key_checks = 1; # Lo volvemos a activar
 
-
 # -- Harcodeo algunos registros --
 insert into nacionalidades (Nombre) values ("Agentina");
 insert into provincias (Nombre) values ("Buenos Aires");
@@ -227,3 +226,5 @@ insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,current_date());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813725,14203944,2,10000,124124124,current_date());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813726,null,1,10000,124124125,current_date());

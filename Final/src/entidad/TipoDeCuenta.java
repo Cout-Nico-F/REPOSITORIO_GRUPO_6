@@ -1,15 +1,21 @@
 package entidad;
 
 public class TipoDeCuenta {
-	private int idTipoCuenta;
+	private short idTipoCuenta;
 	private String descripcion;
 	
+	public TipoDeCuenta() {};
 	
-	
-	public int getIdTipoCuenta() {
+	public TipoDeCuenta(short idTipoCuenta, String descripcion) {
+		super();
+		this.idTipoCuenta = idTipoCuenta;
+		this.descripcion = descripcion;
+	}
+
+	public short getIdTipoCuenta() {
 		return idTipoCuenta;
 	}
-	public void setIdTipoCuenta(int idTipoCuenta) {
+	public void setIdTipoCuenta(short idTipoCuenta) {
 		this.idTipoCuenta = idTipoCuenta;
 	}
 	public String getDescripcion() {

@@ -27,11 +27,10 @@ public class AdminDaoImpl implements IAdminDao {
 		boolean inserto = false;
 		
 		try {
-			
 			ps = conexion.prepareStatement(insert);
 			ps.setString(1, c.getNumeroCuenta());
 			ps.setInt(2, c.getDNI());
-			ps.setShort(3, c.getIdTipodeCuenta());
+			ps.setShort(3, c.getTipoDeCuenta().getIdTipoCuenta());
 			ps.setBigDecimal(4, c.getSaldo());
 			ps.setString(5, c.getCBU());
 			ps.setDate(6, c.getFecha());
@@ -60,33 +59,6 @@ public class AdminDaoImpl implements IAdminDao {
 		return inserto;
 	}
 
-
-	@Override
-	public ArrayList<TipoDeCuenta> listarTiposCuentas() {
-		ResultSet rs;
-		PreparedStatement ps;
-		ArrayList<TipoDeCuenta> ListaTipos = new ArrayList<>();
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		TipoDeCuenta tipoDeCuenta = new TipoDeCuenta();
-		
-		try {
-			ps = conexion.prepareStatement(readTiposCuentas);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				tipoDeCuenta.setDescripcion(rs.getString("descripcion"));
-				tipoDeCuenta.setIdTipoCuenta(rs.getShort("idTipoCuenta"));
-				ListaTipos.add(tipoDeCuenta);
-			}
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-			return ListaTipos;
-		}
-		
-		return ListaTipos;
-	}
-
-
 	@Override
 	public ArrayList<Cuenta> listarCuentas() {
 
@@ -94,6 +66,7 @@ public class AdminDaoImpl implements IAdminDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs;
 		ArrayList<Cuenta> listaCuentas = new ArrayList<>();
+		TipoDeCuentaDaoImpl daoTipoCuentas = new TipoDeCuentaDaoImpl();
 		try {
 			ps = conexion.prepareStatement(listarCuentas);
 			rs = ps.executeQuery();
@@ -101,21 +74,18 @@ public class AdminDaoImpl implements IAdminDao {
 				Cuenta cuenta = new Cuenta();
 				cuenta.setNumeroCuenta(rs.getString("numerocuenta"));
 				cuenta.setDNI(rs.getInt("dni"));
-				cuenta.setIdTipodeCuenta(rs.getShort("idtipocuenta"));
+				cuenta.setTipoDeCuenta(daoTipoCuentas.buscarTipoDeCuenta(rs.getShort("idtipocuenta")));
 				cuenta.setSaldo(rs.getBigDecimal("saldo"));
 				cuenta.setCBU(rs.getString("cbu"));
 				cuenta.setFecha(rs.getDate("fechacreacion"));
 				
 				listaCuentas.add(cuenta);
-				
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return listaCuentas; //Acá la devolvería vacía
 		}
-		
 		return listaCuentas;
-		
 	}
 }

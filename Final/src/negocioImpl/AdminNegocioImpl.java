@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import dao.ClienteDao;
 import dao.IAdminDao;
+import dao.ITipoDeCuentaDao;
 import daoImpl.AdminDaoImpl;
 import daoImpl.ClienteDaoImpl;
+import daoImpl.TipoDeCuentaDaoImpl;
 import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;
@@ -15,7 +17,7 @@ public class AdminNegocioImpl implements IAdminNegocio{
 
 	@Override
 	public ArrayList<TipoDeCuenta> listarTiposCuenta() {
-		IAdminDao dao = new AdminDaoImpl();
+		ITipoDeCuentaDao dao = new TipoDeCuentaDaoImpl();
 		return dao.listarTiposCuentas();
 	}
 

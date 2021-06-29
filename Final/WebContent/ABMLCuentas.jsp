@@ -47,7 +47,7 @@
 										for (Cliente cli : listaCli) {
 											String aux = cli.getNombre() + " " + cli.getApellido() + " - " + String.valueOf(cli.getDni());
 							%>
-							<option>
+							<option value="<%=cli.getDni()%>">
 								<%=aux%>
 							</option>
 							<%
@@ -71,7 +71,7 @@
 										ArrayList<TipoDeCuenta> listaTipos = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTiposCta");
 										for (TipoDeCuenta tipo : listaTipos) {
 								%>
-								<option>
+								<option value="<%=tipo.getIdTipoCuenta()%>">
 									<%=tipo.getDescripcion()%>
 								</option>
 								<%
@@ -138,7 +138,7 @@
 					%>
 						<tr>
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%></td>
-							<td class="dt-body-right"><%=listaCuentas.get(i).getIdTipodeCuenta() %>  </td>
+							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%> </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
 							<td class="dt-body-center"> <%=listaCuentas.get(i).getFecha() %></td>
 							<td > <%=(listaCuentas.get(i).getDNI()==0)?"Sin asignar":listaCuentas.get(i).getDNI()%></td>
