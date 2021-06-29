@@ -8,5 +8,5 @@ public interface IAdminDao {
 
 	public boolean AgregarCuenta (Cuenta c);
 	public ArrayList<Cuenta> listarCuentas();
-	public int eliminarCuenta(String nroCuenta);
+	public int eliminarCuenta(long nroCuenta);
 }

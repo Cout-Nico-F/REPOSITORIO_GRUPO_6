@@ -34,7 +34,7 @@ public class AdminNegocioImpl implements IAdminNegocio{
 	}
 
 	@Override
-	public void eliminarCuenta(String nroCuenta) {
+	public void eliminarCuenta(long nroCuenta) {
 		IAdminDao dao = new AdminDaoImpl();
 		dao.eliminarCuenta(nroCuenta);
 	}

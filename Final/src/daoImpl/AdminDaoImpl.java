@@ -85,7 +85,7 @@ public class AdminDaoImpl implements IAdminDao {
 	}
 
 	@Override
-	public int eliminarCuenta(String nroCuenta) {
+	public int eliminarCuenta(long nroCuenta) {
 
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -93,7 +93,7 @@ public class AdminDaoImpl implements IAdminDao {
 
 		try {
 			ps = conexion.prepareStatement(eliminarCuenta);
-			ps.setLong(1, Long.parseLong(nroCuenta));
+			ps.setLong(1, nroCuenta);
 			resultado = ps.executeUpdate();
 
 			if (resultado > 0) {

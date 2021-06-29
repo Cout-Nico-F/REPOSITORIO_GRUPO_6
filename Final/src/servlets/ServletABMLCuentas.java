@@ -62,7 +62,13 @@ public class ServletABMLCuentas extends HttpServlet {
 		if (request.getParameter("btnEliminarCuenta") != null) {
 			
 			String numeroCuenta = request.getParameter("nroCuenta");
+			admNeg.eliminarCuenta(Long.parseLong(numeroCuenta));
+			
 			ArrayList<Cuenta> listaCuentas = admNeg.listarCuentas();
+			request.setAttribute("listaCuentas", listaCuentas);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");   
+			rd.forward(request, response);
 			
 		}
 	}
