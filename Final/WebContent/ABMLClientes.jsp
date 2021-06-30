@@ -437,8 +437,9 @@
             </div>
              <% } %>
           </fieldset>
-        </form>
+        </form>        
       </div>
+      <form action="Clientes" method="post">
       <div class="col px-4 py-2">
         <table id="clientes" class="table table-hover nowrap">
           <thead>
@@ -458,9 +459,10 @@
 		for(Cliente c : clientes) 
 		{
 	%>
+	
+	
 	<tr>
-	<form action="Clientes" method="post">
-		<input type="hidden" name="dni" value="<%=c.getDni()%>">
+		 <input type="hidden" name="dni" value="<%=c.getDni()%>">
 		 <td><%=c.getUsuario().getNombreUsuario() %></td>    
 	     <td><%=c.getNombre() %></td>   
 	     <td><%=c.getApellido() %></td>   
@@ -470,12 +472,14 @@
 	     <button class="btn" type="submit" name="btnModificar"><i class="bi bi-pencil-fill"></i></button>
 	     <button class="btn" type="submit" name="btnEliminar"><i class="bi bi-trash-fill"></i></button>
 	     </td>  
-	</form>
 	</tr>
+	
+	
 	<%  } %>
   </tbody>
-        </table>
+        </table>     
       </div>
+      </form>
     </div>
   </body>
 </html>
