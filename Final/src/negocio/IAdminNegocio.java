@@ -11,4 +11,8 @@ public interface IAdminNegocio {
 	public ArrayList<Cuenta> listarCuentas();
 	public Cliente buscarCliente(int dni);
 	public void eliminarCuenta(long nroCuenta);
+	public boolean validarCampoNoVacio(String campo);
+	public boolean validarCamposCuentaNoVacia(Cuenta cuenta);
+	public boolean validarDNIExistente(int dni);
+	public boolean AgregarCuenta(Cuenta cuenta);
 }

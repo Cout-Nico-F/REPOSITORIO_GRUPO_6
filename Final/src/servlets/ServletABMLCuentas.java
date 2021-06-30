@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import entidad.Cliente;
 import entidad.Cuenta;
@@ -45,7 +46,7 @@ public class ServletABMLCuentas extends HttpServlet {
 			throws ServletException, IOException {
 
 		eliminarCuenta(request);
-		
+		agregarCuenta(request);
 
 		cargarCuentas(request);
 		cargarDropdown(request);
@@ -62,6 +63,38 @@ public class ServletABMLCuentas extends HttpServlet {
 	
 	// *----------------------METODOS-------------------------*//
 
+	
+	private void agregarCuenta(HttpServletRequest request) {
+		if (request.getParameter("btnRegistrar") != null) {
+			Cuenta cuenta = new Cuenta();
+			cuenta.setCBU(request.getParameter("inputCBU"));
+			cuenta.setDNI(Integer.valueOf(request.getParameter("dniCli")));
+			cuenta.setNumeroCuenta(request.getParameter("inputNroCuenta"));
+			cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")),""));	
+			cuenta.setSaldo(VariablesGlobales.saldoInicial);
+			
+			if(admNeg.validarCamposCuentaNoVacia(cuenta)){
+				if(admNeg.validarDNIExistente(cuenta.getDNI())){
+					if(admNeg.AgregarCuenta(cuenta)) {
+						JOptionPane.showMessageDialog(null, "Cuenta agregada exitosamente!.");
+						limpiarCampos();
+					} else {
+						JOptionPane.showMessageDialog(null, "ERROR. No se pudo crear la Cuenta.");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "ERROR. El DNI ingresado no es un Cliente.");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "ERROR. Hay campos sin completar o con formato no válido.");
+			}
+		}
+	}
+	
+	
+	private void limpiarCampos() {
+		
+	}
+
 	private void eliminarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnEliminarCuenta") != null) {
 
@@ -73,6 +106,7 @@ public class ServletABMLCuentas extends HttpServlet {
 
 	private void cargarDropdown(HttpServletRequest request) {
 		ArrayList<TipoDeCuenta> listaTiposCta = admNeg.listarTiposCuenta();
+		listaTiposCta.add(0, new TipoDeCuenta((short)0,"Tipo de Cuenta"));
 		request.setAttribute("listaTiposCta", listaTiposCta);
 	}
 

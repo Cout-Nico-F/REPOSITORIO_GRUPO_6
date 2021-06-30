@@ -18,7 +18,7 @@ public class ClienteDaoImpl implements ClienteDao {
 	private static final String insertCliente = "insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico,TelefonoFijo,Celular) "
 			+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String traerClientes = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where Eliminado = false";
-	private static final String traerCliente = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where Dni = ";
+	private static final String traerCliente = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where eliminado=false and Dni = ";
 	private static final String traerClientesMaxCuentas = "Select cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, \r\n" + 
 			"cli.Direccion, cli.CorreoElectronico From clientes cli left join cuentas ctas on cli.Dni = ctas.Dni\r\n" + 
 			"group by cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, \r\n" + 
@@ -292,7 +292,5 @@ public class ClienteDaoImpl implements ClienteDao {
 			return "El campo dni esta vacio";
 		}*/
 		return "No hay campos vacios";
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

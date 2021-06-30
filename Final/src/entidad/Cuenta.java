@@ -39,7 +39,7 @@ public class Cuenta {
 		CBU = cBU;
 		DNI = dNI;
 		this.tipoDeCuenta = tipoDeCuenta;
-		saldo = BigDecimal.valueOf(10000);
+		saldo = VariablesGlobales.saldoInicial;
 		fecha = (Date)Calendar.getInstance().getTime(); 
 	}                                                                    
 	
@@ -50,7 +50,7 @@ public class Cuenta {
 		this.numeroCuenta = numeroCuenta;
 		CBU = cBU;	
 		this.tipoDeCuenta = tipoDeCuenta;
-		saldo = BigDecimal.valueOf(10000);
+		saldo = VariablesGlobales.saldoInicial;
 		fecha = (Date)Calendar.getInstance().getTime();
 	}
 

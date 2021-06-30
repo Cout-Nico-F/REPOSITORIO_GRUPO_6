@@ -37,7 +37,7 @@
 							cliente</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
-								placeholder="Ingrese el DNI" id="dniCli" list="listaClientes">
+								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes">
 							<datalist id="listaClientes"> <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
 							<%
 								ArrayList<Cliente> listaCli = null;
@@ -65,7 +65,7 @@
 						<label for="tipo" class="col-sm-3 col-form-label">Tipo de
 							cuenta</label>
 						<div class="col-sm-9">
-							<select class="form-control" id="tipo">
+							<select class="form-control" id="tipo" name="DropdownTipoCuenta">
 								<%
 									if (request.getAttribute("listaTiposCta") != null) {
 										ArrayList<TipoDeCuenta> listaTipos = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTiposCta");
@@ -85,14 +85,14 @@
 						<label for="numero" class="col-sm-3 col-form-label">Número
 							de cuenta</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control" id="numero"
+							<input type="number" class="form-control" id="numero" name="inputNroCuenta"
 								placeholder="Ingrese el Número de cuenta">
 						</div>
 					</div>
 					<div class="form-group row my-2">
 						<label for="cbu" class="col-sm-3 col-form-label">CBU</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control" id="cbu"
+							<input type="number" class="form-control" name="inputCBU" id="cbu"
 								placeholder="Ingrese el CBU">
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 						</div>
 					</div>
 					<div class="mt-3">
-						<button type="submit" class="btn btn-primary">Registrar</button>
+						<button type="submit" name="btnRegistrar" class="btn btn-primary">Registrar</button>
 						<button type="submit" class="btn btn-secondary">Limpiar</button>
 					</div>
 				</fieldset>
