@@ -54,18 +54,20 @@ public class servletClientes extends HttpServlet {
 			u.setContrasenia(request.getParameter("contrasena"));
 			u.setEsAdmin("Administrador".equals(request.getParameter("tipo")));
 			c.setUsuario(u);
+			
+			
 			String mensaje = cNeg.validacionesClientes(c);
 			
 			if(mensaje.equals("Cliente agregado con exito")) {
 				cNeg.insertCliente(c); //Ingresas el usuario
-				request.setAttribute("mensajeModal", "Cliente agregado con exito");
+				request.setAttribute("tipoMensajeAlta","success");
+				request.setAttribute("mensajeAlert", "Cliente agregado con exito");
 			}
 			else {
-				//No hago nada y seteo el valor mensaje en un request   
-				request.setAttribute("mensajeModal",mensaje);
+				request.setAttribute("tipoMensajeAlta", "danger");
+				request.setAttribute("mensajeAlert",mensaje);
 			}
 		}
-		
 		
 		if(request.getParameter("btnActualizar") != null) {
 			Cliente c = new Cliente();

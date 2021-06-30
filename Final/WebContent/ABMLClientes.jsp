@@ -46,23 +46,12 @@
     </script>
   </head>
   <body>
-    <div class="row">
-   		<div class="modal" id="ventana-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Informacion</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><%=request.getAttribute("mensajeModal") %></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+  <div class="row">
+    <% if(request.getAttribute("tipoMensajeAlta") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeAlta")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeAlert") %></strong>
+		</div>
+		<% session.removeAttribute("mensaje");} %>
       <div class="col  px-4 py-2">
         <form method="get" action="Clientes">
           <fieldset>
@@ -480,6 +469,6 @@
         </table>     
       </div>
       </form>
-    </div>
+     </div>
   </body>
 </html>
