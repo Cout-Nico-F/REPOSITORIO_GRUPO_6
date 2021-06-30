@@ -90,12 +90,29 @@ public class servletClientes extends HttpServlet {
 			u.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
 			u.setContrasenia(request.getParameter("contrasena"));
 			c.setUsuario(u);
-			cNeg.actualizarCliente(c);
+			
+			String mensaje = cNeg.validacionesClientes(c);
+			
+			if(mensaje.equals("Cliente agregado con exito")) {
+				cNeg.actualizarCliente(c); 
+				request.setAttribute("tipoMensajeAlta","success");
+				request.setAttribute("mensajeAlert", "Cliente agregado con exito");
+			}
+			else {
+				request.setAttribute("tipoMensajeAlta", "danger");
+				request.setAttribute("mensajeAlert",mensaje);
+			}
 		}
+		if(request.getParameter("btnOk") != null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
+			rd.forward(request,response);
+		}
+		
 		request.setAttribute("clientes", cNeg.traerClientes());
 		request.setAttribute("nacionalidades", cNeg.traerNacionalidades());
 		request.setAttribute("provincias", cNeg.traerProvincias());
-		request.setAttribute("localidades", cNeg.traerLocalidades());		
+		request.setAttribute("localidades", cNeg.traerLocalidades());
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
 		rd.forward(request,response);
 	}
@@ -114,12 +131,15 @@ public class servletClientes extends HttpServlet {
 		if(request.getParameter("btnEliminar") != null) {
 			cNeg.eliminarCliente(dni);
 		}
+		
 		request.setAttribute("clientes", cNeg.traerClientes());
 		request.setAttribute("nacionalidades", cNeg.traerNacionalidades());
 		request.setAttribute("provincias", cNeg.traerProvincias());
 		request.setAttribute("localidades", cNeg.traerLocalidades());
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
 		rd.forward(request,response);
+		
 	}
 	
 	private Date getDate(String dateString) {
