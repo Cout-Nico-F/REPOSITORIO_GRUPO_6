@@ -272,7 +272,7 @@ public class ClienteDaoImpl implements ClienteDao {
 					return "El nombre de usuario debe ser menor a 45 caracteres";
 			}
 			if(c.getUsuario().getContrasenia().length() > 45) {
-				return "La contrase\F1a ingresada debe ser menor a 45 caracteres";
+				return "La contraseña ingresada debe ser menor a 45 caracteres";
 			}
 		}
 		return "Cliente agregado con exito";
@@ -303,7 +303,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			return "El campo nombre usuario esta vacio";
 		}
 		if(c.getUsuario().getContrasenia().isEmpty()) {
-			return "El campo contrase\F1a esta vacia";
+			return "El campo contraseña esta vacio";
 		}
 		return "No hay campos vacios";
 	}

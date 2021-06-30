@@ -36,8 +36,8 @@
 						<label for="dni" class="col-sm-3 col-form-label">DNI del
 							cliente</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control"
-								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes">
+							<input type="text" class="form-control required"
+								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes" required>
 							<datalist id="listaClientes"> <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
 							<%
 								ArrayList<Cliente> listaCli = null;
@@ -76,7 +76,7 @@
 								</option>
 								<%
 									}
-									}
+								}
 								%>
 							</select>
 						</div>
@@ -85,22 +85,22 @@
 						<label for="numero" class="col-sm-3 col-form-label">Número
 							de cuenta</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control" id="numero" name="inputNroCuenta"
-								placeholder="Ingrese el Número de cuenta">
+							<input type="number" class="form-control required" id="numero" name="inputNroCuenta"
+								placeholder="Ingrese el Número de cuenta" required>
 						</div>
 					</div>
 					<div class="form-group row my-2">
 						<label for="cbu" class="col-sm-3 col-form-label">CBU</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control" name="inputCBU" id="cbu"
-								placeholder="Ingrese el CBU">
+							<input type="number" class="form-control required" name="inputCBU" id="cbu"
+								placeholder="Ingrese el CBU" required>
 						</div>
 					</div>
 					<div class="form-group row my-2">
 						<label for="saldo" class="col-sm-3 col-form-label">Saldo</label>
 						<div class="col-sm-9">
 							<input type="money" readonly value="$10,000.00"
-								class="form-control" id="saldo">
+								class="form-control required" id="saldo" required>
 						</div>
 					</div>
 					<div class="mt-3">
@@ -109,6 +109,28 @@
 					</div>
 				</fieldset>
 			</form>
+			
+			<% if(request.getParameter("msjModal") != null){
+	
+				%>
+		
+				<div class="modal" tabindex="-1">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title"> <%=request.getAttribute("msjTituloModal") %> </h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        <p><%=request.getAttribute("msjModal") %></p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+		<%} %>
 		</div>
 		<form action="ServletABMLCuentas" method="post">
 		<div class="col px-4 py-2">

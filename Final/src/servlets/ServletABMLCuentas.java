@@ -70,22 +70,27 @@ public class ServletABMLCuentas extends HttpServlet {
 			cuenta.setCBU(request.getParameter("inputCBU"));
 			cuenta.setDNI(Integer.valueOf(request.getParameter("dniCli")));
 			cuenta.setNumeroCuenta(request.getParameter("inputNroCuenta"));
-			cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")),""));	
+			System.out.println(request.getParameter("DropdownTipoCuenta"));
+			cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")),"."));	
 			cuenta.setSaldo(VariablesGlobales.saldoInicial);
 			
 			if(admNeg.validarCamposCuentaNoVacia(cuenta)){
 				if(admNeg.validarDNIExistente(cuenta.getDNI())){
 					if(admNeg.AgregarCuenta(cuenta)) {
-						JOptionPane.showMessageDialog(null, "Cuenta agregada exitosamente!.");
+						request.setAttribute("msjTituloModal", "Carga exitosa");
+						request.setAttribute("msjModal", "La cuenta se ha agregado exitosamente.");
 						limpiarCampos();
 					} else {
-						JOptionPane.showMessageDialog(null, "ERROR. No se pudo crear la Cuenta.");
+						request.setAttribute("msjTituloModal", "ERROR");
+						request.setAttribute("msjModal", "No se pudo crear la Cuenta en base de datos.");
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "ERROR. El DNI ingresado no es un Cliente.");
+					request.setAttribute("msjTituloModal", "ERROR");
+					request.setAttribute("msjModal", "El DNI ingresado no corresponde a un Cliente");					JOptionPane.showMessageDialog(null, "ERROR. El DNI ingresado no es un Cliente.");
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "ERROR. Hay campos sin completar o con formato no válido.");
+				request.setAttribute("msjTituloModal", "ADVERTENCIA");
+				request.setAttribute("msjModal", "Hay campos sin completar!!.");				JOptionPane.showMessageDialog(null, "ERROR. Hay campos sin completar o con formato no válido.");
 			}
 		}
 	}
