@@ -107,30 +107,33 @@
 						<button type="submit" name="btnRegistrar" class="btn btn-primary">Registrar</button>
 						<button type="submit" class="btn btn-secondary">Limpiar</button>
 					</div>
+					
+<%-- 					<% if(request.getParameter("msjModal") != null){ --%>
+	
+<%-- 				%> --%>
+				
+<!-- 				<div class="modal" tabindex="-1"> -->
+<!-- 				  <div class="modal-dialog"> -->
+<!-- 				    <div class="modal-content"> -->
+<!-- 				      <div class="modal-header"> -->
+<%-- 				        <h5 class="modal-title"> <%=request.getAttribute("msjTituloModal") %> </h5> --%>
+<!-- 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+<!-- 				      </div> -->
+<!-- 				      <div class="modal-body"> -->
+<%-- 				        <p><%=request.getAttribute("msjModal") %></p> --%>
+<!-- 				      </div> -->
+<!-- 				      <div class="modal-footer"> -->
+<!-- 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+<!-- 				      </div> -->
+<!-- 				    </div> -->
+<!-- 				  </div> -->
+<!-- 				</div> -->
+<%-- 			<%} %> --%>
+					
 				</fieldset>
 			</form>
 			
-			<% if(request.getParameter("msjModal") != null){
-	
-				%>
-		
-				<div class="modal" tabindex="-1">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title"> <%=request.getAttribute("msjTituloModal") %> </h5>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body">
-				        <p><%=request.getAttribute("msjModal") %></p>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-		<%} %>
+			
 		</div>
 		<form action="ServletABMLCuentas" method="post">
 		<div class="col px-4 py-2">
