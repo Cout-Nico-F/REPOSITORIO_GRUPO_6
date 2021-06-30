@@ -19,58 +19,76 @@ import negocio.IAdminNegocio;
 import negocioImpl.AdminNegocioImpl;
 import negocioImpl.ClienteNegocioImpl;
 
-
 @WebServlet("/ServletABMLCuentas")
 public class ServletABMLCuentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private IAdminNegocio admNeg = new AdminNegocioImpl();
-    private ClienteNegocio cliNeg = new ClienteNegocioImpl(); 
+	private IAdminNegocio admNeg = new AdminNegocioImpl();
+	private ClienteNegocio cliNeg = new ClienteNegocioImpl();
+
+	public ServletABMLCuentas() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		
+		
+		cargarCuentas(request);
+		cargarDropdown(request);
+		cargarClientesDatalist(request);
+		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
+		rd.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		eliminarCuenta(request);
+		
+
+		cargarCuentas(request);
+		cargarDropdown(request);
+		cargarClientesDatalist(request);
+		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
+		rd.forward(request, response);
+
+	}
+
 	
-    public ServletABMLCuentas() {
-        super();
-    }
+	
+	
+	
+	
+	// *----------------------METODOS-------------------------*//
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void eliminarCuenta(HttpServletRequest request) {
+		if (request.getParameter("btnEliminarCuenta") != null) {
 
+			String numeroCuenta = request.getParameter("nroCuenta");
+			admNeg.eliminarCuenta(Long.parseLong(numeroCuenta));
+			System.out.println(numeroCuenta);
+		}
+	}
+
+	private void cargarDropdown(HttpServletRequest request) {
 		ArrayList<TipoDeCuenta> listaTiposCta = admNeg.listarTiposCuenta();
 		request.setAttribute("listaTiposCta", listaTiposCta);
-	
+	}
+
+	private void cargarClientesDatalist(HttpServletRequest request) {
 		ArrayList<Cliente> listaClientes = cliNeg.traerClientes(VariablesGlobales.cantMaxCuentasPorCliente);
 		request.setAttribute("listaClientes", listaClientes);
+	}
 
-		
-		//Listamos las cuentas con los clientes.
-		//Guardamos todas las cuentas
+	private void cargarCuentas(HttpServletRequest request) {
 		ArrayList<Cuenta> listaCuentas = admNeg.listarCuentas();
 		request.setAttribute("listaCuentas", listaCuentas);
-		
-		
-		//Guardamos los clientes
+
 		ArrayList<Cliente> listaClientesDeCuentas = new ArrayList<Cliente>();
 		for (Cuenta cuenta : listaCuentas) {
 			listaClientesDeCuentas.add(admNeg.buscarCliente(cuenta.getDNI()));
 		}
 		request.setAttribute("listaClientesDeCuentas", listaClientesDeCuentas);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");   
-		rd.forward(request, response);
 	}
-	
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if (request.getParameter("btnEliminarCuenta") != null) {
-			
-			String numeroCuenta = request.getParameter("nroCuenta");
-			admNeg.eliminarCuenta(Long.parseLong(numeroCuenta));
-			
-			ArrayList<Cuenta> listaCuentas = admNeg.listarCuentas();
-			request.setAttribute("listaCuentas", listaCuentas);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");   
-			rd.forward(request, response);
-			
-		}
-	}
-
 }
