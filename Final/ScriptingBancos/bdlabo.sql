@@ -228,3 +228,8 @@ insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,current_date());
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813725,14203944,2,10000,124124124,current_date());
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813726,null,1,10000,124124125,current_date());
+
+insert into tiposmovimientos (descripcion) values ("Alta de cuenta");
+insert into tiposmovimientos (descripcion) values ("Alta de prestamo");
+insert into tiposmovimientos (descripcion) values ("Pago de prestamo");
+insert into tiposmovimientos (descripcion) values ("Transferencia");
