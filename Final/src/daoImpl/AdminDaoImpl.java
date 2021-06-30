@@ -13,7 +13,7 @@ import entidad.TipoDeCuenta;
 public class AdminDaoImpl implements IAdminDao {
 
 	private static final String insert = "insert into cuentas (NumeroCuenta,Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?,?)";
-	private static final String listarCuentas = "select * from cuentas";
+	private static final String listarCuentas = "select * from cuentas where eliminado = false";
 	private static final String eliminarCuenta = "update cuentas set eliminado = true where numerocuenta = ?";
 	// private static final String readall = "SELECT * FROM cuentas";
 

@@ -32,10 +32,11 @@ public class ServletABMLCuentas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
+		
+		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
-		cargarCuentas(request);
-
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
@@ -43,11 +44,12 @@ public class ServletABMLCuentas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		eliminarCuenta(request);
+		
+
+		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
-		eliminarCuenta(request);
-		cargarCuentas(request);
-
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
 
