@@ -13,6 +13,7 @@ import daoImpl.TipoDeCuentaDaoImpl;
 import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;
+import entidad.VariablesGlobales;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
 
@@ -64,11 +65,15 @@ public class AdminNegocioImpl implements IAdminNegocio{
 	@Override
 	public boolean validarDNIExistente(int dni) {
 		ClienteNegocio cliNeg = new ClienteNegocioImpl();
-		Cliente cli = cliNeg.traerCliente(dni);
-		if(cli.getDni()==0) {
-			return false;
+		ArrayList<Cliente> listaClientes = cliNeg.traerClientes(VariablesGlobales.cantMaxCuentasPorCliente);
+		int index;
+		for(index=0; index<listaClientes.size();index++) {
+			if(listaClientes.get(index).getDni()==dni)
+			{
+				return true;
+			}
 		}
-		return true;
+		return false;
 	}
 
 	@Override

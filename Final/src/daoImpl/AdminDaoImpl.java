@@ -26,7 +26,11 @@ public class AdminDaoImpl implements IAdminDao {
 		try {
 			ps = conexion.prepareStatement(insert);
 			ps.setString(1, c.getNumeroCuenta());
-			ps.setInt(2, c.getDNI());
+			if(c.getDNI()!=0) {
+				ps.setInt(2, c.getDNI());				
+			} else {
+				ps.setNull(2, java.sql.Types.NULL);
+			}
 			ps.setShort(3, c.getTipoDeCuenta().getIdTipoCuenta());
 			ps.setBigDecimal(4, c.getSaldo());
 			ps.setString(5, c.getCBU());

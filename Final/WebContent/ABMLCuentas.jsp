@@ -37,7 +37,7 @@
 							cliente</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control required"
-								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes" required>
+								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes">
 							<datalist id="listaClientes"> <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
 							<%
 								ArrayList<Cliente> listaCli = null;
