@@ -26,6 +26,8 @@ public class ClienteDaoImpl implements ClienteDao {
 			"having count(*) <=2";
 	private static final String actualizarCliente = "UPDATE clientes SET IdNacionalidad = ? , IdLocalidad = ? , Nombre = ? , Apellido = ? , Sexo = ? , FechaNacimiento = ? , Direccion = ? , CorreoElectronico = ? , TelefonoFijo = ? , Celular = ?, Direccion = ? WHERE Dni = ?";
 	private static final String eliminarCliente = "UPDATE clientes SET Eliminado = true WHERE Dni = ?";
+	private static final String CompararDni = "Select dni From clientes";
+	private static final String CompararCuil = "Select cuil From clientes";
 	@Override
 	public Cliente insertCliente(Cliente c) {
 		PreparedStatement statement;
@@ -246,7 +248,7 @@ public class ClienteDaoImpl implements ClienteDao {
 	@Override
 	public String validacionesClientes(Cliente c) {
 		
-		/*if(campoVacio(c).equals("No hay campos vacios")) {
+		if(campoVacio(c).equals("No hay campos vacios")) {
 			
 			if(c.getNombre().length() > 45) {
 				return "El nombre ingresado supera los 45 caracteres";
@@ -254,18 +256,12 @@ public class ClienteDaoImpl implements ClienteDao {
 			if(c.getApellido().length() > 45) {
 				return "El apellido ingresado supera los 45 caracteres";
 			}
-			/*if(c.getDni()) { //tengo que hacer que vaya a la base de datos y compare
+			if(buscarDni(c.getDni())) { //tengo que hacer que vaya a la base de datos y compare
 				return "El dni ingresado ya se encuentra en la base de datos";
 			}
-			if(c.getCuil()) { //tengo que hacer que vaya a la base de datos y compare
-				
-			}*/
-			/*if(c.getFechaNacimiento())) { //Ya recibe una fecha de nacimiento valida?
-				
-			}*/
-			/*if(c.getSexo()) { //Como es un select tiene opciones ya predeterminadas
-				
-			}*//*
+			if(buscarCuil(c.getCuil())) { //tengo que hacer que vaya a la base de datos y compare
+				return "El cuil ingresado ya se encuentra en la base de datos";
+			}
 			if(c.getDireccion().length() > 45) {
 				return "El campo direccion no puede superar los 45 digitos";
 			}
@@ -276,9 +272,9 @@ public class ClienteDaoImpl implements ClienteDao {
 					return "El nombre de usuario debe ser menor a 45 caracteres";
 			}
 			if(c.getUsuario().getContrasenia().length() > 45) {
-				return "La contraseï¿½a ingresada debe ser menor a 45 caracteres";
+				return "La contraseña ingresada debe ser menor a 45 caracteres";
 			}
-		}*/
+		}
 		return "Cliente agregado con exito";
 	}
 	public String campoVacio(Cliente c) {
@@ -288,11 +284,63 @@ public class ClienteDaoImpl implements ClienteDao {
 		if(c.getApellido().isEmpty()) {
 			return "El campo apellido esta vacio";
 		}
-		/*if(c.getDni() == ) {
+		if(String.valueOf(c.getDni()).isEmpty()) {
 			return "El campo dni esta vacio";
-		}*/
+		}
+		if(String.valueOf(c.getCuil()).isEmpty()) {
+			return "El campo cuil esta vacio";
+		}
+		if(String.valueOf(c.getCelular()).isEmpty()) {
+			return "El campo celular esta vacio";
+		}
+		if(c.getDireccion().isEmpty()) {
+			return "El campo direccion esta vacio";
+		}
+		if(c.getCorreoElectronico().isEmpty()) {
+			return "El campo correo electronico esta vacio";
+		}
+		if(c.getUsuario().getNombreUsuario().isEmpty()) {
+			return "El campo nombre usuario esta vacio";
+		}
+		if(c.getUsuario().getContrasenia().isEmpty()) {
+			return "El campo contraseña esta vacia";
+		}
 		return "No hay campos vacios";
-		// TODO Auto-generated method stub
-		return null;
+	}
+	public boolean buscarDni(int dni) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(CompararDni);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				if(dni == rs.getInt("Dni")) {
+					return true;
+				}
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public boolean buscarCuil(String cuil) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(CompararCuil);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				if(cuil == rs.getString("cuil")) {
+					return true;
+				}
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
