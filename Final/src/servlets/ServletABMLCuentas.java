@@ -50,13 +50,29 @@ public class ServletABMLCuentas extends HttpServlet {
 		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
+		modificarCuenta(request);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
-
 	}
+
+
+	
+	
 
 	// *----------------------METODOS-------------------------*//
 
+	
+	private void modificarCuenta(HttpServletRequest request) {
+		if (request.getParameter("btnModificarCuenta") != null) {
+			String numeroCuenta = request.getParameter("nroCuenta");
+			//admNeg.
+		}
+		
+	}
+	
+	
+	
 	private void agregarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnRegistrar") != null) {
 			Cuenta cuenta = devolverCuentaCargada(request);
@@ -108,7 +124,7 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void limpiarCampos() {
-
+		
 	}
 
 	private void eliminarCuenta(HttpServletRequest request) {

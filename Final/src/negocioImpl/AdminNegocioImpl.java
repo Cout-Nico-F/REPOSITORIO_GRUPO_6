@@ -102,6 +102,16 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return false;
 	}
 
+	@Override
+	public boolean asignarCuenta(long nroCuenta, int dni, String nombre, String apellido) {
+		IAdminDao dao = new AdminDaoImpl();
+		if(validarCuentaExistente(nroCuenta) &&	validarDNIExistente(dni)) {
+			return dao.asignacionCuenta(nroCuenta, nombre, apellido, dni);
+		}
+		return false;
+	}
+
+	
 	/*
 	 * TODO: falta crear validadores de: - El número de cuenta no esté repetido. -
 	 * El CBU no este repetido. - El IDTipoCuenta exista en la tabla TiposDeCuenta.

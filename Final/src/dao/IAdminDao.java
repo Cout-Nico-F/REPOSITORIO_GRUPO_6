@@ -15,5 +15,5 @@ public interface IAdminDao {
 	public TipoDeMovimiento traerTipoDeMovimiento(short idTipoMovimiento);
 	public TipoDeMovimiento traerTipoDeMovimiento(String descripcionTipoMov);
 	public boolean actualizarSaldoAltaDeCuenta(int NumeroDeCuenta,BigDecimal saldo);
-	
+	public boolean asignacionCuenta(long nroCuenta, String nombre, String apellido, int dni);
 }

@@ -174,9 +174,19 @@
 							<td class="dt-body-center"><%=(listaClientes.get(i).getApellido()==null)?"Sin asignar":listaClientes.get(i).getApellido()%></td>
 							<td class="dt-body-center"><%=(listaClientes.get(i).getNombre()==null)?"Sin asignar":listaClientes.get(i).getNombre()%></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getSaldo()%></td>
-							<td><div class="text-center"><button type="submit" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button>
-							<button type="submit" name="btnEliminarCuenta" value="eliminarCuenta" class="btn"><i class="bi bi-trash-fill"></i></button></div>
-							</td>
+							<%if(listaCuentas.get(i).getDNI()!=0){
+								%>
+								<td><div class="text-center"><button type="submit" name="btnEliminarCuenta" value="eliminarCuenta" class="btn"><i class="bi bi-trash-fill"></i></button></div>
+								</td>
+								<%
+							} else{
+								%>
+								<td><div class="text-center"><button type="submit" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button>
+								<button type="submit" name="btnEliminarCuenta" value="eliminarCuenta" class="btn"><i class="bi bi-trash-fill"></i></button></div>
+								</td>
+								<%
+							}
+							%>
 						</form>
 						</tr>
 					<%} 				

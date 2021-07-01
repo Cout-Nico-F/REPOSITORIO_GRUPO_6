@@ -28,8 +28,15 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe)"
 			+ " values (?, ?, ?, ?, ?, ?, ?)";
 	private static final String actualizarSaldoInicial ="update cuentas set saldo = ? where NumeroCuenta = ?";
-	// private static final String readall = "SELECT * FROM cuentas";
+	private static final String asignarCuenta = "update cuentas set (nombre, apellido, dni) values (?,?,?) where numerocuenta = ?";
 
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public boolean AgregarCuenta(Cuenta c) {
 		PreparedStatement ps;
@@ -169,10 +176,6 @@ public class AdminDaoImpl implements IAdminDao {
 	}
 	
 	
-	
-	
-	
-	
 
 	@Override
 	public TipoDeMovimiento traerTipoDeMovimiento(short idTipoMov) {
@@ -249,7 +252,6 @@ public class AdminDaoImpl implements IAdminDao {
 			e.printStackTrace();
 
 			try {
-
 				conexion.rollback();
 			} catch (SQLException f) {
 
@@ -278,6 +280,35 @@ public class AdminDaoImpl implements IAdminDao {
 			e.printStackTrace();
 		}
 		return existe;
+	}
+
+	@Override
+	public boolean asignacionCuenta(long nroCuenta, String nombre, String apellido, int dni) {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean asigno=false;
+				
+		try {
+			ps = conexion.prepareStatement(asignarCuenta);
+			ps.setString(1, nombre);
+			ps.setString(2, apellido);
+			ps.setInt(3, dni);
+			
+			if(ps.executeUpdate()>0) {
+				conexion.commit();
+				asigno=true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException f) {
+				f.printStackTrace();
+			}
+		}
+		
+		return asigno;
 	}
 	
 	
