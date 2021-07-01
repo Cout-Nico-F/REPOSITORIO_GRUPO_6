@@ -93,6 +93,7 @@ public class servletClientes extends HttpServlet {
 			n.setIdNacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
 			c.setNacionalidad(n);
 			Usuario u = new Usuario();
+			u.setNombreUsuario(request.getParameter("usuario"));
 			u.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
 			u.setContrasenia(request.getParameter("contrasena"));
 			c.setUsuario(u);
