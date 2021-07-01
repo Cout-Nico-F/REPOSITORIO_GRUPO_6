@@ -83,8 +83,14 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 	}
 
 	@Override
-	public String validacionesClientes(Cliente c) {
+	public String validacionesClientesAlta(Cliente c) {
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
-		return cdao.validacionesClientes(c);
+		return cdao.validacionesClientesAlta(c);
+	}
+
+	@Override
+	public String validacionesClientesModificar(Cliente c) {
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		return cdao.validacionesClientesModificar(c);
 	}
 }
