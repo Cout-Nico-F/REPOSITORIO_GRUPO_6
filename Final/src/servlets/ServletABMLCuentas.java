@@ -86,9 +86,7 @@ public class ServletABMLCuentas extends HttpServlet {
 			cuenta.setDNI(Integer.valueOf(request.getParameter("dniCli")));
 		cuenta.setNumeroCuenta(request.getParameter("inputNroCuenta"));
 		cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")), "."));
-		String sSaldo = String.valueOf(request.getParameter("inputSaldo"));
-		BigDecimal big = new BigDecimal(sSaldo);
-		cuenta.setSaldo(big);
+		cuenta.setSaldo(new BigDecimal(request.getParameter("inputSaldo")));		
 		return cuenta;
 	}
 

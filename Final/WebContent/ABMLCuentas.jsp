@@ -37,7 +37,8 @@
 							cliente</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control required"
-								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes">
+								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes" onKeyPress="if(this.value.length>8) return false;"
+								 maxlength="9">
 							<datalist id="listaClientes"> <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
 							<%
 								ArrayList<Cliente> listaCli = null;
@@ -86,14 +87,16 @@
 							de cuenta</label>
 						<div class="col-sm-9">
 							<input type="number" class="form-control required" id="numero" name="inputNroCuenta"
-								placeholder="Ingrese el Número de cuenta" required>
+								placeholder="Ingrese el Número de cuenta" required onKeyPress="if(this.value.length>8) return false;"
+								 maxlength="9">
 						</div>
 					</div>
 					<div class="form-group row my-2">
 						<label for="cbu" class="col-sm-3 col-form-label">CBU</label>
 						<div class="col-sm-9">
 							<input type="number" class="form-control required" name="inputCBU" id="cbu"
-								placeholder="Ingrese el CBU" required>
+								placeholder="Ingrese el CBU" required onKeyPress="if(this.value.length>21) return false;"
+								 maxlength="9">
 						</div>
 					</div>
 					<div class="form-group row my-2">

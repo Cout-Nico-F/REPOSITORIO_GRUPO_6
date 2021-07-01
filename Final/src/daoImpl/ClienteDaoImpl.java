@@ -19,11 +19,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String traerClientes = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where Eliminado = false";
 	private static final String traerCliente = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where eliminado=false and Dni = ";
-	private static final String traerClientesMaxCuentas = "Select cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, cli.Direccion, cli.CorreoElectronico "
-			+ "From clientes cli left join cuentas ctas on cli.Dni = ctas.Dni "
-			+ "where ctas.Eliminado=false and cli.eliminado=false "
-			+ "group by cli.Dni, cli.IdUsuario, cli.IdNacionalidad, cli.IdLocalidad, cli.Cuil, cli.Nombre, cli.Apellido, cli.Sexo, cli.FechaNacimiento, cli.Direccion, cli.CorreoElectronico "
-			+ "having count(*) <=2";
+	private static final String traerClientesMaxCuentas = "select * from clientes where (select count(*) from cuentas c where c.eliminado = false and Clientes.dni=c.dni)<=2 and clientes.eliminado = false";
 	private static final String actualizarCliente = "UPDATE clientes SET IdNacionalidad = ? , IdLocalidad = ? , Nombre = ? , Apellido = ? , Sexo = ? , FechaNacimiento = ? , Direccion = ? , CorreoElectronico = ? , TelefonoFijo = ? , Celular = ?, Direccion = ? WHERE Dni = ?";
 	private static final String eliminarCliente = "UPDATE clientes SET Eliminado = true WHERE Dni = ?";
 	private static final String CompararDni = "Select dni From clientes";
