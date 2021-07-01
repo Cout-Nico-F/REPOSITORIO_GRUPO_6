@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.mysql.cj.protocol.Resultset;
+
 import dao.IAdminDao;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;
@@ -17,6 +19,7 @@ import entidad.TipoDeMovimiento;
 
 public class AdminDaoImpl implements IAdminDao {
 
+	private static final String existeCuenta = "select * from cuentas where numerocuenta = ?";
 	private static final String insert = "insert into cuentas (NumeroCuenta,Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?,?)";
 	private static final String listarCuentas = "select * from cuentas where eliminado = false";
 	private static final String eliminarCuenta = "update cuentas set eliminado = true where numerocuenta = ?";
@@ -255,6 +258,28 @@ public class AdminDaoImpl implements IAdminDao {
 		}
 		return modifico;
 	}
+
+	@Override
+	public boolean existe(long numeroCuenta) {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean existe = false;
+		ResultSet rs;
+		
+		try {
+			ps=conexion.prepareStatement(existeCuenta);
+			ps.setLong(1, numeroCuenta);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				existe = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return existe;
+	}
+	
 	
 }
 

@@ -8,6 +8,7 @@ import entidad.*;
 public interface IAdminDao {
 
 	public boolean AgregarCuenta (Cuenta c);
+	public boolean existe(long numeroCuenta);
 	public ArrayList<Cuenta> listarCuentas();
 	public int eliminarCuenta(long nroCuenta);
 	public boolean MovimientoAltaDeCuenta (Cuenta c);

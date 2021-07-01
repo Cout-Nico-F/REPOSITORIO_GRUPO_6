@@ -63,8 +63,13 @@ public class ServletABMLCuentas extends HttpServlet {
 			if (admNeg.validarCamposCuentaNoVacia(cuenta)) {
 				if (cuenta.getDNI() != 0) {
 					if (admNeg.validarDNIExistente(Integer.valueOf(cuenta.getDNI()))) {
+						if(!admNeg.validarCuentaExistente(Long.parseLong(cuenta.getNumeroCuenta()))){
 							agregarCuenta(request, cuenta);
 							admNeg.MovimientoDeAlta(cuenta);
+							} else {
+								request.setAttribute("msjTituloModal", "ERROR");
+								request.setAttribute("msjModal", "La Cuenta que intenta crear ya existe");
+							}
 						} else {
 							request.setAttribute("msjTituloModal", "ERROR");
 							request.setAttribute("msjModal", "El DNI ingresado no corresponde a un Cliente");
