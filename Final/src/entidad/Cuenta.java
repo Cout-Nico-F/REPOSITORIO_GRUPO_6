@@ -19,7 +19,7 @@ public class Cuenta {
 	}
 	//Constructor para registrar movimientos de saldo en cuentas
 	
-	public Cuenta(String numeroCuenta, String cBU, int dNI, TipoDeCuenta tipoDeCuenta,BigDecimal saldo,Date fecha)
+	public Cuenta(String numeroCuenta, String cBU, int dNI, TipoDeCuenta tipoDeCuenta,BigDecimal saldo,java.util.Date fecha)
 	{
 		super();
 		this.numeroCuenta = numeroCuenta;
@@ -27,8 +27,7 @@ public class Cuenta {
 		DNI = dNI;
 		this.tipoDeCuenta = tipoDeCuenta;
 		this.saldo = saldo;
-		this.fecha= fecha;
-
+		this.fecha= new Date(fecha.getTime());
 	}
 	
 	//Constructor para crear cuenta con cliente asignado
@@ -40,7 +39,7 @@ public class Cuenta {
 		DNI = dNI;
 		this.tipoDeCuenta = tipoDeCuenta;
 		saldo = VariablesGlobales.saldoInicial;
-		fecha = (Date)Calendar.getInstance().getTime(); 
+		fecha = new Date(Calendar.getInstance().getTime().getTime()); 
 	}                                                                    
 	
 	//Constructor para crear cuenta sin cliente asignado
@@ -51,15 +50,19 @@ public class Cuenta {
 		CBU = cBU;	
 		this.tipoDeCuenta = tipoDeCuenta;
 		saldo = VariablesGlobales.saldoInicial;
-		fecha = (Date)Calendar.getInstance().getTime();
+		fecha = new Date(Calendar.getInstance().getTime().getTime());
 	}
 
-	public java.sql.Date getFecha() {
+	public java.sql.Date getFechaSQL() {
 		return fecha;
 	}
 	
-	public void setFecha(java.sql.Date fecha) {
-		this.fecha = fecha;
+	public java.util.Date getFechaJava() {
+		return new java.util.Date(fecha.getTime());
+	}
+	
+	public void setFecha(java.util.Date fecha) {
+		this.fecha = new Date(fecha.getTime());
 	}
 
 	public String getNumeroCuenta() 

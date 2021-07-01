@@ -14,7 +14,11 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		IAdminDao dao = new AdminDaoImpl();
-		//dao.MovimientoAltaDeCuenta(new Cuenta("123813724","234384234",14203944,new TipoDeCuenta()));
+		if(dao.MovimientoAltaDeCuenta(new Cuenta("123813724","234384234",14203944,new TipoDeCuenta())))
+		{
+			System.out.println("Cargo correctamente");
+		} else {
+			System.out.println("No cargo :C");
+		}
 	}
-
 }

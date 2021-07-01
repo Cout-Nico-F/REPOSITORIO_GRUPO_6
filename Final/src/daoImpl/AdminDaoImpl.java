@@ -19,8 +19,8 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String insert = "insert into cuentas (NumeroCuenta,Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?,?)";
 	private static final String listarCuentas = "select * from cuentas where eliminado = false";
 	private static final String eliminarCuenta = "update cuentas set eliminado = true where numerocuenta = ?";
-	private static final String traerTipoDeMovimientoSegunID = "select * from movimientos where idtipomovimiento =";
-	private static final String traerTipoDeMovimientoSegunDescrip = "select * from movimientos where Descripcion =";
+	private static final String traerTipoDeMovimientoSegunID = "select * from tiposmovimientos where idtipomovimiento =";
+	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
 	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe)"
 			+ " values (?, ?, ?, ?, ?, ?, ?)";
 	// private static final String readall = "SELECT * FROM cuentas";
@@ -42,7 +42,7 @@ public class AdminDaoImpl implements IAdminDao {
 			ps.setShort(3, c.getTipoDeCuenta().getIdTipoCuenta());
 			ps.setBigDecimal(4, c.getSaldo());
 			ps.setString(5, c.getCBU());
-			ps.setDate(6, c.getFecha());
+			ps.setDate(6, c.getFechaSQL());
 
 			if (ps.executeUpdate() > 0) {
 
@@ -198,7 +198,7 @@ public class AdminDaoImpl implements IAdminDao {
 		TipoDeMovimiento tipoMov = new TipoDeMovimiento();
 		try {
 			
-			ps = conexion.prepareStatement(traerTipoDeMovimientoSegunDescrip + descripcionTipoMov);
+			ps = conexion.prepareStatement(traerTipoDeMovimientoSegunDescrip+descripcionTipoMov+"%'");
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				tipoMov.setIdTipoMovimiento(rs.getShort("idtipomovimiento"));

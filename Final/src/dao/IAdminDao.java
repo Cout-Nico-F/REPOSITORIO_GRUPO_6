@@ -12,5 +12,4 @@ public interface IAdminDao {
 	public boolean MovimientoAltaDeCuenta (Cuenta c);
 	public TipoDeMovimiento traerTipoDeMovimiento(short idTipoMovimiento);
 	public TipoDeMovimiento traerTipoDeMovimiento(String descripcionTipoMov);
-	
 }
