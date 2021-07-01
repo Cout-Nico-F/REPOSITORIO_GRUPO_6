@@ -99,7 +99,7 @@
 					<div class="form-group row my-2">
 						<label for="saldo" class="col-sm-3 col-form-label">Saldo</label>
 						<div class="col-sm-9">
-							<input type="money" readonly value="$10,000.00"
+							<input type="number" readonly name="inputSaldo" value="0.00"
 								class="form-control required" id="saldo" required>
 						</div>
 					</div>
@@ -166,7 +166,7 @@
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%> <input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%>  </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
-							<td class="dt-body-center"> <%=listaCuentas.get(i).getFechaJava() %></td>
+							<td class="dt-body-center"> <%=listaCuentas.get(i).getFechaSQL() %></td>
 							<td > <%=(listaCuentas.get(i).getDNI()==0)?"Sin asignar":listaCuentas.get(i).getDNI()%></td>
 							<td class="dt-body-center"><%=(listaClientes.get(i).getApellido()==null)?"Sin asignar":listaClientes.get(i).getApellido()%></td>
 							<td class="dt-body-center"><%=(listaClientes.get(i).getNombre()==null)?"Sin asignar":listaClientes.get(i).getNombre()%></td>
