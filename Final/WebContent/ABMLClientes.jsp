@@ -32,23 +32,32 @@
             },
             lengthChange: false
         } );
-    } );
+       
+       
+		
+    });
     
-    (function(){
-    	$(function(){
-    		$('#btnModal').on('click',function(){
-    			$('#ventana-modal').modal();
-    		});
-    	});
-    	
-    }());
-    
+    $( function() {
+	    $( "#dialog" ).dialog();
+	    $("#btnActualizar").click(function() {
+	    	<% if(request.getAttribute("mensajeAlert") != null){ %>
+	 		var mensaje = "<%=request.getAttribute("mensajeAlert") %>"
+	 		$('#divModal').html(mensaje)
+	 		<% } %>
+	        $("#dialog").dialog("open");
+	        return false;
+	      });
+	  });
     </script>
   </head>
   <body>
   <% if(request.getAttribute("mensajeAlert") != null){ %>
   		<%=request.getAttribute("mensajeAlert") %>
   <% } %>
+		<div id="dialog" title="Basic dialog">
+  		<p id="divModal"></p>
+  		</div>
+  		
   <div class="row">
       <div class="col  px-4 py-2">
         <form method="get" action="Clientes">
@@ -274,7 +283,7 @@
             <div class="form-group row my-2">
               <label for="usuario" class="col-sm-3 col-form-label">Usuario</label>
               <div class="col-sm-9">      
-                <input type="text" class="form-control" id="usuario" value="<%=cActual.getUsuario().getNombreUsuario()%>" readonly>
+                <input type="text" class="form-control" id="usuario" name="usuario" value="<%=cActual.getUsuario().getNombreUsuario()%>" readonly>
               </div>
             </div>
             <div class="form-group row my-2">
@@ -284,7 +293,7 @@
               </div>
             </div>
             <div class="mt-3 py-4">
-            <button type="submit" class="btn btn-primary" name="btnActualizar" data-bs-toggle="modal" data-bs-target="#exampleModal">Actualizar</button>
+            <button type="submit" class="btn btn-primary" name="btnActualizar">Actualizar</button>
             </div>
  <%
 	} else {
@@ -424,25 +433,6 @@
             </div>
              <% } %>
           </fieldset>
-               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  				<div class="modal-dialog">
-   				 <div class="modal-content">
-     			  <div class="modal-header">
-        		  <h5 class="modal-title" id="exampleModalLabel">Feedback admin</h5>
-     			 </div>
-      			<div class="modal-body">
-        		<% if(request.getAttribute("mensajeAlert") != null){ %>
-  				<%=request.getAttribute("mensajeAlert") %>
- 			    <% } else { %>
-  					Si conoce los sc
- 	 			<% } %>
-      		</div>
-      		<div class="modal-footer">
-       		 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" name="btnOk">Close</button>
-      		</div>
-    		</div>
-  			</div>
-		</div>
         </form>        
       </div>
       <form action="Clientes" method="post">
@@ -487,6 +477,6 @@
       </div>
       </form>
      </div>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+     
   </body>
 </html>

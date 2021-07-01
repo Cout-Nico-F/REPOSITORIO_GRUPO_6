@@ -350,12 +350,12 @@ public class ClienteDaoImpl implements ClienteDao {
 		if(c.getCorreoElectronico().isEmpty()) {
 			return "El campo correo electronico esta vacio";
 		}
-		if(c.getUsuario().getNombreUsuario().isEmpty()) {
-			return "El campo nombre usuario esta vacio";
-		}
-		if(c.getUsuario().getContrasenia().isEmpty()) {
-			return "El campo contraseña esta vacio";
-		}
+			if( c.getUsuario().getNombreUsuario().isEmpty() ) {
+				return "El campo nombre usuario esta vacio";
+			}
+			if(c.getUsuario().getContrasenia().isEmpty()) {
+				return "El campo contraseña esta vacio";
+			}
 		return "No hay campos vacios";
 	}
 	public String buscarDni(int dni) {
