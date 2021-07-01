@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -84,7 +85,10 @@ public class ServletABMLCuentas extends HttpServlet {
 		if (request.getParameter("dniCli") != "")
 			cuenta.setDNI(Integer.valueOf(request.getParameter("dniCli")));
 		cuenta.setNumeroCuenta(request.getParameter("inputNroCuenta"));
-		cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")), "."));	
+		cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")), "."));
+		String sSaldo = String.valueOf(request.getParameter("inputSaldo"));
+		BigDecimal big = new BigDecimal(sSaldo);
+		cuenta.setSaldo(big);
 		return cuenta;
 	}
 
