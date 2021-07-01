@@ -83,8 +83,8 @@ create table if not exists movimientos (
 	IdMovimientos int unsigned auto_increment, #primero hacemos que sea pk y despues lo modificamos para que sea autoincrementable
 	IdTipoMovimiento tinyint unsigned not null,
 	Dni int not null,
-    CuentaOrigen bigint not null,
-    CuentaDestino bigint not null,	
+    CuentaOrigen bigint null,
+    CuentaDestino bigint null,	
     Fecha datetime not null,
     Detalles text not null,
     Importe decimal not null,
@@ -228,6 +228,8 @@ insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,current_date());
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813725,14203944,2,10000,124124124,current_date());
 insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813726,null,1,10000,124124125,current_date());
+
+insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,14203944,null,123813725,current_timestamp(),"Alta de cuenta", 10000);
 
 insert into tiposmovimientos (descripcion) values ("Alta de cuenta");
 insert into tiposmovimientos (descripcion) values ("Alta de prestamo");

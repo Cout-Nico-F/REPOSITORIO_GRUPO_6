@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import dao.IAdminDao;
 import entidad.Cuenta;
@@ -18,7 +21,8 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String eliminarCuenta = "update cuentas set eliminado = true where numerocuenta = ?";
 	private static final String traerTipoDeMovimientoSegunID = "select * from movimientos where idtipomovimiento =";
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from movimientos where Descripcion =";
-	private static final String movimientoAltaDeCuenta = "insert into movimientos ()";
+	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe)"
+			+ " values (?, ?, ?, ?, ?, ?, ?)";
 	// private static final String readall = "SELECT * FROM cuentas";
 
 	@Override
@@ -123,10 +127,39 @@ public class AdminDaoImpl implements IAdminDao {
 	public boolean MovimientoAltaDeCuenta(Cuenta c) {
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean inserto = false;
+		boolean creo = false;
+		try {
+			
+			ps = conexion.prepareStatement(movimientoAltaDeCuenta);
+			ps.setShort(1, (traerTipoDeMovimiento("Alta de cuenta")).getIdTipoMovimiento());
+			ps.setInt(2, c.getDNI());
+			ps.setNull(3, java.sql.Types.NULL);
+			ps.setLong(4, Long.valueOf(c.getNumeroCuenta()));
+			ps.setTimestamp(5, new Timestamp(Calendar.getInstance().getTime().getTime()));
+			ps.setString(6, "Alta de cuenta");
+			ps.setBigDecimal(7, c.getSaldo());
+
+			if (ps.executeUpdate() > 0) {
+
+				conexion.commit();
+				creo = true;
+			}
+			
+		} catch (SQLException e) {		
+			e.printStackTrace();
+			try {
+
+				conexion.rollback();
+			} catch (SQLException f) {
+
+				f.printStackTrace();
+				return creo;
+			}
+			
+			return creo;
+		}
 		
-		
-		return true;
+		return creo;
 		
 	}
 
