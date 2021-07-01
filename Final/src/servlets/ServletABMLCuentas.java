@@ -63,12 +63,13 @@ public class ServletABMLCuentas extends HttpServlet {
 				if (cuenta.getDNI() != 0) {
 					if (admNeg.validarDNIExistente(Integer.valueOf(cuenta.getDNI()))) {
 							agregarCuenta(request, cuenta);
+							admNeg.MovimientoDeAlta(cuenta);
 						} else {
 							request.setAttribute("msjTituloModal", "ERROR");
 							request.setAttribute("msjModal", "El DNI ingresado no corresponde a un Cliente");
 						}
 				} else {
-					agregarCuenta(request, cuenta);	
+					agregarCuenta(request, cuenta);						
 				}
 			} else {
 				request.setAttribute("msjTituloModal", "ADVERTENCIA");
@@ -83,13 +84,13 @@ public class ServletABMLCuentas extends HttpServlet {
 		if (request.getParameter("dniCli") != "")
 			cuenta.setDNI(Integer.valueOf(request.getParameter("dniCli")));
 		cuenta.setNumeroCuenta(request.getParameter("inputNroCuenta"));
-		cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")), "."));
-		cuenta.setSaldo(VariablesGlobales.saldoInicial);
+		cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")), "."));	
 		return cuenta;
 	}
 
 	private void agregarCuenta(HttpServletRequest request, Cuenta cuenta) {
 		if (admNeg.AgregarCuenta(cuenta)) {
+		
 			request.setAttribute("msjTituloModal", "Carga exitosa");
 			request.setAttribute("msjModal", "La cuenta se ha agregado exitosamente.");
 			limpiarCampos();

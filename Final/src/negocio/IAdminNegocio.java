@@ -15,4 +15,6 @@ public interface IAdminNegocio {
 	public boolean validarCamposCuentaNoVacia(Cuenta cuenta);
 	public boolean validarDNIExistente(int dni);
 	public boolean AgregarCuenta(Cuenta cuenta);
+	public boolean MovimientoDeAlta(Cuenta cuenta);
+	
 }

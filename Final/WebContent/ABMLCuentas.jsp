@@ -166,7 +166,7 @@
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%> <input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%>  </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
-							<td class="dt-body-center"> <%=listaCuentas.get(i).getFecha() %></td>
+							<td class="dt-body-center"> <%=listaCuentas.get(i).getFechaJava() %></td>
 							<td > <%=(listaCuentas.get(i).getDNI()==0)?"Sin asignar":listaCuentas.get(i).getDNI()%></td>
 							<td class="dt-body-center"><%=(listaClientes.get(i).getApellido()==null)?"Sin asignar":listaClientes.get(i).getApellido()%></td>
 							<td class="dt-body-center"><%=(listaClientes.get(i).getNombre()==null)?"Sin asignar":listaClientes.get(i).getNombre()%></td>

@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
 	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe)"
 			+ " values (?, ?, ?, ?, ?, ?, ?)";
+	private static final String actualizarSaldoInicial ="update cuentas set saldo = ? where NumeroCuenta = ?";
 	// private static final String readall = "SELECT * FROM cuentas";
 
 	@Override
@@ -162,6 +164,12 @@ public class AdminDaoImpl implements IAdminDao {
 		return creo;
 		
 	}
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public TipoDeMovimiento traerTipoDeMovimiento(short idTipoMov) {
@@ -213,4 +221,41 @@ public class AdminDaoImpl implements IAdminDao {
 		
 		return tipoMov;
 	}
+
+	@Override
+	public boolean actualizarSaldoAltaDeCuenta(int NumeroDeCuenta, BigDecimal saldo) {
+		
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean modifico = false;
+		
+		try {
+			
+			ps = conexion.prepareStatement(actualizarSaldoInicial);
+			ps.setBigDecimal(1, saldo);
+			ps.setInt(2, NumeroDeCuenta);
+			
+			if (ps.executeUpdate() > 0) {
+
+				conexion.commit();
+				modifico = true;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+			try {
+
+				conexion.rollback();
+			} catch (SQLException f) {
+
+				f.printStackTrace();
+			}
+		}
+		return modifico;
+	}
+	
 }
+
+		

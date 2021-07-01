@@ -17,7 +17,7 @@ import entidad.VariablesGlobales;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
 
-public class AdminNegocioImpl implements IAdminNegocio{
+public class AdminNegocioImpl implements IAdminNegocio {
 
 	@Override
 	public ArrayList<TipoDeCuenta> listarTiposCuenta() {
@@ -45,19 +45,17 @@ public class AdminNegocioImpl implements IAdminNegocio{
 
 	@Override
 	public boolean validarCampoNoVacio(String campo) {
-		if(campo.isEmpty()) {
+		if (campo.isEmpty()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean validarCamposCuentaNoVacia(Cuenta c) {
-		if(validarCampoNoVacio(c.getCBU()) &&
-		validarCampoNoVacio(c.getNumeroCuenta()) &&
-		validarCampoNoVacio(String.valueOf(c.getTipoDeCuenta().getIdTipoCuenta())) &&
-		validarCampoNoVacio(String.valueOf(c.getSaldo())) &&
-		c.getTipoDeCuenta().getIdTipoCuenta()!=0)
+		if (validarCampoNoVacio(c.getCBU()) && validarCampoNoVacio(c.getNumeroCuenta())
+				&& validarCampoNoVacio(String.valueOf(c.getTipoDeCuenta().getIdTipoCuenta()))
+				&& validarCampoNoVacio(String.valueOf(c.getSaldo())) && c.getTipoDeCuenta().getIdTipoCuenta() != 0)
 			return true;
 		return false;
 	}
@@ -67,9 +65,8 @@ public class AdminNegocioImpl implements IAdminNegocio{
 		ClienteNegocio cliNeg = new ClienteNegocioImpl();
 		ArrayList<Cliente> listaClientes = cliNeg.traerClientes(VariablesGlobales.cantMaxCuentasPorCliente);
 		int index;
-		for(index=0; index<listaClientes.size();index++) {
-			if(listaClientes.get(index).getDni()==dni)
-			{
+		for (index = 0; index < listaClientes.size(); index++) {
+			if (listaClientes.get(index).getDni() == dni) {
 				return true;
 			}
 		}
@@ -78,15 +75,28 @@ public class AdminNegocioImpl implements IAdminNegocio{
 
 	@Override
 	public boolean AgregarCuenta(Cuenta cuenta) {
-		IAdminDao dao = new AdminDaoImpl();		
+		IAdminDao dao = new AdminDaoImpl();
 		cuenta.setFecha(new Date(Calendar.getInstance().getTime().getTime()));
 		return dao.AgregarCuenta(cuenta);
 	}
-	
-	/*TODO: falta crear validadores de:
-	 * 						  - El número de cuenta no esté repetido.
-	 * 						  - El CBU no este repetido.
-	 * 						  - El IDTipoCuenta exista en la tabla TiposDeCuenta.
-	 * 						  - El saldo no quede negativo después de la modificación.
+
+	@Override
+	public boolean MovimientoDeAlta(Cuenta cuenta) {
+
+		boolean creado = false;
+
+		IAdminDao dao = new AdminDaoImpl();
+
+		if (dao.MovimientoAltaDeCuenta(cuenta)) {
+
+			return dao.actualizarSaldoAltaDeCuenta(Integer.valueOf(cuenta.getNumeroCuenta()), cuenta.getSaldo());
+		}
+		return false;
+	}
+
+	/*
+	 * TODO: falta crear validadores de: - El número de cuenta no esté repetido. -
+	 * El CBU no este repetido. - El IDTipoCuenta exista en la tabla TiposDeCuenta.
+	 * - El saldo no quede negativo después de la modificación.
 	 */
 }
