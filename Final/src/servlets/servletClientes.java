@@ -55,17 +55,23 @@ public class servletClientes extends HttpServlet {
 			u.setEsAdmin("Administrador".equals(request.getParameter("tipo")));
 			c.setUsuario(u);
 			
-			
 			String mensaje = cNeg.validacionesClientes(c);
 			
 			if(mensaje.equals("Cliente agregado con exito")) {
-				cNeg.insertCliente(c); //Ingresas el usuario
-				request.setAttribute("tipoMensajeAlta","success");
+				cNeg.insertCliente(c);
 				request.setAttribute("mensajeAlert", "Cliente agregado con exito");
 			}
 			else {
-				request.setAttribute("tipoMensajeAlta", "danger");
 				request.setAttribute("mensajeAlert",mensaje);
+			}
+			int x = 0; 
+			while(true) { //Hago que espere un rato para que se vea el modal, Muy trucho esto xD
+				if(x > 60) {
+					RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
+					rd.forward(request,response);
+					return;
+				}
+				x = x+1;
 			}
 		}
 		
@@ -95,17 +101,20 @@ public class servletClientes extends HttpServlet {
 			
 			if(mensaje.equals("Cliente agregado con exito")) {
 				cNeg.actualizarCliente(c); 
-				request.setAttribute("tipoMensajeAlta","success");
 				request.setAttribute("mensajeAlert", "Cliente agregado con exito");
 			}
 			else {
-				request.setAttribute("tipoMensajeAlta", "danger");
 				request.setAttribute("mensajeAlert",mensaje);
 			}
-		}
-		if(request.getParameter("btnOk") != null) {
-			RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
-			rd.forward(request,response);
+			int x = 0; 
+			while(true) { //Hago que espere un rato para que se vea el modal, Muy trucho esto xD
+				if(x > 60) {
+					RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
+					rd.forward(request,response);
+					return;
+				}
+				x = x+1;
+			}
 		}
 		
 		request.setAttribute("clientes", cNeg.traerClientes());
