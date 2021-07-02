@@ -55,9 +55,6 @@ public class ServletABMLCuentas extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
-
-
-	
 	
 
 	// *----------------------METODOS-------------------------*//
@@ -66,9 +63,14 @@ public class ServletABMLCuentas extends HttpServlet {
 	private void modificarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnModificarCuenta") != null) {
 			String numeroCuenta = request.getParameter("nroCuenta");
-			//admNeg.
+			Cuenta cuenta = admNeg.traerCuenta(Long.valueOf(numeroCuenta));
+			request.setAttribute("inputNroCuenta", cuenta.getNumeroCuenta());
+			request.setAttribute("inputCBU", cuenta.getCBU());
+			request.setAttribute("inputSaldo", cuenta.getSaldo());
+			request.setAttribute("DropdownTipoCuenta", cuenta.getTipoDeCuenta().getIdTipoCuenta());
+			request.setAttribute("dniCli", cuenta.getDNI());
+			//falta hacerlo andar
 		}
-		
 	}
 	
 	

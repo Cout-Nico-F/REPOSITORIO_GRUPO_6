@@ -13,6 +13,7 @@ import java.util.Calendar;
 import com.mysql.cj.protocol.Resultset;
 
 import dao.IAdminDao;
+import dao.ITipoDeCuentaDao;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;
 import entidad.TipoDeMovimiento;
@@ -30,13 +31,33 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String actualizarSaldoInicial ="update cuentas set saldo = ? where NumeroCuenta = ?";
 	private static final String asignarCuenta = "update cuentas set (nombre, apellido, dni) values (?,?,?) where numerocuenta = ?";
 
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public Cuenta traerCuenta(long numeroCuenta) {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Cuenta cuenta = new Cuenta();
+		ResultSet rs;
+		ITipoDeCuentaDao daoTipoCuentas = new TipoDeCuentaDaoImpl();
+		try {
+			ps=conexion.prepareStatement(existeCuenta);
+			ps.setLong(1, numeroCuenta);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				cuenta.setNumeroCuenta(rs.getString("numerocuenta"));
+				cuenta.setDNI(rs.getInt("dni"));
+				cuenta.setTipoDeCuenta(daoTipoCuentas.buscarTipoDeCuenta(rs.getShort("idtipocuenta")));
+				cuenta.setSaldo(rs.getBigDecimal("saldo"));
+				cuenta.setCBU(rs.getString("cbu"));
+				cuenta.setFecha(rs.getDate("fechacreacion"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new Cuenta();
+		}
+		return cuenta;
+	}
+
 	@Override
 	public boolean AgregarCuenta(Cuenta c) {
 		PreparedStatement ps;
@@ -310,6 +331,7 @@ public class AdminDaoImpl implements IAdminDao {
 		
 		return asigno;
 	}
+
 	
 	
 }

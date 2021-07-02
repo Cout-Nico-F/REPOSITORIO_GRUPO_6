@@ -72,7 +72,11 @@
 										ArrayList<TipoDeCuenta> listaTipos = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTiposCta");
 										for (TipoDeCuenta tipo : listaTipos) {
 								%>
-								<option value="<%=tipo.getIdTipoCuenta()%>">
+								<option value="<%=tipo.getIdTipoCuenta()%>" 
+								<%if(request.getAttribute("DropdownTipoCuenta")!=null){ 
+									if(tipo.getIdTipoCuenta()==Short.valueOf(String.valueOf((request.getAttribute("DropdownTipoCuenta"))))){
+									%>selected<% } 
+								}%> >
 									<%=tipo.getDescripcion()%>
 								</option>
 								<%
@@ -86,7 +90,7 @@
 						<label for="numero" class="col-sm-3 col-form-label">Número
 							de cuenta</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control required" id="numero" name="inputNroCuenta"
+							<input type="number" class="form-control required" id="numero" name="inputNroCuenta"  <%if(request.getAttribute("inputNroCuenta")!=null){%>value=<%=request.getAttribute("inputNroCuenta")%><% } %>
 								placeholder="Ingrese el Número de cuenta" required onKeyPress="if(this.value.length>8) return false;"
 								 maxlength="9">
 						</div>
@@ -94,7 +98,7 @@
 					<div class="form-group row my-2">
 						<label for="cbu" class="col-sm-3 col-form-label">CBU</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control required" name="inputCBU" id="cbu"
+							<input type="number" class="form-control required" name="inputCBU" id="cbu" <%if(request.getAttribute("inputCBU")!=null){%>value=<%=request.getAttribute("inputCBU")%><% } %>
 								placeholder="Ingrese el CBU" required onKeyPress="if(this.value.length>21) return false;"
 								 maxlength="9">
 						</div>
@@ -102,7 +106,7 @@
 					<div class="form-group row my-2">
 						<label for="saldo" class="col-sm-3 col-form-label">Saldo</label>
 						<div class="col-sm-9">
-							<input type="number" readonly name="inputSaldo" value="0.00"
+							<input type="number" readonly name="inputSaldo" <%if(request.getAttribute("inputSaldo")!=null){%>value=<%=request.getAttribute("inputSaldo")%><% } else{ %>value="0.00" <%}%>
 								class="form-control required" id="saldo" required>
 						</div>
 					</div>

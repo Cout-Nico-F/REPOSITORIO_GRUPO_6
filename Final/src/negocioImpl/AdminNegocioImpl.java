@@ -111,6 +111,13 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return false;
 	}
 
+	@Override
+	public Cuenta traerCuenta(long nroCuenta) {
+		IAdminDao dao = new AdminDaoImpl();
+		Cuenta cuenta = dao.traerCuenta(nroCuenta);
+		return cuenta;
+	}
+
 	
 	/*
 	 * TODO: falta crear validadores de: - El número de cuenta no esté repetido. -
