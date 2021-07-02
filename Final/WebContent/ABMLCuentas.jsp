@@ -73,9 +73,11 @@
 										for (TipoDeCuenta tipo : listaTipos) {
 								%>
 								<option value="<%=tipo.getIdTipoCuenta()%>" 
-								<%if(request.getAttribute("DropdownTipoCuenta")!=null){ 
+								<%if(request.getAttribute("DropdownTipoCuenta")!=null){
 									if(tipo.getIdTipoCuenta()==Short.valueOf(String.valueOf((request.getAttribute("DropdownTipoCuenta"))))){
-									%>selected<% } 
+									%>selected<% } else {%>
+										disabled	
+									<% }
 								}%> >
 									<%=tipo.getDescripcion()%>
 								</option>
@@ -90,7 +92,7 @@
 						<label for="numero" class="col-sm-3 col-form-label">Número
 							de cuenta</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control required" id="numero" name="inputNroCuenta"  <%if(request.getAttribute("inputNroCuenta")!=null){%>value=<%=request.getAttribute("inputNroCuenta")%><% } %>
+							<input type="number" class="form-control required" id="numero" name="inputNroCuenta"  <%if(request.getAttribute("inputNroCuenta")!=null){%>readonly value=<%=request.getAttribute("inputNroCuenta")%><% } %>
 								placeholder="Ingrese el Número de cuenta" required onKeyPress="if(this.value.length>8) return false;"
 								 maxlength="9">
 						</div>
@@ -98,7 +100,7 @@
 					<div class="form-group row my-2">
 						<label for="cbu" class="col-sm-3 col-form-label">CBU</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control required" name="inputCBU" id="cbu" <%if(request.getAttribute("inputCBU")!=null){%>value=<%=request.getAttribute("inputCBU")%><% } %>
+							<input type="number" class="form-control required" name="inputCBU" id="cbu" <%if(request.getAttribute("inputCBU")!=null){%> readonly value=<%=request.getAttribute("inputCBU")%><% } %>
 								placeholder="Ingrese el CBU" required onKeyPress="if(this.value.length>21) return false;"
 								 maxlength="9">
 						</div>
@@ -111,8 +113,16 @@
 						</div>
 					</div>
 					<div class="mt-3">
-						<button type="submit" name="btnRegistrar" class="btn btn-primary">Registrar</button>
-						<button type="submit" class="btn btn-secondary">Limpiar</button>
+						<button type="submit" class="btn btn-primary" <% if(request.getAttribute("inputNroCuenta")==null){
+							%>name="btnRegistrar" >Registrar</button> <% 
+						} else {
+							%>name="btnAsignar" >Asignar</button> <%
+						}%>
+						<button type="submit" class="btn btn-secondary"<% if(request.getAttribute("inputNroCuenta")==null){
+							%>  name="btnLimpiar">Limpiar</button> <% 
+						} else {
+							%> name="btnCancelar">Cancelar</button> <%
+						}%>
 					</div>
 					
 <%-- 					<% if(request.getParameter("msjModal") != null){ --%>
