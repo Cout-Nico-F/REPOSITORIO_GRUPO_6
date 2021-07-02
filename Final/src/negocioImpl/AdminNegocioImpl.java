@@ -103,10 +103,10 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	}
 
 	@Override
-	public boolean asignarCuenta(long nroCuenta, int dni, String nombre, String apellido) {
+	public boolean asignarCuenta(long nroCuenta, int dni) {
 		IAdminDao dao = new AdminDaoImpl();
 		if(validarCuentaExistente(nroCuenta) &&	validarDNIExistente(dni)) {
-			return dao.asignacionCuenta(nroCuenta, nombre, apellido, dni);
+			return dao.asignacionCuenta(nroCuenta, dni);
 		}
 		return false;
 	}

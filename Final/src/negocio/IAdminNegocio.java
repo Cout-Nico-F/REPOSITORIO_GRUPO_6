@@ -17,6 +17,6 @@ public interface IAdminNegocio {
 	public boolean AgregarCuenta(Cuenta cuenta);
 	public boolean MovimientoDeAlta(Cuenta cuenta);
 	public boolean validarCuentaExistente(long nroCuenta);
-	public boolean asignarCuenta(long nroCuenta, int dni, String nombre, String apellido);
+	public boolean asignarCuenta(long nroCuenta, int dni);
 	public Cuenta traerCuenta(long nroCuenta);
 }

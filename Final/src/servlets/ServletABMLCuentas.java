@@ -46,7 +46,9 @@ public class ServletABMLCuentas extends HttpServlet {
 
 		eliminarCuenta(request);
 		agregarCuenta(request);
-
+		asignarCuenta(request);
+		
+		
 		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
@@ -55,10 +57,30 @@ public class ServletABMLCuentas extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
-	
+
 
 	// *----------------------METODOS-------------------------*//
 
+	
+
+	private void asignarCuenta(HttpServletRequest request) {
+		if (request.getParameter("btnAsignar") != null) {
+			Cuenta c = devolverCuentaCargada(request);
+			request.setAttribute("inputNroCuenta", null);
+			request.setAttribute("inputCBU", null);
+			request.setAttribute("inputSaldo", null);
+			request.setAttribute("DropdownTipoCuenta", null);
+			request.setAttribute("dniCli", null);
+			if(admNeg.asignarCuenta(Long.parseLong(c.getNumeroCuenta()), c.getDNI())) {
+				request.setAttribute("msjTituloModal", "EXITO");
+				request.setAttribute("msjModal", "La Cuenta ha sido asignada correctamente");
+			} else {
+				request.setAttribute("msjTituloModal", "ERROR");
+				request.setAttribute("msjModal", "La Cuenta no se pudo asignar");
+			}
+		}
+		
+	}
 	
 	private void modificarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnModificarCuenta") != null) {
@@ -69,11 +91,8 @@ public class ServletABMLCuentas extends HttpServlet {
 			request.setAttribute("inputSaldo", cuenta.getSaldo());
 			request.setAttribute("DropdownTipoCuenta", cuenta.getTipoDeCuenta().getIdTipoCuenta());
 			request.setAttribute("dniCli", cuenta.getDNI());
-			//falta hacerlo andar
 		}
 	}
-	
-	
 	
 	private void agregarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnRegistrar") != null) {
