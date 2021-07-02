@@ -32,32 +32,17 @@
             },
             lengthChange: false
         } );
-       
-       
-		
-    });
-    
-    $( function() {
-	    $( "#dialog" ).dialog();
-	    $("#btnActualizar").click(function() {
-	    	<% if(request.getAttribute("mensajeAlert") != null){ %>
-	 		var mensaje = "<%=request.getAttribute("mensajeAlert") %>"
-	 		$('#divModal').html(mensaje)
+        <% if(request.getAttribute("mensajeAlert") != null){ %>
+	 		$('.toast-body').html('<span><%=request.getAttribute("mensajeAlert") %></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
+	        $('.toast').toast('show');
 	 		<% } %>
-	        $("#dialog").dialog("open");
-	        return false;
-	      });
-	  });
+    });
     </script>
   </head>
   <body>
-  <% if(request.getAttribute("mensajeAlert") != null){ %>
-  		<%=request.getAttribute("mensajeAlert") %>
-  <% } %>
-		<div id="dialog" title="Basic dialog">
-  		<p id="divModal"></p>
-  		</div>
-  		
+   <div class="toast" style="left: 50%; position: fixed; transform: translate(-50%, 0px); z-index: 9999;" data-bs-autohide="false">
+      <div class="toast-body"></div>
+  </div>
   <div class="row">
       <div class="col  px-4 py-2">
         <form method="get" action="Clientes">
@@ -187,7 +172,7 @@
              <div class="form-group row my-2">
               <label for="cuil" class="col-sm-3 col-form-label">CUIL</label>
               <div class="col-sm-9">      
-                <input type="text" class="form-control" id="cuil" value="<%=cActual.getCuil()%>" readonly>
+                <input type="text" class="form-control" id="cuil" name="cuil" value="<%=cActual.getCuil()%>" readonly>
               </div>
             </div>
             <div class="form-group row my-2">

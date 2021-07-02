@@ -51,10 +51,10 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 	}
 	
 	@Override
-	public void actualizarCliente(Cliente cliente) {
+	public int actualizarCliente(Cliente cliente) {
 		// TODO Auto-generated method stub
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
-		cdao.actualizarCliente(cliente);
+		return cdao.actualizarCliente(cliente);
 	}
 	
 	@Override
@@ -83,14 +83,14 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 	}
 
 	@Override
-	public String validacionesClientesAlta(Cliente c) {
+	public boolean existeDni(int dni) {
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
-		return cdao.validacionesClientesAlta(c);
+		return cdao.existeDni(dni);
 	}
 
 	@Override
-	public String validacionesClientesModificar(Cliente c) {
+	public boolean existeCuil(String cuil) {
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
-		return cdao.validacionesClientesModificar(c);
+		return cdao.existeCuil(cuil);
 	}
 }

@@ -12,6 +12,6 @@ public interface ClienteDao {
 	public Cliente traerCliente(int dni);
 	public int actualizarCliente(Cliente cliente);
 	public int eliminarCliente(int dni);
-	public String validacionesClientesAlta(Cliente c);
-	public String validacionesClientesModificar(Cliente c);
+	public boolean existeCuil(String cuil);
+	public boolean existeDni(int dni);
 }

@@ -242,119 +242,7 @@ public class ClienteDaoImpl implements ClienteDao {
 		}
 	}
 	@Override
-	public String validacionesClientesAlta(Cliente c) {
-		
-		if(campoVacio(c).equals("No hay campos vacios")) {
-			
-			if(c.getNombre().length() > 45) {
-				return "El campo nombre no puede superar los 45 caracteres";
-			}
-			if(c.getApellido().length() > 45) {
-				return "El campo apellido no puede superar los 45 caracteres";
-			}
-			if(c.getDni() > 8) {
-				return "El campo dni no puede superar los 8 digitos";
-			}
-			if(c.getCuil().length() > 15) {
-				return "El campo cuil no puede superar los 15 caracteres";
-			}
-			if(c.getDireccion().length() > 45) {
-				return "El campo direccion no puede superar los 45 caracteres";
-			}
-			if(c.getTelefonoFijo().length() > 20) {
-				return "El campo telefono fijo no puede superar los 20 digitos";
-			}
-			if(c.getCelular().length() > 20) {
-				return "El campo celular no puede superar los 20 digitos";
-			}
-			if(c.getCorreoElectronico().length() > 45) {
-				return "El campo correo no puede superar los 45 caracteres";
-			}
-			if(c.getUsuario().getNombreUsuario().length() > 45) {
-				return "El campo nombre usuario no puede superar los 45 caracteres";
-			}
-			if(c.getUsuario().getContrasenia().length() > 45) {
-				return "El campo contraseña no puede superar los 45 caracteres";
-			}
-		}
-		if(buscarDni(c.getDni()).equals("El campo Dni ya se encuentra en base de datos")){
-			return buscarDni(c.getDni());
-		}
-		if(buscarCuil(c.getCuil()).equals("El campo Cuil ya se encuentra en base de datos")) {
-			return buscarCuil(c.getCuil());
-		}
-		return "Cliente agregado con exito";
-	}
-	@Override
-	public String validacionesClientesModificar(Cliente c) {
-		
-		if(campoVacio(c).equals("No hay campos vacios")) {
-			
-			if(c.getNombre().length() > 45) {
-				return "El campo nombre no puede superar los 45 caracteres";
-			}
-			if(c.getApellido().length() > 45) {
-				return "El campo apellido no puede superar los 45 caracteres";
-			}
-			if(c.getDni() > 8) {
-				return "El campo dni no puede superar los 8 digitos";
-			}
-			if(c.getCuil().length() > 15) {
-				return "El campo cuil no puede superar los 15 caracteres";
-			}
-			if(c.getDireccion().length() > 45) {
-				return "El campo direccion no puede superar los 45 caracteres";
-			}
-			if(c.getTelefonoFijo().length() > 20) {
-				return "El campo telefono fijo no puede superar los 20 digitos";
-			}
-			if(c.getCelular().length() > 20) {
-				return "El campo celular no puede superar los 20 digitos";
-			}
-			if(c.getCorreoElectronico().length() > 45) {
-				return "El campo correo no puede superar los 45 caracteres";
-			}
-			if(c.getUsuario().getNombreUsuario().length() > 45) {
-				return "El campo nombre usuario no puede superar los 45 caracteres";
-			}
-			if(c.getUsuario().getContrasenia().length() > 45) {
-				return "El campo contraseña no puede superar los 45 caracteres";
-			}
-		}
-		return "Cliente Modificado con exito";
-	}
-	
-	public String campoVacio(Cliente c) {
-		if(c.getNombre().isEmpty()) {
-			return "El campo nombre esta vacio";
-		}
-		if(c.getApellido().isEmpty()) {
-			return "El campo apellido esta vacio";
-		}
-		if(String.valueOf(c.getDni()).isEmpty()) {
-			return "El campo dni esta vacio";
-		}
-		if(String.valueOf(c.getCuil()).isEmpty()) {
-			return "El campo cuil esta vacio";
-		}
-		if(String.valueOf(c.getCelular()).isEmpty()) {
-			return "El campo celular esta vacio";
-		}
-		if(c.getDireccion().isEmpty()) {
-			return "El campo direccion esta vacio";
-		}
-		if(c.getCorreoElectronico().isEmpty()) {
-			return "El campo correo electronico esta vacio";
-		}
-			if( c.getUsuario().getNombreUsuario().isEmpty() ) {
-				return "El campo nombre usuario esta vacio";
-			}
-			if(c.getUsuario().getContrasenia().isEmpty()) {
-				return "El campo contraseña esta vacio";
-			}
-		return "No hay campos vacios";
-	}
-	public String buscarDni(int dni) {
+	public boolean existeDni(int dni) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs = null;
@@ -363,16 +251,18 @@ public class ClienteDaoImpl implements ClienteDao {
 			rs = statement.executeQuery();
 			while(rs.next()) {
 				if(dni == rs.getInt("Dni")) {
-					return "El campo Dni ya se encuentra en base de datos";
+					return true;
 				}
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return "No se encuentra en base de datos";
+		return false;
 	}
-	public String buscarCuil(String cuil) {
+	
+	@Override
+	public boolean existeCuil(String cuil) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs = null;
@@ -381,13 +271,13 @@ public class ClienteDaoImpl implements ClienteDao {
 			rs = statement.executeQuery();
 			while(rs.next()) {
 				if(cuil.equals(rs.getString("cuil"))) {
-					return "El campo Cuil ya se encuentra en base de datos";
+					return true;
 				}
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return "No se encuentra en base de datos";
+		return false;
 	}
 }

@@ -35,7 +35,7 @@ public class servletClientes extends HttpServlet {
 			Cliente c = new Cliente();
 			c.setNombre(request.getParameter("nombre"));
 			c.setApellido(request.getParameter("apellido"));
-			c.setDni(Integer.parseInt(request.getParameter("dni")));
+			c.setDni(getInteger(request.getParameter("dni")));
 			c.setCuil(request.getParameter("cuil"));
 			c.setFechaNacimiento(getDate(request.getParameter("fecha")));
 			c.setSexo(request.getParameter("sexo"));
@@ -55,31 +55,23 @@ public class servletClientes extends HttpServlet {
 			u.setEsAdmin("Administrador".equals(request.getParameter("tipo")));
 			c.setUsuario(u);
 			
-			String mensaje = cNeg.validacionesClientesAlta(c);
-			
-			if(mensaje.equals("Cliente agregado con exito")) {
-				cNeg.insertCliente(c);
-				request.setAttribute("mensajeAlert", "Cliente agregado con exito");
-			}
-			else {
-				request.setAttribute("mensajeAlert",mensaje);
-			}
-			int x = 0; 
-			while(true) { //Hago que espere un rato para que se vea el modal, Muy trucho esto xD
-				if(x > 60) {
-					RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
-					rd.forward(request,response);
-					return;
+			String mensaje = validarClienteAlta(c);
+			if("Cliente valido".equals(mensaje)) {
+				if(cNeg.insertCliente(c)){
+					mensaje = "Cliente agregado con exito";
+				} else {
+					mensaje = "Hubo un error al intentar crear el cliente";
 				}
-				x = x+1;
 			}
+			request.setAttribute("mensajeAlert", mensaje);
 		}
 		
 		if(request.getParameter("btnActualizar") != null) {
 			Cliente c = new Cliente();
 			c.setNombre(request.getParameter("nombre"));
 			c.setApellido(request.getParameter("apellido"));
-			c.setDni(Integer.parseInt(request.getParameter("dni")));
+			c.setDni(getInteger(request.getParameter("dni")));
+			c.setCuil(request.getParameter("cuil"));
 			c.setFechaNacimiento(getDate(request.getParameter("fecha")));
 			c.setSexo(request.getParameter("sexo"));
 			c.setTelefonoFijo(request.getParameter("telefono"));
@@ -98,24 +90,15 @@ public class servletClientes extends HttpServlet {
 			u.setContrasenia(request.getParameter("contrasena"));
 			c.setUsuario(u);
 			
-			String mensaje = cNeg.validacionesClientesModificar(c);
-			
-			if(mensaje.equals("Cliente modificado con exito")) {
-				cNeg.actualizarCliente(c); 
-				request.setAttribute("mensajeAlert", "Cliente modificado con exito");
-			}
-			else {
-				request.setAttribute("mensajeAlert",mensaje);
-			}
-			int x = 0; 
-			while(true) { //Hago que espere un rato para que se vea el modal, Muy trucho esto xD
-				if(x > 60) {
-					RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
-					rd.forward(request,response);
-					return;
+			String mensaje = validarCliente(c);
+			if("Cliente valido".equals(mensaje)) {
+				if (cNeg.actualizarCliente(c) > 0) {
+					mensaje = "Cliente modificado con exito";
+				} else {
+					mensaje = "Hubo un error al intentar actualizar el cliente";
 				}
-				x = x+1;
 			}
+			request.setAttribute("mensajeAlert", mensaje);
 		}
 		
 		request.setAttribute("clientes", cNeg.traerClientes());
@@ -161,6 +144,101 @@ public class servletClientes extends HttpServlet {
 			e.printStackTrace();
 		}
 		return date;
+	}
+	
+	private int getInteger(String intString) {
+		int integer = 0;
+		try {
+			integer = Integer.parseInt(intString);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return integer;
+	}
+	
+	public String validarClienteAlta(Cliente c) {
+		ClienteNegocio cNeg = new ClienteNegocioImpl();
+		String mensaje = validarCliente(c);
+		if("Cliente valido".equals(mensaje)) {
+			if(cNeg.existeDni(c.getDni())){
+				mensaje = "El DNI ya se encuentra en base de datos";
+			}
+			if(cNeg.existeCuil(c.getCuil())){
+				mensaje = "El CUIL ya se encuentra en base de datos";
+			}
+		} 
+		return mensaje;
+	}
+	
+	public String validarCliente(Cliente c) {
+		String mensaje = campoVacio(c);
+		if("No hay campos vacios".equals(mensaje)) {
+			if(c.getNombre().length() > 45) {
+				return "El campo nombre no puede superar los 45 caracteres";
+			}
+			if(c.getApellido().length() > 45) {
+				return "El campo apellido no puede superar los 45 caracteres";
+			}
+			if(String.valueOf(c.getDni()).length() > 8) {
+				return "El campo DNI no puede superar los 8 digitos";
+			}
+			if(c.getCuil().length() > 15) {
+				return "El campo CUIL no puede superar los 15 caracteres";
+			}
+			if(c.getDireccion().length() > 45) {
+				return "El campo direccion no puede superar los 45 caracteres";
+			}
+			if(c.getTelefonoFijo().length() > 20) {
+				return "El campo telefono fijo no puede superar los 20 digitos";
+			}
+			if(c.getCelular().length() > 20) {
+				return "El campo celular no puede superar los 20 digitos";
+			}
+			if(c.getCorreoElectronico().length() > 45) {
+				return "El campo correo no puede superar los 45 caracteres";
+			}
+			if(c.getUsuario().getNombreUsuario().length() > 45) {
+				return "El campo nombre usuario no puede superar los 45 caracteres";
+			}
+			if(c.getUsuario().getContrasenia().length() > 45) {
+				return "El campo contraseña no puede superar los 45 caracteres";
+			}
+		}
+		else {
+			return mensaje;
+		}
+		return "Cliente valido";
+	}
+	
+	public String campoVacio(Cliente c) {
+		if(c.getNombre().isEmpty()) {
+			return "El campo nombre esta vacio";
+		}
+		if(c.getApellido().isEmpty()) {
+			return "El campo apellido esta vacio";
+		}
+		if(c.getDni() == 0) {
+			return "El campo DNI no es valido";
+		}
+		if(String.valueOf(c.getCuil()).isEmpty()) {
+			return "El campo CUIL esta vacio";
+		}
+		if(String.valueOf(c.getCelular()).isEmpty()) {
+			return "El campo celular esta vacio";
+		}
+		if(c.getDireccion().isEmpty()) {
+			return "El campo direccion esta vacio";
+		}
+		if(c.getCorreoElectronico().isEmpty()) {
+			return "El campo correo electronico esta vacio";
+		}
+		if( c.getUsuario().getNombreUsuario().isEmpty() ) {
+			return "El campo nombre usuario esta vacio";
+		}
+		if(c.getUsuario().getContrasenia().isEmpty()) {
+			return "El campo contraseña esta vacio";
+		}
+		return "No hay campos vacios";
 	}
 
 }

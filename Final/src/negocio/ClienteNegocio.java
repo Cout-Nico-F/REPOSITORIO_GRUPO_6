@@ -12,11 +12,11 @@ public interface ClienteNegocio {
 	public ArrayList<Cliente> traerClientes();
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
 	public Cliente traerCliente(int dni);
-	public void actualizarCliente(Cliente cliente);
+	public int actualizarCliente(Cliente cliente);
 	public void eliminarCliente(int dni);
 	public ArrayList<Localidad> traerLocalidades();
 	public ArrayList<Nacionalidad> traerNacionalidades();
 	public ArrayList<Provincia> traerProvincias();
-	public String validacionesClientesAlta(Cliente c);
-	public String validacionesClientesModificar(Cliente c);
+	public boolean existeCuil(String cuil);
+	public boolean existeDni(int dni);
 }
