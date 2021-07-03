@@ -28,9 +28,9 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
 	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe)"
 			+ " values (?, ?, ?, ?, ?, ?, ?)";
-	private static final String actualizarSaldoInicial ="update cuentas set saldo = ? where NumeroCuenta = ?";
 	private static final String asignarCuenta = "update cuentas set dni=? where numerocuenta = ?";
-
+	
+	
 	@Override
 	public Cuenta traerCuenta(long numeroCuenta) {
 		PreparedStatement ps;
@@ -224,6 +224,7 @@ public class AdminDaoImpl implements IAdminDao {
 		
 	}
 
+	
 	@Override
 	public TipoDeMovimiento traerTipoDeMovimiento(String descripcionTipoMov) {
 		
