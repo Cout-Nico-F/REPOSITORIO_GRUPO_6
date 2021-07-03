@@ -11,9 +11,7 @@ public interface IAdminDao {
 	public boolean existe(long numeroCuenta);
 	public ArrayList<Cuenta> listarCuentas();
 	public int eliminarCuenta(long nroCuenta);
-	public boolean MovimientoAltaDeCuenta (Cuenta c);
-	public TipoDeMovimiento traerTipoDeMovimiento(short idTipoMovimiento);
-	public TipoDeMovimiento traerTipoDeMovimiento(String descripcionTipoMov);
-	public boolean asignacionCuenta(long nroCuenta, int dni);
 	public Cuenta traerCuenta(long numeroCuenta);
+	public boolean asignacionCuenta(long nroCuenta, int dni);
+	
 }
