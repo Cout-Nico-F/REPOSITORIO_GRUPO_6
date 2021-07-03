@@ -250,7 +250,7 @@ public class AdminDaoImpl implements IAdminDao {
 	}
 
 	@Override
-	public boolean actualizarSaldoAltaDeCuenta(int NumeroDeCuenta, BigDecimal saldo) {
+	public boolean actualizarSaldoAltaDeCuenta(long NumeroDeCuenta, BigDecimal saldo) {
 		
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -260,7 +260,7 @@ public class AdminDaoImpl implements IAdminDao {
 			
 			ps = conexion.prepareStatement(actualizarSaldoInicial);
 			ps.setBigDecimal(1, saldo);
-			ps.setInt(2, NumeroDeCuenta);
+			ps.setLong(2, NumeroDeCuenta);
 			
 			if (ps.executeUpdate() > 0) {
 
