@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import dao.IAdminDao;
 import dao.IMovimientoDao;
 import entidad.TipoDeMovimiento;
+import entidad.VariablesGlobales;
 
 public class MovimientoDaoImpl implements IMovimientoDao{
 
@@ -15,7 +16,7 @@ public class MovimientoDaoImpl implements IMovimientoDao{
 	private static final String actualizarSaldo ="update cuentas set saldo = ? where NumeroCuenta = ?";
 	
 	@Override
-	public boolean registrarMovimiento(TipoDeMovimiento tipoMov, long cuentaorigen, long cuentaDestino, BigDecimal importe) {
+	public boolean registrarMovimiento(String tipoMov, long cuentaorigen, long cuentaDestino, BigDecimal importe) {
 		
 		if(actualizarSaldos(tipoMov,cuentaorigen,cuentaDestino,importe)) {
 			
@@ -25,23 +26,23 @@ public class MovimientoDaoImpl implements IMovimientoDao{
 	}
 
 	@Override
-	public boolean actualizarSaldos(TipoDeMovimiento tipoMov, long cuentaOrigen, long cuentaDestino, BigDecimal importe) {
+	public boolean actualizarSaldos(String tipoMov, long cuentaOrigen, long cuentaDestino, BigDecimal importe) {
 		boolean retorno = false; 
-		switch(tipoMov.getDescripcion())
+		switch(tipoMov)
 		{
-			case "Alta de cuenta":
+			case VariablesGlobales.tiposMovimientoAlta:
 			{
 				retorno = CaseAltaDeCuenta(cuentaDestino,importe);
 			}
-			case "Alta de prestamo":
+			case VariablesGlobales.tiposMovimientoAltaPrestamo:
 			{
 				retorno = CaseAltaDePrestamo(cuentaDestino,importe);
 			} break;
-			case "Pago de prestamo":
+			case VariablesGlobales.tiposMovimientoPagoPrestamo:
 			{
 				retorno = CasePagoPrestamo(cuentaOrigen, importe);
 			} break;
-			case "Transferencia":
+			case VariablesGlobales.tiposMovimientoTransferencia:
 			{
 				retorno = CaseTransferencia(cuentaOrigen, cuentaDestino, importe);
 			} break;

@@ -6,16 +6,21 @@ import java.util.Calendar;
 
 import dao.ClienteDao;
 import dao.IAdminDao;
+import dao.IMovimientoDao;
 import dao.ITipoDeCuentaDao;
 import daoImpl.AdminDaoImpl;
 import daoImpl.ClienteDaoImpl;
+import daoImpl.MovimientoDaoImpl;
 import daoImpl.TipoDeCuentaDaoImpl;
 import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;
+import entidad.TipoDeMovimiento;
 import entidad.VariablesGlobales;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
+
+
 
 public class AdminNegocioImpl implements IAdminNegocio {
 
@@ -94,10 +99,13 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		boolean creado = false;
 
 		IAdminDao dao = new AdminDaoImpl();
-
+		IMovimientoDao daoMov = new MovimientoDaoImpl();
+		TipoDeMovimiento tdm = new TipoDeMovimiento();
 		if (dao.MovimientoAltaDeCuenta(cuenta)) {
 
-			return dao.actualizarSaldoAltaDeCuenta(Integer.valueOf(cuenta.getNumeroCuenta()), cuenta.getSaldo());
+			
+			return daoMov.actualizarSaldos(  VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0), Long.parseLong(cuenta.getNumeroCuenta()),VariablesGlobales.saldoInicial);
+		//	return daoMov.actualizarSaldos(Integer.valueOf(cuenta.getNumeroCuenta()), cuenta.getSaldo());
 		}
 		return false;
 	}
@@ -105,8 +113,9 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	@Override
 	public boolean asignarCuenta(long nroCuenta, int dni) {
 		IAdminDao dao = new AdminDaoImpl();
+		IMovimientoDao daoMov = new MovimientoDaoImpl();
 		if(validarCuentaExistente(nroCuenta) &&	validarDNIExistente(dni)) {
-			if(dao.actualizarSaldoAltaDeCuenta(nroCuenta, VariablesGlobales.saldoAltaDeCuenta))
+			if(daoMov.actualizarSaldos(VariablesGlobales.tiposMovimientoAlta,Long.valueOf(0),nroCuenta, VariablesGlobales.saldoAltaDeCuenta))
 				return dao.asignacionCuenta(nroCuenta, dni);
 		}
 		return false;

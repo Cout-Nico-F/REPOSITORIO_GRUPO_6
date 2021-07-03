@@ -29,7 +29,7 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe)"
 			+ " values (?, ?, ?, ?, ?, ?, ?)";
 	private static final String asignarCuenta = "update cuentas set dni=? where numerocuenta = ?";
-	
+	private static final String actualizarSaldo ="update cuentas set saldo = ? where NumeroCuenta = ?";
 	
 	@Override
 	public Cuenta traerCuenta(long numeroCuenta) {
@@ -248,39 +248,6 @@ public class AdminDaoImpl implements IAdminDao {
 		}
 		
 		return tipoMov;
-	}
-
-	@Override
-	public boolean actualizarSaldoAltaDeCuenta(long NumeroDeCuenta, BigDecimal saldo) {
-		
-		PreparedStatement ps;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean modifico = false;
-		
-		try {
-			
-			ps = conexion.prepareStatement(actualizarSaldoInicial);
-			ps.setBigDecimal(1, saldo);
-			ps.setLong(2, NumeroDeCuenta);
-			
-			if (ps.executeUpdate() > 0) {
-
-				conexion.commit();
-				modifico = true;
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-
-			try {
-				conexion.rollback();
-			} catch (SQLException f) {
-
-				f.printStackTrace();
-			}
-		}
-		return modifico;
 	}
 
 	@Override
