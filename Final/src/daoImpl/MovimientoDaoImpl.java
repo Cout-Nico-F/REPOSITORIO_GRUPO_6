@@ -16,35 +16,35 @@ public class MovimientoDaoImpl implements IMovimientoDao{
 	private static final String actualizarSaldo ="update cuentas set saldo = ? where NumeroCuenta = ?";
 	
 	@Override
-	public boolean registrarMovimiento(String tipoMov, long cuentaorigen, long cuentaDestino, BigDecimal importe) {
+	public boolean registrarMovimiento(String tipoMov, long cuentaARestar, long cuentaASumar, BigDecimal importe) {
 		
-		if(actualizarSaldos(tipoMov,cuentaorigen,cuentaDestino,importe)) {
-			
+		if(actualizarSaldos(tipoMov,cuentaARestar,cuentaASumar,importe)) {
+			//TODO Falta registrar el movimiento
 		
 		}
 		return false;
 	}
 
 	@Override
-	public boolean actualizarSaldos(String tipoMov, long cuentaOrigen, long cuentaDestino, BigDecimal importe) {
+	public boolean actualizarSaldos(String tipoMov, long cuentaARestar, long cuentaASumar, BigDecimal importe) {
 		boolean retorno = false; 
 		switch(tipoMov)
 		{
 			case VariablesGlobales.tiposMovimientoAlta:
 			{
-				retorno = CaseAltaDeCuenta(cuentaDestino,importe);
-			}
+				retorno = CaseAltaDeCuenta(cuentaASumar,importe);
+			} break;
 			case VariablesGlobales.tiposMovimientoAltaPrestamo:
 			{
-				retorno = CaseAltaDePrestamo(cuentaDestino,importe);
+				retorno = CaseAltaDePrestamo(cuentaASumar,importe);
 			} break;
 			case VariablesGlobales.tiposMovimientoPagoPrestamo:
 			{
-				retorno = CasePagoPrestamo(cuentaOrigen, importe);
+				retorno = CasePagoPrestamo(cuentaARestar, importe);
 			} break;
 			case VariablesGlobales.tiposMovimientoTransferencia:
 			{
-				retorno = CaseTransferencia(cuentaOrigen, cuentaDestino, importe);
+				retorno = CaseTransferencia(cuentaARestar, cuentaASumar, importe);
 			} break;
 			default:
 			  break;
@@ -52,26 +52,26 @@ public class MovimientoDaoImpl implements IMovimientoDao{
 		return retorno;
 	}
 	
-	private boolean CaseTransferencia(long cuentaOrigen, long cuentaDestino, BigDecimal importe) {
+	private boolean CaseTransferencia(long cuentaARestar, long cuentaASumar, BigDecimal importe) {
 		
-		if(CasePagoPrestamo(cuentaOrigen, importe)) //se le resta la plata a la cuenta origen
-			if(CaseAltaDePrestamo(cuentaDestino, importe)) //se le suma plata a la cuenta destino
+		if(CasePagoPrestamo(cuentaARestar, importe)) //se le resta la plata a la cuenta origen
+			if(CaseAltaDePrestamo(cuentaASumar, importe)) //se le suma plata a la cuenta destino
 				return true;
 		return false;
 	}
 	
-	private boolean CasePagoPrestamo(long cuentaOrigen, BigDecimal importe) {
+	private boolean CasePagoPrestamo(long cuentaARestar, BigDecimal importe) {
 		
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean modifico = false;
 		dao = new AdminDaoImpl();
 		try {
-			BigDecimal nuevoImporte = importe.subtract((dao.traerCuenta(cuentaOrigen)).getSaldo());
+			BigDecimal nuevoImporte = importe.subtract((dao.traerCuenta(cuentaARestar)).getSaldo());
 			if(nuevoImporte.compareTo(BigDecimal.ZERO)>=0){
 				ps = conexion.prepareStatement(actualizarSaldo);
-				ps.setBigDecimal(1, importe.add((dao.traerCuenta(cuentaOrigen)).getSaldo())); //se suma el saldo de la cuenta con el importe del prestamo y se setea en DB
-				ps.setLong(2, cuentaOrigen);		
+				ps.setBigDecimal(1, importe.add((dao.traerCuenta(cuentaARestar)).getSaldo())); //se suma el saldo de la cuenta con el importe del prestamo y se setea en DB
+				ps.setLong(2, cuentaARestar);		
 				if (ps.executeUpdate() > 0) {
 					conexion.commit();
 					modifico = true;
@@ -91,15 +91,15 @@ public class MovimientoDaoImpl implements IMovimientoDao{
 		return modifico;
 	}
 	
-	private boolean CaseAltaDePrestamo(long cuentaDestino, BigDecimal importe) {
+	private boolean CaseAltaDePrestamo(long cuentaASumar, BigDecimal importe) {
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean modifico = false;
 		dao = new AdminDaoImpl();
 		try {
 			ps = conexion.prepareStatement(actualizarSaldo);
-			ps.setBigDecimal(1, importe.add((dao.traerCuenta(cuentaDestino)).getSaldo())); //se suma el saldo de la cuenta con el importe del prestamo y se setea en DB
-			ps.setLong(2, cuentaDestino);		
+			ps.setBigDecimal(1, importe.add((dao.traerCuenta(cuentaASumar)).getSaldo())); //se suma el saldo de la cuenta con el importe del prestamo y se setea en DB
+			ps.setLong(2, cuentaASumar);		
 			if (ps.executeUpdate() > 0) {
 				conexion.commit();
 				modifico = true;

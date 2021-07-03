@@ -55,10 +55,10 @@
 								}
 									} else {
 							%>
-							<option>No se encontraron Cliente disponibles</option>
+							<option>No se encontraron clientes disponibles</option>
 							<%
 								}
-								}
+							}
 							%> </datalist>
 						</div>
 					</div>

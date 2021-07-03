@@ -96,16 +96,12 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	@Override
 	public boolean MovimientoDeAlta(Cuenta cuenta) {
 
-		boolean creado = false;
-
 		IAdminDao dao = new AdminDaoImpl();
 		IMovimientoDao daoMov = new MovimientoDaoImpl();
-		TipoDeMovimiento tdm = new TipoDeMovimiento();
 		if (dao.MovimientoAltaDeCuenta(cuenta)) {
 
 			
-			return daoMov.actualizarSaldos(  VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0), Long.parseLong(cuenta.getNumeroCuenta()),VariablesGlobales.saldoInicial);
-		//	return daoMov.actualizarSaldos(Integer.valueOf(cuenta.getNumeroCuenta()), cuenta.getSaldo());
+			return daoMov.actualizarSaldos(  VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0), Long.parseLong(cuenta.getNumeroCuenta()),VariablesGlobales.saldoAltaDeCuenta);		//	return daoMov.actualizarSaldos(Integer.valueOf(cuenta.getNumeroCuenta()), cuenta.getSaldo());
 		}
 		return false;
 	}
