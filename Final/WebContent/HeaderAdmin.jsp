@@ -17,6 +17,15 @@
 		});
 	});
 </script>
+
+<style>
+	img{
+		width: 22px;
+		height: 22px;
+		border-radius: 12px;
+	}
+</style>
+
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Banco</a>
