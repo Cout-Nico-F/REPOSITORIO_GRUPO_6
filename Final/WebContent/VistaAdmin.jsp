@@ -14,6 +14,7 @@
 </head>
 <body>
    <main>
+   <form method= "post" action="ServletVistaAdmin">
      <div class="cards">
          <div class="card-single">
              <div>
@@ -189,6 +190,7 @@
              </div>
          </div>
      </div>
+   </form>
  </main>
 </body>
 </html>

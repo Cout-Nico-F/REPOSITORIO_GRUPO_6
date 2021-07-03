@@ -56,8 +56,14 @@ public class servletLogin extends HttpServlet {
 					sessionUsuario.setAttribute("tipoUsuarioLogeado", u.getEsAdmin());
 					sessionUsuario.setAttribute("nombreUsuarioLogeado", u.getNombreUsuario());
 				}				
-			}					
-			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+			}
+			String redirige;
+			if(u.getEsAdmin()) {
+				redirige="VistaAdmin.jsp";
+			} else {
+				redirige="/Login.jsp";
+			}
+			RequestDispatcher rd = request.getRequestDispatcher(redirige);
 			rd.forward(request,response);
 			return;
 		}
