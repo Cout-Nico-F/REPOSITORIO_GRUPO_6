@@ -13,7 +13,7 @@ public interface ClienteNegocio {
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
 	public Cliente traerCliente(int dni);
 	public int actualizarCliente(Cliente cliente);
-	public void eliminarCliente(int dni);
+	public boolean eliminarCliente(int dni);
 	public ArrayList<Localidad> traerLocalidades();
 	public ArrayList<Nacionalidad> traerNacionalidades();
 	public ArrayList<Provincia> traerProvincias();

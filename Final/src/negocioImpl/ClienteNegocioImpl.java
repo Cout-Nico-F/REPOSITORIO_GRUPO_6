@@ -44,10 +44,10 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 	}
 	
 	@Override
-	public void eliminarCliente(int dni) {
+	public boolean eliminarCliente(int dni) {
 		// TODO Auto-generated method stub
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
-		cdao.eliminarCliente(dni);
+		return cdao.eliminarCliente(dni) > 0;
 	}
 	
 	@Override

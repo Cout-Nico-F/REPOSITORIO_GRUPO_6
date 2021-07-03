@@ -29,9 +29,8 @@ public class servletClientes extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Se ejecuta sin llamarlo? Sí, se llama a /Clientes desde el navegador
 		ClienteNegocio cNeg = new ClienteNegocioImpl();
-		if(request.getParameter("btnRegistrar") != null) {
+		if("registrar".equals(request.getParameter("accion"))) {
 			Cliente c = new Cliente();
 			c.setNombre(request.getParameter("nombre"));
 			c.setApellido(request.getParameter("apellido"));
@@ -50,12 +49,15 @@ public class servletClientes extends HttpServlet {
 			n.setIdNacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
 			c.setNacionalidad(n);
 			Usuario u = new Usuario();
-			u.setNombreUsuario(request.getParameter("usuario"));
+			u.setNombreUsuario(request.getParameter("usuario")); 
 			u.setContrasenia(request.getParameter("contrasena"));
 			u.setEsAdmin("Administrador".equals(request.getParameter("tipo")));
 			c.setUsuario(u);
 			
 			String mensaje = validarClienteAlta(c);
+			if(!u.getContrasenia().equals(request.getParameter("contrasenaRep"))) {
+				mensaje = "Las contraseñas deben coincidir";
+			}
 			if("Cliente valido".equals(mensaje)) {
 				if(cNeg.insertCliente(c)){
 					mensaje = "Cliente agregado con exito";
@@ -66,11 +68,11 @@ public class servletClientes extends HttpServlet {
 			request.setAttribute("mensajeAlert", mensaje);
 		}
 		
-		if(request.getParameter("btnActualizar") != null) {
+		if("actualizar".equals(request.getParameter("accion"))) {
 			Cliente c = new Cliente();
 			c.setNombre(request.getParameter("nombre"));
 			c.setApellido(request.getParameter("apellido"));
-			c.setDni(getInteger(request.getParameter("dni")));
+			c.setDni(Integer.parseInt(request.getParameter("dni")));
 			c.setCuil(request.getParameter("cuil"));
 			c.setFechaNacimiento(getDate(request.getParameter("fecha")));
 			c.setSexo(request.getParameter("sexo"));
@@ -113,18 +115,19 @@ public class servletClientes extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ClienteNegocio cNeg = new ClienteNegocioImpl();
 		int dni = Integer.parseInt(request.getParameter("dni"));
-		if(request.getParameter("btnDetalle") != null) {
+		if (request.getParameter("btnDetalle") != null) {
 			request.setAttribute("clienteActual", cNeg.traerCliente(dni));
 			request.setAttribute("vista", "detalle");
-		}
-		if(request.getParameter("btnModificar") != null) {			
+		} else if (request.getParameter("btnModificar") != null) {			
 			request.setAttribute("clienteActual", cNeg.traerCliente(dni));
 			request.setAttribute("vista", "modificacion");
+		} else {
+			if (cNeg.eliminarCliente(dni)) {
+				request.setAttribute("mensajeAlert", "El cliente ha sido eliminado");
+			} else {				
+				request.setAttribute("mensajeAlert", "Hubo un error al intentar eliminar el cliente");
+			}
 		}
-		if(request.getParameter("btnEliminar") != null) {
-			cNeg.eliminarCliente(dni);
-		}
-		
 		request.setAttribute("clientes", cNeg.traerClientes());
 		request.setAttribute("nacionalidades", cNeg.traerNacionalidades());
 		request.setAttribute("provincias", cNeg.traerProvincias());
@@ -132,7 +135,6 @@ public class servletClientes extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLClientes.jsp");
 		rd.forward(request,response);
-		
 	}
 	
 	private Date getDate(String dateString) {

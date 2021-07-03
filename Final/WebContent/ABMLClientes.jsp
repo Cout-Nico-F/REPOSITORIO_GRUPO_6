@@ -36,16 +36,65 @@
 	 		$('.toast-body').html('<span><%=request.getAttribute("mensajeAlert") %></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 	        $('.toast').toast('show');
 	 		<% } %>
+ 		$(document).on("click", ".abrir-modal", function () {
+ 			var accion = $(this).data("accion")
+ 			var mensaje = "¿Está seguro de que desea " + accion + " este cliente?"
+ 	    	$('input[name="accion"]').val(accion)
+ 		    $(".modal-body").html(mensaje)
+ 		});
+        $("#provincia").change(llenarLocalidades)
+        window.onload = llenarLocalidades()
     });
+    
+    function submitForm() {
+    	if("eliminar" == $('input[name="accion"]').val()) {
+        	$("#formPost").submit()
+    	} else {
+        	$("#formGet").submit()
+    	}
+    }
+    
+    function llenarLocalidades() {
+        var str = ""
+        <%ArrayList<Localidad> ls = (ArrayList<Localidad>) request.getAttribute("localidades");
+        if(ls != null && !ls.isEmpty())
+           for(Localidad l : ls) { %>
+               if( $('select[name="provincia"]').val() == <%=l.getProvincia().getIdProvincia()%>) {
+                     <%Cliente c = (Cliente) request.getAttribute("clienteActual");
+                     int idLocalidad = 0;
+                     if(c != null) {
+                  	   idLocalidad = c.getLocalidad().getIdLocalidad();
+                     }%>
+                     if(<%=idLocalidad%> != 0) {
+                  	   str += "<option value='<%=l.getIdLocalidad()%>' <%=l.getIdLocalidad() == idLocalidad ? "selected" : ""%>><%=l.getNombre()%></option>"
+                  	} else {
+                  		str += "<option value='<%=l.getIdLocalidad()%>'><%=l.getNombre()%></option>"
+                    }
+               }
+        <%}%>
+        $('select[name="localidad"]').html(str)
+    }
     </script>
   </head>
   <body>
    <div class="toast" style="left: 50%; position: fixed; transform: translate(-50%, 0px); z-index: 9999;" data-bs-autohide="false">
       <div class="toast-body"></div>
   </div>
+	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" onclick="submitForm()">Guardar cambios</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
   <div class="row">
       <div class="col  px-4 py-2">
-        <form method="get" action="Clientes">
+        <form id="formGet" method="get" action="Clientes">
+          		 <input type="hidden" name="accion">
           <fieldset>
             <legend>Nuevo cliente</legend>
               <%
@@ -278,7 +327,7 @@
               </div>
             </div>
             <div class="mt-3 py-4">
-            <button type="submit" class="btn btn-primary" name="btnActualizar">Actualizar</button>
+            <button class="btn btn-primary abrir-modal" type="button" data-bs-toggle="modal" data-bs-target="#modal" data-accion="actualizar">Actualizar</button>
             </div>
  <%
 	} else {
@@ -412,15 +461,20 @@
                 <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese la contraseña">
               </div>
             </div>
+            <div class="form-group row my-2">
+              <label for="contrasena" class="col-sm-3 col-form-label">Repetir contraseña</label>
+              <div class="col-sm-9">      
+                <input type="password" class="form-control" id="contrasenaRep" name="contrasenaRep" placeholder="Ingrese la contraseña nuevamente">
+              </div>
+            </div>
             <div class="mt-3 py-4">
-            <input type="submit" class="btn btn-primary" name="btnRegistrar" data-bs-toggle="modal" data-bs-target="#exampleModal" value="Registrar">
+            <button class="btn btn-primary abrir-modal" type="button" data-bs-toggle="modal" data-bs-target="#modal" data-accion="registrar">Registrar</button>
             <button type="reset" class="btn btn-secondary">Limpiar</button>
             </div>
              <% } %>
           </fieldset>
         </form>        
       </div>
-      <form action="Clientes" method="post">
       <div class="col px-4 py-2">
         <table id="clientes" class="table table-hover nowrap">
           <thead>
@@ -433,16 +487,14 @@
             </tr>
           </thead>
             <tbody>
-     	
      <%  
      ArrayList<Cliente> clientes = (ArrayList<Cliente>) request.getAttribute("clientes");
      if(clientes != null && !clientes.isEmpty())
 		for(Cliente c : clientes) 
 		{
 	%>
-	
-	
 	<tr>
+      <form id="formPost" action="Clientes" method="post">
 		 <input type="hidden" name="dni" value="<%=c.getDni()%>">
 		 <td><%=c.getUsuario().getNombreUsuario() %></td>    
 	     <td><%=c.getNombre() %></td>   
@@ -451,16 +503,14 @@
 	     <td class="text-center">
 	     <button class="btn" type="submit" name="btnDetalle"><i class="bi bi-info-lg"></i></button>
 	     <button class="btn" type="submit" name="btnModificar"><i class="bi bi-pencil-fill"></i></button>
-	     <button class="btn" type="submit" name="btnEliminar"><i class="bi bi-trash-fill"></i></button>
-	     </td>  
+	     <button class="btn abrir-modal" type="button" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button>
+	     </td>     
+      </form>
 	</tr>
-	
-	
 	<%  } %>
   </tbody>
         </table>     
       </div>
-      </form>
      </div>
      
   </body>
