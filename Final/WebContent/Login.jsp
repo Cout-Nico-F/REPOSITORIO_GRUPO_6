@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,8 +31,8 @@
               </div>
              <div class="d-flex justify-content-center">
                <div class="col-sm-4">  
-                <label for="apellido" class="col-sm-3 col-form-label">Contrasenia</label>
-                <input type="password" class="form-control" id="apellido" placeholder="Contrasenia" name="txtContrasenia">
+                <label for="apellido" class="col-sm-3 col-form-label">Contraseña</label>
+                <input type="password" class="form-control" id="apellido" placeholder="Contraseña" name="txtContrasenia">
               </div>
             </div>
             <div class="d-flex justify-content-center">
