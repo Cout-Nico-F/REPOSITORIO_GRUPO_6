@@ -20,8 +20,6 @@ import entidad.VariablesGlobales;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
 
-
-
 public class AdminNegocioImpl implements IAdminNegocio {
 
 	@Override
@@ -45,7 +43,7 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	@Override
 	public void eliminarCuenta(long nroCuenta) {
 		IAdminDao dao = new AdminDaoImpl();
-		if(dao.existe(nroCuenta)) {
+		if (dao.existe(nroCuenta)) {
 			dao.eliminarCuenta(nroCuenta);
 		}
 	}
@@ -79,7 +77,7 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean validarCuentaExistente(long nroCuenta) {
 		IAdminDao dao = new AdminDaoImpl();
@@ -98,7 +96,10 @@ public class AdminNegocioImpl implements IAdminNegocio {
 
 		IMovimientoDao daoMov = new MovimientoDaoImpl();
 		if (daoMov.MovimientoAltaDeCuenta(cuenta)) {
-			return daoMov.actualizarSaldos(VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0), Long.parseLong(cuenta.getNumeroCuenta()),VariablesGlobales.saldoAltaDeCuenta);		//	return daoMov.actualizarSaldos(Integer.valueOf(cuenta.getNumeroCuenta()), cuenta.getSaldo());
+			return daoMov.actualizarSaldos(VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0),
+					Long.parseLong(cuenta.getNumeroCuenta()), VariablesGlobales.saldoAltaDeCuenta); // return
+																									// daoMov.actualizarSaldos(Integer.valueOf(cuenta.getNumeroCuenta()),
+																									// cuenta.getSaldo());
 		}
 		return false;
 	}
@@ -107,8 +108,9 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	public boolean asignarCuenta(long nroCuenta, int dni) {
 		IAdminDao dao = new AdminDaoImpl();
 		IMovimientoDao daoMov = new MovimientoDaoImpl();
-		if(validarCuentaExistente(nroCuenta) &&	validarDNIExistente(dni)) {
-			if(daoMov.actualizarSaldos(VariablesGlobales.tiposMovimientoAlta,Long.valueOf(0),nroCuenta, VariablesGlobales.saldoAltaDeCuenta))
+		if (validarCuentaExistente(nroCuenta) && validarDNIExistente(dni)) {
+			if (daoMov.actualizarSaldos(VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0), nroCuenta,
+					VariablesGlobales.saldoAltaDeCuenta))
 				return dao.asignacionCuenta(nroCuenta, dni);
 		}
 		return false;
@@ -121,7 +123,6 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return cuenta;
 	}
 
-	
 	/*
 	 * TODO: falta crear validadores de: - El número de cuenta no esté repetido. -
 	 * El CBU no este repetido. - El IDTipoCuenta exista en la tabla TiposDeCuenta.

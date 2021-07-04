@@ -47,21 +47,17 @@ public class ServletABMLCuentas extends HttpServlet {
 		eliminarCuenta(request);
 		agregarCuenta(request);
 		asignarCuenta(request);
-		
-		
+
 		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
 		modificarCuenta(request);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
 
-
 	// *----------------------METODOS-------------------------*//
-
-	
 
 	private void asignarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnAsignar") != null) {
@@ -71,7 +67,7 @@ public class ServletABMLCuentas extends HttpServlet {
 			request.setAttribute("inputSaldo", null);
 			request.setAttribute("DropdownTipoCuenta", null);
 			request.setAttribute("dniCli", null);
-			if(admNeg.asignarCuenta(Long.parseLong(c.getNumeroCuenta()), c.getDNI())) {
+			if (admNeg.asignarCuenta(Long.parseLong(c.getNumeroCuenta()), c.getDNI())) {
 				request.setAttribute("msjTituloModal", "EXITO");
 				request.setAttribute("msjModal", "La Cuenta ha sido asignada correctamente");
 			} else {
@@ -79,9 +75,9 @@ public class ServletABMLCuentas extends HttpServlet {
 				request.setAttribute("msjModal", "La Cuenta no se pudo asignar");
 			}
 		}
-		
+
 	}
-	
+
 	private void modificarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnModificarCuenta") != null) {
 			String numeroCuenta = request.getParameter("nroCuenta");
@@ -93,26 +89,26 @@ public class ServletABMLCuentas extends HttpServlet {
 			request.setAttribute("dniCli", cuenta.getDNI());
 		}
 	}
-	
+
 	private void agregarCuenta(HttpServletRequest request) {
 		if (request.getParameter("btnRegistrar") != null) {
 			Cuenta cuenta = devolverCuentaCargada(request);
 			if (admNeg.validarCamposCuentaNoVacia(cuenta)) {
 				if (cuenta.getDNI() != 0) {
 					if (admNeg.validarDNIExistente(Integer.valueOf(cuenta.getDNI()))) {
-						if(!admNeg.validarCuentaExistente(Long.parseLong(cuenta.getNumeroCuenta()))){
+						if (!admNeg.validarCuentaExistente(Long.parseLong(cuenta.getNumeroCuenta()))) {
 							agregarCuenta(request, cuenta);
 							admNeg.MovimientoDeAlta(cuenta);
-							} else {
-								request.setAttribute("msjTituloModal", "ERROR");
-								request.setAttribute("msjModal", "La Cuenta que intenta crear ya existe");
-							}
 						} else {
 							request.setAttribute("msjTituloModal", "ERROR");
-							request.setAttribute("msjModal", "El DNI ingresado no corresponde a un Cliente");
+							request.setAttribute("msjModal", "La Cuenta que intenta crear ya existe");
 						}
+					} else {
+						request.setAttribute("msjTituloModal", "ERROR");
+						request.setAttribute("msjModal", "El DNI ingresado no corresponde a un Cliente");
+					}
 				} else {
-					agregarCuenta(request, cuenta);						
+					agregarCuenta(request, cuenta);
 				}
 			} else {
 				request.setAttribute("msjTituloModal", "ADVERTENCIA");
@@ -122,19 +118,22 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private Cuenta devolverCuentaCargada(HttpServletRequest request) {
-		Cuenta cuenta=new Cuenta();
+		Cuenta cuenta = new Cuenta();
 		cuenta.setCBU(request.getParameter("inputCBU"));
 		if (request.getParameter("dniCli") != "")
 			cuenta.setDNI(Integer.valueOf(request.getParameter("dniCli")));
 		cuenta.setNumeroCuenta(request.getParameter("inputNroCuenta"));
+
 		cuenta.setTipoDeCuenta(new TipoDeCuenta(Short.valueOf(request.getParameter("DropdownTipoCuenta")), "."));
-		cuenta.setSaldo(new BigDecimal(request.getParameter("inputSaldo")));		
+
+		cuenta.setSaldo(new BigDecimal(request.getParameter("inputSaldo")));
+
 		return cuenta;
 	}
 
 	private void agregarCuenta(HttpServletRequest request, Cuenta cuenta) {
 		if (admNeg.AgregarCuenta(cuenta)) {
-		
+
 			request.setAttribute("msjTituloModal", "Carga exitosa");
 			request.setAttribute("msjModal", "La cuenta se ha agregado exitosamente.");
 			limpiarCampos();
@@ -145,7 +144,7 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void limpiarCampos() {
-		
+
 	}
 
 	private void eliminarCuenta(HttpServletRequest request) {
@@ -177,4 +176,21 @@ public class ServletABMLCuentas extends HttpServlet {
 		}
 		request.setAttribute("listaClientesDeCuentas", listaClientesDeCuentas);
 	}
+
+	// Validaciones para cuenta
+
+	public Boolean campoVacio(Cuenta c) {
+		Boolean formatovalido = true;
+		if (c.getCBU().isEmpty()) {
+			formatovalido = false;
+		}
+		if (c.getNumeroCuenta().isEmpty()) {
+			formatovalido = false;
+		}
+		if (c.getTipoDeCuenta().getIdTipoCuenta() == 0) {
+			formatovalido = false;
+		}
+		return formatovalido;
+	}
+
 }
