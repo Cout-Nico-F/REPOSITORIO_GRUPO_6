@@ -32,7 +32,7 @@
              <div class="d-flex justify-content-center">
                <div class="col-sm-4">  
                 <label for="apellido" class="col-sm-3 col-form-label">Contrasenia</label>
-                <input type="text" class="form-control" id="apellido" placeholder="Contrasenia" name="txtContrasenia">
+                <input type="password" class="form-control" id="apellido" placeholder="Contrasenia" name="txtContrasenia">
               </div>
             </div>
             <div class="d-flex justify-content-center">
