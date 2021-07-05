@@ -6,7 +6,6 @@ public class Movimiento {
 
 	private int ID;
 	private TipoDeMovimiento tipoDeMovimiento;
-	private java.sql.Date fecha;
 	private String detalle;
 	private BigDecimal importe;
 	private long IDCuentaOrigen;
@@ -25,12 +24,6 @@ public class Movimiento {
 	}
 	public void setTipoDeMovimiento(TipoDeMovimiento tipoDeMovimiento) {
 		this.tipoDeMovimiento = tipoDeMovimiento;
-	}
-	public java.sql.Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(java.sql.Date fecha) {
-		this.fecha = fecha;
 	}
 	public String getDetalle() {
 		return detalle;
@@ -56,6 +49,17 @@ public class Movimiento {
 	public void setIDCuentaDestino(long iDCuentaDestino) {
 		IDCuentaDestino = iDCuentaDestino;
 	}
+	public Movimiento(int iD, TipoDeMovimiento tipoDeMovimiento, String detalle, BigDecimal importe,
+			long iDCuentaOrigen, long iDCuentaDestino) {
+		super();
+		ID = iD;
+		this.tipoDeMovimiento = tipoDeMovimiento;
+		this.detalle = detalle;
+		this.importe = importe;
+		IDCuentaOrigen = iDCuentaOrigen;
+		IDCuentaDestino = iDCuentaDestino;
+	}
+	
 	
 	
 }

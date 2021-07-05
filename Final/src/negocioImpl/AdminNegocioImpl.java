@@ -14,9 +14,11 @@ import daoImpl.MovimientoDaoImpl;
 import daoImpl.TipoDeCuentaDaoImpl;
 import entidad.Cliente;
 import entidad.Cuenta;
+import entidad.Movimiento;
 import entidad.TipoDeCuenta;
 import entidad.TipoDeMovimiento;
 import entidad.VariablesGlobales;
+import entidad.VariablesGlobales.TiposMovimiento;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
 
@@ -95,7 +97,9 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	public boolean MovimientoDeAlta(Cuenta cuenta) {
 		IMovimientoDao daoMov = new MovimientoDaoImpl();
 		cuenta.setSaldo(VariablesGlobales.saldoAltaDeCuenta);
-		if (daoMov.MovimientoAltaDeCuenta(cuenta)) {
+		//if (daoMov.MovimientoAltaDeCuenta(cuenta)) {
+		Movimiento aux = new Movimiento(0, daoMov.traerTipoDeMovimiento(TiposMovimiento.AltaCuenta.getOperacion()), "Alta de cuenta", VariablesGlobales.saldoAltaDeCuenta, Long.valueOf(0), Long.valueOf(cuenta.getNumeroCuenta()));
+		if (daoMov.registrarMovimiento(aux)) {
 			return daoMov.actualizarSaldos(VariablesGlobales.TiposMovimiento.AltaCuenta, Long.valueOf(0),
 					Long.parseLong(cuenta.getNumeroCuenta()), VariablesGlobales.saldoAltaDeCuenta); 
 		}
