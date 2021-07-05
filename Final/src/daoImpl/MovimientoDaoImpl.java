@@ -13,6 +13,7 @@ import dao.IMovimientoDao;
 import entidad.Cuenta;
 import entidad.TipoDeMovimiento;
 import entidad.VariablesGlobales;
+import entidad.VariablesGlobales.TiposMovimiento;
 
 public class MovimientoDaoImpl implements IMovimientoDao {
 
@@ -25,21 +26,18 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
 
 	@Override
-	public boolean registrarMovimiento(String tipoMov, long cuentaARestar, long cuentaASumar, BigDecimal importe) {
-
-		if (actualizarSaldos(tipoMov, cuentaARestar, cuentaASumar, importe)) {
-			// TODO Falta registrar el movimiento
-
-		}
+	public boolean registrarMovimiento(TiposMovimiento tipoMov, long cuentaARestar, long cuentaASumar, BigDecimal importe) {
+		
+		
 		return false;
 	}
 
 	@Override
-	public boolean actualizarSaldos(String tipoMov, long cuentaARestar, long cuentaASumar, BigDecimal importe) {
+	public boolean actualizarSaldos(TiposMovimiento tipoMov, long cuentaARestar, long cuentaASumar, BigDecimal importe) {
 		boolean retorno = false;
 
 		if (importe.compareTo(BigDecimal.ZERO) > 0) {
-			switch (tipoMov) {
+			switch (tipoMov.getOperacion()) {
 			case VariablesGlobales.tiposMovimientoAlta: {
 				retorno = CaseAltaDeCuenta(cuentaASumar, importe);
 			}
@@ -61,7 +59,6 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			default:
 				break;
 			}
-
 		}
 		return retorno;
 	}

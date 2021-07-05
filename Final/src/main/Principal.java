@@ -6,9 +6,13 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import dao.IAdminDao;
+import dao.IMovimientoDao;
 import daoImpl.AdminDaoImpl;
+import daoImpl.MovimientoDaoImpl;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;
+import entidad.VariablesGlobales;
+import entidad.VariablesGlobales.TiposMovimiento;
 
 public class Principal {
 
@@ -21,9 +25,11 @@ public class Principal {
 //		} else {
 //			System.out.println("No cargo :C");
 //		}
-		String sbig = "0.01";
 		
-		BigDecimal big = new BigDecimal(sbig);
-		System.out.println(big);
+		
+//		String sbig = "0.01";
+//		
+//		BigDecimal big = new BigDecimal(sbig);
+//		System.out.println(big);
 	}
 }
