@@ -82,7 +82,6 @@ create table if not exists cuotas (
 create table if not exists movimientos (
 	IdMovimientos int unsigned auto_increment, #primero hacemos que sea pk y despues lo modificamos para que sea autoincrementable
 	IdTipoMovimiento tinyint unsigned not null,
-	Dni int not null,
     CuentaOrigen bigint null,
     CuentaDestino bigint null,	
     Fecha datetime not null,

@@ -11,6 +11,7 @@ import java.util.Calendar;
 import dao.IAdminDao;
 import dao.IMovimientoDao;
 import entidad.Cuenta;
+import entidad.Movimiento;
 import entidad.TipoDeMovimiento;
 import entidad.VariablesGlobales;
 import entidad.VariablesGlobales.TiposMovimiento;
@@ -20,16 +21,48 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	private IAdminDao dao;
 	private static final String actualizarSaldo = "update cuentas set saldo = ? where NumeroCuenta = ?";
 	private static final String traerSaldoCuenta = "select saldo from cuentas where numerocuenta = ?";
-	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe)"
-			+ " values (?, ?, ?, ?, ?, ?, ?)";
+	private static final String movimientoAltaDeCuenta = "insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe)"
+			+ " values (?, ?, ?, ?, ?, ?)";
 	private static final String traerTipoDeMovimientoSegunID = "select * from tiposmovimientos where idtipomovimiento =";
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
-
+	
 	@Override
-	public boolean registrarMovimiento(TiposMovimiento tipoMov, long cuentaARestar, long cuentaASumar, BigDecimal importe) {
+	public boolean registrarMovimiento(Movimiento mov) {
+		boolean registro = false;
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try {
+			ps = conexion.prepareStatement(movimientoAltaDeCuenta);
+			ps.setShort(1, mov.getTipoDeMovimiento().getIdTipoMovimiento());
+			if (mov.getIDCuentaOrigen() != 0) {
+				ps.setLong(2, mov.getIDCuentaOrigen());		
+			}else {
+				ps.setNull(2, java.sql.Types.NULL);
+			}
+			if (mov.getIDCuentaDestino() != 0) {
+				ps.setLong(3, mov.getIDCuentaDestino());	
+				
+			}else {
+				ps.setNull(3, java.sql.Types.NULL);
+			}
+			ps.setTimestamp(4, new Timestamp(Calendar.getInstance().getTime().getTime()));
+			ps.setString(5, mov.getDetalle());
+			ps.setBigDecimal(6, mov.getImporte());
+			
+			if (ps.executeUpdate() > 0) {
+				conexion.commit();
+				registro = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();	
+			}
+		}
 		
-		
-		return false;
+		return registro;
 	}
 
 	@Override
@@ -256,12 +289,11 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 
 			ps = conexion.prepareStatement(movimientoAltaDeCuenta);
 			ps.setShort(1, (traerTipoDeMovimiento("Alta de cuenta")).getIdTipoMovimiento());
-			ps.setInt(2, c.getDNI());
-			ps.setNull(3, java.sql.Types.NULL);
-			ps.setLong(4, Long.valueOf(c.getNumeroCuenta()));
-			ps.setTimestamp(5, new Timestamp(Calendar.getInstance().getTime().getTime()));
-			ps.setString(6, "Alta de cuenta");
-			ps.setBigDecimal(7, c.getSaldo());
+			ps.setNull(2, java.sql.Types.NULL);
+			ps.setLong(3, Long.valueOf(c.getNumeroCuenta()));
+			ps.setTimestamp(4, new Timestamp(Calendar.getInstance().getTime().getTime()));
+			ps.setString(5, "Alta de cuenta");
+			ps.setBigDecimal(6, c.getSaldo());
 
 			if (ps.executeUpdate() > 0) {
 

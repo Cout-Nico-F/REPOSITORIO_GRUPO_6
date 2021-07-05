@@ -6,7 +6,6 @@ public class Movimiento {
 
 	private int ID;
 	private TipoDeMovimiento tipoDeMovimiento;
-	private int DNI;
 	private java.sql.Date fecha;
 	private String detalle;
 	private BigDecimal importe;
@@ -26,12 +25,6 @@ public class Movimiento {
 	}
 	public void setTipoDeMovimiento(TipoDeMovimiento tipoDeMovimiento) {
 		this.tipoDeMovimiento = tipoDeMovimiento;
-	}
-	public int getDNI() {
-		return DNI;
-	}
-	public void setDNI(int dNI) {
-		DNI = dNI;
 	}
 	public java.sql.Date getFecha() {
 		return fecha;
@@ -63,16 +56,6 @@ public class Movimiento {
 	public void setIDCuentaDestino(long iDCuentaDestino) {
 		IDCuentaDestino = iDCuentaDestino;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }
