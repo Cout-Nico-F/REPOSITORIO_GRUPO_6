@@ -38,7 +38,7 @@ public class Cuenta {
 		CBU = cBU;
 		DNI = dNI;
 		this.tipoDeCuenta = tipoDeCuenta;
-		saldo = VariablesGlobales.saldoInicial;
+		saldo = VariablesGlobales.saldoCero;
 		fecha = new Date(Calendar.getInstance().getTime().getTime()); 
 	}                                                                    
 	
@@ -49,7 +49,7 @@ public class Cuenta {
 		this.numeroCuenta = numeroCuenta;
 		CBU = cBU;	
 		this.tipoDeCuenta = tipoDeCuenta;
-		saldo = VariablesGlobales.saldoInicial;
+		saldo = VariablesGlobales.saldoCero;
 		fecha = new Date(Calendar.getInstance().getTime().getTime());
 	}
 

@@ -93,13 +93,11 @@ public class AdminNegocioImpl implements IAdminNegocio {
 
 	@Override
 	public boolean MovimientoDeAlta(Cuenta cuenta) {
-
 		IMovimientoDao daoMov = new MovimientoDaoImpl();
+		cuenta.setSaldo(VariablesGlobales.saldoAltaDeCuenta);
 		if (daoMov.MovimientoAltaDeCuenta(cuenta)) {
-			return daoMov.actualizarSaldos(VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0),
-					Long.parseLong(cuenta.getNumeroCuenta()), VariablesGlobales.saldoAltaDeCuenta); // return
-																									// daoMov.actualizarSaldos(Integer.valueOf(cuenta.getNumeroCuenta()),
-																									// cuenta.getSaldo());
+			return daoMov.actualizarSaldos(VariablesGlobales.TiposMovimiento.AltaCuenta, Long.valueOf(0),
+					Long.parseLong(cuenta.getNumeroCuenta()), VariablesGlobales.saldoAltaDeCuenta); 
 		}
 		return false;
 	}
@@ -109,8 +107,8 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		IAdminDao dao = new AdminDaoImpl();
 		IMovimientoDao daoMov = new MovimientoDaoImpl();
 		if (validarCuentaExistente(nroCuenta) && validarDNIExistente(dni)) {
-			if (daoMov.actualizarSaldos(VariablesGlobales.tiposMovimientoAlta, Long.valueOf(0), nroCuenta,
-					VariablesGlobales.saldoAltaDeCuenta))
+			if (daoMov.actualizarSaldos(VariablesGlobales.TiposMovimiento.AltaCuenta, Long.valueOf(0), nroCuenta,
+					VariablesGlobales.saldoAltaDeCuenta) && daoMov.MovimientoAltaDeCuenta(new Cuenta(String.valueOf(nroCuenta),"",dni,new TipoDeCuenta(), VariablesGlobales.saldoAltaDeCuenta,new java.util.Date())))
 				return dao.asignacionCuenta(nroCuenta, dni);
 		}
 		return false;
