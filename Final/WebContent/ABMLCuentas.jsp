@@ -49,8 +49,12 @@
     });
     
     function submitForm() {
-    	if("eliminar" == $('input[name="accion"]').val() || "asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val()) {
-        	$("#formPost").submit()
+    	if("eliminar" == $('input[name="accion"]').val()){
+        	$("#formGet2").submit()
+    	} 
+		if("asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val()) {
+			$("#formGet1").submit()
+    	}
     }
 
     </script>
@@ -58,7 +62,6 @@
 
 <body>
    <div class="toast" style="left: 50%; position: fixed; transform: translate(-50%, 0px); z-index: 9999;" data-bs-autohide="false">
-      <div class="toast-header"> </div>
       <div class="toast-body"> </div>
   </div>
   
@@ -76,7 +79,7 @@
 	
 	<div class="row">
 		<div class="col  px-4 py-2">
-			<form method="post" action="ServletABMLCuentas">
+			<form id="formGet1" method="get" action="ServletABMLCuentas">
 			  <input type="hidden" name="accion">
 				<fieldset>
 					<legend>Nueva cuenta</legend>
@@ -200,7 +203,7 @@
 			
 			
 		</div>
-		<form action="ServletABMLCuentas" method="post">
+		<form action="ServletABMLCuentas" method="get">
 		<div class="col px-4 py-2">
 			<table id="cuentas" class="table table-hover nowrap">
 				<thead>
@@ -227,7 +230,7 @@
 					for(int i=0;i<listaCuentas.size();i++) {	
 					%>
 						<tr>
-						<form action="ServletABMLCuentas" method="post">
+						<form id="formGet2" action="ServletABMLCuentas" method="post">
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%> <input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%>  </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
@@ -238,13 +241,13 @@
 							<td class="dt-body-right"><%=listaCuentas.get(i).getSaldo()%></td>
 							<%if(listaCuentas.get(i).getDNI()!=0){
 								%>
-								<td><div class="text-center"><button type="button" name="btnEliminarCuenta" value="eliminarCuenta" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
+								<td><div class="text-center"><button type="button" name="btnEliminarCuenta" value="eliminar" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
 								</td>
 								<%
 							} else{
 								%>
-								<td><div class="text-center"><button type="submit" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button>
-								<button type="submit" name="btnEliminarCuenta" value="eliminarCuenta" class="btn"><i class="bi bi-trash-fill"></i></button></div>
+								<td><div class="text-center"><button type="button" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button>
+								<button type="button" name="btnEliminarCuenta" value="eliminarCuenta" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
 								</td>
 								<%
 							}
