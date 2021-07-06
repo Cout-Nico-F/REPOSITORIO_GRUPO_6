@@ -60,7 +60,7 @@ public class ServletABMLCuentas extends HttpServlet {
 	// *----------------------METODOS-------------------------*//
 
 	private void asignarCuenta(HttpServletRequest request) {
-		if (request.getParameter("btnAsignar") != null) {
+		if (request.getAttribute("accion")!=null && "asignar".equals(request.getAttribute("accion"))) {
 			Cuenta c = devolverCuentaCargada(request);
 			request.setAttribute("inputNroCuenta", null);
 			request.setAttribute("inputCBU", null);
@@ -79,7 +79,7 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void modificarCuenta(HttpServletRequest request) {
-		if (request.getParameter("btnModificarCuenta") != null) {
+		if (request.getAttribute("btnModificarCuenta") != null) {
 			String numeroCuenta = request.getParameter("nroCuenta");
 			Cuenta cuenta = admNeg.traerCuenta(Long.valueOf(numeroCuenta));
 			request.setAttribute("inputNroCuenta", cuenta.getNumeroCuenta());
@@ -91,7 +91,7 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void agregarCuenta(HttpServletRequest request) {
-		if (request.getParameter("btnRegistrar") != null) {
+		if (request.getAttribute("accion")!=null && "agregar".equals(request.getAttribute("accion"))) {
 			Cuenta cuenta = devolverCuentaCargada(request);
 			if (admNeg.validarCamposCuentaNoVacia(cuenta)) {
 				if (cuenta.getDNI() != 0) {

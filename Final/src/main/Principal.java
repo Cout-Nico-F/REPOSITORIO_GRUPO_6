@@ -17,7 +17,6 @@ import entidad.VariablesGlobales.TiposMovimiento;
 public class Principal {
 
 	public static void main(String[] args) {
-		
 //		IAdminDao dao = new AdminDaoImpl();
 //		if(dao.MovimientoAltaDeCuenta(new Cuenta("123813724","234384234",14203944,new TipoDeCuenta())))
 //		{

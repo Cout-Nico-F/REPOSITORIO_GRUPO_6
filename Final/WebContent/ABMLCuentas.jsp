@@ -15,21 +15,69 @@
     $(document).ready(function() {
         var table = $('#cuentas').DataTable( {
             language: {
-                zeroRecords: "No hay resultados",
-                info: "Página _PAGE_ de _PAGES_",
-                infoEmpty: "No hay registros",
-                infoFiltered: "(filtrada de _MAX_ registros totales)",
-                search: "Buscar: "
-            }
+            	"decimal":        "",
+                "emptyTable":     "No hay información disponible en la tabla",
+                "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "infoEmpty":      "Mostrando 0 a 0 de 0 registro(s)",
+                "infoFiltered":   "(filtrado de _MAX_ registros totales)",
+                "infoPostFix":    "",
+                "thousands":      ".",
+                "loadingRecords": "Cargando...",
+                "processing":     "Procesando...",
+                "search":         "Buscar:",
+                "zeroRecords":    "No se encontraron resultados",
+                "paginate": {
+                    "first":      "Primera",
+                    "last":       "Última",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                }
+            },
+            lengthChange: false
         } );
-    } );
-</script>
+        <% if(request.getAttribute("msjTituloModal") != null){ %>
+	 		$('.toast-body').html('<span><%=request.getAttribute("msjModal") %></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
+	        $('.toast-header').html('<span><%=request.getAttribute("msjTituloModal") %></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
+	 		$('.toast').toast('show');
+	 		<% } %>
+ 		$(document).on("click", ".abrir-modal", function () {
+ 			var accion = $(this).data("accion")
+ 			var mensaje = "¿Está seguro de que desea " + accion + " esta cuenta?"
+ 	    	$('input[name="accion"]').val(accion)
+ 		    $(".modal-body").html(mensaje)
+ 		});
+    });
+    
+    function submitForm() {
+    	if("eliminar" == $('input[name="accion"]').val() || "asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val()) {
+        	$("#formPost").submit()
+    }
+
+    </script>
 </head>
 
 <body>
+   <div class="toast" style="left: 50%; position: fixed; transform: translate(-50%, 0px); z-index: 9999;" data-bs-autohide="false">
+      <div class="toast-header"> </div>
+      <div class="toast-body"> </div>
+  </div>
+  
+	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" onclick="submitForm()">Guardar cambios</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<div class="row">
 		<div class="col  px-4 py-2">
 			<form method="post" action="ServletABMLCuentas">
+			  <input type="hidden" name="accion">
 				<fieldset>
 					<legend>Nueva cuenta</legend>
 					<div class="form-group row my-2">
@@ -113,10 +161,10 @@
 						</div>
 					</div>
 					<div class="mt-3">
-						<button type="submit" class="btn btn-primary" <% if(request.getAttribute("inputNroCuenta")==null){
+						<button type="button" class="btn btn-primary abrir-modal" <% if(request.getAttribute("inputNroCuenta")==null){
 							%>name="btnRegistrar" >Registrar</button> <% 
 						} else {
-							%>name="btnAsignar" >Asignar</button> <%
+							%>name="btnAsignar" data-bs-toggle="modal" data-bs-target="#modal" data-accion="asignar" >Asignar</button> <%
 						}%>
 						<input type="reset" class="btn btn-secondary"<% if(request.getAttribute("inputNroCuenta")==null){
 							%>  name="btnLimpiar" value="Limpiar"> <% 
@@ -190,7 +238,7 @@
 							<td class="dt-body-right"><%=listaCuentas.get(i).getSaldo()%></td>
 							<%if(listaCuentas.get(i).getDNI()!=0){
 								%>
-								<td><div class="text-center"><button type="submit" name="btnEliminarCuenta" value="eliminarCuenta" class="btn"><i class="bi bi-trash-fill"></i></button></div>
+								<td><div class="text-center"><button type="button" name="btnEliminarCuenta" value="eliminarCuenta" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
 								</td>
 								<%
 							} else{
