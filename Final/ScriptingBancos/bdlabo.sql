@@ -44,13 +44,14 @@ create table if not exists localidades (
     primary Key (IdLocalidad)
 );
 create table if not exists cuentas (
-	NumeroCuenta bigint not null, #Hay que validar que sean numeros 
+	NumeroCuenta bigint not null auto_increment, #Hay que validar que sean numeros 
     Dni int null,
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
     Saldo decimal(12,2) not null,
     Cbu varchar(22) unique not null,
     FechaCreacion date not null,
     Eliminado boolean default false not null,
+    IDinserted bigint not null auto_increment,
     Primary Key (NumeroCuenta)
 );
 create table if not exists tiposDeCuenta (
@@ -143,6 +144,7 @@ alter table localidades add foreign key (IdProvincia) references provincias (IdP
 # -- Provincia --
 
 # -- Cuenta --
+alter table cuantas auto_increment=1000000;
 alter table cuentas add foreign key (Dni) references clientes (Dni);
 alter table cuentas add foreign key (IdTipoCuenta) references tiposDeCuenta (IdTipoCuenta);
 

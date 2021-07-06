@@ -118,8 +118,8 @@
 						} else {
 							%>name="btnAsignar" >Asignar</button> <%
 						}%>
-						<button type="submit" class="btn btn-secondary"<% if(request.getAttribute("inputNroCuenta")==null){
-							%>  name="btnLimpiar">Limpiar</button> <% 
+						<input type="reset" class="btn btn-secondary"<% if(request.getAttribute("inputNroCuenta")==null){
+							%>  name="btnLimpiar" value="Limpiar"> <% 
 						} else {
 							%> name="btnCancelar">Cancelar</button> <%
 						}%>

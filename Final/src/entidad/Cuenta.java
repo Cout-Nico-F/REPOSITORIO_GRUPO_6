@@ -17,8 +17,8 @@ public class Cuenta {
 	{
 		this.tipoDeCuenta = new TipoDeCuenta();
 	}
-	//Constructor para registrar movimientos de saldo en cuentas
 	
+	//Constructor para registrar movimientos de saldo en cuentas	
 	public Cuenta(String numeroCuenta, String cBU, int dNI, TipoDeCuenta tipoDeCuenta,BigDecimal saldo,java.util.Date fecha)
 	{
 		super();
