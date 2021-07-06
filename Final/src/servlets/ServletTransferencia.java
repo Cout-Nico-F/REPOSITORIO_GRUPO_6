@@ -63,7 +63,13 @@ public class ServletTransferencia extends HttpServlet {
 					return;
 				}
 				
-				//Si el codigo llega a este punto es porque existe la cuenta y tiene saldo suficiente.
+				//Si el codigo llega a este punto es porque existen las cuentas y el origen tiene saldo suficiente para realizar la operacion.
+				
+				//Cartel preguntando Si estamos seguros de querer transferir. 
+				
+				//Transferencia.
+				
+				//Aviso de transferencia Correcta o fallida.
 			
 			} catch (SQLException e) {
 				//Acá podemos redireccionar a una pantalla de error. por ejemplo: "La base de datos no responde. Esta apagada o sin acceso. "
