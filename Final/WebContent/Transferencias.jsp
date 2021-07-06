@@ -11,9 +11,15 @@
 <body>
 
         <br><br><br><br><br><br><br>
+        <form method="Post" action="ServletTransferencia">
+        
         <div class="wrapper">
         	<div class="title"> Transferencia Bancaria </div>
         <div class="form">
+              <div class="inputfield">
+              <label>CBU Cuenta Origen:</label>
+              <input type="number" class="input" >
+           </div> 
          <div class="inputfield">
               <label>CBU Cuenta Destino:</label>
               <input type="number" class="input" >
@@ -23,7 +29,8 @@
               <input type="number" class="input" >
            </div>
           <br><br>
-          <input type="submit" value="Transferir">
+          <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">
     </div>	
+    </form>
 </body>
 </html>
