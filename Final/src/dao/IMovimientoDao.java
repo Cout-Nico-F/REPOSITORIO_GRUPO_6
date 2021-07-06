@@ -1,6 +1,7 @@
 package dao;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import entidad.Cuenta;
 import entidad.Movimiento;
@@ -15,4 +16,5 @@ public interface IMovimientoDao {
 	public boolean MovimientoAltaDeCuenta (Cuenta c);
 	public TipoDeMovimiento traerTipoDeMovimiento(String descripcionTipoMov);
 	public TipoDeMovimiento traerTipoDeMovimiento(short idTipoMov);
+	public ArrayList<Cuenta> traerDatosMovimientos(int IDUsuario);
 }

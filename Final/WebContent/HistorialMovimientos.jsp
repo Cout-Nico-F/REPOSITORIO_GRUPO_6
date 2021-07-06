@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import = "entidad.TipoDeCuenta" %>
 <%@ page import="java.util.ArrayList"%>
+<%@page import="entidad.Cuenta" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,12 +13,13 @@
 
 	<br>
 	<br>
+	<form action="ServletHistorialMovimientos" method="POST"> 
 	<div class="titleMovimientos">Historial de Movimientos</div>
 	<br>
 	<div align="center">
 		<label for="standard-select">Seleccione la cuenta</label>
 		<div class="select">
-			<select id="standard-select">
+			<select id="standard-select" name="slMostrar">
 		<% if(request.getParameter("listaTiposCta") != null){
 			ArrayList<TipoDeCuenta> listaCuentas = new ArrayList<TipoDeCuenta>();
 			listaCuentas = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTiposCta");
@@ -27,11 +29,9 @@
 			</select> <span class="focus"></span>
 		</div>
 	</div>
-	
 	<% } %>
 	<br>
-
-
+	</form>
 	<script>
 		$(document).ready(function() {
 			var table = $('#movimientos').DataTable({
@@ -44,23 +44,18 @@
 				},
 				lengthChange : false,
 				data : [ {
-					"Fecha" : "2016-05-28",
-					"Detalle" : "Transferencia Abogado",
-					"Tipo de Movimiento" : "Transferencia",
-					"CBU Cuenta destino" : 5250000456,
-					"Importe" : "$39473"
-				}, {
-					"Fecha" : "2015-03-18",
-					"Detalle" : "Apertura de cuenta",
-					"Tipo de Movimiento" : "Alta cuenta",
-					"CBU Cuenta destino" : 5250445891020456,
-					"Importe" : "$10000"
-				}, {
-					"Fecha" : "2021-05-28",
+					<% if(request.getParameter("listaTiposCta") != null){ 
+						ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+						listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentas");
+						for(Cuenta c : listaCuentas) { %>
+					
+					"Fecha" : ,
 					"Detalle" : "Pago Universidad",
 					"Tipo de Movimiento" : "Transferencia",
 					"CBU Cuenta destino" : 52500004554686,
 					"Importe" : "$10850"
+					<% } %>
+				<% } %>
 				}, ],
 				columns : [ {
 					data : 'Fecha'

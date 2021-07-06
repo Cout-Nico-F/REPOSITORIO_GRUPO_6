@@ -36,6 +36,11 @@ public class ServletHistorialMovimientos extends HttpServlet {
 		cargarCuentasSelect(request);
 		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
 		rd.forward(request, response);
+		
+		if(request.getParameter("slMostrar") != null) {
+			movNeg.traerDatosMovimientos(2); //Harcodeo el id de usuario
+		}
+		
 	}
 	
 	public void cargarCuentasSelect(HttpServletRequest request) {

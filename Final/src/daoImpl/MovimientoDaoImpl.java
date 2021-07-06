@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import dao.IAdminDao;
@@ -317,6 +318,12 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 
 		return creo;
 
+	}
+
+	@Override
+	public ArrayList<Cuenta> traerDatosMovimientos(int IDUsuario) {
+		//No esta conectada con nada la tabla movimientos y tiposmovimientos
+		return null;
 	}
 
 }
