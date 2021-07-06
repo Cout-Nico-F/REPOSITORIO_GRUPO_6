@@ -30,6 +30,9 @@ public class ServletHistorialMovimientos extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Rellenar el select con los tipos de cuenta de cliente
+		// Capturar el evento onchange del select para cargar los datos en la tabla dependiendo el tipo de cuenta
+		// Agregar un boton refresh en la tabla
 		cargarCuentasSelect(request);
 		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
 		rd.forward(request, response);
