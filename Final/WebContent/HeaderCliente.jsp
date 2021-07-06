@@ -37,7 +37,7 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="HistorialMovimientos.jsp">Cuentas</a>
+          <a class="nav-link" href="HistorialMovimientos.jsp">Historial Movimientos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Transferencias.jsp">Transferir dinero</a>
