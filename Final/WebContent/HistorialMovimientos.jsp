@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import = "entidad.TipoDeCuenta" %>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,17 +14,21 @@
 	<br>
 	<div class="titleMovimientos">Historial de Movimientos</div>
 	<br>
-
 	<div align="center">
 		<label for="standard-select">Seleccione la cuenta</label>
 		<div class="select">
 			<select id="standard-select">
-				<option value="Option 1">Caja de Ahorro</option>
-				<option value="Option 2">Cuenta Corriente</option>
-				<option value="Option 3">Caja de Ahorro 2</option>
+		<% if(request.getParameter("listaTiposCta") != null){
+			ArrayList<TipoDeCuenta> listaCuentas = new ArrayList<TipoDeCuenta>();
+			listaCuentas = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTiposCta");
+			 for(TipoDeCuenta tc : listaCuentas) { %>
+				<option value="<%=tc.getIdTipoCuenta()%>"><%=tc.getDescripcion()%></option> <!-- El id nose si hace falta por las dudas lo pongo -->
+			<% } %>
 			</select> <span class="focus"></span>
 		</div>
 	</div>
+	
+	<% } %>
 	<br>
 
 
