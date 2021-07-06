@@ -51,8 +51,8 @@ create table if not exists cuentas (
     Cbu varchar(22) unique not null,
     FechaCreacion date not null,
     Eliminado boolean default false not null,
-    IDinserted bigint not null auto_increment,
-    Primary Key (NumeroCuenta)
+    IDinserted bigint not null,
+    primary key (NumeroCuenta)
 );
 create table if not exists tiposDeCuenta (
 	IdTipoCuenta tinyint unsigned auto_increment,
@@ -144,7 +144,7 @@ alter table localidades add foreign key (IdProvincia) references provincias (IdP
 # -- Provincia --
 
 # -- Cuenta --
-alter table cuantas auto_increment=1000000;
+alter table cuentas auto_increment=1000000;
 alter table cuentas add foreign key (Dni) references clientes (Dni);
 alter table cuentas add foreign key (IdTipoCuenta) references tiposDeCuenta (IdTipoCuenta);
 
@@ -161,7 +161,6 @@ alter table prestamos add foreign key (NumeroCuenta) references cuentas (NumeroC
 alter table cuotas add foreign key (IdPrestamos) references prestamos (IdPrestamos);
 
 # -- Movimientos --
-alter table movimientos add foreign key (Dni) references clientes (Dni);
 alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovimientos (IdTipoMovimiento);
 
 # -- Tipos Movimientos --
@@ -210,6 +209,20 @@ alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovim
 
 #SET Foreign_key_checks = 1; # Lo volvemos a activar
 
+DELIMITER $$
+CREATE FUNCTION autoInc ()
+    RETURNS BIGINT READS SQL DATA
+    BEGIN
+        DECLARE getCount BIGINT;
+
+        SET getCount = (
+            SELECT count(*)
+            FROM bdlabo.Cuentas) + 1;
+
+        RETURN getCount;
+    END$$
+DELIMITER ;
+
 # -- Harcodeo algunos registros --
 insert into nacionalidades (Nombre) values ("Agentina");
 insert into provincias (Nombre) values ("Buenos Aires");
@@ -226,13 +239,13 @@ values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av
 insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,current_date());
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813725,14203944,2,10000,124124124,current_date());
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813726,null,1,10000,124124125,current_date());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813724,14203944,1,10000,124124123,current_date(),autoInc());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813725,14203944,2,10000,124124124,current_date(),autoInc());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813726,null,1,10000,124124125,current_date(),autoInc());
 
 insert into tiposmovimientos (descripcion) values ("Alta de cuenta");
 insert into tiposmovimientos (descripcion) values ("Alta de prestamo");
 insert into tiposmovimientos (descripcion) values ("Pago de prestamo");
 insert into tiposmovimientos (descripcion) values ("Transferencia");
 
-insert into movimientos (idtipomovimiento,dni,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,14203944,null,123813725,current_timestamp(),"Alta de cuenta", 10000);
+insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,14203944,123813725,current_timestamp(),"Alta de cuenta", 10000);

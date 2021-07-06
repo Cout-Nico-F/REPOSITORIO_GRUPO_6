@@ -33,16 +33,10 @@ public class ServletABMLCuentas extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		eliminarCuenta(request);
-		agregarCuenta(request);
-		asignarCuenta(request);
-		
+
 		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
-		modificarCuenta(request);
-
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
@@ -50,10 +44,14 @@ public class ServletABMLCuentas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		eliminarCuenta(request);
+		agregarCuenta(request);
+		asignarCuenta(request);
 
 		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
+		modificarCuenta(request);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
@@ -93,7 +91,7 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void agregarCuenta(HttpServletRequest request) {
-		if (request.getParameter("accion")!=null && "agregar".equals(request.getParameter("accion"))) {
+		if (request.getParameter("accion") != null && "agregar".equals(request.getParameter("accion"))) {
 			Cuenta cuenta = devolverCuentaCargada(request);
 			if (admNeg.validarCamposCuentaNoVacia(cuenta)) {
 				if (cuenta.getDNI() != 0) {
@@ -150,11 +148,11 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void eliminarCuenta(HttpServletRequest request) {
-		//if (request.getParameter("btnEliminarCuenta") != null) {
-		if(request.getParameter("accion")!=null && "eliminar".equals(request.getParameter("accion"))){
+		if (request.getParameter("btnEliminarCuenta") != null) {
+
 			String numeroCuenta = request.getParameter("nroCuenta");
 			admNeg.eliminarCuenta(Long.parseLong(numeroCuenta));
-			request.setAttribute("accion", null);
+			
 		}
 	}
 

@@ -50,11 +50,14 @@
     
     function submitForm() {
     	if("eliminar" == $('input[name="accion"]').val()){
-        	$("#formGet2").submit()
-    	} 
-		if("asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val()) {
-			$("#formGet1").submit()
+        	$("#formPost").submit()
     	}
+    	else if("asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val())  {
+    		$("#formGet").submit()
+		}
+// 		if("asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val()) {
+// 			$("#formGet1").submit()
+//     	}
     }
 
     </script>
@@ -79,7 +82,7 @@
 	
 	<div class="row">
 		<div class="col  px-4 py-2">
-			<form id="formGet1" method="get" action="ServletABMLCuentas">
+			<form id="formGet" method="get" action="ServletABMLCuentas">
 			  <input type="hidden" name="accion">
 				<fieldset>
 					<legend>Nueva cuenta</legend>
@@ -87,7 +90,7 @@
 						<label for="dni" class="col-sm-3 col-form-label">DNI del
 							cliente</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control required"
+							<input type="text" class="form-control" required
 								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes" onKeyPress="if(this.value.length>8) return false;"
 								 maxlength="9">
 							<datalist id="listaClientes"> <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
@@ -176,34 +179,12 @@
 						}%>
 					</div>
 					
-<%-- 					<% if(request.getParameter("msjModal") != null){ --%>
-	
-<%-- 				%> --%>
-				
-<!-- 				<div class="modal" tabindex="-1"> -->
-<!-- 				  <div class="modal-dialog"> -->
-<!-- 				    <div class="modal-content"> -->
-<!-- 				      <div class="modal-header"> -->
-<%-- 				        <h5 class="modal-title"> <%=request.getAttribute("msjTituloModal") %> </h5> --%>
-<!-- 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-<!-- 				      </div> -->
-<!-- 				      <div class="modal-body"> -->
-<%-- 				        <p><%=request.getAttribute("msjModal") %></p> --%>
-<!-- 				      </div> -->
-<!-- 				      <div class="modal-footer"> -->
-<!-- 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
-<!-- 				      </div> -->
-<!-- 				    </div> -->
-<!-- 				  </div> -->
-<!-- 				</div> -->
-<%-- 			<%} %> --%>
-					
 				</fieldset>
 			</form>
 			
 			
 		</div>
-		<form action="ServletABMLCuentas" method="get">
+
 		<div class="col px-4 py-2">
 			<table id="cuentas" class="table table-hover nowrap">
 				<thead>
@@ -230,7 +211,7 @@
 					for(int i=0;i<listaCuentas.size();i++) {	
 					%>
 						<tr>
-						<form id="formGet2" action="ServletABMLCuentas" method="post">
+						<form id="formPost" action="ServletABMLCuentas" method="post">
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%> <input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%>  </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
@@ -259,7 +240,7 @@
 				</tbody>
 			</table>
 		</div>
-		</form>
+
 	</div>
 </body>
 </html>
