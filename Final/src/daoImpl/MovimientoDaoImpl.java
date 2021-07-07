@@ -26,7 +26,13 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			+ " values (?, ?, ?, ?, ?, ?)";
 	private static final String traerTipoDeMovimientoSegunID = "select * from tiposmovimientos where idtipomovimiento =";
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
-	
+	private static final String traerHistorialMovimientosSegunUsuario = "Select * from tiposmovimientos inner join movimientos\r\n" + 
+			"on tiposmovimientos.IdTipoMovimiento = movimientos.IdTipoMovimiento \r\n" + 
+			"inner join cuentas on  movimientos.CuentaOrigen = cuentas.NumeroCuenta\r\n" + 
+			"inner join clientes on clientes.Dni = cuentas.Dni\r\n" + 
+			"inner join usuarios on usuarios.IdUsuario = clientes.IdUsuario\r\n" + 
+			"Where usuarios.IdUsuario = ?";
+
 	@Override
 	public boolean registrarMovimiento(Movimiento mov) {
 		boolean registro = false;
@@ -321,9 +327,33 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	}
 
 	@Override
-	public ArrayList<Cuenta> traerDatosMovimientos(int IDUsuario) {
-		//No esta conectada con nada la tabla movimientos y tiposmovimientos
-		return null;
+	public ArrayList<Movimiento> traerDatosMovimientos(int IDUsuario) {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		ArrayList<Movimiento> listMov = new ArrayList<Movimiento>();
+		try {
+			ps = conexion.prepareStatement(traerHistorialMovimientosSegunUsuario);
+			ps.setInt(1,IDUsuario);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Movimiento mov = new Movimiento();
+				mov.setDetalle(rs.getString("movimientos.Detalles"));
+				mov.setFechaMovimiento(rs.getDate("movimientos.Fecha"));
+				mov.setIDCuentaDestino(rs.getLong("movimientos.CuentaDestino"));
+				TipoDeMovimiento tm = new TipoDeMovimiento();
+				tm.setIdTipoMovimiento(rs.getShort("tiposmovimientos.IdTipoMovimiento"));
+				tm.setDescripcion(rs.getString("tiposmovimientos.Descripcion"));
+				mov.setImporte(rs.getBigDecimal("movimientos.Importe"));
+				mov.setTipoDeMovimiento(tm);
+				listMov.add(mov);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<Movimiento>();
+		}
+		return listMov;
 	}
 
 }

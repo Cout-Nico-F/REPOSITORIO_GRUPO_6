@@ -13,6 +13,9 @@ public class Movimiento {
 	private long IDCuentaDestino;
 	private Date fechaMovimiento;
 	
+	public Movimiento() {
+		
+	}
 	
 	public int getID() {
 		return ID;
