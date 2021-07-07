@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
 import entidad.Cliente;
@@ -26,23 +27,35 @@ public class ServletABMLCuentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IAdminNegocio admNeg = new AdminNegocioImpl();
 	private ClienteNegocio cliNeg = new ClienteNegocioImpl();
+	private String NombreUsuario = "";
 
 	public ServletABMLCuentas() {
+	
 		super();
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		agregarCuenta(request);
-		asignarCuenta(request);
-
+		String redirige;
 		
-		cargarCuentas(request);
-		cargarDropdown(request);
-		cargarClientesDatalist(request);
-		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
+		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && request.getSession().getAttribute("tipoUsuarioLogeado")=="false"){
+			
+			redirige="/ABMLCuentas.jsp";
+			agregarCuenta(request);
+			asignarCuenta(request);
+			cargarCuentas(request);
+			cargarDropdown(request);
+			cargarClientesDatalist(request);
+			
+		}
+		else {
+			redirige="/servletLogin.java";
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher(redirige);
 		rd.forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -176,6 +189,12 @@ public class ServletABMLCuentas extends HttpServlet {
 		}
 		request.setAttribute("listaClientesDeCuentas", listaClientesDeCuentas);
 	}
+	
+
+	
+	
+	
+	
 
 	// Validaciones para cuenta
 

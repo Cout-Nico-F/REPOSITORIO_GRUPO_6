@@ -46,7 +46,7 @@
           <a class="nav-link" href="Prestamos.jsp">Pedir un préstamo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="PagarPrestamos.jsp">Pagar un préstamo</a>
+          <a class="nav-link" href="ServletPagarPrestamo">Pagar un préstamo</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="DatosPersonales.jsp">Datos personales</a>
