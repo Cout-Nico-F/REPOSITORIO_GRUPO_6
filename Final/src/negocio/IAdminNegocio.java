@@ -21,4 +21,5 @@ public interface IAdminNegocio {
 	public boolean validarCuentaExistente(long nroCuenta);
 	public boolean asignarCuenta(long nroCuenta, int dni);
 	public Cuenta traerCuenta(long nroCuenta);
+	public boolean validarUsuarioAdmin(HttpServletRequest request);
 }

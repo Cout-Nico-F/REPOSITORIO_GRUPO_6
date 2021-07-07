@@ -32,7 +32,7 @@ public class ServletABMLCuentas extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado")==true){
+		if(admNeg.validarUsuarioAdmin(request)){
 			agregarCuenta(request);
 			asignarCuenta(request);
 			cargarCuentas(request);
@@ -50,7 +50,7 @@ public class ServletABMLCuentas extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado")==true){
+		if(admNeg.validarUsuarioAdmin(request)){
 			if(request.getParameter("btnModificarCuenta")!=null) {
 				modificarCuenta(request);			
 			} else {			

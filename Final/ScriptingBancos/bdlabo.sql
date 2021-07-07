@@ -160,7 +160,10 @@ alter table prestamos add foreign key (NumeroCuenta) references cuentas (NumeroC
 alter table cuotas add foreign key (IdPrestamos) references prestamos (IdPrestamos);
 
 # -- Movimientos --
+alter table movimientos add foreign key (CuentaOrigen) references Cuentas (NumeroCuenta);
+alter table movimientos add foreign key (CuentaDestino) references Cuentas (NumeroCuenta);
 alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovimientos (IdTipoMovimiento);
+alter table movimientos add constraint check (not(isnull(CuentaOrigen) and isnull(CuentaDestino)));
 
 # -- Tipos Movimientos --
 
@@ -209,7 +212,7 @@ alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovim
 #SET Foreign_key_checks = 1; # Lo volvemos a activar
 
 # -- Harcodeo algunos registros --
-insert into nacionalidades (Nombre) values ("Agentina");
+insert into nacionalidades (Nombre) values ("Argentina");
 insert into provincias (Nombre) values ("Buenos Aires");
 insert into localidades (IdProvincia,Nombre) values (1,"Escobar");
 
@@ -233,4 +236,4 @@ insert into tiposmovimientos (descripcion) values ("Alta de prestamo");
 insert into tiposmovimientos (descripcion) values ("Pago de prestamo");
 insert into tiposmovimientos (descripcion) values ("Transferencia");
 
-insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,14203944,123813725,current_timestamp(),"Alta de cuenta", 10000);
+insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,123813724,123813726,current_timestamp(),"Alta de cuenta", 10000);

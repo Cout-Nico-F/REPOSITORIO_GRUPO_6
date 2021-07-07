@@ -18,13 +18,19 @@ import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.Movimiento;
 import entidad.TipoDeCuenta;
-import entidad.TipoDeMovimiento;
 import entidad.VariablesGlobales;
 import entidad.VariablesGlobales.TiposMovimiento;
 import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
 
 public class AdminNegocioImpl implements IAdminNegocio {
+	
+	@Override
+	public boolean validarUsuarioAdmin(HttpServletRequest request) {
+		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && request.getSession().getAttribute("tipoUsuarioLogeado")=="true")
+			return true;
+		return false;
+	}
 
 	@Override
 	public ArrayList<TipoDeCuenta> listarTiposCuenta() {
