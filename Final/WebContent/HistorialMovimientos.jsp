@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import = "entidad.TipoDeCuenta" %>
 <%@ page import="java.util.ArrayList"%>
-<%@page import="entidad.Cuenta" %>
+<%@page import="entidad.Movimiento" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,16 +44,15 @@
 				},
 				lengthChange : false,
 				data : [ {
-					<% if(request.getParameter("listaTiposCta") != null){ 
-						ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
-						listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentas");
-						for(Cuenta c : listaCuentas) { %>
-					
+					<% if(request.getAttribute("listaMovimientos") != null){ 
+						ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>();
+						listaMovimientos = (ArrayList<Movimiento>) request.getAttribute("listaMovimientos");
+						for(Movimiento c : listaMovimientos) { %>
 					"Fecha" : ,
-					"Detalle" : "Pago Universidad",
-					"Tipo de Movimiento" : "Transferencia",
-					"CBU Cuenta destino" : 52500004554686,
-					"Importe" : "$10850"
+					"Detalle" : ,
+					"Tipo de Movimiento" : ,
+					"CBU Cuenta destino" : ,
+					"Importe" : "
 					<% } %>
 				<% } %>
 				}, ],
