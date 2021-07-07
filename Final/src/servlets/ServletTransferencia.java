@@ -42,29 +42,7 @@ public class ServletTransferencia extends HttpServlet {
 			try {
 				
 				//validar que los input no esten vacíos.
-				if(validarCampoNoVacio(request.getParameter("inputCbuOrigen")) == false ) {
-					//Alert diciendo: Falta ingresar el numero de Cbu de origen.
-					request.getSession().setAttribute("mensajeOrigen","Ingrese el CBU de la cuenta de origen");
-					request.setAttribute("tipoMensajeOrigen","danger");
-				
-					return;
-				}
-				
-				if(validarCampoNoVacio(request.getParameter("inputCbuDestino")) == false ) {
-					//Alert diciendo: Falta ingresar el numero de Cbu de destino.
-					request.getSession().setAttribute("mensajeDestino","Ingrese el CBU de la cuenta de destino");
-					request.setAttribute("tipoMensajeDestino","danger");
-					
-					return;
-				}
-				
-				if(validarCampoNoVacio(request.getParameter("inputSaldo")) == false ) {
-					//Alert diciendo: Falta ingresar el numero de Cbu de destino.
-					request.getSession().setAttribute("mensajeSaldoVacio","Ingrese la cantidad a transferir en pesos");
-					request.setAttribute("tipoMensajeSaldoVacio","danger");
-					
-					return;
-				}
+				ComprobarCamposVacios(request);
 				
 				ITransferirDao idao = new TransferirDaoImpl();
 				if (idao.ComprobarExistencia(request.getParameter("inputCbuOrigen")) == false ) {
@@ -119,6 +97,34 @@ public class ServletTransferencia extends HttpServlet {
 			return false;
 		}
 		return true;
+	}
+	
+	public void ComprobarCamposVacios(HttpServletRequest request) {
+		
+		if(validarCampoNoVacio(request.getParameter("inputCbuOrigen")) == false ) {
+			//Alert diciendo: Falta ingresar el numero de Cbu de origen.
+			request.getSession().setAttribute("mensajeOrigen","Ingrese el CBU de la cuenta de origen");
+			request.setAttribute("tipoMensajeOrigen","danger");
+		
+			return;
+		}
+		
+		if(validarCampoNoVacio(request.getParameter("inputCbuDestino")) == false ) {
+			//Alert diciendo: Falta ingresar el numero de Cbu de destino.
+			request.getSession().setAttribute("mensajeDestino","Ingrese el CBU de la cuenta de destino");
+			request.setAttribute("tipoMensajeDestino","danger");
+			
+			return;
+		}
+		
+		if(validarCampoNoVacio(request.getParameter("inputSaldo")) == false ) {
+			//Alert diciendo: Falta ingresar el numero de Cbu de destino.
+			request.getSession().setAttribute("mensajeSaldoVacio","Ingrese la cantidad a transferir en pesos");
+			request.setAttribute("tipoMensajeSaldoVacio","danger");
+			
+			return;
+		}
+		
 	}
 
 }
