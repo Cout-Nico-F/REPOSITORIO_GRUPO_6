@@ -2,6 +2,8 @@ package negocio;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import entidad.Cliente;
 import entidad.Localidad;
 import entidad.Nacionalidad;
@@ -19,4 +21,5 @@ public interface ClienteNegocio {
 	public ArrayList<Provincia> traerProvincias();
 	public boolean existeCuil(String cuil);
 	public boolean existeDni(int dni);
+	public boolean validarUsuarioCliente(HttpServletRequest request);
 }

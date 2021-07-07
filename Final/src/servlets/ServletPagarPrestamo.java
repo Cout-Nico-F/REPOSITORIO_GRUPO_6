@@ -9,44 +9,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import negocio.ClienteNegocio;
+import negocioImpl.ClienteNegocioImpl;
+
 /**
  * Servlet implementation class ServletPagarPrestamo
  */
 @WebServlet("/ServletPagarPrestamo")
 public class ServletPagarPrestamo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ClienteNegocio cliNeg = new ClienteNegocioImpl();
 
-	
-    public ServletPagarPrestamo() {
-        super();
+	public ServletPagarPrestamo() {
+		super();
 
-    }
-
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
-		
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");
-		rd.forward(request,response);
-		
-		
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		
-		
-		
-		
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if (cliNeg.validarUsuarioCliente(request)) {
+
+		} else {
+			response.sendRedirect("Login.jsp");
+			return;
+		}
+
 		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");
-		rd.forward(request,response);
-		
+		rd.forward(request, response);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		if (cliNeg.validarUsuarioCliente(request)) {
+
+		} else {
+			response.sendRedirect("Login.jsp");
+			return;
+		}
+
+		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");
+		rd.forward(request, response);
+
 	}
 
 }

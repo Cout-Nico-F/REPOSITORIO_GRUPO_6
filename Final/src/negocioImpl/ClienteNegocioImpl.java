@@ -2,6 +2,8 @@ package negocioImpl;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import dao.LocalidadDao;
 import dao.NacionalidadDao;
 import dao.ProvinciaDao;
@@ -18,6 +20,13 @@ import entidad.Usuario;
 import negocio.ClienteNegocio;
 
 public class ClienteNegocioImpl implements ClienteNegocio{
+	
+	@Override
+	public boolean validarUsuarioCliente(HttpServletRequest request) {
+		if(request.getSession().getAttribute("nombreUsuarioLogeado") != null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado") == false)
+			return true;
+		return false;
+	}
 	
 	@Override
 	public boolean insertCliente(Cliente c) {
@@ -93,4 +102,5 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
 		return cdao.existeCuil(cuil);
 	}
+
 }

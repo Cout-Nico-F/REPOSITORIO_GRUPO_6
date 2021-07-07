@@ -27,7 +27,7 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	
 	@Override
 	public boolean validarUsuarioAdmin(HttpServletRequest request) {
-		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && request.getSession().getAttribute("tipoUsuarioLogeado")=="true")
+		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado") == true)
 			return true;
 		return false;
 	}
