@@ -44,14 +44,13 @@ create table if not exists localidades (
     primary Key (IdLocalidad)
 );
 create table if not exists cuentas (
-	NumeroCuenta bigint not null auto_increment, #Hay que validar que sean numeros 
+	NumeroCuenta bigint not null, #Hay que validar que sean numeros
     Dni int null,
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
     Saldo decimal(12,2) not null,
     Cbu varchar(22) unique not null,
     FechaCreacion date not null,
     Eliminado boolean default false not null,
-    IDinserted bigint not null,
     primary key (NumeroCuenta)
 );
 create table if not exists tiposDeCuenta (
@@ -209,20 +208,6 @@ alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovim
 
 #SET Foreign_key_checks = 1; # Lo volvemos a activar
 
-DELIMITER $$
-CREATE FUNCTION autoInc ()
-    RETURNS BIGINT READS SQL DATA
-    BEGIN
-        DECLARE getCount BIGINT;
-
-        SET getCount = (
-            SELECT count(*)
-            FROM bdlabo.Cuentas) + 1;
-
-        RETURN getCount;
-    END$$
-DELIMITER ;
-
 # -- Harcodeo algunos registros --
 insert into nacionalidades (Nombre) values ("Agentina");
 insert into provincias (Nombre) values ("Buenos Aires");
@@ -239,9 +224,9 @@ values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av
 insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813724,14203944,1,10000,124124123,current_date(),autoInc());
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813725,14203944,2,10000,124124124,current_date(),autoInc());
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813726,null,1,10000,124124125,current_date(),autoInc());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,current_date());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813725,14203944,2,10000,124124124,current_date());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813726,null,1,10000,124124125,current_date());
 
 insert into tiposmovimientos (descripcion) values ("Alta de cuenta");
 insert into tiposmovimientos (descripcion) values ("Alta de prestamo");

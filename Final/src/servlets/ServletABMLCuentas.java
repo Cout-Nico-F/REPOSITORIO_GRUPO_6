@@ -34,6 +34,10 @@ public class ServletABMLCuentas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		agregarCuenta(request);
+		asignarCuenta(request);
+
+		
 		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
@@ -43,15 +47,16 @@ public class ServletABMLCuentas extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		eliminarCuenta(request);
-		agregarCuenta(request);
-		asignarCuenta(request);
+		
+		if(request.getParameter("btnModificarCuenta")!=null) {
+			modificarCuenta(request);			
+		} else {			
+			eliminarCuenta(request);			
+		}
 
 		cargarCuentas(request);
 		cargarDropdown(request);
 		cargarClientesDatalist(request);
-		modificarCuenta(request);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
 		rd.forward(request, response);
@@ -79,7 +84,6 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void modificarCuenta(HttpServletRequest request) {
-		if (request.getParameter("btnModificarCuenta") != null) {
 			String numeroCuenta = request.getParameter("nroCuenta");
 			Cuenta cuenta = admNeg.traerCuenta(Long.valueOf(numeroCuenta));
 			request.setAttribute("inputNroCuenta", cuenta.getNumeroCuenta());
@@ -87,11 +91,10 @@ public class ServletABMLCuentas extends HttpServlet {
 			request.setAttribute("inputSaldo", cuenta.getSaldo());
 			request.setAttribute("DropdownTipoCuenta", cuenta.getTipoDeCuenta().getIdTipoCuenta());
 			request.setAttribute("dniCli", cuenta.getDNI());
-		}
 	}
 
 	private void agregarCuenta(HttpServletRequest request) {
-		if (request.getParameter("accion") != null && "agregar".equals(request.getParameter("accion"))) {
+		if (request.getParameter("btnRegistrar") != null) {
 			Cuenta cuenta = devolverCuentaCargada(request);
 			if (admNeg.validarCamposCuentaNoVacia(cuenta)) {
 				if (cuenta.getDNI() != 0) {
@@ -148,12 +151,8 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void eliminarCuenta(HttpServletRequest request) {
-		if (request.getParameter("btnEliminarCuenta") != null) {
-
 			String numeroCuenta = request.getParameter("nroCuenta");
 			admNeg.eliminarCuenta(Long.parseLong(numeroCuenta));
-			
-		}
 	}
 
 	private void cargarDropdown(HttpServletRequest request) {
