@@ -34,7 +34,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 			return;
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamos.jsp");
 		rd.forward(request, response);
 
 	}
@@ -49,7 +49,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 			return;
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamos.jsp");
 		rd.forward(request, response);
 
 	}
