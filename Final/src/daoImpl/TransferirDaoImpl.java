@@ -1,14 +1,12 @@
 package daoImpl;
 
-import java.math.BigDecimal;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import dao.ITipoDeCuentaDao;
 import dao.ITransferirDao;
-import entidad.Cuenta;
+
 
 public class TransferirDaoImpl implements ITransferirDao{
 
@@ -54,6 +52,38 @@ public class TransferirDaoImpl implements ITransferirDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad) throws SQLException
+	{//TODO: completarMetodoTransferir
+		
+		
+		//Movimiento negativo de cantidad "cantidad" en cuenta Origen
+		//Movimiento positivo de la misma cantidad en cuenta Destino
+		
+		
+		
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		try {
+			ps=conexion.prepareStatement("select Saldo from cuentas where Cbu = ?");
+			ps.setString(1, cbuOrigen);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				
+				if (rs.getBigDecimal("Saldo").floatValue() >= cantidad) {
+					
+					return true;				
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
 		}
 		return false;
 	}

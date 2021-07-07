@@ -31,6 +31,16 @@ public class TransferenciaNegocioImpl implements ITransferenciaNegocio {
 		}
 		return r;
 	}
-	
 
+	@Override
+	public boolean Transferir(String cbuOrigen,String cbuDestino,float cantidad) {
+		boolean r = false;
+		try {
+			r = idao.Transferir(cbuOrigen, cbuDestino, cantidad);
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
 }
