@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,18 +38,23 @@ public class TransferirDaoImpl implements ITransferirDao{
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs;
-		boolean encontrado = false;
 		try {
-			ps=conexion.prepareStatement("select Cbu from cuentas where Cbu = ?");
+			ps=conexion.prepareStatement("select Saldo from cuentas where Cbu = ?");
 			ps.setString(1, cbu);
 			
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				encontrado = true;
+				
+				if (rs.getBigDecimal("Saldo").floatValue() >= cantidad) {
+					
+					return true;				
+				}
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return encontrado;
+		return false;
 	}
 }
