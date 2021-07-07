@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ITransferirDao;
 import daoImpl.TransferirDaoImpl;
+import negocio.ITransferenciaNegocio;
+import negocioImpl.TransferenciaNegocioImpl;
 
 /**
  * Servlet implementation class ServletTransferencia
@@ -43,9 +45,10 @@ public class ServletTransferencia extends HttpServlet {
 				
 				//validar que los input no esten vacíos.
 				ComprobarCamposVacios(request);
+			
+				ITransferenciaNegocio ineg = new TransferenciaNegocioImpl();
 				
-				ITransferirDao idao = new TransferirDaoImpl();
-				if (idao.ComprobarExistencia(request.getParameter("inputCbuOrigen")) == false ) {
+				if (ineg.ComprobarExistencia(request.getParameter("inputCbuOrigen")) == false ) {
 					
 					//Alert diciendo: No existe la cuenta de origen ingresada.
 					request.getSession().setAttribute("mensajeOrigenIncorrecto","No existe el CBU de la cuenta de origen ingresada");
@@ -54,7 +57,7 @@ public class ServletTransferencia extends HttpServlet {
 					return;
 				}
 				
-				if (idao.ComprobarExistencia(request.getParameter("inputCbuDestino")) == false ) {
+				if (ineg.ComprobarExistencia(request.getParameter("inputCbuDestino")) == false ) {
 					
 					//Alert diciendo: No existe la cuenta destino ingresada.
 					request.getSession().setAttribute("mensajeDestinoIncorrecto","No existe el CBU de la cuenta de destino ingresada");
@@ -63,7 +66,7 @@ public class ServletTransferencia extends HttpServlet {
 					return;
 				}
 				
-				if (idao.ComprobarSaldo(request.getParameter("inputSaldo"), Integer.valueOf( request.getParameter("inputSaldo"))) == false) {
+				if (ineg.ComprobarSaldo(request.getParameter("inputSaldo"), Integer.valueOf( request.getParameter("inputSaldo"))) == false) {
 					//Alert diciendo: Saldo Insuficiente!
 					request.getSession().setAttribute("mensajeSaldo","Saldo insuficiente en la cuenta destino");
 					request.setAttribute("tipoMensajeSaldo","danger");
@@ -79,9 +82,7 @@ public class ServletTransferencia extends HttpServlet {
 				
 				//Aviso de transferencia Correcta o fallida.
 			
-			} catch (SQLException e) {
-				//Acá podemos redireccionar a una pantalla de error. por ejemplo: "La base de datos no responde. Esta apagada o sin acceso. "
-			}finally {
+			} finally {
 				RequestDispatcher rd = request.getRequestDispatcher("/Transferencias.jsp");
 				rd.forward(request,response);
 			}
