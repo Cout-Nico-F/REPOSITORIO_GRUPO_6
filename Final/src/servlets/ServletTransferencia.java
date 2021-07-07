@@ -46,9 +46,7 @@ public class ServletTransferencia extends HttpServlet {
 					//Alert diciendo: Falta ingresar el numero de Cbu de origen.
 					request.getSession().setAttribute("mensajeOrigen","Ingrese el CBU de la cuenta de origen");
 					request.setAttribute("tipoMensajeOrigen","danger");
-					
-					RequestDispatcher rd = request.getRequestDispatcher("/Transferencias.jsp");
-					rd.forward(request,response);
+				
 					return;
 				}
 				
@@ -56,8 +54,15 @@ public class ServletTransferencia extends HttpServlet {
 					//Alert diciendo: Falta ingresar el numero de Cbu de destino.
 					request.getSession().setAttribute("mensajeDestino","Ingrese el CBU de la cuenta de destino");
 					request.setAttribute("tipoMensajeDestino","danger");
-					RequestDispatcher rd = request.getRequestDispatcher("/Transferencias.jsp");
-					rd.forward(request,response);
+					
+					return;
+				}
+				
+				if(validarCampoNoVacio(request.getParameter("inputSaldo")) == false ) {
+					//Alert diciendo: Falta ingresar el numero de Cbu de destino.
+					request.getSession().setAttribute("mensajeSaldoVacio","Ingrese la cantidad a transferir en pesos");
+					request.setAttribute("tipoMensajeSaldoVacio","danger");
+					
 					return;
 				}
 				
@@ -65,6 +70,9 @@ public class ServletTransferencia extends HttpServlet {
 				if (idao.ComprobarExistencia(request.getParameter("inputCbuOrigen")) == false ) {
 					
 					//Alert diciendo: No existe la cuenta de origen ingresada.
+					request.getSession().setAttribute("mensajeOrigenIncorrecto","No existe el CBU de la cuenta de origen ingresada");
+					request.setAttribute("tipoMensajeOrigenIncorrecto","danger");
+					
 					return;
 				}
 				
@@ -73,13 +81,15 @@ public class ServletTransferencia extends HttpServlet {
 					//Alert diciendo: No existe la cuenta destino ingresada.
 					request.getSession().setAttribute("mensajeDestinoIncorrecto","No existe el CBU de la cuenta de destino ingresada");
 					request.setAttribute("tipoMensajeDestinoIncorrecto","danger");
+					
 					return;
 				}
 				
-				if (idao.ComprobarSaldo(request.getParameter("inputCbuOrigen"), Integer.valueOf( request.getParameter("cantidadIngresada"))) == false) {
+				if (idao.ComprobarSaldo(request.getParameter("inputSaldo"), Integer.valueOf( request.getParameter("inputSaldo"))) == false) {
 					//Alert diciendo: Saldo Insuficiente!
 					request.getSession().setAttribute("mensajeSaldo","Saldo insuficiente en la cuenta destino");
 					request.setAttribute("tipoMensajeSaldo","danger");
+					
 					return;
 				}
 				
@@ -93,6 +103,9 @@ public class ServletTransferencia extends HttpServlet {
 			
 			} catch (SQLException e) {
 				//Acá podemos redireccionar a una pantalla de error. por ejemplo: "La base de datos no responde. Esta apagada o sin acceso. "
+			}finally {
+				RequestDispatcher rd = request.getRequestDispatcher("/Transferencias.jsp");
+				rd.forward(request,response);
 			}
 		}
 		
