@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
+
 import dao.ClienteDao;
 import dao.IAdminDao;
 import dao.IMovimientoDao;
@@ -125,9 +127,6 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return cuenta;
 	}
 
-	/*
-	 * TODO: falta crear validadores de: - El número de cuenta no esté repetido. -
-	 * El CBU no este repetido. - El IDTipoCuenta exista en la tabla TiposDeCuenta.
-	 * - El saldo no quede negativo después de la modificación.
-	 */
+
+
 }

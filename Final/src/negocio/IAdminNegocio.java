@@ -2,6 +2,8 @@ package negocio;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.TipoDeCuenta;

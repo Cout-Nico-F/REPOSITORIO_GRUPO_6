@@ -10,8 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import entidad.Cliente;
 import entidad.Cuenta;
@@ -27,51 +25,46 @@ public class ServletABMLCuentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IAdminNegocio admNeg = new AdminNegocioImpl();
 	private ClienteNegocio cliNeg = new ClienteNegocioImpl();
-	private String NombreUsuario = "";
-
-	public ServletABMLCuentas() {
 	
+	public ServletABMLCuentas() {
 		super();
-		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String redirige;
-		
-		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && request.getSession().getAttribute("tipoUsuarioLogeado")=="false"){
-			
-			redirige="/ABMLCuentas.jsp";
+		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado")==true){
 			agregarCuenta(request);
 			asignarCuenta(request);
 			cargarCuentas(request);
 			cargarDropdown(request);
 			cargarClientesDatalist(request);
-			
 		}
 		else {
-			redirige="/servletLogin.java";
+			response.sendRedirect("Login.jsp");
+			return;
 		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher(redirige);
+
+		RequestDispatcher rd = request.getRequestDispatcher("ABMLCuentas.jsp");
 		rd.forward(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		if(request.getParameter("btnModificarCuenta")!=null) {
-			modificarCuenta(request);			
-		} else {			
-			eliminarCuenta(request);			
+		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado")==true){
+			if(request.getParameter("btnModificarCuenta")!=null) {
+				modificarCuenta(request);			
+			} else {			
+				eliminarCuenta(request);		
+			}
+			cargarCuentas(request);
+			cargarDropdown(request);
+			cargarClientesDatalist(request);
+		} else {
+			response.sendRedirect("Login.jsp");
+			return;
 		}
 
-		cargarCuentas(request);
-		cargarDropdown(request);
-		cargarClientesDatalist(request);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
 
