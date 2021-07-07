@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidad.Movimiento;
 import entidad.TipoDeCuenta;
+import negocio.ClienteNegocio;
 import negocio.MovimientoNegocio;
+import negocioImpl.ClienteNegocioImpl;
 import negocioImpl.MovimientoNegocioImpl;
 
 @WebServlet("/ServletHistorialMovimientos")
@@ -33,24 +36,19 @@ public class ServletHistorialMovimientos extends HttpServlet {
 		// Rellenar el select con los tipos de cuenta de cliente
 		// Capturar el evento onchange del select para cargar los datos en la tabla dependiendo el tipo de cuenta
 		// Agregar un boton refresh en la tabla
-		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && 
-				(int)request.getSession().getAttribute("tipoUsuarioLogeado")==2) { //Si es 2 es un cliente
 		cargarCuentasSelect(request);
-		RequestDispatcher rd = request.getRequestDispatcher("HistorialMovimientos.jsp");
+		//Por ahora me trae solamente los datos del usuario con id 2
+		cargarTableHistorialMov(request);
+		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
 		rd.forward(request, response);
-		
-			if(request.getParameter("slMostrar") != null) {
-				movNeg.traerDatosMovimientos(2); //Harcodeo el id de usuario
-			}
-		}
-		else {
-			response.sendRedirect("Login.jsp"); //Si sos admin te manda al login, porque un admin no es cliente??
-			return;
-		}
 	}
 	
 	public void cargarCuentasSelect(HttpServletRequest request) {
 		ArrayList<TipoDeCuenta> listaTiposCta = movNeg.buscarTiposDeCuentasUsuario(2); // Le harcodeo el id usuario
 		request.setAttribute("listaTiposCta", listaTiposCta);
+	}
+	public void cargarTableHistorialMov(HttpServletRequest request) {
+		ArrayList<Movimiento> listaMov = movNeg.traerDatosMovimientos(2); //Harcodeo el id de usuario
+		request.setAttribute("listaMov", listaMov);
 	}
 }
