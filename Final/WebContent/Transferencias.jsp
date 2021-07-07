@@ -10,13 +10,26 @@
 </head>
 <body>
 
-        <br><br><br><br><br><br><br>
+        
         <form method="Post" action="ServletTransferencia">
         
         <div class="wrapper">
         	<div class="title"> Transferencia Bancaria </div>
-        <div class="form">
-         <!-- Alert -->
+        	
+        	
+        	<!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeSaldo") != null && session.getAttribute("mensajeSaldo") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeSaldo")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeSaldo") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeSaldo");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		 <!-- Alert -->
          <div class="d-flex justify-content-center">
  		
  		<% if(request.getAttribute("tipoMensajeOrigen") != null && session.getAttribute("mensajeOrigen") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
@@ -28,15 +41,7 @@
 		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
  		</div>
  		 <!-- Alert -->
- 		 
- 		 
-              <div class="inputfield">
-              <label>CBU Cuenta Origen:</label>
-              <input type="number" class="input" >
-           </div>
-           
-           
-          <!-- Alert -->
+ 		 <!-- Alert -->
          <div class="d-flex justify-content-center">
  		
  		<% if(request.getAttribute("tipoMensajeDestino") != null && session.getAttribute("mensajeDestino") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
@@ -48,7 +53,13 @@
 		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
  		</div>
  		 <!-- Alert -->
- 		 
+        	
+        <div class="form">
+        		 
+              <div class="inputfield">
+              <label>CBU Cuenta Origen:</label>
+              <input type="number" class="input" name="inputCbuOrigen">
+           </div> 
          <div class="inputfield">
               <label>CBU Cuenta Destino:</label>
               <input type="number" class="input" >
@@ -59,6 +70,7 @@
            </div>
           <br><br>
           <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">
+ 		 
     </div>	
     </div>
     </form>
