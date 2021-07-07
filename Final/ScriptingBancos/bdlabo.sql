@@ -60,13 +60,12 @@ create table if not exists tiposDeCuenta (
 );
 create table if not exists prestamos (
 	IdPrestamos int unsigned auto_increment, #primero hacemos que sea pk y despues lo modificamos para que sea autoincrementable
-    NumeroCuenta bigint not null, #Los numeros de  cuenta no se repiten? por las dudas unique
+    NumeroCuenta bigint not null,
 	Dni int not null,
     Fecha date not null,
-    ImporteSolicitado decimal not null,
-    ImporteAPagar decimal not null,
-    PlazoPagoMeses decimal not null,
-    MontoMensual decimal not null,
+    ImporteSolicitado decimal(12,2) not null,
+    ImporteAPagar decimal(12,2) not null,
+    MontoMensual decimal(12,2) not null,
     Cuotas tinyint unsigned not null,
     Estado tinyint not null, #En MySQL, cero se considera falso y el valor distinto de cero se considera verdadero. Para usar literales booleanos,
     primary Key (IdPrestamos)
