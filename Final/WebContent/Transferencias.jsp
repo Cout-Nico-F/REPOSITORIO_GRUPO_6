@@ -16,10 +16,39 @@
         <div class="wrapper">
         	<div class="title"> Transferencia Bancaria </div>
         <div class="form">
+         <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeOrigen") != null && session.getAttribute("mensajeOrigen") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeOrigen")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeOrigen") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeOrigen");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		 
+ 		 
               <div class="inputfield">
               <label>CBU Cuenta Origen:</label>
               <input type="number" class="input" >
-           </div> 
+           </div>
+           
+           
+          <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeDestino") != null && session.getAttribute("mensajeDestino") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeDestino")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeDestino") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeDestino");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		 
          <div class="inputfield">
               <label>CBU Cuenta Destino:</label>
               <input type="number" class="input" >
@@ -31,6 +60,7 @@
           <br><br>
           <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">
     </div>	
+    </div>
     </form>
 </body>
 </html>

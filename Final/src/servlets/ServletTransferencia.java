@@ -27,23 +27,28 @@ public class ServletTransferencia extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	/* DoGet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	*/
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 		
 		if (request.getParameter("btnTransferir") != null) {
 			try {
+				
+				//validar que los input no esten vacíos.
+				if(validarCampoNoVacio(request.getParameter("cbuOrigen")) == false ) {
+					//Alert diciendo: Falta ingresar el numero de Cbu de origen.
+					return;
+				}
+				
+				if(validarCampoNoVacio(request.getParameter("cbuDestino")) == false ) {
+					//Alert diciendo: Falta ingresar el numero de Cbu de destino.
+					return;
+				}
 				
 				ITransferirDao idao = new TransferirDaoImpl();
 				if (idao.ComprobarExistencia(request.getParameter("cbuOrigen")) == false ) {
@@ -76,6 +81,13 @@ public class ServletTransferencia extends HttpServlet {
 			}
 		}
 		
+	}
+	
+	public boolean validarCampoNoVacio(String campo) {
+		if (campo.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }
