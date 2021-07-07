@@ -236,3 +236,5 @@ insert into tiposmovimientos (descripcion) values ("Pago de prestamo");
 insert into tiposmovimientos (descripcion) values ("Transferencia");
 
 insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,123813724,123813726,current_timestamp(),"Alta de cuenta", 10000);
+
+insert into prestamos (numerocuenta,dni,fecha,importesolicitado,importeapagar,montomensual,cuotas,estado) values (123813724,14203944,current_date(),50000,65000, 6500, 10, 3);

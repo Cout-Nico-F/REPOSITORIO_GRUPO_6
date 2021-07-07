@@ -1,3 +1,6 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="entidad.Prestamo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,12 +69,49 @@
               <th scope="col" class="text-center">Valor de cuota</th>
               <th scope="col" class="text-center">Total prestamo</th>
               <th scope="col" class="text-center">Plazo de pago (meses)</th>
-              <th scope="col" class="text-center">Monto por mes</th>
+              <th scope="col" class="text-center">Total saldo préstamo</th>
               <th scope="col" class="text-center">Número de cuota</th>
               <th scope="col" class="text-center">Cuenta a debitar</th>
-              <th scope="col" class="text-center">Pagar</th>
+              <th scope="col" class="text-center">Pagar cuota</th>
+              <th scope="col" class="text-center">Pago total</th>
+              
             </tr>
           </thead>
+          <tbody>
+          <% ArrayList<Prestamo> listaPrestamos = null;
+          if (request.getAttribute("listaPrestamos") != null){
+        	  listaPrestamos = (ArrayList<Prestamo>)request.getAttribute("listaPrestamos");
+          }
+          if(listaPrestamos != null) {
+        	  
+          for(Prestamo p : listaPrestamos){
+        	  %>
+        	  <form id="formPost" action="ServletPagarPrestamo" method="post">
+        	  <td class="dt-body-center"><input type="hidden" name="nroCuenta"></td>
+			  <td class="dt-body-right"><%=p.getMontoMensual()%>  </td>
+			  <td ><%=p.getImporteSolicitado()%></td>
+			  <td class="dt-body-center"> <%=p.getCantCuotas() %></td>
+			  <td ></td>
+			  <td class="dt-body-center"></td>
+			  <td></td>
+			  <td class="dt-body-center"><div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div></td>
+			<td class="dt-body-center"><div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div></td>
+        	  
+        	  
+        	  
+        	  </form>
+          <%} 
+          }
+          %>
+          
+          
+          
+          
+          </tbody>
         </table>
   </body>
 </html>
