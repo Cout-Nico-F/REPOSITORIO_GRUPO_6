@@ -146,7 +146,31 @@ public class PrestamoDaoImpl implements PrestamoDao {
 
 	@Override
 	public int actualizarPrestamo(Prestamo prestamo) {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		int resultado = -1;
+		try {
+			ps = conexion.prepareStatement(actualizarPrestamo);
+			ps.setInt(1, prestamo.getEstado());
+			ps.setLong(2, prestamo.getIdPrestamo());
+			resultado = ps.executeUpdate();
+			if (resultado > 0) {
+				conexion.commit();
+				//Si está aprobado, se insertan las cuotas
+				if(prestamo.getEstado() == 3) {
+					CuotaDao cuotaDao = new CuotaDaoImpl();
+					cuotaDao.insertarCuotas(prestamo);					
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return resultado;
 	}
+	
 }

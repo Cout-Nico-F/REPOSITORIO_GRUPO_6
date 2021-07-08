@@ -240,6 +240,7 @@ insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detal
 insert into prestamos (numerocuenta,dni,fecha,importesolicitado,importeapagar,montomensual,cuotas,estado) values (123813724,14203944,current_date(),50000,65000, 6500, 10, 3);
 insert into prestamos (numerocuenta,dni,fecha,importesolicitado,importeapagar,montomensual,cuotas,estado) values (123813724,14203944,current_date(),5000,6500, 650, 10, 3);
 
+insert into prestamos (numerocuenta,dni,fecha,importesolicitado,importeapagar,montomensual,cuotas,estado) values (123813724,14203944,current_date(),1000,1200, 120, 10, 1);
 
 insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,1,6500,DATE_FORMAT("2021-08-07", "%Y" "%m" "%d"),null);
 insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,2,6500,DATE_FORMAT("2021-09-07", "%Y" "%m" "%d"),null);
