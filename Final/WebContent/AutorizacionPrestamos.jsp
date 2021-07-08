@@ -105,6 +105,9 @@
 		 <input type="hidden" name="fecha" value="<%=p.getFecha()%>">
 		 <input type="hidden" name="cuotas" value="<%=p.getCuotas()%>">
 		 <input type="hidden" name="montoMensual" value="<%=p.getMontoMensual()%>">
+		 <td><%=p.getCliente().getNombre()%></td>    
+	     <td><%=p.getCliente().getApellido()%></td>   
+	     <td><%=p.getCliente().getDni()%></td>   
 	     <td class="text-center"><%=p.getFecha()%></td>
 	     <td><%=p.getImporteSolicitado()%></td>
 	     <td><%=p.getCuotas()%></td>
