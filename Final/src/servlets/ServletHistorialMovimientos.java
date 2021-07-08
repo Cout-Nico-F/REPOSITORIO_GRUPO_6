@@ -32,19 +32,12 @@ public class ServletHistorialMovimientos extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(cNeg.validarUsuarioCliente(request)) {
+		cargarCuentasSelect(request);
+		if(request.getParameter("slvalue") != null) {
+			long numeroCuenta = Long.valueOf(request.getParameter("slvalue"));
+			cargarTableHistorialMov(request,numeroCuenta);
 			cargarCuentasSelect(request);
-			if(request.getParameter("slvalue") != null) {
-				long numeroCuenta = Long.valueOf(request.getParameter("slvalue"));
-				cargarTableHistorialMov(request,numeroCuenta);
-				cargarCuentasSelect(request);
-			}
 		}
-		else {
-			response.sendRedirect("Login.jsp");
-			return;
-		}
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
 		rd.forward(request, response);
 	}
@@ -62,8 +55,8 @@ public class ServletHistorialMovimientos extends HttpServlet {
 	}
 	
 	public void cargarCuentasSelect(HttpServletRequest request) {
-		int id = (int)request.getSession().getAttribute("IdUsuario");
-		ArrayList<Cuenta> listaTiposCta = movNeg.buscarTiposDeCuentasUsuario(id); // Le harcodeo el id usuario
+		//int id = (int)request.getSession().getAttribute("IdUsuario");
+		ArrayList<Cuenta> listaTiposCta = movNeg.buscarTiposDeCuentasUsuario(2); // Le harcodeo el id usuario
 		request.setAttribute("listaTiposCta", listaTiposCta);
 	}
 	public void cargarTableHistorialMov(HttpServletRequest request,long numeroCuenta) {
