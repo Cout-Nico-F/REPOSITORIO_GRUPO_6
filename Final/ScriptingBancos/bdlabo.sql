@@ -75,7 +75,7 @@ create table if not exists cuotas (
     NumeroCuota tinyint not null,
     Importe decimal not null, # que tipo de importe es?
     FechaVencimiento date not null,
-    FechaPago date not null,
+    FechaPago date null,
     Primary Key (IdPrestamos,NumeroCuota)
 );
 create table if not exists movimientos (
@@ -238,3 +238,15 @@ insert into tiposmovimientos (descripcion) values ("Transferencia");
 insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,123813724,123813726,current_timestamp(),"Alta de cuenta", 10000);
 
 insert into prestamos (numerocuenta,dni,fecha,importesolicitado,importeapagar,montomensual,cuotas,estado) values (123813724,14203944,current_date(),50000,65000, 6500, 10, 3);
+
+
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,1,6500,"2021-08-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,2,6500,"2021-09-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,3,6500,"2021-10-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,4,6500,"2021-11-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,5,6500,"2021-12-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,6,6500,"2022-01-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,7,6500,"2022-02-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,8,6500,"2022-03-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,9,6500,"2022-04-07",null);
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,10,6500,"2022-05-07",null);

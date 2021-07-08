@@ -2,6 +2,7 @@ package entidad;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Prestamo {
 	private int ID;
@@ -10,9 +11,11 @@ public class Prestamo {
 	private BigDecimal importeSolicitado;
 	private BigDecimal montoMensual;
 	private short cantCuotas;
+	private ArrayList<Cuota> listaCuotas;
+	
 	
 	public Prestamo(int iD, int dniCliente, java.util.Date fecha, BigDecimal importeSolicitado,
-			BigDecimal montoMensual, short cantCuotas) {
+			BigDecimal montoMensual, short cantCuotas,ArrayList<Cuota> listaCuotas) {
 		super();
 		ID = iD;
 		this.dniCliente = dniCliente;
@@ -20,8 +23,18 @@ public class Prestamo {
 		this.importeSolicitado = importeSolicitado;
 		this.montoMensual = montoMensual;
 		this.cantCuotas = cantCuotas;
+		this.listaCuotas = listaCuotas;
+		
 	}
 	
+	public ArrayList<Cuota> getListaCuotas() {
+		return listaCuotas;
+	}
+
+	public void setListaCuotas(ArrayList<Cuota> listaCuotas) {
+		this.listaCuotas = listaCuotas;
+	}
+
 	public Prestamo() {
 	}
 	
