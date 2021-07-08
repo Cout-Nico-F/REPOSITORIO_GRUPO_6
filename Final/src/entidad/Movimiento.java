@@ -1,6 +1,7 @@
 package entidad;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Movimiento {
@@ -11,7 +12,7 @@ public class Movimiento {
 	private BigDecimal importe;
 	private long IDCuentaOrigen;
 	private long IDCuentaDestino;
-	private Date fechaMovimiento;
+	private Timestamp fechaMovimiento;
 	
 	public Movimiento() {
 		
@@ -53,10 +54,10 @@ public class Movimiento {
 	public void setIDCuentaDestino(long iDCuentaDestino) {
 		IDCuentaDestino = iDCuentaDestino;
 	}
-	public void setFechaMovimiento(Date fechaMovimiento) {
+	public void setFechaMovimiento(Timestamp fechaMovimiento) {
 		this.fechaMovimiento = fechaMovimiento;
 	}
-	public Date getFechaMovimiento() {
+	public Timestamp getFechaMovimiento() {
 		return fechaMovimiento;
 	}
 	public Movimiento(int iD, TipoDeMovimiento tipoDeMovimiento, String detalle, BigDecimal importe,

@@ -1,13 +1,13 @@
 package entidad;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Cuota {
 	private int numeroCuota;
-	private Prestamo prestamo;
-	private double importe;
-	private Date fechaVencimiento;
-	private Date fechaPago;
+	private BigDecimal importe;
+	private java.sql.Date fechaVencimiento;
+	private java.sql.Date fechaPago;
 	
 	public Cuota() {
 		
@@ -19,28 +19,38 @@ public class Cuota {
 	public void setNumeroCuota(int numeroCuota) {
 		this.numeroCuota = numeroCuota;
 	}
-	public Prestamo getPrestamo() {
-		return prestamo;
-	}
-	public void setPrestamo(Prestamo prestamo) {
-		this.prestamo = prestamo;
-	}
-	public double getImporte() {
+
+	public BigDecimal getImporte() {
 		return importe;
 	}
-	public void setImporte(double importe) {
+	public void setImporte(BigDecimal importe) {
 		this.importe = importe;
 	}
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
 	}
-	public void setFechaVencimiento(Date fechaVencimiento) {
+	public void setFechaVencimiento(java.sql.Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
-	public Date getFechaPago() {
+	
+	public java.util.Date getFechaDeVencimientoJAVA() {
+		return new java.util.Date(fechaVencimiento.getTime());
+	}
+	public java.sql.Date getFechaDeVencimientoSQL() {
+		return fechaVencimiento;
+	}
+	
+	public java.util.Date getFechaPagoJAVA() {
+		return new java.util.Date(fechaPago.getTime());
+	}
+	
+	public java.sql.Date getFechaPagoSQL() {
 		return fechaPago;
 	}
-	public void setFechaPago(Date fechaPago) {
-		this.fechaPago = fechaPago;
+	
+	public void setFechaPago(java.util.Date fechaPago) {
+		this.fechaPago = new java.sql.Date(fechaPago.getTime());
 	}
+	
+	
 }

@@ -86,7 +86,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 			numeroCuotasMostradas=listaCuotas.size();
 		}
 		listaCuotas = new ArrayList<Cuota>(listaCuotas.subList(0, numeroCuotasMostradas));
-		prestamo = new Prestamo(p.getID(),p.getDniCliente(),p.getFechaJava(),p.getImporteSolicitado(),p.getMontoMensual(),p.getCantCuotas(),listaCuotas);
+		prestamo = new Prestamo(p.getIdPrestamo(),p.getCliente(),p.getCuenta(),p.getFechaSQL(),p.getImporteSolicitado(),p.getImporteAPagar(),p.getMontoMensual(),p.getCuotas(), p.getEstado(),listaCuotas);
 		prestamo.setListaCuotas(listaCuotas);
 		listaPrestAux.add(prestamo);
 		}

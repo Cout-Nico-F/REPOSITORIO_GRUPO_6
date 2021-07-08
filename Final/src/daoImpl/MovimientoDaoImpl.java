@@ -336,7 +336,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			if(rs.next()) {
 				Movimiento mov = new Movimiento();
 				mov.setDetalle(rs.getString("m.Detalles"));
-				mov.setFechaMovimiento(rs.getDate("m.Fecha"));
+				mov.setFechaMovimiento(rs.getTimestamp("m.Fecha"));
 				mov.setIDCuentaDestino(rs.getLong("m.CuentaDestino"));
 				mov.setImporte(rs.getBigDecimal("m.Importe"));
 				TipoDeMovimiento tm = new TipoDeMovimiento();

@@ -97,8 +97,8 @@
         	  %>
         	  <tr>     	  
         	  <form id="formPost" action="ServletPagarPrestamo" method="post">
-    	  	  <td class="dt-body-center"> <%=p.getID() %></td>
-        	  <td class="dt-body-center"> <%=c.getNumeroDeCuota() %> / <%=p.getCantCuotas() %> </td>
+    	  	  <td class="dt-body-center"> <%=p.getIdPrestamo() %></td>
+        	  <td class="dt-body-center"> <%=c.getNumeroCuota() %> / <%=p.getCuotas() %> </td>
         	  <td class="dt-body-center"> <%=c.getFechaDeVencimientoSQL() %> <input type="hidden" name="nroCuenta"></td>
 			  <td class="dt-body-center">$ <%=p.getMontoMensual()%> .- </td>
 			  <td class="dt-body-center"> $ <%=((ArrayList<BigDecimal>)request.getAttribute("listaSaldos")).get(indexPrestamo) %> .- </td>

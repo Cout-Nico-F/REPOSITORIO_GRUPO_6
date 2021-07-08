@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,10 @@ import negocioImpl.AdminNegocioImpl;
 
 @WebServlet("/AutorizacionPrestamos")
 public class ServletAutorizacionPrestamos extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private IAdminNegocio admNeg = new AdminNegocioImpl();
 	
 	public ServletAutorizacionPrestamos() {
@@ -35,14 +40,14 @@ public class ServletAutorizacionPrestamos extends HttpServlet {
 		Prestamo p = new Prestamo();
 		String mensaje;
 		p.setIdPrestamo(Integer.valueOf(request.getParameter("idPrestamo")));
-		p.setCuotas(Integer.valueOf(request.getParameter("cuotas")));
-		p.setMontoMensual(Double.valueOf(request.getParameter("montoMensual")));
-		p.setFecha(getDate(request.getParameter("fecha")));
+		p.setCuotas(Short.valueOf(request.getParameter("cuotas")));
+		p.setMontoMensual(new BigDecimal((String)request.getParameter("montoMensual")));
+		p.setFechaJAVA(getDate(request.getParameter("fecha")));
 		if("autorizar".equals(request.getParameter("accion"))) {
-			p.setEstado(3);
+			p.setEstado((short)3);
 			mensaje = "El préstamo ha sido autorizado"; 
 		} else {
-			p.setEstado(2);
+			p.setEstado((short)2);
 			mensaje = "El préstamo ha sido denegado";
 		}
 		if(admNeg.actualizarPrestamo(p) < 1) {
