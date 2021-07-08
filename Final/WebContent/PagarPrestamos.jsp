@@ -85,7 +85,10 @@
           if(listaPrestamos != null) {
         	  
           for(Prestamo p : listaPrestamos){
+        	  
         	  %>
+        	  <h1>Cuotas a vencer</h1>
+        	  
         	  <form id="formPost" action="ServletPagarPrestamo" method="post">
         	  <td class="dt-body-center"><input type="hidden" name="nroCuenta"></td>
 			  <td class="dt-body-right"><%=p.getMontoMensual()%>  </td>
