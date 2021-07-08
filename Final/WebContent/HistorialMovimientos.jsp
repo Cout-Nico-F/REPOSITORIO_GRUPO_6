@@ -24,9 +24,17 @@
 		 <% if(request.getAttribute("listaTiposCta") != null){
 			ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
 			listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaTiposCta");
-			 for(Cuenta c : listaCuentas) { %>
+			 for(Cuenta c : listaCuentas) { 
+			 	if(c.getNumeroCuenta().equals(request.getParameter("slvalue")))
+			 	{
+			 	%>
+			 		<option value="<%=c.getNumeroCuenta() %>" selected><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
+			 	<% 
+			 	} else {
+			 	%>
 				<option value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option> <!-- El id nose si hace falta por las dudas lo pongo -->
-			<% } %>
+			 	<%}
+			 } %>
 			<% } 
 		 	else { %>
 				<option value="1">No hay opciones</option>
@@ -55,7 +63,7 @@
             	listaMov = (ArrayList<Movimiento>) request.getAttribute("listaMov"); 
             	for(Movimiento m : listaMov) { %>
             <tr>
-            	<td><%=m.getFechaMovimiento() %></td>
+            	<td>Fecha: <%=new java.sql.Date(m.getFechaMovimiento().getTime()) %></td>
             	<td><%=m.getDetalle() %></td>
             	<td><%=m.getTipoDeMovimiento().getDescripcion() %></td>
             	<td><%=m.getIDCuentaDestino() %></td>
