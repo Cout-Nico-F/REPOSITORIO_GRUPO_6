@@ -1,6 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import = "entidad.TipoDeCuenta" %>
+<%@page import = "entidad.Cuenta" %>
 <%@ page import="java.util.ArrayList"%>
 <%@page import="entidad.Movimiento" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,12 +20,12 @@
 	<div align="center">
 		<label for="standard-select">Seleccione la cuenta</label>
 		<div class="select"> 
-			<select id="standard-select" name="slMostrar">
+			<select id="standard-select" name="slMostrar" onchange="this.form.submit()">
 		 <% if(request.getAttribute("listaTiposCta") != null){
-			ArrayList<TipoDeCuenta> listaCuentas = new ArrayList<TipoDeCuenta>();
-			listaCuentas = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTiposCta");
-			 for(TipoDeCuenta tc : listaCuentas) { %>
-				<option value="<%=tc.getIdTipoCuenta() %>"><%=tc.getDescripcion() %></option> <!-- El id nose si hace falta por las dudas lo pongo -->
+			ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+			listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaTiposCta");
+			 for(Cuenta c : listaCuentas) { %>
+				<option value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option> <!-- El id nose si hace falta por las dudas lo pongo -->
 			<% } %>
 			<% } 
 		 	else { %>
