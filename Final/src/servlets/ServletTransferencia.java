@@ -66,9 +66,9 @@ public class ServletTransferencia extends HttpServlet {
 					return;
 				}
 				
-				if (ineg.ComprobarSaldo(request.getParameter("inputSaldo"), Integer.valueOf( request.getParameter("inputSaldo"))) == false) {
+				if (ineg.ComprobarSaldo( request.getParameter("inputCbuOrigen")  , Float.valueOf(request.getParameter("inputSaldo")) ) == false) {
 					//Alert diciendo: Saldo Insuficiente!
-					request.getSession().setAttribute("mensajeSaldo","Saldo insuficiente en la cuenta destino");
+					request.getSession().setAttribute("mensajeSaldo","Saldo insuficiente en la cuenta origen");
 					request.setAttribute("tipoMensajeSaldo","danger");
 					
 					return;
@@ -80,7 +80,7 @@ public class ServletTransferencia extends HttpServlet {
 				
 				//Transferencia.
 				
-				ineg.Transferir(null, null, 0);
+				ineg.Transferir(request.getParameter("inputCbuOrigen"), request.getParameter("inputCbuDestino"), Float.valueOf(request.getParameter("inputSaldo")) );
 
 				//Aviso de transferencia Correcta o fallida.
 			
