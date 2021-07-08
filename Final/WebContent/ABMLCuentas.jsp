@@ -169,7 +169,7 @@
 						} else {
 							%> <button class="btn btn-primary abrir-modal" type="button" name="btnAsignar" data-bs-toggle="modal" data-bs-target="#modal" data-accion="asignar" >Asignar</button> <%
 						}%>
-						<input type="reset" class="btn btn-secondary"<% if(request.getAttribute("inputNroCuenta")==null){
+						<input type="submit" class="btn btn-secondary"<% if(request.getAttribute("inputNroCuenta")==null){
 							%>  name="btnLimpiar" value="Limpiar"> <% 
 						} else {
 							%> name="btnCancelar" value="Cancelar"> <%
