@@ -23,7 +23,7 @@ public class ServletHistorialMovimientos extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private MovimientoNegocio movNeg = new MovimientoNegocioImpl();
-	//private ClienteNegocio cNeg = new ClienteNegocioImpl();
+	private ClienteNegocio cNeg = new ClienteNegocioImpl();
        
     public ServletHistorialMovimientos() {
         super();
@@ -31,8 +31,19 @@ public class ServletHistorialMovimientos extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		cargarCuentasSelect(request);
-		//cargarTableHistorialMov(request);
+		
+		if(cNeg.validarUsuarioCliente(request)) {
+			cargarCuentasSelect(request);
+			if(request.getParameter("slvalue") != null) {
+				long numeroCuenta = Long.valueOf(request.getParameter("slvalue"));
+				cargarTableHistorialMov(request,numeroCuenta);
+				cargarCuentasSelect(request);
+			}
+		}
+		else {
+			response.sendRedirect("Login.jsp");
+			return;
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
 		rd.forward(request, response);
@@ -42,8 +53,8 @@ public class ServletHistorialMovimientos extends HttpServlet {
 		// Rellenar el select con los tipos de cuenta de cliente
 		// Capturar el evento onchange del select para cargar los datos en la tabla dependiendo el tipo de cuenta
 		// Agregar un boton refresh en la tabla
-		cargarCuentasSelect(request);
 		//cargarTableHistorialMov(request);
+		cargarCuentasSelect(request);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
 		rd.forward(request, response);
@@ -51,11 +62,12 @@ public class ServletHistorialMovimientos extends HttpServlet {
 	}
 	
 	public void cargarCuentasSelect(HttpServletRequest request) {
-		ArrayList<Cuenta> listaTiposCta = movNeg.buscarTiposDeCuentasUsuario(2); // Le harcodeo el id usuario
+		int id = (int)request.getSession().getAttribute("IdUsuario");
+		ArrayList<Cuenta> listaTiposCta = movNeg.buscarTiposDeCuentasUsuario(id); // Le harcodeo el id usuario
 		request.setAttribute("listaTiposCta", listaTiposCta);
 	}
-	public void cargarTableHistorialMov(HttpServletRequest request) {
-		ArrayList<Movimiento> listaMov = movNeg.traerDatosMovimientos(2); //Harcodeo el id de usuario
+	public void cargarTableHistorialMov(HttpServletRequest request,long numeroCuenta) {
+		ArrayList<Movimiento> listaMov = movNeg.traerDatosMovimientos(numeroCuenta); //Harcodeo el id de usuario
 		request.setAttribute("listaMov", listaMov);
 	}
 }

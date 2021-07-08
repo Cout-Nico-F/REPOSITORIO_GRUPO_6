@@ -16,11 +16,11 @@
 	
 	<div class="titleMovimientos">Historial de Movimientos</div>
 	<br>
-	<form action="ServletHistorialMovimientos" method="post"> 
+	<form action="ServletHistorialMovimientos" method="get"> 
 	<div align="center">
 		<label for="standard-select">Seleccione la cuenta</label>
 		<div class="select"> 
-			<select id="standard-select" name="slMostrar" onchange="this.form.submit()">
+			<select id="standard-select" name="slvalue" onchange="this.form.submit()">
 		 <% if(request.getAttribute("listaTiposCta") != null){
 			ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
 			listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaTiposCta");
@@ -31,13 +31,13 @@
 		 	else { %>
 				<option value="1">No hay opciones</option>
 			<% } %>
-			</select> 
+			</select> <span class="focus"></span>
+			<input type="hidden" name="selectedValue" value="0"/>  
 		</div>
 	</div>
 	</form>
 	
 	<br>
-	<form method="post" action="ServletHistorialMovimientos"> 
 	<div class="col px-4 py-2">
         <table id="clientes" class="table table-hover nowrap">
           <thead>
@@ -66,7 +66,6 @@
       		</tbody>
       	</table>
       </div>
-      </form>
 </body>
 
 </html>

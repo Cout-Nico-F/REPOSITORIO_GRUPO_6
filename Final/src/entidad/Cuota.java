@@ -1,56 +1,46 @@
 package entidad;
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 public class Cuota {
+	private int numeroCuota;
+	private Prestamo prestamo;
+	private double importe;
+	private Date fechaVencimiento;
+	private Date fechaPago;
 	
-	short numeroDeCuota;
-	BigDecimal importe;
-	Date fechaDeVencimiento;
-	Date fechaDePago;
-	
-	
-	public Cuota(short numeroDeCuota, BigDecimal importe, java.util.Date fechaDeVencimiento, java.util.Date fechaDePago) {
-		super();
-		this.numeroDeCuota = numeroDeCuota;
-		this.importe = importe;
-		this.fechaDeVencimiento = new Date(fechaDeVencimiento.getTime());
-		this.fechaDePago = new Date(fechaDePago.getTime());
-	}
 	public Cuota() {
-		super();
+		
 	}
 	
-	
-	public short getNumeroDeCuota() {
-		return numeroDeCuota;
+	public int getNumeroCuota() {
+		return numeroCuota;
 	}
-	public void setNumeroDeCuota(short numeroDeCuota) {
-		this.numeroDeCuota = numeroDeCuota;
+	public void setNumeroCuota(int numeroCuota) {
+		this.numeroCuota = numeroCuota;
 	}
-	public BigDecimal getImporte() {
+	public Prestamo getPrestamo() {
+		return prestamo;
+	}
+	public void setPrestamo(Prestamo prestamo) {
+		this.prestamo = prestamo;
+	}
+	public double getImporte() {
 		return importe;
 	}
-	public void setImporte(BigDecimal importe) {
+	public void setImporte(double importe) {
 		this.importe = importe;
 	}
-	public java.util.Date getFechaDeVencimientoJAVA() {
-		return new java.util.Date(fechaDeVencimiento.getTime());
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
 	}
-	public java.sql.Date getFechaDeVencimientoSQL() {
-		return fechaDeVencimiento;
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
 	}
-	public void setFechaDeVencimiento(java.util.Date fechaDeVencimiento) {
-		this.fechaDeVencimiento = new Date(fechaDeVencimiento.getTime());
+	public Date getFechaPago() {
+		return fechaPago;
 	}
-	public java.util.Date getFechaDePagoJAVA() {
-		return new java.util.Date(fechaDePago.getTime());
-	}
-	public java.sql.Date getFechaDePagoSQL() {
-		return fechaDePago;
-	}
-	public void setFechaDePago(java.util.Date fechaDePago) {
-		this.fechaDePago =new Date(fechaDePago.getTime());
+	public void setFechaPago(Date fechaPago) {
+		this.fechaPago = fechaPago;
 	}
 }

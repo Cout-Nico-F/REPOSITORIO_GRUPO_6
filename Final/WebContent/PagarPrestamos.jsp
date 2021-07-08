@@ -73,8 +73,12 @@
               <th scope="col" class="text-center">Valor de cuota</th>
               <th scope="col" class="text-center">Saldo préstamo</th>
               <th scope="col" class="text-center">Total prestamo</th>
+              <th scope="col" class="text-center">Plazo de pago (meses)</th>
+              <th scope="col" class="text-center">Total saldo préstamo</th>
+              <th scope="col" class="text-center">Número de cuota</th>
               <th scope="col" class="text-center">Cuenta a debitar</th>
               <th scope="col" class="text-center">Pagar cuota</th>
+              <th scope="col" class="text-center">Pago total</th>
               
             </tr>
           </thead>
@@ -86,6 +90,7 @@
           if(listaPrestamos != null) {
        	  int indexPrestamo = 0;
           for(Prestamo p : listaPrestamos){
+        	  
         	  %>
         	  <% ArrayList<Cuota> listaCuotas = p.getListaCuotas();
         	  	for(Cuota c : listaCuotas){
@@ -102,6 +107,12 @@
 			  <td class="dt-body-center"><div class="form-check">
 			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
 			</div></td>
+			<td class="dt-body-center"><div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div></td>
+        	  
+        	  
+        	  
         	  </form>
         	  </tr>
           	<%}

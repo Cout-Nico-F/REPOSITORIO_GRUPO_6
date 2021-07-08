@@ -10,13 +10,16 @@ import dao.ClienteDao;
 import dao.IAdminDao;
 import dao.IMovimientoDao;
 import dao.ITipoDeCuentaDao;
+import dao.PrestamoDao;
 import daoImpl.AdminDaoImpl;
 import daoImpl.ClienteDaoImpl;
 import daoImpl.MovimientoDaoImpl;
+import daoImpl.PrestamoDaoImpl;
 import daoImpl.TipoDeCuentaDaoImpl;
 import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.Movimiento;
+import entidad.Prestamo;
 import entidad.TipoDeCuenta;
 import entidad.VariablesGlobales;
 import entidad.VariablesGlobales.TiposMovimiento;
@@ -32,6 +35,18 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return false;
 	}
 
+	@Override
+	public ArrayList<Prestamo> listarPrestamosParaAutorizar(){
+		PrestamoDao dao = new PrestamoDaoImpl();
+		return dao.traerPrestamosParaAutorizar();
+	}
+	
+	@Override
+	public int actualizarPrestamo(Prestamo prestamo) {
+		PrestamoDao dao = new PrestamoDaoImpl();
+		return dao.actualizarPrestamo(prestamo);
+	}
+	
 	@Override
 	public ArrayList<TipoDeCuenta> listarTiposCuenta() {
 		ITipoDeCuentaDao dao = new TipoDeCuentaDaoImpl();

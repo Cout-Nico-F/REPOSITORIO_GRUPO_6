@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import entidad.Cliente;
 import entidad.Cuenta;
+import entidad.Prestamo;
 import entidad.TipoDeCuenta;
 
 public interface IAdminNegocio {
@@ -21,5 +22,7 @@ public interface IAdminNegocio {
 	public boolean validarCuentaExistente(long nroCuenta);
 	public boolean asignarCuenta(long nroCuenta, int dni);
 	public Cuenta traerCuenta(long nroCuenta);
+	public ArrayList<Prestamo> listarPrestamosParaAutorizar();
+	public int actualizarPrestamo(Prestamo prestamo);
 	public boolean validarUsuarioAdmin(HttpServletRequest request);
 }

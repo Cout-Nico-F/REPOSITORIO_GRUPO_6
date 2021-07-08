@@ -79,7 +79,11 @@ public class ServletTransferencia extends HttpServlet {
 				//Cartel preguntando Si estamos seguros de querer transferir. 
 				
 				//Transferencia.
+<<<<<<< HEAD
 				//TODO:  ineg.Transferir();
+=======
+				//ineg.Transferir();
+>>>>>>> 3f090beed32a3e4c105f6fc9fef8faeb25edffed
 				//Aviso de transferencia Correcta o fallida.
 			
 			} finally {

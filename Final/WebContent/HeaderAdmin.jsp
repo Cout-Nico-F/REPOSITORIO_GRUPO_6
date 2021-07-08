@@ -41,7 +41,7 @@
           <a class="nav-link" href="ServletABMLCuentas">ABML Cuentas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="AutorizarPrestamos.jsp">Autorización de préstamos</a>
+          <a class="nav-link" href="AutorizacionPrestamos">Autorización de préstamos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="VistaAdmin.jsp">Reportes</a>

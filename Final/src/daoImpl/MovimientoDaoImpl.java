@@ -26,12 +26,9 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			+ " values (?, ?, ?, ?, ?, ?)";
 	private static final String traerTipoDeMovimientoSegunID = "select * from tiposmovimientos where idtipomovimiento =";
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
-	private static final String traerHistorialMovimientosSegunUsuario = "Select * from tiposmovimientos inner join movimientos\r\n" + 
-			"on tiposmovimientos.IdTipoMovimiento = movimientos.IdTipoMovimiento \r\n" + 
-			"inner join cuentas on  movimientos.CuentaOrigen = cuentas.NumeroCuenta\r\n" + 
-			"inner join clientes on clientes.Dni = cuentas.Dni\r\n" + 
-			"inner join usuarios on usuarios.IdUsuario = clientes.IdUsuario\r\n" + 
-			"Where usuarios.IdUsuario = ?";
+	private static final String traerHistorialMovimientosSegunNumeroCuenta = "Select * From movimientos m inner join cuentas c on ((m.CuentaOrigen = c.NumeroCuenta) or (m.CuentaDestino = c.NumeroCuenta))\r\n" + 
+			"inner join tiposmovimientos tm on m.IdTipoMovimiento = tm.IdTipoMovimiento\r\n" + 
+			"Where NumeroCuenta = ?;";
 
 	@Override
 	public boolean registrarMovimiento(Movimiento mov) {
@@ -327,24 +324,24 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	}
 
 	@Override
-	public ArrayList<Movimiento> traerDatosMovimientos(int IDUsuario) {
+	public ArrayList<Movimiento> traerDatosMovimientos(long NumeroCuenta) {
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs;
 		ArrayList<Movimiento> listMov = new ArrayList<Movimiento>();
 		try {
-			ps = conexion.prepareStatement(traerHistorialMovimientosSegunUsuario);
-			ps.setInt(1,IDUsuario);
+			ps = conexion.prepareStatement(traerHistorialMovimientosSegunNumeroCuenta);
+			ps.setLong(1,NumeroCuenta);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				Movimiento mov = new Movimiento();
-				mov.setDetalle(rs.getString("movimientos.Detalles"));
-				mov.setFechaMovimiento(rs.getDate("movimientos.Fecha"));
-				mov.setIDCuentaDestino(rs.getLong("movimientos.CuentaDestino"));
+				mov.setDetalle(rs.getString("m.Detalles"));
+				mov.setFechaMovimiento(rs.getDate("m.Fecha"));
+				mov.setIDCuentaDestino(rs.getLong("m.CuentaDestino"));
+				mov.setImporte(rs.getBigDecimal("m.Importe"));
 				TipoDeMovimiento tm = new TipoDeMovimiento();
-				tm.setIdTipoMovimiento(rs.getShort("tiposmovimientos.IdTipoMovimiento"));
-				tm.setDescripcion(rs.getString("tiposmovimientos.Descripcion"));
-				mov.setImporte(rs.getBigDecimal("movimientos.Importe"));
+				tm.setIdTipoMovimiento(rs.getShort("tm.IdTipoMovimiento"));
+				tm.setDescripcion(rs.getString("tm.Descripcion"));
 				mov.setTipoDeMovimiento(tm);
 				listMov.add(mov);
 			}

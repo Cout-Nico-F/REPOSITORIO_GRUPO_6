@@ -11,5 +11,5 @@ public interface MovimientoNegocio {
 	
 	public boolean validarFondosSuficientes(String nroCuenta, BigDecimal importeADescontar);
 	public ArrayList<Cuenta> buscarTiposDeCuentasUsuario(int IDUsuario);
-	public ArrayList<Movimiento> traerDatosMovimientos(int IDUsuario);
+	public ArrayList<Movimiento> traerDatosMovimientos(long NumeroCuenta);
 }

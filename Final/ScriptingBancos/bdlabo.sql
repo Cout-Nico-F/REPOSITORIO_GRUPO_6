@@ -75,7 +75,7 @@ create table if not exists cuotas (
     NumeroCuota tinyint not null,
     Importe decimal(12,2) not null, # que tipo de importe es?
     FechaVencimiento date not null,
-    FechaPago date null,
+    FechaPago date default null,
     Primary Key (IdPrestamos,NumeroCuota)
 );
 create table if not exists movimientos (

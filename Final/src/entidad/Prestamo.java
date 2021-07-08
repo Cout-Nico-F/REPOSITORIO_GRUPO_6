@@ -1,32 +1,83 @@
 package entidad;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Prestamo {
-	private int ID;
-	private int dniCliente;
+	private int idPrestamo;
+	private Cuenta cuenta;
+	private Cliente cliente;
 	private Date fecha;
-	private BigDecimal importeSolicitado;
-	private BigDecimal montoMensual;
-	private short cantCuotas;
+	private double importeSolicitado;
+	private double importeAPagar;
+	private double montoMensual;
+	private int cuotas;
+	private int estado;
 	private ArrayList<Cuota> listaCuotas;
 	
-	
-	public Prestamo(int iD, int dniCliente, java.util.Date fecha, BigDecimal importeSolicitado,
-			BigDecimal montoMensual, short cantCuotas,ArrayList<Cuota> listaCuotas) {
-		super();
-		ID = iD;
-		this.dniCliente = dniCliente;
-		this.fecha = new Date(fecha.getTime());
-		this.importeSolicitado = importeSolicitado;
-		this.montoMensual = montoMensual;
-		this.cantCuotas = cantCuotas;
-		this.listaCuotas = listaCuotas;
+	public Prestamo() {
 		
 	}
 	
+	public int getIdPrestamo() {
+		return idPrestamo;
+	}
+	public void setIdPrestamo(int idPrestamo) {
+		this.idPrestamo = idPrestamo;
+	}
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	public double getImporteSolicitado() {
+		return importeSolicitado;
+	}
+	public void setImporteSolicitado(double importeSolicitado) {
+		this.importeSolicitado = importeSolicitado;
+	}
+	public double getImporteAPagar() {
+		return importeAPagar;
+	}
+	public void setImporteAPagar(double importeAPagar) {
+		this.importeAPagar = importeAPagar;
+	}
+	public double getMontoMensual() {
+		return montoMensual;
+	}
+	public void setMontoMensual(double montoMensual) {
+		this.montoMensual = montoMensual;
+	}
+	public int getCuotas() {
+		return cuotas;
+	}
+	public void setCuotas(int cuotas) {
+		this.cuotas = cuotas;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public ArrayList<Cuota> getListaCuotas() {
 		return listaCuotas;
 	}
@@ -34,48 +85,4 @@ public class Prestamo {
 	public void setListaCuotas(ArrayList<Cuota> listaCuotas) {
 		this.listaCuotas = listaCuotas;
 	}
-
-	public Prestamo() {
-	}
-	
-	public int getID() {
-		return ID;
-	}
-	public void setID(int iD) {
-		ID = iD;
-	}
-	public int getDniCliente() {
-		return dniCliente;
-	}
-	public void setDniCliente(int dniCliente) {
-		this.dniCliente = dniCliente;
-	}
-	public java.sql.Date getFechaSQL() {
-		return fecha;
-	}
-	public java.util.Date getFechaJava() {
-		return new java.util.Date(fecha.getTime());
-	}
-	public void setFecha(java.util.Date fecha) {
-		this.fecha = new Date(fecha.getTime());
-	}
-	public BigDecimal getImporteSolicitado() {
-		return importeSolicitado;
-	}
-	public void setImporteSolicitado(BigDecimal importeSolicitado) {
-		this.importeSolicitado = importeSolicitado;
-	}
-	public BigDecimal getMontoMensual() {
-		return montoMensual;
-	}
-	public void setMontoMensual(BigDecimal montoMensual) {
-		this.montoMensual = montoMensual;
-	}
-	public short getCantCuotas() {
-		return cantCuotas;
-	}
-	public void setCantCuotas(short cantCuotas) {
-		this.cantCuotas = cantCuotas;
-	}
-
 }
