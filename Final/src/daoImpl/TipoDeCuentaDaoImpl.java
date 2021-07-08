@@ -15,7 +15,7 @@ public class TipoDeCuentaDaoImpl implements ITipoDeCuentaDao{
 	private static final String buscarCuentasUsuarios = "Select * from tiposdecuenta tc inner join cuentas c on tc.IdTipoCuenta = c.IdTipoCuenta \r\n" + 
 			"inner join clientes cli on cli.dni = c.dni \r\n" + 
 			"inner join usuarios u on u.IdUsuario = cli.IdUsuario\r\n" + 
-			"Where u.IdUsuario = ?";
+			"Where u.IdUsuario = ? and c.Eliminado = false";
 	
 	@Override
 	public ArrayList<TipoDeCuenta> listarTiposCuentas() {

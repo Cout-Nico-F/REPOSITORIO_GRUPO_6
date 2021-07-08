@@ -28,7 +28,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
 	private static final String traerHistorialMovimientosSegunNumeroCuenta = "Select * From movimientos m inner join cuentas c on ((m.CuentaOrigen = c.NumeroCuenta) or (m.CuentaDestino = c.NumeroCuenta))\r\n" + 
 			"inner join tiposmovimientos tm on m.IdTipoMovimiento = tm.IdTipoMovimiento\r\n" + 
-			"Where NumeroCuenta = ?;";
+			"Where NumeroCuenta = ? and c.Eliminado=false;";
 
 	@Override
 	public boolean registrarMovimiento(Movimiento mov) {
