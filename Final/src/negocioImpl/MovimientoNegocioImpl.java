@@ -30,9 +30,9 @@ public class MovimientoNegocioImpl implements MovimientoNegocio {
 	}
 
 	@Override
-	public ArrayList<Movimiento> traerDatosMovimientos(int IDUsuario) {
+	public ArrayList<Movimiento> traerDatosMovimientos(long NumeroCuenta) {
 		IMovimientoDao iMDao = new MovimientoDaoImpl();
-		return iMDao.traerDatosMovimientos(IDUsuario);
+		return iMDao.traerDatosMovimientos(NumeroCuenta);
 	}
 
 }
