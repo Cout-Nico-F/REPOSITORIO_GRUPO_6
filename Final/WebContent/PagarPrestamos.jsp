@@ -1,3 +1,5 @@
+<%@page import="java.math.BigDecimal"%>
+<%@page import="entidad.Cuota"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="entidad.Prestamo"%>
 <%@page import="java.util.ArrayList"%>
@@ -65,15 +67,14 @@
         <table id="clientes" class="table table-hover nowrap">
           <thead>
             <tr>
+              <th scope="col" class="text-center">Código de Préstamo</th>
+              <th scope="col" class="text-center">Número de cuota</th>
               <th scope="col" class="text-center">Fecha de vencimiento</th>
               <th scope="col" class="text-center">Valor de cuota</th>
+              <th scope="col" class="text-center">Saldo préstamo</th>
               <th scope="col" class="text-center">Total prestamo</th>
-              <th scope="col" class="text-center">Plazo de pago (meses)</th>
-              <th scope="col" class="text-center">Total saldo préstamo</th>
-              <th scope="col" class="text-center">Número de cuota</th>
               <th scope="col" class="text-center">Cuenta a debitar</th>
               <th scope="col" class="text-center">Pagar cuota</th>
-              <th scope="col" class="text-center">Pago total</th>
               
             </tr>
           </thead>
@@ -83,37 +84,32 @@
         	  listaPrestamos = (ArrayList<Prestamo>)request.getAttribute("listaPrestamos");
           }
           if(listaPrestamos != null) {
-        	  
+       	  int indexPrestamo = 0;
           for(Prestamo p : listaPrestamos){
-        	  
         	  %>
-        	  <h1>Cuotas a vencer</h1>
-        	  
+        	  <% ArrayList<Cuota> listaCuotas = p.getListaCuotas();
+        	  	for(Cuota c : listaCuotas){
+        	  %>
+        	  <tr>     	  
         	  <form id="formPost" action="ServletPagarPrestamo" method="post">
-        	  <td class="dt-body-center"><input type="hidden" name="nroCuenta"></td>
-			  <td class="dt-body-right"><%=p.getMontoMensual()%>  </td>
-			  <td ><%=p.getImporteSolicitado()%></td>
-			  <td class="dt-body-center"> <%=p.getCantCuotas() %></td>
-			  <td ></td>
-			  <td class="dt-body-center"></td>
+    	  	  <td class="dt-body-center"> <%=p.getID() %></td>
+        	  <td class="dt-body-center"> <%=c.getNumeroDeCuota() %> / <%=p.getCantCuotas() %> </td>
+        	  <td class="dt-body-center"> <%=c.getFechaDeVencimientoSQL() %> <input type="hidden" name="nroCuenta"></td>
+			  <td class="dt-body-center">$ <%=p.getMontoMensual()%> .- </td>
+			  <td class="dt-body-center"> $ <%=((ArrayList<BigDecimal>)request.getAttribute("listaSaldos")).get(indexPrestamo) %> .- </td>
+			  <td class="dt-body-center">$ <%=p.getImporteSolicitado()%> .-</td>
 			  <td></td>
 			  <td class="dt-body-center"><div class="form-check">
 			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
 			</div></td>
-			<td class="dt-body-center"><div class="form-check">
-			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			</div></td>
-        	  
-        	  
-        	  
         	  </form>
-          <%} 
+        	  </tr>
+          	<%}
+        	  	indexPrestamo++; 
+          } 
           }
           %>
-          
-          
-          
-          
+    
           </tbody>
         </table>
   </body>

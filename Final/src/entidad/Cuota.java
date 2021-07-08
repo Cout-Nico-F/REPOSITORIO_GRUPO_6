@@ -53,7 +53,4 @@ public class Cuota {
 	public void setFechaDePago(java.util.Date fechaDePago) {
 		this.fechaDePago =new Date(fechaDePago.getTime());
 	}
-
-	
-	
 }
