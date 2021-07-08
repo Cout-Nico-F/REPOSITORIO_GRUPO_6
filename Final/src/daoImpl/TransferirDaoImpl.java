@@ -75,10 +75,10 @@ public class TransferirDaoImpl implements ITransferirDao{
 		
 		
 		Movimiento aux = new Movimiento(4, daoMov.traerTipoDeMovimiento(TiposMovimiento.Transferencia.getOperacion()), "Transferencia", new BigDecimal(cantidad_s), Long.valueOf(cuenta), Long.valueOf(destino));
+		
 		if (daoMov.registrarMovimiento(aux)) {
 			return daoMov.actualizarSaldos(VariablesGlobales.TiposMovimiento.Transferencia, Long.valueOf(cuenta), Long.parseLong(destino), new BigDecimal(cantidad_s)); 
-		}		
-		
+		}				
 		return false;
 	}
 	

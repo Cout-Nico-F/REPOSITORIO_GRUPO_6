@@ -89,7 +89,18 @@
 		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
  		</div>
  		 <!-- Alert -->
- 		 
+ 		 <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeTransferencia") != null && session.getAttribute("mensajeTransferencia") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeTransferencia")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeTransferencia") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeTransferencia");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
         	
         <div class="form">
         		 

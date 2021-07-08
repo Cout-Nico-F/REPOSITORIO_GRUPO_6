@@ -79,8 +79,11 @@ public class ServletTransferencia extends HttpServlet {
 				//Cartel preguntando Si estamos seguros de querer transferir. 
 				
 				//Transferencia.
-				
-				ineg.Transferir(request.getParameter("inputCbuOrigen"), request.getParameter("inputCbuDestino"), Float.valueOf(request.getParameter("inputSaldo")) );
+				if (ineg.Transferir(request.getParameter("inputCbuOrigen"), request.getParameter("inputCbuDestino"), Float.valueOf(request.getParameter("inputSaldo")) )) {
+					
+					request.getSession().setAttribute("mensajeTransferencia","Transferencia exitosa, ponele.");
+					request.setAttribute("tipoMensajeTransferencia","success");					
+				}
 
 				//Aviso de transferencia Correcta o fallida.
 			
