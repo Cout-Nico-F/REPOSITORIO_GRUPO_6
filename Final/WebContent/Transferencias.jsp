@@ -95,15 +95,15 @@
         		 
               <div class="inputfield">
               <label>CBU Cuenta Origen:</label>
-              <input type="number" class="form-control" name="inputCbuOrigen">
+              <input type="number" class="form-control" name="inputCbuOrigen" min="1" pattern="^[0-9]+">
            </div> 
          <div class="inputfield">
               <label>CBU Cuenta Destino:</label>
-              <input type="number" class="form-control" name="inputCbuDestino">
+              <input type="number" class="form-control" name="inputCbuDestino" min="1" pattern="^[0-9]+">
            </div>    
           <div class="inputfield">
               <label style="width: 243px; height: 26px">Cantidad en Pesos:</label>
-              <input type="number" class="form-control" name="inputSaldo">
+              <input type="number" class="form-control" name="inputSaldo" min="1" pattern="^[0-9]+">
            </div>
           <br><br>
           <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">

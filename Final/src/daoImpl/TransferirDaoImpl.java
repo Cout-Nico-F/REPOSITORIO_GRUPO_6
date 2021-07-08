@@ -64,8 +64,6 @@ public class TransferirDaoImpl implements ITransferirDao{
 		//Movimiento negativo de cantidad "cantidad" en cuenta Origen
 		//Movimiento positivo de la misma cantidad en cuenta Destino
 		
-		
-		
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs;

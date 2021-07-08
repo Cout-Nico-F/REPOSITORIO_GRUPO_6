@@ -80,7 +80,7 @@ public class ServletTransferencia extends HttpServlet {
 				
 				//Transferencia.
 				
-				//TODO:  ineg.Transferir();
+				ineg.Transferir(null, null, 0);
 
 				//Aviso de transferencia Correcta o fallida.
 			
