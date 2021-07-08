@@ -1,11 +1,18 @@
 package daoImpl;
 
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import dao.IMovimientoDao;
 import dao.ITransferirDao;
+import entidad.Cuenta;
+import entidad.Movimiento;
+import entidad.VariablesGlobales;
+import entidad.VariablesGlobales.TiposMovimiento;
 
 
 public class TransferirDaoImpl implements ITransferirDao{
@@ -58,31 +65,28 @@ public class TransferirDaoImpl implements ITransferirDao{
 
 	@Override
 	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad) throws SQLException
-	{//TODO: completarMetodoTransferir
+	{	
+		String cuenta =  "123813724"; // TraerNroCuenta(cbuOrigen);
+		String destino = "123813725"; // TraerNroCuenta(cbuDestino);
+		
+		String cantidad_s = Float.toString(cantidad);
+		
+		IMovimientoDao daoMov = new MovimientoDaoImpl();
 		
 		
-		//Movimiento negativo de cantidad "cantidad" en cuenta Origen
-		//Movimiento positivo de la misma cantidad en cuenta Destino
+		Movimiento aux = new Movimiento(4, daoMov.traerTipoDeMovimiento(TiposMovimiento.Transferencia.getOperacion()), "Transferencia", new BigDecimal(cantidad_s), Long.valueOf(cuenta), Long.valueOf(destino));
+		if (daoMov.registrarMovimiento(aux)) {
+			return daoMov.actualizarSaldos(VariablesGlobales.TiposMovimiento.Transferencia, Long.valueOf(cuenta), Long.parseLong(destino), new BigDecimal(cantidad_s)); 
+		}		
 		
-		PreparedStatement ps;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		ResultSet rs;
-		try {
-			ps=conexion.prepareStatement("select Saldo from cuentas where Cbu = ?");
-			ps.setString(1, cbuOrigen);
-			
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				
-				if (rs.getBigDecimal("Saldo").floatValue() >= cantidad) {
-					
-					return true;				
-				}
-				
-			}
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
 		return false;
+	}
+	
+	@Override
+	public String TraerNroCuenta (String Cbu) {
+		
+		
+		return "";
+		
 	}
 }
