@@ -3,7 +3,6 @@ package daoImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,10 +10,9 @@ import java.util.Date;
 import dao.CuotaDao;
 import entidad.Cuota;
 import entidad.Prestamo;
-import entidad.Usuario;
 
 public class CuotaDaoImpl implements CuotaDao {
-	private static final String InsertarCuotaInsert = "insert into cuotas(IdPrestamo, NumeroCuota, Importe, FechaVencimiento) values";
+	private static final String InsertarCuotaInsert = "insert into cuotas(IdPrestamos, NumeroCuota, Importe, FechaVencimiento) values";
 	
 	@Override
 	public int insertarCuotas (Prestamo prestamo) {
