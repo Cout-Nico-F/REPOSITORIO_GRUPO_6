@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidad.Cuenta;
 import entidad.Movimiento;
 import entidad.TipoDeCuenta;
 import negocio.ClienteNegocio;
@@ -22,6 +23,7 @@ public class ServletHistorialMovimientos extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private MovimientoNegocio movNeg = new MovimientoNegocioImpl();
+	//private ClienteNegocio cNeg = new ClienteNegocioImpl();
        
     public ServletHistorialMovimientos() {
         super();
@@ -29,7 +31,11 @@ public class ServletHistorialMovimientos extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		cargarCuentasSelect(request);
+		//cargarTableHistorialMov(request);
 		
+		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,14 +43,15 @@ public class ServletHistorialMovimientos extends HttpServlet {
 		// Capturar el evento onchange del select para cargar los datos en la tabla dependiendo el tipo de cuenta
 		// Agregar un boton refresh en la tabla
 		cargarCuentasSelect(request);
-		//Por ahora me trae solamente los datos del usuario con id 2
-		cargarTableHistorialMov(request);
+		//cargarTableHistorialMov(request);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/HistorialMovimientos.jsp");
 		rd.forward(request, response);
+		
 	}
 	
 	public void cargarCuentasSelect(HttpServletRequest request) {
-		ArrayList<TipoDeCuenta> listaTiposCta = movNeg.buscarTiposDeCuentasUsuario(2); // Le harcodeo el id usuario
+		ArrayList<Cuenta> listaTiposCta = movNeg.buscarTiposDeCuentasUsuario(2); // Le harcodeo el id usuario
 		request.setAttribute("listaTiposCta", listaTiposCta);
 	}
 	public void cargarTableHistorialMov(HttpServletRequest request) {

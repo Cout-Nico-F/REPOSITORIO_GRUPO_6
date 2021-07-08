@@ -24,7 +24,7 @@ public class MovimientoNegocioImpl implements MovimientoNegocio {
 	}
 
 	@Override
-	public ArrayList<TipoDeCuenta> buscarTiposDeCuentasUsuario(int IDUsuario) {
+	public ArrayList<Cuenta> buscarTiposDeCuentasUsuario(int IDUsuario) {
 		ITipoDeCuentaDao iTDao = new TipoDeCuentaDaoImpl();
 		return iTDao.buscarTiposDeCuentasUsuario(IDUsuario);
 	}

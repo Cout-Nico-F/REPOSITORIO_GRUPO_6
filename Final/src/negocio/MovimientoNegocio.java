@@ -10,6 +10,6 @@ import entidad.TipoDeCuenta;
 public interface MovimientoNegocio {
 	
 	public boolean validarFondosSuficientes(String nroCuenta, BigDecimal importeADescontar);
-	public ArrayList<TipoDeCuenta> buscarTiposDeCuentasUsuario(int IDUsuario);
+	public ArrayList<Cuenta> buscarTiposDeCuentasUsuario(int IDUsuario);
 	public ArrayList<Movimiento> traerDatosMovimientos(int IDUsuario);
 }
