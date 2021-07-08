@@ -60,8 +60,7 @@ public class Movimiento {
 	public Timestamp getFechaMovimiento() {
 		return fechaMovimiento;
 	}
-	public Movimiento(int iD, TipoDeMovimiento tipoDeMovimiento, String detalle, BigDecimal importe,
-			long iDCuentaOrigen, long iDCuentaDestino) {
+	public Movimiento(int iD, TipoDeMovimiento tipoDeMovimiento, String detalle, BigDecimal importe, long iDCuentaOrigen, long iDCuentaDestino) {
 		super();
 		ID = iD;
 		this.tipoDeMovimiento = tipoDeMovimiento;
