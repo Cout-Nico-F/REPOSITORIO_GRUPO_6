@@ -22,20 +22,20 @@
  		</div>
         <form action="servletLogin" method="post">
           <fieldset>
-            <legend class="d-flex justify-content-center">Iniciar Sesion</legend>
+            <legend class="d-flex justify-content-center py-4">Iniciar Sesion</legend>
             <div class="d-flex justify-content-center">
-              <div class="col-sm-4"> 
-              	 <label for="nombre" class="col-sm-6 col-form-label">Nombre de usuario</label>
+              <div class="col-sm-12"> 
+              	 <label for="nombre" class="col-sm-12 col-form-label">Nombre de usuario</label>
                	 <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="txtNombreUsuario">
                </div>
               </div>
              <div class="d-flex justify-content-center">
-               <div class="col-sm-4">  
+               <div class="col-sm-12">  
                 <label for="apellido" class="col-sm-3 col-form-label">Contraseña</label>
                 <input type="password" class="form-control" id="apellido" placeholder="Contraseña" name="txtContrasenia">
               </div>
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-left">
             	<div class="col-sm-1 py-4">
             		<input type="submit" value="Loguearse" name="btnLogin" class="btn btn-info">
             	</div>
