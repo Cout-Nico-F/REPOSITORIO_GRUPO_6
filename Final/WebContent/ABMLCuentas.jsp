@@ -52,12 +52,9 @@
     	if("eliminar" == $('input[name="accion"]').val()){
         	$("#formPost").submit()
     	}
-    	else if("asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val())  {
+    	else if("asignar" == $('input[name="accion"]').val()){
     		$("#formGet").submit()
-		}
-// 		if("asignar" == $('input[name="accion"]').val() || "agregar" == $('input[name="accion"]').val()) {
-// 			$("#formGet1").submit()
-//     	}
+        }
     }
 
     </script>
@@ -90,7 +87,7 @@
 						<label for="dni" class="col-sm-3 col-form-label">DNI del
 							cliente</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" required
+							<input type="text" class="form-control"
 								placeholder="Ingrese el DNI" id="dniCli" name="dniCli" list="listaClientes" onKeyPress="if(this.value.length>8) return false;"
 								 maxlength="9">
 							<datalist id="listaClientes"> <!-- 	            aca iría la lista de clientes con <= 2 cuentas asignadas -->
@@ -167,10 +164,10 @@
 						</div>
 					</div>
 					<div class="mt-3">
-						<button type="button" class="btn btn-primary abrir-modal" <% if(request.getAttribute("inputNroCuenta")==null){
-							%>name="btnRegistrar" >Registrar</button> <% 
+						<% if(request.getAttribute("inputNroCuenta")==null){
+							%> <button class="btn btn-primary"  type="submit" name="btnRegistrar" >Registrar</button> <% 
 						} else {
-							%>name="btnAsignar" data-bs-toggle="modal" data-bs-target="#modal" data-accion="asignar" >Asignar</button> <%
+							%> <button class="btn btn-primary abrir-modal" type="button" name="btnAsignar" data-bs-toggle="modal" data-bs-target="#modal" data-accion="asignar" >Asignar</button> <%
 						}%>
 						<input type="reset" class="btn btn-secondary"<% if(request.getAttribute("inputNroCuenta")==null){
 							%>  name="btnLimpiar" value="Limpiar"> <% 
@@ -227,8 +224,8 @@
 								<%
 							} else{
 								%>
-								<td><div class="text-center"><button type="button" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button>
-								<button type="button" name="btnEliminarCuenta" value="eliminarCuenta" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
+								<td><div class="text-center"><button type="submit" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button>
+								<button type="button" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
 								</td>
 								<%
 							}

@@ -67,8 +67,6 @@ public class UsuarioDaoImpl {
 	
 	public Usuario buscarUsuario(Usuario u)
 	{
-		//Codigo para buscar el usuario y que devuelve un bool en caso de existir
-		//Cuando la bd este terminada haria un procedimiento almacenado
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs = null;

@@ -10,27 +10,106 @@
 </head>
 <body>
 
-        <br><br><br><br><br><br><br>
+        
         <form method="Post" action="ServletTransferencia">
         
         <div class="wrapper">
         	<div class="title"> Transferencia Bancaria </div>
+        	
+        	
+        	<!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeSaldo") != null && session.getAttribute("mensajeSaldo") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeSaldo")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeSaldo") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeSaldo");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		 <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeOrigen") != null && session.getAttribute("mensajeOrigen") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeOrigen")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeOrigen") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeOrigen");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		 <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeDestino") != null && session.getAttribute("mensajeDestino") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeDestino")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeDestino") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeDestino");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		 <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeDestinoIncorrecto") != null && session.getAttribute("mensajeDestinoIncorrecto") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeDestinoIncorrecto")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeDestinoIncorrecto") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeDestinoIncorrecto");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		  <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeOrigenIncorrecto") != null && session.getAttribute("mensajeOrigenIncorrecto") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeOrigenIncorrecto")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeOrigenIncorrecto") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeOrigenIncorrecto");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		  <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeSaldoVacio") != null && session.getAttribute("mensajeSaldoVacio") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeSaldoVacio")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeSaldoVacio") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeSaldoVacio");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		 
+        	
         <div class="form">
+        		 
               <div class="inputfield">
               <label>CBU Cuenta Origen:</label>
-              <input type="number" class="input" >
+              <input type="number" class="form-control" name="inputCbuOrigen">
            </div> 
          <div class="inputfield">
               <label>CBU Cuenta Destino:</label>
-              <input type="number" class="input" >
+              <input type="number" class="form-control" name="inputCbuDestino">
            </div>    
           <div class="inputfield">
-              <label style="width: 243px; height: 26px">Cantidad a Transferir en Pesos:</label>
-              <input type="number" class="input" >
+              <label style="width: 243px; height: 26px">Cantidad en Pesos:</label>
+              <input type="number" class="form-control" name="inputSaldo">
            </div>
           <br><br>
           <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">
+ 		 
     </div>	
+    </div>
     </form>
 </body>
 </html>

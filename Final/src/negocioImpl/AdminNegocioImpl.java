@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
+
 import dao.ClienteDao;
 import dao.IAdminDao;
 import dao.IMovimientoDao;
@@ -25,6 +27,13 @@ import negocio.ClienteNegocio;
 import negocio.IAdminNegocio;
 
 public class AdminNegocioImpl implements IAdminNegocio {
+	
+	@Override
+	public boolean validarUsuarioAdmin(HttpServletRequest request) {
+		if(request.getSession().getAttribute("nombreUsuarioLogeado")!=null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado") == true)
+			return true;
+		return false;
+	}
 
 	@Override
 	public ArrayList<Prestamo> listarPrestamosParaAutorizar(){
@@ -139,9 +148,6 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return cuenta;
 	}
 
-	/*
-	 * TODO: falta crear validadores de: - El número de cuenta no esté repetido. -
-	 * El CBU no este repetido. - El IDTipoCuenta exista en la tabla TiposDeCuenta.
-	 * - El saldo no quede negativo después de la modificación.
-	 */
+
+
 }

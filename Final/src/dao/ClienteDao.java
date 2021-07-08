@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 
 import entidad.Cliente;
+import entidad.Usuario;
 
 public interface ClienteDao {
 	
@@ -10,6 +11,7 @@ public interface ClienteDao {
 	public ArrayList<Cliente> traerClientes();
 	public ArrayList<Cliente> traerClientes(int cantMaxCuentas);
 	public Cliente traerCliente(int dni);
+	public Cliente traerClientePorNombreUsuario(String NombreUsuario);
 	public int actualizarCliente(Cliente cliente);
 	public int eliminarCliente(int dni);
 	public boolean existeCuil(String cuil);

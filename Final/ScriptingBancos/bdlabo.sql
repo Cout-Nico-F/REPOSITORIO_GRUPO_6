@@ -44,15 +44,14 @@ create table if not exists localidades (
     primary Key (IdLocalidad)
 );
 create table if not exists cuentas (
-	NumeroCuenta bigint not null auto_increment, #Hay que validar que sean numeros 
+	NumeroCuenta bigint not null, #Hay que validar que sean numeros 
     Dni int null,
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
     Saldo decimal(12,2) not null,
     Cbu varchar(22) unique not null,
     FechaCreacion date not null,
     Eliminado boolean default false not null,
-    IDinserted bigint not null,
-    primary key (NumeroCuenta)
+    Primary Key (NumeroCuenta)
 );
 create table if not exists tiposDeCuenta (
 	IdTipoCuenta tinyint unsigned auto_increment,
@@ -64,10 +63,9 @@ create table if not exists prestamos (
     NumeroCuenta bigint not null, #Los numeros de  cuenta no se repiten? por las dudas unique
 	Dni int not null,
     Fecha date not null,
-    ImporteSolicitado decimal not null,
-    ImporteAPagar decimal not null,
-    PlazoPagoMeses decimal not null,
-    MontoMensual decimal not null,
+    ImporteSolicitado decimal(12,2) not null,
+    ImporteAPagar decimal(12,2) not null,
+    MontoMensual decimal(12,2) not null,
     Cuotas tinyint unsigned not null,
     Estado tinyint not null, #En MySQL, cero se considera falso y el valor distinto de cero se considera verdadero. Para usar literales booleanos,
     primary Key (IdPrestamos)
@@ -77,7 +75,7 @@ create table if not exists cuotas (
     NumeroCuota tinyint not null,
     Importe decimal not null, # que tipo de importe es?
     FechaVencimiento date not null,
-    FechaPago date not null,
+    FechaPago date default null,
     Primary Key (IdPrestamos,NumeroCuota)
 );
 create table if not exists movimientos (
@@ -161,7 +159,10 @@ alter table prestamos add foreign key (NumeroCuenta) references cuentas (NumeroC
 alter table cuotas add foreign key (IdPrestamos) references prestamos (IdPrestamos);
 
 # -- Movimientos --
-alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovimientos (IdTipoMovimiento);
+alter table movimientos add foreign key (CuentaOrigen) references Cuentas (NumeroCuenta);	
+alter table movimientos add foreign key (CuentaDestino) references Cuentas (NumeroCuenta);	
+alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovimientos (IdTipoMovimiento);	
+alter table movimientos add constraint check (not(isnull(CuentaOrigen) and isnull(CuentaDestino)));
 
 # -- Tipos Movimientos --
 
@@ -209,22 +210,8 @@ alter table movimientos add foreign key (IdTipoMovimiento) references tiposMovim
 
 #SET Foreign_key_checks = 1; # Lo volvemos a activar
 
-DELIMITER $$
-CREATE FUNCTION autoInc ()
-    RETURNS BIGINT READS SQL DATA
-    BEGIN
-        DECLARE getCount BIGINT;
-
-        SET getCount = (
-            SELECT count(*)
-            FROM bdlabo.Cuentas) + 1;
-
-        RETURN getCount;
-    END$$
-DELIMITER ;
-
 # -- Harcodeo algunos registros --
-insert into nacionalidades (Nombre) values ("Agentina");
+insert into nacionalidades (Nombre) values ("Argentina");
 insert into provincias (Nombre) values ("Buenos Aires");
 insert into localidades (IdProvincia,Nombre) values (1,"Escobar");
 
@@ -239,13 +226,24 @@ values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av
 insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
 
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813724,14203944,1,10000,124124123,current_date(),autoInc());
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813725,14203944,2,10000,124124124,current_date(),autoInc());
-insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion, IdInserted) values (123813726,null,1,10000,124124125,current_date(),autoInc());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813724,14203944,1,10000,124124123,current_date());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813725,14203944,2,10000,124124124,current_date());
+insert into cuentas (numerocuenta,dni,idtipocuenta,saldo,cbu,fechacreacion) values (123813726,null,1,10000,124124125,current_date());
 
 insert into tiposmovimientos (descripcion) values ("Alta de cuenta");
 insert into tiposmovimientos (descripcion) values ("Alta de prestamo");
 insert into tiposmovimientos (descripcion) values ("Pago de prestamo");
 insert into tiposmovimientos (descripcion) values ("Transferencia");
 
-insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,14203944,123813725,current_timestamp(),"Alta de cuenta", 10000);
+insert into movimientos (idtipomovimiento,cuentaorigen,cuentadestino,fecha,detalles,importe) values (2,123813724,123813726,current_timestamp(),"Alta de cuenta", 10000);	
+insert into prestamos (numerocuenta,dni,fecha,importesolicitado,importeapagar,montomensual,cuotas,estado) values (123813724,14203944,current_date(),50000,65000, 6500, 10, 3);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,1,6500,"2021-08-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,2,6500,"2021-09-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,3,6500,"2021-10-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,4,6500,"2021-11-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,5,6500,"2021-12-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,6,6500,"2022-01-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,7,6500,"2022-02-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,8,6500,"2022-03-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,9,6500,"2022-04-07",null);	
+insert into cuotas (IdPrestamos,numerocuota,importe,FechaVencimiento,FechaPago) values (1,10,6500,"2022-05-07",null);

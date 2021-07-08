@@ -8,6 +8,7 @@ import dao.ITipoDeCuentaDao;
 import daoImpl.MovimientoDaoImpl;
 import daoImpl.TipoDeCuentaDaoImpl;
 import entidad.Cuenta;
+import entidad.Movimiento;
 import entidad.TipoDeCuenta;
 import negocio.MovimientoNegocio;
 
@@ -23,15 +24,15 @@ public class MovimientoNegocioImpl implements MovimientoNegocio {
 	}
 
 	@Override
-	public ArrayList<TipoDeCuenta> buscarTiposDeCuentasUsuario(int IDUsuario) {
+	public ArrayList<Cuenta> buscarTiposDeCuentasUsuario(int IDUsuario) {
 		ITipoDeCuentaDao iTDao = new TipoDeCuentaDaoImpl();
 		return iTDao.buscarTiposDeCuentasUsuario(IDUsuario);
 	}
 
 	@Override
-	public ArrayList<Cuenta> traerDatosMovimientos(int IDUsuario) {
+	public ArrayList<Movimiento> traerDatosMovimientos(long NumeroCuenta) {
 		IMovimientoDao iMDao = new MovimientoDaoImpl();
-		return iMDao.traerDatosMovimientos(IDUsuario);
+		return iMDao.traerDatosMovimientos(NumeroCuenta);
 	}
 
 }

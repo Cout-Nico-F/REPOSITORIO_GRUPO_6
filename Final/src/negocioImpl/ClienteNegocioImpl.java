@@ -2,22 +2,52 @@ package negocioImpl;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
+import dao.ClienteDao;
 import dao.LocalidadDao;
 import dao.NacionalidadDao;
+import dao.PrestamoDao;
 import dao.ProvinciaDao;
 import daoImpl.ClienteDaoImpl;
 import daoImpl.LocalidadDaoImpl;
 import daoImpl.NacionalidadDaoImpl;
+import daoImpl.PrestamoDaoImpl;
 import daoImpl.ProvinciaDaoImpl;
 import daoImpl.UsuarioDaoImpl;
 import entidad.Cliente;
 import entidad.Localidad;
 import entidad.Nacionalidad;
+import entidad.Prestamo;
 import entidad.Provincia;
 import entidad.Usuario;
 import negocio.ClienteNegocio;
 
 public class ClienteNegocioImpl implements ClienteNegocio{
+	
+
+	@Override
+	public Cliente traerClientePorNombreUsuario(String nombreUsuario) {
+		ClienteDao cliDao = new ClienteDaoImpl();
+		return cliDao.traerClientePorNombreUsuario(nombreUsuario);
+	}
+	
+	@Override
+	public ArrayList<Prestamo> listarPrestamosPorCliente(int dni) {
+		PrestamoDao presDao= new PrestamoDaoImpl();		
+		ArrayList<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
+		if(existeDni(dni)) {
+			listaPrestamos = presDao.listarPrestamosPorCliente(dni);
+		}
+		return listaPrestamos;
+	}
+	
+	@Override
+	public boolean validarUsuarioCliente(HttpServletRequest request) {
+		if(request.getSession().getAttribute("nombreUsuarioLogeado") != null && (Boolean)request.getSession().getAttribute("tipoUsuarioLogeado") == false)
+			return true;
+		return false;
+	}
 	
 	@Override
 	public boolean insertCliente(Cliente c) {
@@ -93,4 +123,5 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
 		return cdao.existeCuil(cuil);
 	}
+
 }

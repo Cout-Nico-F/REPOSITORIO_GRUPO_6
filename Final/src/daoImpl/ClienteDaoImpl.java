@@ -24,6 +24,57 @@ public class ClienteDaoImpl implements ClienteDao {
 	private static final String eliminarCliente = "UPDATE clientes SET Eliminado = true WHERE Dni = ?";
 	private static final String CompararDni = "Select dni From clientes";
 	private static final String CompararCuil = "Select cuil From clientes";
+	private static final String traerClientePorUsuario = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where eliminado=false and u.nombreUsuario = ?";
+	
+	
+	@Override
+	public Cliente traerClientePorNombreUsuario(String nombreUsuario) {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		Cliente cli = new Cliente();
+		
+		try {
+			ps = conexion.prepareStatement(traerClientePorUsuario);
+			ps.setString(1,nombreUsuario);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				cli.setDni(rs.getInt("c.Dni"));
+				cli.setNombre(rs.getString("c.Nombre"));
+				cli.setApellido(rs.getString("c.Apellido"));
+				cli.setDireccion(rs.getString("c.Direccion"));
+				cli.setCorreoElectronico(rs.getString("c.CorreoElectronico"));
+				cli.setSexo(rs.getString("c.Sexo"));
+				cli.setCuil(rs.getString("c.Cuil"));
+				cli.setFechaNacimiento(rs.getDate("c.FechaNacimiento"));
+				cli.setTelefonoFijo(rs.getString("c.TelefonoFijo"));
+				cli.setCelular(rs.getString("c.Celular"));
+				Usuario u = new Usuario();
+				u.setIdUsuario(rs.getInt("u.IdUsuario"));
+				u.setContrasenia(rs.getString("u.Contrasenia"));
+				u.setNombreUsuario(rs.getString("u.NombreUsuario"));
+				u.setEsAdmin(rs.getBoolean("u.EsAdmin"));
+				cli.setUsuario(u);
+				Provincia p = new Provincia();
+				p.setIdProvincia(rs.getInt("p.IdProvincia"));
+				p.setNombre(rs.getString("p.Nombre"));
+				Localidad l = new Localidad();
+				l.setIdLocalidad(rs.getInt("l.IdLocalidad"));
+				l.setNombre(rs.getString("l.Nombre"));
+				l.setProvincia(p);
+				cli.setLocalidad(l);
+				Nacionalidad n = new Nacionalidad(); 
+				n.setIdNacionalidad(rs.getInt("n.IdNacionalidad"));
+				n.setNombre(rs.getString("n.Nombre"));
+				cli.setNacionalidad(n);
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new Cliente();
+		}
+		return cli;
+	}
+	
 	@Override
 	public Cliente insertCliente(Cliente c) {
 		PreparedStatement statement;

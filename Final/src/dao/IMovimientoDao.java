@@ -16,5 +16,5 @@ public interface IMovimientoDao {
 	public boolean MovimientoAltaDeCuenta (Cuenta c);
 	public TipoDeMovimiento traerTipoDeMovimiento(String descripcionTipoMov);
 	public TipoDeMovimiento traerTipoDeMovimiento(short idTipoMov);
-	public ArrayList<Cuenta> traerDatosMovimientos(int IDUsuario);
+	public ArrayList<Movimiento> traerDatosMovimientos(long NumeroCuenta);
 }

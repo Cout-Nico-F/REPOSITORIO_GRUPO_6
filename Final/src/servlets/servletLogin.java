@@ -55,6 +55,7 @@ public class servletLogin extends HttpServlet {
 					
 					sessionUsuario.setAttribute("tipoUsuarioLogeado", u.getEsAdmin());
 					sessionUsuario.setAttribute("nombreUsuarioLogeado", u.getNombreUsuario());
+					sessionUsuario.setAttribute("IdUsuario", u.getIdUsuario());
 				}				
 			}
 			String redirige;

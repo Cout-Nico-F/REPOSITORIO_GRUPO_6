@@ -17,6 +17,12 @@ public class Cliente {
 	private String telefonoFijo;
 	private String celular;
 	
+	public Cliente() {
+		super();}
+	public Cliente(int dni) {
+		super();
+		this.dni = dni;
+	}
 	public int getDni() {
 		return dni;
 	}

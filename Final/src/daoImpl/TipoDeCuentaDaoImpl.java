@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import dao.ITipoDeCuentaDao;
+import entidad.Cuenta;
 import entidad.TipoDeCuenta;
 
 public class TipoDeCuentaDaoImpl implements ITipoDeCuentaDao{
@@ -11,10 +12,10 @@ public class TipoDeCuentaDaoImpl implements ITipoDeCuentaDao{
 	private static final String listaTodos = "select * from tiposdecuenta";
 	private static final String buscar = "select * from tiposdecuenta where idtipocuenta=";
 	// Trae todo lo relacionado de tipo cuentas que correspondan a un usuario
-	private static final String buscarCuentasUsuarios = "Select * from tiposdecuenta inner join cuentas on tiposdecuenta.IdTipoCuenta = cuentas.IdTipoCuenta \r\n" + 
-			"inner join clientes on clientes.dni = cuentas.dni \r\n" + 
-			"inner join usuarios on usuarios.IdUsuario = clientes.IdUsuario\r\n" + 
-			"Where usuarios.IdUsuario = ?";
+	private static final String buscarCuentasUsuarios = "Select * from tiposdecuenta tc inner join cuentas c on tc.IdTipoCuenta = c.IdTipoCuenta \r\n" + 
+			"inner join clientes cli on cli.dni = c.dni \r\n" + 
+			"inner join usuarios u on u.IdUsuario = cli.IdUsuario\r\n" + 
+			"Where u.IdUsuario = ?";
 	
 	@Override
 	public ArrayList<TipoDeCuenta> listarTiposCuentas() {
@@ -60,20 +61,23 @@ public class TipoDeCuentaDaoImpl implements ITipoDeCuentaDao{
 	}
 
 	@Override
-	public ArrayList<TipoDeCuenta> buscarTiposDeCuentasUsuario(int IDUsuario) {
+	public ArrayList<Cuenta> buscarTiposDeCuentasUsuario(int IDUsuario) {
 		ResultSet rs;
 		PreparedStatement ps;
-		ArrayList<TipoDeCuenta> ListaTipos = new ArrayList<TipoDeCuenta>();
+		ArrayList<Cuenta> ListaTipos = new ArrayList<Cuenta>();
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try {
 			ps = conexion.prepareStatement(buscarCuentasUsuarios);
 			ps.setInt(1,IDUsuario);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				TipoDeCuenta tipoDeCuenta = new TipoDeCuenta();
-				tipoDeCuenta.setDescripcion(rs.getString("descripcion"));
-				tipoDeCuenta.setIdTipoCuenta(rs.getShort("idTipoCuenta"));
-				ListaTipos.add(tipoDeCuenta);
+				Cuenta c = new Cuenta();
+				c.setNumeroCuenta(String.valueOf((rs.getLong("c.NumeroCuenta"))));
+				TipoDeCuenta tc = new TipoDeCuenta();
+				tc.setDescripcion(rs.getString("descripcion"));
+				tc.setIdTipoCuenta(rs.getShort("idTipoCuenta"));
+				c.setTipoDeCuenta(tc);
+				ListaTipos.add(c);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();

@@ -26,7 +26,10 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			+ " values (?, ?, ?, ?, ?, ?)";
 	private static final String traerTipoDeMovimientoSegunID = "select * from tiposmovimientos where idtipomovimiento =";
 	private static final String traerTipoDeMovimientoSegunDescrip = "select * from tiposmovimientos where descripcion like '%";
-	
+	private static final String traerHistorialMovimientosSegunNumeroCuenta = "Select * From movimientos m inner join cuentas c on ((m.CuentaOrigen = c.NumeroCuenta) or (m.CuentaDestino = c.NumeroCuenta))\r\n" + 
+			"inner join tiposmovimientos tm on m.IdTipoMovimiento = tm.IdTipoMovimiento\r\n" + 
+			"Where NumeroCuenta = ?;";
+
 	@Override
 	public boolean registrarMovimiento(Movimiento mov) {
 		boolean registro = false;
@@ -321,9 +324,33 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	}
 
 	@Override
-	public ArrayList<Cuenta> traerDatosMovimientos(int IDUsuario) {
-		//No esta conectada con nada la tabla movimientos y tiposmovimientos
-		return null;
+	public ArrayList<Movimiento> traerDatosMovimientos(long NumeroCuenta) {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		ArrayList<Movimiento> listMov = new ArrayList<Movimiento>();
+		try {
+			ps = conexion.prepareStatement(traerHistorialMovimientosSegunNumeroCuenta);
+			ps.setLong(1,NumeroCuenta);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Movimiento mov = new Movimiento();
+				mov.setDetalle(rs.getString("m.Detalles"));
+				mov.setFechaMovimiento(rs.getDate("m.Fecha"));
+				mov.setIDCuentaDestino(rs.getLong("m.CuentaDestino"));
+				mov.setImporte(rs.getBigDecimal("m.Importe"));
+				TipoDeMovimiento tm = new TipoDeMovimiento();
+				tm.setIdTipoMovimiento(rs.getShort("tm.IdTipoMovimiento"));
+				tm.setDescripcion(rs.getString("tm.Descripcion"));
+				mov.setTipoDeMovimiento(tm);
+				listMov.add(mov);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<Movimiento>();
+		}
+		return listMov;
 	}
 
 }

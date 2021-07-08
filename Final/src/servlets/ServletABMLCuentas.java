@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import entidad.Cliente;
 import entidad.Cuenta;
@@ -26,34 +25,46 @@ public class ServletABMLCuentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IAdminNegocio admNeg = new AdminNegocioImpl();
 	private ClienteNegocio cliNeg = new ClienteNegocioImpl();
-
+	
 	public ServletABMLCuentas() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if(admNeg.validarUsuarioAdmin(request)){
+			agregarCuenta(request);
+			asignarCuenta(request);
+			cargarCuentas(request);
+			cargarDropdown(request);
+			cargarClientesDatalist(request);
+		}
+		else {
+			response.sendRedirect("Login.jsp");
+			return;
+		}
 
-		cargarCuentas(request);
-		cargarDropdown(request);
-		cargarClientesDatalist(request);
-		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if(admNeg.validarUsuarioAdmin(request)){
+			if(request.getParameter("btnModificarCuenta")!=null) {
+				modificarCuenta(request);			
+			} else {			
+				eliminarCuenta(request);		
+			}
+			cargarCuentas(request);
+			cargarDropdown(request);
+			cargarClientesDatalist(request);
+		} else {
+			response.sendRedirect("Login.jsp");
+			return;
+		}
 
-		eliminarCuenta(request);
-		agregarCuenta(request);
-		asignarCuenta(request);
-
-		cargarCuentas(request);
-		cargarDropdown(request);
-		cargarClientesDatalist(request);
-		modificarCuenta(request);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/ABMLCuentas.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("ABMLCuentas.jsp");
 		rd.forward(request, response);
 	}
 
@@ -79,7 +90,6 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void modificarCuenta(HttpServletRequest request) {
-		if (request.getParameter("btnModificarCuenta") != null) {
 			String numeroCuenta = request.getParameter("nroCuenta");
 			Cuenta cuenta = admNeg.traerCuenta(Long.valueOf(numeroCuenta));
 			request.setAttribute("inputNroCuenta", cuenta.getNumeroCuenta());
@@ -87,11 +97,10 @@ public class ServletABMLCuentas extends HttpServlet {
 			request.setAttribute("inputSaldo", cuenta.getSaldo());
 			request.setAttribute("DropdownTipoCuenta", cuenta.getTipoDeCuenta().getIdTipoCuenta());
 			request.setAttribute("dniCli", cuenta.getDNI());
-		}
 	}
 
 	private void agregarCuenta(HttpServletRequest request) {
-		if (request.getParameter("accion") != null && "agregar".equals(request.getParameter("accion"))) {
+		if (request.getParameter("btnRegistrar") != null) {
 			Cuenta cuenta = devolverCuentaCargada(request);
 			if (admNeg.validarCamposCuentaNoVacia(cuenta)) {
 				if (cuenta.getDNI() != 0) {
@@ -148,12 +157,8 @@ public class ServletABMLCuentas extends HttpServlet {
 	}
 
 	private void eliminarCuenta(HttpServletRequest request) {
-		if (request.getParameter("btnEliminarCuenta") != null) {
-
 			String numeroCuenta = request.getParameter("nroCuenta");
 			admNeg.eliminarCuenta(Long.parseLong(numeroCuenta));
-			
-		}
 	}
 
 	private void cargarDropdown(HttpServletRequest request) {
@@ -177,6 +182,12 @@ public class ServletABMLCuentas extends HttpServlet {
 		}
 		request.setAttribute("listaClientesDeCuentas", listaClientesDeCuentas);
 	}
+	
+
+	
+	
+	
+	
 
 	// Validaciones para cuenta
 

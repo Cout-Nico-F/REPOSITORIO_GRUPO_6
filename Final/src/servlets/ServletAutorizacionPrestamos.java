@@ -34,7 +34,7 @@ public class ServletAutorizacionPrestamos extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/AutorizacionPrestamos.jsp");
 		Prestamo p = new Prestamo();
 		String mensaje;
-		p.setIdPrestamo(Long.valueOf(request.getParameter("idPrestamo")));
+		p.setIdPrestamo(Integer.valueOf(request.getParameter("idPrestamo")));
 		p.setCuotas(Integer.valueOf(request.getParameter("cuotas")));
 		p.setMontoMensual(Double.valueOf(request.getParameter("montoMensual")));
 		p.setFecha(getDate(request.getParameter("fecha")));

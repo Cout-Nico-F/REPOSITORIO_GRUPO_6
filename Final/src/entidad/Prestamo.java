@@ -1,9 +1,10 @@
 package entidad;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Prestamo {
-	private long idPrestamo;
+	private int idPrestamo;
 	private Cuenta cuenta;
 	private Cliente cliente;
 	private Date fecha;
@@ -12,16 +13,16 @@ public class Prestamo {
 	private double montoMensual;
 	private int cuotas;
 	private int estado;
-	private Cuota[] listaCuotas;
+	private ArrayList<Cuota> listaCuotas;
 	
 	public Prestamo() {
 		
 	}
 	
-	public long getIdPrestamo() {
+	public int getIdPrestamo() {
 		return idPrestamo;
 	}
-	public void setIdPrestamo(long idPrestamo) {
+	public void setIdPrestamo(int idPrestamo) {
 		this.idPrestamo = idPrestamo;
 	}
 	public Date getFecha() {
@@ -77,11 +78,11 @@ public class Prestamo {
 		this.cliente = cliente;
 	}
 
-	public Cuota[] getListaCuotas() {
+	public ArrayList<Cuota> getListaCuotas() {
 		return listaCuotas;
 	}
 
-	public void setListaCuotas(Cuota[] listaCuotas) {
+	public void setListaCuotas(ArrayList<Cuota> listaCuotas) {
 		this.listaCuotas = listaCuotas;
 	}
 }
