@@ -79,6 +79,8 @@ public class ServletTransferencia extends HttpServlet {
 				//Cartel preguntando Si estamos seguros de querer transferir. 
 				
 				//Transferencia.
+				//Aviso de transferencia Correcta o fallida.
+				
 				if (ineg.Transferir(request.getParameter("inputCbuOrigen"), request.getParameter("inputCbuDestino"), Float.valueOf(request.getParameter("inputSaldo")) )) {
 					request.getSession().setAttribute("mensajeTransferencia","Transferencia exitosa, ponele.");
 					request.setAttribute("tipoMensajeTransferencia","success");					
@@ -88,8 +90,7 @@ public class ServletTransferencia extends HttpServlet {
 					request.setAttribute("tipoMensajeTransferencia","danger");	
 				}
 
-				//Aviso de transferencia Correcta o fallida.
-			
+				
 			} finally {
 				RequestDispatcher rd = request.getRequestDispatcher("/Transferencias.jsp");
 				rd.forward(request,response);
