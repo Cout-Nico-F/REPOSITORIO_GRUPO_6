@@ -21,7 +21,7 @@
 </script>
 
 <style>
-	img{
+	.img-user{
 		width: 22px;
 		height: 22px;
 		border-radius: 12px;
@@ -56,9 +56,9 @@
       <form method="post" action="servletLogin">
      	<% if( request.getSession().getAttribute("nombreUsuarioLogeado") != null){ %>
      		<% if(session.getAttribute("tipoUsuarioLogeado") == "true"){ %> <!-- Hago el casteo asi porque es un objeto -->
-     			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSriFFJXaLLV3g1bFT8PrDRFbD50XjQ7lm_0g&usqp=CAU" >
+     			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSriFFJXaLLV3g1bFT8PrDRFbD50XjQ7lm_0g&usqp=CAU" class="img-user">
      		<% } else { %>
-     			<img src="https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/104-512.png" >		
+     			<img src="https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/104-512.png" class="img-user">		
      		<% } %>
        <span><%= request.getSession().getAttribute("nombreUsuarioLogeado") %></span>
        <input type="submit" name="btnCerrarSesion" value= "Cerrar Sesión" class="btn btn-secondary">
