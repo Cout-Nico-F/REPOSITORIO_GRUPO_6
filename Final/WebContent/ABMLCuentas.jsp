@@ -211,6 +211,7 @@
 					%>
 						<tr>
 						<form id="formPost<%=listaCuentas.get(i).getNumeroCuenta()%>" action="ServletABMLCuentas" method="post">
+							<input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input>
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%> <input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%>  </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
