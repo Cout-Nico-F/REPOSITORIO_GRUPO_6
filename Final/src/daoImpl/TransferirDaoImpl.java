@@ -66,7 +66,7 @@ public class TransferirDaoImpl implements ITransferirDao{
 	@Override
 	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad) throws SQLException
 	{	
-		String cuenta =  "123813724"; // TraerNroCuenta(cbuOrigen);
+		String cuenta =  "123813724"; // TraerNroCuenta(cbuOrigen); //TODO:No olvidar este hardcode.
 		String destino = "123813725"; // TraerNroCuenta(cbuDestino);
 		
 		String cantidad_s = Float.toString(cantidad);
