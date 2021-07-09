@@ -220,8 +220,13 @@ insert into usuarios (NombreUsuario,Contrasenia,EsAdmin) values ("AlonsoHS20","1
 
 # -- Agrego un cliente y a ese cliente le creo un usuario --
 insert into usuarios (NombreUsuario,Contrasenia,EsAdmin) values ("Nose","123",false); #tendriamos que encriptar la contrasenia -- tiene que tener un usuario antes para que pueda ser cliente?
+insert into usuarios (NombreUsuario,Contrasenia,EsAdmin) values ("Yase","123",false); #tendriamos que encriptar la contrasenia -- tiene que tener un usuario antes para que pueda ser cliente?
+
 insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico,TelefonoFijo,Celular) 
 values (14203944,2,1,1,111111111111,"Nose","Valdez","Masculino","2021/06/25","Av.Siempre viva 123","prueba@gmail.com",01123948373, 1523344556);
+
+insert into clientes (Dni,IdUsuario,IdNacionalidad,IdLocalidad,Cuil,Nombre,Apellido,Sexo,FechaNacimiento,Direccion,CorreoElectronico,TelefonoFijo,Celular) 
+values (0303456,3,1,1,111111222111,"Yase","Gomez","Masculino","2021/06/25","Av.Nuenca muerta 987","prueba@gmail.com",01123848373, 1523344557);
 
 insert into tiposdecuenta (Descripcion) values ("Caja de Ahorro");
 insert into tiposdecuenta (Descripcion) values ("Cuenta Corriente");
