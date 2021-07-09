@@ -25,4 +25,5 @@ public interface IAdminNegocio {
 	public ArrayList<Prestamo> listarPrestamosParaAutorizar();
 	public int actualizarPrestamo(Prestamo prestamo);
 	public boolean validarUsuarioAdmin(HttpServletRequest request);
+	public ArrayList<Cuenta> listarCuentas(int dni);
 }

@@ -87,8 +87,7 @@
 									<% } else {
 										%>
 										<option value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
-									<% }
-									 
+									<% }									 
 								 %>
 							<% }		
 						}

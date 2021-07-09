@@ -21,6 +21,10 @@ public class AdminDaoImpl implements IAdminDao {
 	private static final String eliminarCuenta = "update cuentas set eliminado = true where numerocuenta = ?";
 	private static final String existeCuenta = "select * from cuentas where numerocuenta = ?";
 	private static final String asignarCuenta = "update cuentas set dni=? where numerocuenta = ?";
+	private static final String listarCuentasporDni = "select * from cuentas where eliminado = false and dni = ?";
+	private ITipoDeCuentaDao daoTipoCuentas = new TipoDeCuentaDaoImpl();
+	
+	
 	
 	@Override
 	public Cuenta traerCuenta(long numeroCuenta) {
@@ -97,7 +101,6 @@ public class AdminDaoImpl implements IAdminDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs;
 		ArrayList<Cuenta> listaCuentas = new ArrayList<>();
-		TipoDeCuentaDaoImpl daoTipoCuentas = new TipoDeCuentaDaoImpl();
 		try {
 			ps = conexion.prepareStatement(listarCuentas);
 			rs = ps.executeQuery();
@@ -197,6 +200,35 @@ public class AdminDaoImpl implements IAdminDao {
 		}
 		
 		return asigno;
+	}
+
+	@Override
+	public ArrayList<Cuenta> listarCuentas(int dni) {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
+		try {
+			ps = conexion.prepareStatement(listarCuentasporDni);
+			ps.setInt(1, dni);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Cuenta cuenta = new Cuenta();
+				cuenta.setNumeroCuenta(String.valueOf(rs.getLong("NumeroCuenta")));
+				cuenta.setDNI(rs.getInt("Dni"));
+				cuenta.setTipoDeCuenta(daoTipoCuentas.buscarTipoDeCuenta(rs.getShort("IdTipoCuenta")));
+				cuenta.setSaldo(rs.getBigDecimal("Saldo"));
+				cuenta.setCBU(rs.getString("CBU"));
+				cuenta.setFecha(rs.getDate("FechaCreacion"));
+				
+				listaCuentas.add(cuenta);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return listaCuentas;
+		}
+		return listaCuentas;
 	}
 	
 

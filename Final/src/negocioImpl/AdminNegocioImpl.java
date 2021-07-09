@@ -148,6 +148,12 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return cuenta;
 	}
 
+	@Override
+	public ArrayList<Cuenta> listarCuentas(int dni) {
+		IAdminDao dao = new AdminDaoImpl();
+		return dao.listarCuentas(dni);
+	}
+
 
 
 }

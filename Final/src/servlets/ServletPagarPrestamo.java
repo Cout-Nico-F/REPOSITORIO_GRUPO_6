@@ -16,7 +16,9 @@ import entidad.Cuenta;
 import entidad.Cuota;
 import entidad.Prestamo;
 import negocio.ClienteNegocio;
+import negocio.IAdminNegocio;
 import negocio.IPrestamoNegocio;
+import negocioImpl.AdminNegocioImpl;
 import negocioImpl.ClienteNegocioImpl;
 import negocioImpl.PrestamoNegocioImpl;
 
@@ -27,8 +29,10 @@ import negocioImpl.PrestamoNegocioImpl;
 public class ServletPagarPrestamo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Prestamo> listaPrestamos;
+	private ArrayList<Cuenta> listaCuentas;
 	private ClienteNegocio cliNeg = new ClienteNegocioImpl();
 	private IPrestamoNegocio preNeg = new PrestamoNegocioImpl();
+	private IAdminNegocio admNeg = new AdminNegocioImpl();
 
 	public ServletPagarPrestamo() {
 		super();
@@ -39,6 +43,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 		if (cliNeg.validarUsuarioCliente(request)) {
 			cargarPrestamos(request);
 			cargarSaldos(request);
+			cargarCuentasUsuario(request);
 			
 		} else {
 			response.sendRedirect("Login.jsp");
@@ -73,7 +78,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 		request.setAttribute("listaSaldos", preNeg.cargarSaldos(listaPrestamos));
 	}
 
-	void cargarPrestamos(HttpServletRequest request) {
+	private void cargarPrestamos(HttpServletRequest request) {
 		String nombreUsuario = String.valueOf(request.getSession().getAttribute("nombreUsuarioLogeado"));
 		Cliente cli = cliNeg.traerClientePorNombreUsuario(nombreUsuario);
 		listaPrestamos = cliNeg.listarPrestamosPorCliente(cli.getDni());
@@ -91,5 +96,13 @@ public class ServletPagarPrestamo extends HttpServlet {
 		listaPrestAux.add(prestamo);
 		}
 		request.setAttribute("listaPrestamos", listaPrestAux);
+	}
+	
+	private void cargarCuentasUsuario(HttpServletRequest request) {
+		String nombreUsuario = String.valueOf(request.getSession().getAttribute("nombreUsuarioLogeado"));
+		Cliente cli = cliNeg.traerClientePorNombreUsuario(nombreUsuario);
+		listaCuentas = admNeg.listarCuentas(cli.getDni());
+		
+		request.setAttribute("listaCtasUsuario", listaCuentas);
 	}
 }
