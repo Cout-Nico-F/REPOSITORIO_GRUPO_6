@@ -70,7 +70,7 @@
 	<br>
 
 	<div class="titlePrestamos"></div>
-	<br>
+	<br><br><br>
 	<form action="ServletPagarPrestamo" method="get">
 		<div align="center">
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
@@ -100,7 +100,8 @@
 				</select>
 				
 			</div> <% 
-			if(request.getAttribute("cuentaSeleccionada")!=null && !("Seleccione+una+Cuenta".equals(request.getParameter("cuentaSelecc")))){%>
+			if(request.getAttribute("cuentaSeleccionada") != null &&
+			!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){%>
 			<label><b>Saldo de cuenta: $ <%=((Cuenta)(request.getAttribute("cuentaSeleccionada"))).getSaldo() %> .- </b></label>
 			<%} else {%>
 				<label><b>Saldo de cuenta: </b> <i> Sin cuenta seleccionada </i> </label>
@@ -154,7 +155,8 @@
 					<td class="dt-body-center"><div class="form-check">
 							<input class="form-check-input" type="checkbox" value=""
 								id="flexCheckDefault"		
-					<%if(request.getParameter("cuentaSelecc")==null || ("Seleccione+una+Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
+					<%if(request.getParameter("cuentaSelecc") == null ||
+					("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
 						disabled></div></td> 
 						<% } else {%>
 						></div></td>
