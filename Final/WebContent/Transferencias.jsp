@@ -7,9 +7,41 @@
 <title>Transferencia de dinero</title>
 <link href="recursos/style-prestamos.css" rel="stylesheet" type="text/css">
 <%@ include file="HeaderCliente.jsp" %>
+<script>
+function submitForm() {
+	$("form").submit()
+}
+function mensaje() {
+	const origen = $('input[name="inputCbuOrigen"]').val();
+	const destino = $('input[name="inputCbuDestino"]').val();
+	const saldo = $('input[name="inputSaldo"]').val();
+	var mensaje;
+	if (origen && destino && saldo) {
+		mensaje = "Ud. va a transferir " + saldo + " a la cuenta " + destino;
+		$("#btnDismiss").html("Cancelar")
+		$("#btnSubmit").show()
+	} else {
+		mensaje = "Por favor, llene los campos"
+		$("#btnDismiss").html("Ok")
+		$("#btnSubmit").hide()
+	}
+	$(".modal-body").html(mensaje)
+}
+</script>
 </head>
 <body>
-
+<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	  <input type="hidden" name="dniActual" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button id="btnDismiss" type="button" class="btn btn-secondary" data-bs-dismiss="modal"></button>
+	        <button id="btnSubmit" type="button" class="btn btn-primary" onclick="submitForm()">Confirmar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
         
         <form method="Post" action="ServletTransferencia">
         
@@ -117,7 +149,7 @@
               <input type="number" class="form-control" name="inputSaldo" min="1" pattern="^[0-9]+">
            </div>
           <br><br>
-          <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">
+          <input type="button" value="Transferir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="mensaje()">
  		 
     </div>	
     </div>
