@@ -66,11 +66,10 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	}
 
 	@Override
-	public void eliminarCuenta(long nroCuenta) {
+	public boolean eliminarCuenta(long nroCuenta) {
 		IAdminDao dao = new AdminDaoImpl();
-		if (dao.existe(nroCuenta)) {
-			dao.eliminarCuenta(nroCuenta);
-		}
+		if (dao.existe(nroCuenta))
+			return dao.eliminarCuenta(nroCuenta);
 	}
 
 	@Override

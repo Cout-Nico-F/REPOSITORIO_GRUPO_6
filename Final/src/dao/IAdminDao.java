@@ -11,7 +11,7 @@ public interface IAdminDao {
 	public boolean existe(long numeroCuenta);
 	public ArrayList<Cuenta> listarCuentas();
 	public ArrayList<Cuenta> listarCuentas(int dni);
-	public int eliminarCuenta(long nroCuenta);
+	public boolean eliminarCuenta(long nroCuenta);
 	public Cuenta traerCuenta(long numeroCuenta);
 	public boolean asignacionCuenta(long nroCuenta, int dni);
 	

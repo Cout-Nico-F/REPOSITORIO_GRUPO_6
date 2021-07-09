@@ -124,11 +124,11 @@ public class AdminDaoImpl implements IAdminDao {
 	}
 
 	@Override
-	public int eliminarCuenta(long nroCuenta) {
+	public boolean eliminarCuenta(long nroCuenta) {
 
 		PreparedStatement ps;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		int resultado = -1;
+		int resultado=0;
 
 		try {
 			ps = conexion.prepareStatement(eliminarCuenta);
@@ -147,7 +147,7 @@ public class AdminDaoImpl implements IAdminDao {
 			}
 		}
 
-		return resultado;
+		return (resultado>0)? true:false;
 	}
 
 	

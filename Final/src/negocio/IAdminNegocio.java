@@ -13,7 +13,7 @@ public interface IAdminNegocio {
 	public ArrayList<TipoDeCuenta> listarTiposCuenta();
 	public ArrayList<Cuenta> listarCuentas();
 	public Cliente buscarCliente(int dni);
-	public void eliminarCuenta(long nroCuenta);
+	public boolean eliminarCuenta(long nroCuenta);
 	public boolean validarCampoNoVacio(String campo);
 	public boolean validarCamposCuentaNoVacia(Cuenta cuenta);
 	public boolean validarDNIExistente(int dni);
