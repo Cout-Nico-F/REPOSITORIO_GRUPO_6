@@ -66,8 +66,8 @@ public class TransferirDaoImpl implements ITransferirDao{
 	@Override
 	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad) throws SQLException
 	{	
-		String cuenta =  "123813723"; // TraerNroCuenta(cbuOrigen); //TODO:No olvidar este hardcode.
-		String destino = "123813724"; // TraerNroCuenta(cbuDestino);
+		String cuenta =  "123813724"; // TraerNroCuenta(cbuOrigen); //TODO:No olvidar este hardcode.
+		String destino = "123813725"; // TraerNroCuenta(cbuDestino);
 		
 		String cantidad_s = Float.toString(cantidad);
 		
@@ -77,7 +77,7 @@ public class TransferirDaoImpl implements ITransferirDao{
 		Movimiento aux = new Movimiento(4, daoMov.traerTipoDeMovimiento(TiposMovimiento.Transferencia.getOperacion()), "Transferencia", new BigDecimal(cantidad_s), Long.valueOf(cuenta), Long.valueOf(destino));
 		
 		if (daoMov.registrarMovimiento(aux)) {
-			return daoMov.actualizarSaldos(VariablesGlobales.TiposMovimiento.Transferencia, Long.valueOf(destino), Long.parseLong(cuenta), new BigDecimal(cantidad_s)); 
+			return daoMov.actualizarSaldos(VariablesGlobales.TiposMovimiento.Transferencia, Long.valueOf(cuenta), Long.parseLong(destino), new BigDecimal(cantidad_s)); 
 		}				
 		return false;
 	}
