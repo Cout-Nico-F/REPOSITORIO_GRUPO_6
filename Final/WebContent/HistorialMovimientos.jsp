@@ -1,4 +1,6 @@
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import = "entidad.Cuenta" %>
@@ -11,6 +13,33 @@
 <%@ include file="HeaderCliente.jsp"%>
 </head>
 <body>
+
+	<script>
+	  $(document).ready(function() {
+	        var table = $('#clientes').DataTable( {
+	            language: {
+	            	"decimal":        "",
+	                "emptyTable":     "No hay información disponible en la tabla",
+	                "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+	                "infoEmpty":      "Mostrando 0 a 0 de 0 registro(s)",
+	                "infoFiltered":   "(filtrado de _MAX_ registros totales)",
+	                "infoPostFix":    "",
+	                "thousands":      ".",
+	                "loadingRecords": "Cargando...",
+	                "processing":     "Procesando...",
+	                "search":         "Buscar:",
+	                "zeroRecords":    "No se encontraron resultados",
+	                "paginate": {
+	                    "first":      "Primera",
+	                    "last":       "Última",
+	                    "next":       "Siguiente",
+	                    "previous":   "Anterior"
+	                }
+	            },
+	            lengthChange: false
+	        });
+		});
+	</script>
 
 	<br><br>
 	
@@ -40,7 +69,6 @@
 				<option value="1">No hay opciones</option>
 			<% } %>
 			</select> <span class="focus"></span>
-			<input type="hidden" name="selectedValue" value="0"/>  
 		</div>
 	</div>
 	</form>
@@ -59,17 +87,25 @@
           </thead>
             <tbody>
             <%if(request.getAttribute("listaMov") != null) { 
-            	ArrayList<Movimiento> listaMov = new ArrayList<Movimiento>(); 
-            	listaMov = (ArrayList<Movimiento>) request.getAttribute("listaMov"); 
+            	ArrayList<Movimiento> listaMov = new ArrayList<Movimiento>();
+            	//El warning es por que en tiempo de ejecucion el compilador no sabe si realmente exista un objeto de tipo movimiento
+            	//hasta que se cree por lo tanto si getAttribute() no devuelve un ArrayList entonces se lanzara una ClassCastException
+            	try{
+            		listaMov = ((ArrayList<Movimiento>) request.getAttribute("listaMov")); 
+            	}
+            	catch(ClassCastException e){
+            		e.printStackTrace();
+            	}
+            	
             	for(Movimiento m : listaMov) { %>
             <tr>
-            	<td>Fecha: <%=new java.sql.Date(m.getFechaMovimiento().getTime()) %></td>
-            	<td><%=m.getDetalle() %></td>
-            	<td><%=m.getTipoDeMovimiento().getDescripcion() %></td>
-            	<td><%=m.getIDCuentaDestino() %></td>
-            	<td><%=m.getImporte() %>
+            	<td class="dt-body-center"><%=m.getFechaMovimiento() %> </td>
+            	<td class="dt-body-center"><%=m.getDetalle() %></td>
+            	<td class="dt-body-center"><%=m.getTipoDeMovimiento().getDescripcion() %></td>
+            	<td class="dt-body-center"><%=m.getIDCuentaDestino() %></td>
+            	<td class="dt-body-center"><%=m.getImporte() %></td>
             <tr>
-            <% } %>
+            	<% } %>
             <% } %>
       		</tbody>
       	</table>
