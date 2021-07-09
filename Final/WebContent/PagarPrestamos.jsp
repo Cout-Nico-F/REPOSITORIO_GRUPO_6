@@ -76,6 +76,7 @@
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
 				<select id="slCuentas" name="cuentaSelecc" onchange="this.form.submit()">
+				
 					<%
 						ArrayList<Cuenta> listaCuentas = null;
 						if (request.getAttribute("listaCtasUsuario") != null) {
@@ -83,10 +84,10 @@
 							for (Cuenta c : listaCuentas) {
 								if (c.getNumeroCuenta().equals(request.getParameter("cuentaSelecc"))) {
 									%>
-									<option value="<%=c.getNumeroCuenta() %>" selected><%=c.getTipoDeCuenta().getDescripcion() %>- <%=c.getNumeroCuenta() %></option>
+									<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>"value="<%=c.getNumeroCuenta() %>" selected><%=c.getTipoDeCuenta().getDescripcion() %>- <%=c.getNumeroCuenta() %></option>
 									<% } else {
 										%>
-										<option value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
+										<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>"value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
 									<% }									 
 								 %>
 							<% }		
@@ -98,7 +99,10 @@
 						}							
 					%>
 				</select>
+				
 			</div>
+			if()
+			<label><b>Saldo de cuenta : <%= %></b></label>
 		</div>
 	</form>
 

@@ -104,5 +104,16 @@ public class ServletPagarPrestamo extends HttpServlet {
 		listaCuentas = admNeg.listarCuentas(cli.getDni());
 		
 		request.setAttribute("listaCtasUsuario", listaCuentas);
+		if(request.getParameter("cuentaSelecc")!=null) {
+			
+			String cuentaSeleccionada = String.valueOf(request.getParameter("cuentaSelecc"));
+		
+			Cuenta c = ((IPrestamoNegocio) preNeg).buscarCuenta(listaCuentas, cuentaSeleccionada);
+			request.setAttribute("cuentaSeleccionada",c);
+		}
+		
+	}
+
+	
 	}
 }

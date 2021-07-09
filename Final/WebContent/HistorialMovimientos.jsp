@@ -28,11 +28,11 @@
 			 	if(c.getNumeroCuenta().equals(request.getParameter("slvalue")))
 			 	{
 			 	%>
-			 		<option value="<%=c.getNumeroCuenta() %>" selected><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
+			 		<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>" value="<%=c.getNumeroCuenta() %>" selected><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
 			 	<% 
 			 	} else {
 			 	%>
-				<option value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option> <!-- El id nose si hace falta por las dudas lo pongo -->
+				<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>"  value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option> <!-- El id nose si hace falta por las dudas lo pongo -->
 			 	<%}
 			 } %>
 			<% } 

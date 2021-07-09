@@ -4,12 +4,30 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
+import entidad.Cuenta;
 import entidad.Cuota;
 import entidad.Prestamo;
 import negocio.IPrestamoNegocio;
 
 public class PrestamoNegocioImpl implements IPrestamoNegocio{
+	
 
+	@Override
+	public Cuenta buscarCuenta(ArrayList<Cuenta> listaCuentas, String numeroCuenta) {
+		
+		Cuenta aux=new Cuenta();
+		for(Cuenta c : listaCuentas) {
+			if(c.getNumeroCuenta()==numeroCuenta) {		
+				aux=c;
+			}
+		}
+		return aux;
+	}
+	
+	
+	
 	@Override
 	public ArrayList<BigDecimal> cargarSaldos(ArrayList<Prestamo> listaPrestamos) {
 		ArrayList<BigDecimal> listaSaldos = new ArrayList<BigDecimal>();
