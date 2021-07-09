@@ -278,10 +278,10 @@ public class ClienteDaoImpl implements ClienteDao {
 			while(rs.next()) {
 				Cliente c = new Cliente();
 				c.setDni(rs.getInt("Dni"));
-				c.setNombre(rs.getNString("Nombre"));
-				c.setApellido(rs.getNString("Apellido"));
-				c.setDireccion(rs.getNString("Direccion"));
-				c.setCorreoElectronico(rs.getNString("CorreoElectronico"));
+				c.setNombre(rs.getString("Nombre"));
+				c.setApellido(rs.getString("Apellido"));
+				c.setDireccion(rs.getString("Direccion"));
+				c.setCorreoElectronico(rs.getString("CorreoElectronico"));
 				
 				listaCli.add(c);
 			}

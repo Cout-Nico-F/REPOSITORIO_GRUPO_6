@@ -41,6 +41,7 @@
  			var mensaje = "¿Está seguro de que desea " + accion + " este cliente?"
  	    	$('input[name="accion"]').val(accion)
  		    $(".modal-body").html(mensaje)
+ 		    $('input[name="dniActual"]').val($(this).data("dni"))
  		});
         $("#provincia").change(llenarLocalidades)
         window.onload = llenarLocalidades()
@@ -48,7 +49,7 @@
     
     function submitForm() {
     	if("eliminar" == $('input[name="accion"]').val()) {
-        	$("#formPost").submit()
+        	$("#formPost"+$('input[name="dniActual"]').val()).submit()
     	} else {
         	$("#formGet").submit()
     	}
@@ -82,6 +83,7 @@
       <div class="toast-body"></div>
   </div>
 	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	  <input type="hidden" name="dniActual" >
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body"></div>
@@ -495,7 +497,7 @@
 		{
 	%>
 	<tr>
-      <form id="formPost" action="Clientes" method="post">
+      <form id="formPost<%=c.getDni()%>" action="Clientes" method="post">
 		 <input type="hidden" name="dni" value="<%=c.getDni()%>">
 		 <td><%=c.getUsuario().getNombreUsuario() %></td>    
 	     <td><%=c.getNombre() %></td>   
@@ -504,7 +506,7 @@
 	     <td class="text-center">
 	     <button class="btn" type="submit" name="btnDetalle"><i class="bi bi-info-lg"></i></button>
 	     <button class="btn" type="submit" name="btnModificar"><i class="bi bi-pencil-fill"></i></button>
-	     <button class="btn abrir-modal" type="button" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button>
+	     <button class="btn abrir-modal" type="button" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar" data-dni="<%=c.getDni()%>"><i class="bi bi-trash-fill"></i></button>
 	     </td>     
       </form>
 	</tr>

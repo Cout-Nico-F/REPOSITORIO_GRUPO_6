@@ -50,11 +50,12 @@
  			var mensaje = "¿Está seguro de que desea " + accion + " este préstamo?"
  	    	$('input[name="accion"]').val(accion)
  		    $(".modal-body").html(mensaje)
+ 		    $('input[name="prestamoActual"]').val($(this).data("prestamo"))
  		});
     });
     
     function submitForm() {
-        $("#form").submit()
+        $("#form"+$('input[name="prestamoActual"]').val()).submit()
     }
     </script>
 </head>
@@ -63,6 +64,7 @@
       <div class="toast-body"></div>
   </div>
 	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	  	  <input type="hidden" name="prestamoActual" >
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body"></div>
@@ -73,7 +75,6 @@
 	    </div>
 	  </div>
 	</div>
-<div style="min-height: inherit;">
 		<br>
 		<br>
 	<div class="titlePrestamos">Autorización de Prestamos</div>
@@ -99,7 +100,7 @@
 		{
 	%>
 	<tr>
-      <form id="form" action="AutorizacionPrestamos" method="post">
+      <form id="form<%=p.getIdPrestamo()%>" action="AutorizacionPrestamos" method="post">
       <input type="hidden" name="accion">
 		 <input type="hidden" name="idPrestamo" value="<%=p.getIdPrestamo()%>">
 		 <input type="hidden" name="fecha" value="<%=p.getFecha()%>">
@@ -113,14 +114,13 @@
 	     <td><%=p.getCuotas()%></td>
 	     <td><%=p.getMontoMensual()%></td>
 	     <td class="text-center">
-	     <button type="button" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar">Autorizar</button>
-		<button type="button" class="btn btn-danger abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="denegar">Denegar</button>
+	     <button type="button" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar" data-prestamo="<%=p.getIdPrestamo()%>">Autorizar</button>
+		<button type="button" class="btn btn-danger abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="denegar" data-prestamo="<%=p.getIdPrestamo()%>">Denegar</button>
 		</td>     
       </form>
 	</tr>
 	<%  } %>
   </tbody>
-        </table>  
-        </div>
+        </table> 
 </body>
 </html>

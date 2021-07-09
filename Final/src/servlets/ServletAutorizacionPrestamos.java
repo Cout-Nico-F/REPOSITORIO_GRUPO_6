@@ -30,12 +30,17 @@ public class ServletAutorizacionPrestamos extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (admNeg.validarUsuarioAdmin(request)) {
 		RequestDispatcher rd = request.getRequestDispatcher("/AutorizacionPrestamos.jsp");
 		request.setAttribute("prestamos", admNeg.listarPrestamosParaAutorizar());
 		rd.forward(request, response);
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (admNeg.validarUsuarioAdmin(request)) {
 		RequestDispatcher rd = request.getRequestDispatcher("/AutorizacionPrestamos.jsp");
 		Prestamo p = new Prestamo();
 		String mensaje;
@@ -56,6 +61,9 @@ public class ServletAutorizacionPrestamos extends HttpServlet {
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("prestamos", admNeg.listarPrestamosParaAutorizar());
 		rd.forward(request, response);
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
 	}
 	
 	private Date getDate(String dateString) {

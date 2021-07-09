@@ -45,12 +45,13 @@
  			var mensaje = "¿Está seguro de que desea " + accion + " esta cuenta?"
  	    	$('input[name="accion"]').val(accion)
  		    $(".modal-body").html(mensaje)
+ 		    $('input[name="cuentaActual"]').val($(this).data("cuenta"))
  		});
     });
     
     function submitForm() {
     	if("eliminar" == $('input[name="accion"]').val()){
-        	$("#formPost").submit()
+    		$("#formPost"+$('input[name="cuentaActual"]').val()).submit()
     	}
     	else if("asignar" == $('input[name="accion"]').val()){
     		$("#formGet").submit()
@@ -66,6 +67,7 @@
   </div>
   
 	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	  <input type="hidden" name="cuentaActual" >
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body"></div>
@@ -208,7 +210,7 @@
 					for(int i=0;i<listaCuentas.size();i++) {	
 					%>
 						<tr>
-						<form id="formPost" action="ServletABMLCuentas" method="post">
+						<form id="formPost<%=listaCuentas.get(i).getNumeroCuenta()%>" action="ServletABMLCuentas" method="post">
 							<td class="dt-body-center"><%=listaCuentas.get(i).getNumeroCuenta()%> <input type="hidden" name="nroCuenta" value="<%=listaCuentas.get(i).getNumeroCuenta()%>"></input></td>
 							<td class="dt-body-right"><%=listaCuentas.get(i).getTipoDeCuenta().getDescripcion()%>  </td>
 							<td ><%=listaCuentas.get(i).getCBU()%></td>
@@ -219,13 +221,13 @@
 							<td class="dt-body-right"><%=listaCuentas.get(i).getSaldo()%></td>
 							<%if(listaCuentas.get(i).getDNI()!=0){
 								%>
-								<td><div class="text-center"><button type="button" name="btnEliminarCuenta" value="eliminar" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
+								<td><div class="text-center"><button type="button" name="btnEliminarCuenta" value="eliminar" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar" data-cuenta="<%=listaCuentas.get(i).getNumeroCuenta()%>"><i class="bi bi-trash-fill"></i></button></div>
 								</td>
 								<%
 							} else{
 								%>
 								<td><div class="text-center"><button type="submit" name="btnModificarCuenta" value="modificarCuenta" class="btn"><i class="bi bi-pencil-fill"></i></button>
-								<button type="button" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar"><i class="bi bi-trash-fill"></i></button></div>
+								<button type="button" class="btn abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="eliminar" data-cuenta="<%=listaCuentas.get(i).getNumeroCuenta()%>"><i class="bi bi-trash-fill"></i></button></div>
 								</td>
 								<%
 							}
