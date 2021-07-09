@@ -19,7 +19,7 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio{
 		
 		Cuenta aux=new Cuenta();
 		for(Cuenta c : listaCuentas) {
-			if(c.getNumeroCuenta()==numeroCuenta) {		
+			if(c.getNumeroCuenta().equals(numeroCuenta)) {		
 				aux=c;
 			}
 		}

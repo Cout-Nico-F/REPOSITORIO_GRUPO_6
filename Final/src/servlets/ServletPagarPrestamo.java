@@ -61,6 +61,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 		if (cliNeg.validarUsuarioCliente(request)) {
 			cargarPrestamos(request);
 			cargarSaldos(request);
+			cargarCuentasUsuario(request);
 			
 		} else {
 			response.sendRedirect("Login.jsp");
@@ -105,15 +106,8 @@ public class ServletPagarPrestamo extends HttpServlet {
 		
 		request.setAttribute("listaCtasUsuario", listaCuentas);
 		if(request.getParameter("cuentaSelecc")!=null) {
-			
-			String cuentaSeleccionada = String.valueOf(request.getParameter("cuentaSelecc"));
-		
-			Cuenta c = ((IPrestamoNegocio) preNeg).buscarCuenta(listaCuentas, cuentaSeleccionada);
+			Cuenta c = preNeg.buscarCuenta(listaCuentas, String.valueOf(request.getParameter("cuentaSelecc")));
 			request.setAttribute("cuentaSeleccionada",c);
 		}
-		
-	}
-
-	
 	}
 }

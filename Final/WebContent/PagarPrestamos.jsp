@@ -69,14 +69,14 @@
 <body>
 	<br>
 
-	<div class="titlePrestamos">Pagar Préstamos</div>
+	<div class="titlePrestamos"></div>
 	<br>
 	<form action="ServletPagarPrestamo" method="get">
 		<div align="center">
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
 				<select id="slCuentas" name="cuentaSelecc" onchange="this.form.submit()">
-				
+				<option selected> Seleccione una Cuenta </option>
 					<%
 						ArrayList<Cuenta> listaCuentas = null;
 						if (request.getAttribute("listaCtasUsuario") != null) {
@@ -85,12 +85,11 @@
 								if (c.getNumeroCuenta().equals(request.getParameter("cuentaSelecc"))) {
 									%>
 									<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>"value="<%=c.getNumeroCuenta() %>" selected><%=c.getTipoDeCuenta().getDescripcion() %>- <%=c.getNumeroCuenta() %></option>
-									<% } else {
-										%>
+									<% } else { %>
 										<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>"value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
 									<% }									 
-								 %>
-							<% }		
+								 
+							 }		
 						}
 						else {
 							%>
@@ -100,9 +99,12 @@
 					%>
 				</select>
 				
-			</div>
-			if()
-			<label><b>Saldo de cuenta : <%= %></b></label>
+			</div> <% 
+			if(request.getAttribute("cuentaSeleccionada")!=null && !("Seleccione+una+Cuenta".equals(request.getParameter("cuentaSelecc")))){%>
+			<label><b>Saldo de cuenta: $ <%=((Cuenta)(request.getAttribute("cuentaSeleccionada"))).getSaldo() %> .- </b></label>
+			<%} else {%>
+				<label><b>Saldo de cuenta: </b> <i> Sin cuenta seleccionada </i> </label>
+			<% }%>
 		</div>
 	</form>
 
@@ -151,8 +153,12 @@
 					</td>
 					<td class="dt-body-center"><div class="form-check">
 							<input class="form-check-input" type="checkbox" value=""
-								id="flexCheckDefault">
-						</div></td>
+								id="flexCheckDefault"		
+					<%if(request.getParameter("cuentaSelecc")==null || ("Seleccione+una+Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
+						disabled></div></td> 
+						<% } else {%>
+						></div></td>
+						<%} %>
 			</form>
 			</tr>
 			
