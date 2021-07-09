@@ -40,7 +40,7 @@
         } );
         <%if (request.getAttribute("msjTituloModal") != null) {%>
 	 		$('.toast-body').html('<span><%=request.getAttribute("msjModal")%></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
-	        $('.toast-header').html('<span><%=request.getAttribute("msjTituloModal")%>
+	        $('.toast-header').html('<span><%=request.getAttribute("msjTituloModal")%></span>
 	</span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 						$('.toast').toast('show');
 <%}%>
@@ -150,8 +150,9 @@
 							<input class="form-check-input" type="checkbox" value=""
 								id="flexCheckDefault">
 						</div></td>
-			</tr>
 			</form>
+			</tr>
+			
 			<%
 				}
 						indexPrestamo++;
