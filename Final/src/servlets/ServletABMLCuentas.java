@@ -158,7 +158,13 @@ public class ServletABMLCuentas extends HttpServlet {
 
 	private void eliminarCuenta(HttpServletRequest request) {
 			String numeroCuenta = request.getParameter("nroCuenta");
-			admNeg.eliminarCuenta(Long.parseLong(numeroCuenta));
+			if(admNeg.eliminarCuenta(Long.parseLong(numeroCuenta))) {
+				request.setAttribute("msjModal", "La Cuenta ha sido eliminada exitosamente");
+				request.setAttribute("msjTituloModal", "Exito");
+			} else {
+				request.setAttribute("msjTituloModal", "Error");
+				request.setAttribute("msjModal", "La Cuenta no se ha podido eliminar.");
+			}
 	}
 
 	private void cargarDropdown(HttpServletRequest request) {

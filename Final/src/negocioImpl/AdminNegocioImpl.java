@@ -70,6 +70,7 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		IAdminDao dao = new AdminDaoImpl();
 		if (dao.existe(nroCuenta))
 			return dao.eliminarCuenta(nroCuenta);
+		return false;
 	}
 
 	@Override
