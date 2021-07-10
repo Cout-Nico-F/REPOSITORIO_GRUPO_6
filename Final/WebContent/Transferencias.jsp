@@ -20,11 +20,7 @@ function mensaje() {
 		mensaje = "Ud. va a transferir " + saldo + " a la cuenta " + destino;
 		$("#btnDismiss").html("Cancelar")
 		$("#btnSubmit").show()
-	} else {
-		mensaje = "Por favor, llene los campos"
-		$("#btnDismiss").html("Ok")
-		$("#btnSubmit").hide()
-	}
+	} 
 	$(".modal-body").html(mensaje)
 }
 </script>
@@ -173,8 +169,8 @@ function mensaje() {
               <input type="number" class="form-control" name="inputSaldo" min="1" pattern="^[0-9]+">
            </div>
           <br><br>
-          <input type="button" value="Transferir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="mensaje()">
- 		 
+         <!--   <input type="button" value="Transferir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="mensaje()">
+ 		  Lo comento porque no entra al post y no ejecuta la logica del servlet-->  <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">
     </div>	
     </div>
     </form>

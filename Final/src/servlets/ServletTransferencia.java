@@ -33,8 +33,9 @@ public class ServletTransferencia extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
+		if (request.getParameter("btnTransferir") != null) {
+			doPost(request,response);
+		}
 	}
 	
     
@@ -57,7 +58,7 @@ public class ServletTransferencia extends HttpServlet {
 					return;
 				}
 				
-				if (ineg.ComprobarCuentaPropia(request.getParameter("inputCbuOrigen"), request.getAttribute("IdUsuario").toString() ) == false ) {
+				if (ineg.ComprobarCuentaPropia(request.getParameter("inputCbuOrigen"),  request.getSession().getAttribute("IdUsuario").toString() ) == false ) {
 					
 					request.getSession().setAttribute("mensajeOrigenIncorrecto2","No se puede transferir desde la cuenta de otros. Ingrese el cbu de una cuenta propia como origen.");
 					request.setAttribute("tipoMensajeOrigenIncorrecto2","danger");
