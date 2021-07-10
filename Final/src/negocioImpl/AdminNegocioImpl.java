@@ -44,7 +44,7 @@ public class AdminNegocioImpl implements IAdminNegocio {
 	@Override
 	public int actualizarPrestamo(Prestamo prestamo) {
 		PrestamoDao dao = new PrestamoDaoImpl();
-		return dao.actualizarPrestamo(prestamo);
+		return dao.autorizarPrestamo(prestamo);
 	}
 	
 	@Override

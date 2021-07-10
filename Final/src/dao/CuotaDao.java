@@ -6,7 +6,7 @@ import entidad.Prestamo;
 public interface CuotaDao {
 
 	public int insertarCuotas(Prestamo prestamo);
-	public boolean registrarPagoCuota(int idPrestamo, Cuota cuota);
+	boolean registrarPagoCuota(int idPrestamo, short numeroCuota);
 	
 
 }

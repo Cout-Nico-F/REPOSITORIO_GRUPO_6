@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Cuota {
-	private int numeroCuota;
+	private short numeroCuota;
 	private BigDecimal importe;
 	private java.sql.Date fechaVencimiento;
 	private java.sql.Date fechaPago;
@@ -13,10 +13,10 @@ public class Cuota {
 		
 	}
 	
-	public int getNumeroCuota() {
+	public short getNumeroCuota() {
 		return numeroCuota;
 	}
-	public void setNumeroCuota(int numeroCuota) {
+	public void setNumeroCuota(short numeroCuota) {
 		this.numeroCuota = numeroCuota;
 	}
 

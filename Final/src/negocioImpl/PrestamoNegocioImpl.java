@@ -6,8 +6,12 @@ import java.util.ArrayList;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
+import dao.CuotaDao;
 import dao.IMovimientoDao;
+import dao.PrestamoDao;
+import daoImpl.CuotaDaoImpl;
 import daoImpl.MovimientoDaoImpl;
+import daoImpl.PrestamoDaoImpl;
 import entidad.Cuenta;
 import entidad.Cuota;
 import entidad.Movimiento;
@@ -17,6 +21,8 @@ import negocio.IPrestamoNegocio;
 
 public class PrestamoNegocioImpl implements IPrestamoNegocio {
 
+	private PrestamoDao preDao = new PrestamoDaoImpl();
+	
 	@Override
 	public Cuenta buscarCuenta(ArrayList<Cuenta> listaCuentas, String numeroCuenta) {
 
@@ -49,7 +55,7 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio {
 		Movimiento mov = new Movimiento(imDao.traerTipoDeMovimiento(TiposMovimiento.PagoPrestamo.getOperacion()),
 				detalle, cuota.getImporte(), Long.valueOf(numeroCuenta));
 		if (imDao.actualizarSaldos(TiposMovimiento.PagoPrestamo, Long.valueOf(numeroCuenta), 0,
-				cuota.getImporte()) && imDao.registrarMovimiento(mov) && registrarPagoCuota(idPrestamo, cuota)) {
+				cuota.getImporte()) && imDao.registrarMovimiento(mov) && registrarPagoCuota(idPrestamo, cuota.getNumeroCuota())) {
 			
 			return true;  //TODO actualizar cuota y préstamo
 		} else {
@@ -58,8 +64,20 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio {
 
 	}
 	
-	private boolean registrarPagoCuota(int idPrestamo, Cuota cuota) {
+	private boolean registrarPagoCuota(int idPrestamo, short cuota) {
 		
+		//1 Actualizar prestamo
+		boolean resultado=true;
+		CuotaDao cuotaDao = new CuotaDaoImpl();
+		if(cuotaDao.registrarPagoCuota(idPrestamo,cuota)==false)resultado=false;
+		
+		
+		ArrayList<Cuota> listaCuotas = preDao.listarCuotas(idPrestamo);
+		if(listaCuotas.size()==0) {
+			if(preDao.actualizarPrestamo(Short.valueOf("4"), idPrestamo)==false)resultado=false;
+			
+		}
+		return resultado;
 	}
 
 }

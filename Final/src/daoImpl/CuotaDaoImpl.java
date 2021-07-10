@@ -13,7 +13,7 @@ import entidad.Prestamo;
 
 public class CuotaDaoImpl implements CuotaDao {
 	private static final String InsertarCuotaInsert = "insert into cuotas(IdPrestamos, NumeroCuota, Importe, FechaVencimiento) values";
-	
+	private static final String registrarPagoCuota ="update cuotas set fechaPago =? where idPrestamos = ?";
 	@Override
 	public int insertarCuotas (Prestamo prestamo) {
 		PreparedStatement statement;
@@ -55,8 +55,30 @@ public class CuotaDaoImpl implements CuotaDao {
     }
 
 	@Override
-	public boolean registrarPagoCuota(int idPrestamo, Cuota cuota) {
-		// TODO Auto-generated method stub
+	public boolean registrarPagoCuota(int idPrestamo,short numeroCuota) {
+		
+		boolean modifico=false;
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try {
+			ps = conexion.prepareStatement(registrarPagoCuota);
+			ps.setDate(1,new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+			ps.setShort(2, numeroCuota);
+			if(ps.executeUpdate()>0) {
+				conexion.commit();
+				modifico=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+			conexion.rollback();	
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+				return false;
+			}
 		return false;
+		}
+	
+		return modifico;
 	}
 }

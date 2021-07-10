@@ -131,7 +131,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 				if (listaCuotas.size() > 0) {
 					for (Cuota c : listaCuotas) {
 						if (movNeg.validarFondosSuficientes(String.valueOf(request.getParameter("cuentaSelecc")), c.getImporte())) {
-							movNeg.
+							preNeg.registrarPagoPrestamo(request.getParameter("cuentaSelecc"), c, p.getIdPrestamo(), "detallePago");
 						}
 					}
 				} else {
