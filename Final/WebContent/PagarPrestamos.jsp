@@ -126,8 +126,8 @@
 		<tbody>
 			<%
 				ArrayList<Prestamo> listaPrestamos = null;
-				if (request.getAttribute("listaPrestamos") != null) {
-					listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestamos");
+				if (request.getAttribute("listaPrestAux") != null) {
+					listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestAux");
 				}
 				if (listaPrestamos != null) {
 					for (Prestamo p : listaPrestamos) {
@@ -173,8 +173,11 @@
 
 		</tbody>
 	</table>
-	<div class ="container" align="right">
-	 <button name="btnPagar" type="submit" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar" >Pagar</button>
-	 </div>
+	<%if(request.getParameter("cuentaSelecc") != null &&
+					!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
+						<div class ="container" align="right">
+						 <button name="btnPagar" type="submit" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar" >Pagar</button>
+						 </div>
+						<% } %>
 </body>
 </html>
