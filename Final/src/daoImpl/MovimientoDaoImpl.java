@@ -334,7 +334,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			ps = conexion.prepareStatement(traerHistorialMovimientosSegunNumeroCuenta);
 			ps.setLong(1,NumeroCuenta);
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) { //Puse un if y no un while por eso me traia solo un dato siempre xD
 				Movimiento mov = new Movimiento();
 				mov.setDetalle(rs.getString("m.Detalles"));
 				mov.setFechaMovimiento(rs.getTimestamp("m.Fecha"));
@@ -349,7 +349,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
-			return new ArrayList<Movimiento>();
+			return listMov;
 		}
 		return listMov;
 	}
