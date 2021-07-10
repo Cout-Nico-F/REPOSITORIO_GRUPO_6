@@ -151,8 +151,8 @@
 					<td class="dt-body-center">$ <%=p.getImporteSolicitado()%> .-
 					</td>
 					<td class="dt-body-center"><div class="form-check">
-							<input class="form-check-input" type="checkbox" name="cbPrestamo<%=listaPrestamos.indexOf(p)%><%=listaCuotas.indexOf(c) %>" value=""
-								id="flexCheckDefault"		
+							<input class="form-check-input" type="checkbox" name="cbPrestamo<%=String.valueOf(listaPrestamos.indexOf(p))+String.valueOf(listaCuotas.indexOf(c))%>"
+								id="flexCheckDefault"	
 					<%if(request.getParameter("cuentaSelecc") == null ||
 					("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
 						disabled></div></td> 
@@ -173,11 +173,13 @@
 
 		</tbody>
 	</table>
+	<form method="get" action="ServletPagarPrestamo">
 	<%if(request.getParameter("cuentaSelecc") != null &&
 					!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
 						<div class ="container" align="right">
 						 <button name="btnPagar" type="submit" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar" >Pagar</button>
 						 </div>
 						<% } %>
+	</form>
 </body>
 </html>

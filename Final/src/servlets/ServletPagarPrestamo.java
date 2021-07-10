@@ -149,16 +149,17 @@ public class ServletPagarPrestamo extends HttpServlet {
 		BigDecimal totalAPagar = new BigDecimal(0);
 		ArrayList<Prestamo> listaAux = (ArrayList<Prestamo>) request.getAttribute("listaPrestAux");
 		for (Prestamo p : listaAux) {
+			ArrayList<Cuota> listaAuxCuotas = new ArrayList<Cuota>();
 			ArrayList<Cuota> listaCuotas = p.getListaCuotas();
-			int indexPrestamo = listaPrestamos.indexOf(p);
+			String indexPrestamo = String.valueOf(listaAux.indexOf(p));
 			for (Cuota c : listaCuotas) {
-				int indexCuota = listaCuotas.indexOf(c);
+				String indexCuota = String.valueOf(listaCuotas.indexOf(c));
 				if (request.getParameter("cbPrestamo" + indexPrestamo + indexCuota) != null) {
 					totalAPagar.add(c.getImporte());
-				} else {
-					listaAux.get(indexPrestamo).getListaCuotas().remove(c);
+					listaAuxCuotas.add(c);
 				}
 			}
+			p.setListaCuotas(listaAuxCuotas);
 		}
 		Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
 		if (cuentaSeleccionada.getSaldo().subtract(totalAPagar).compareTo(BigDecimal.ZERO) >= 0) {
@@ -166,5 +167,4 @@ public class ServletPagarPrestamo extends HttpServlet {
 		}
 		return new ArrayList<Prestamo>();
 	}
-
 }
