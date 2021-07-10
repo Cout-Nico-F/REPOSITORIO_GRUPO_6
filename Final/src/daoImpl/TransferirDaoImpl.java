@@ -66,8 +66,8 @@ public class TransferirDaoImpl implements ITransferirDao{
 	@Override
 	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad) throws SQLException
 	{	
-		String cuenta =  "123813724"; // TraerNroCuenta(cbuOrigen); //TODO:No olvidar este hardcode.
-		String destino = "123813725"; // TraerNroCuenta(cbuDestino);
+		String cuenta = TraerNroCuenta(cbuOrigen); 
+		String destino = TraerNroCuenta(cbuDestino);
 		
 		String cantidad_s = Float.toString(cantidad);
 		
@@ -85,7 +85,22 @@ public class TransferirDaoImpl implements ITransferirDao{
 	@Override
 	public String TraerNroCuenta (String cbu) {
 		
-		return "Coming Soon";
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		try {
+			ps=conexion.prepareStatement("select NumeroCuenta from cuentas where cbu = ?");
+			ps.setString(1, cbu);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getString("NumeroCuenta");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "false";
+		}
+		return "false";
 	}
 	
 	@Override
