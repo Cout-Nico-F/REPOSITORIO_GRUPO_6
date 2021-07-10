@@ -34,6 +34,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 	private IPrestamoNegocio preNeg = new PrestamoNegocioImpl();
 	private IAdminNegocio admNeg = new AdminNegocioImpl();
 
+
 	public ServletPagarPrestamo() {
 		super();
 	}
@@ -44,7 +45,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 			cargarPrestamos(request);
 			cargarSaldos(request);
 			cargarCuentasUsuario(request);
-			
+			pagarPrestamo(request);
 		} else {
 			response.sendRedirect("Login.jsp");
 			return;
@@ -110,4 +111,29 @@ public class ServletPagarPrestamo extends HttpServlet {
 			request.setAttribute("cuentaSeleccionada",c);
 		}
 	}
+	
+	private void pagarPrestamo(HttpServletRequest request) {
+		if(request.getParameter("btnPagar")!=null) {
+			//1 Checkear los checkbox seleccionados
+			
+			
+			for(int i=0;i<listaPrestamos.size();i++) {
+				
+				
+				
+				if(request.getParameter("cbPrestamo"+i)!=null) {
+					
+				}
+				
+			}
+			
+			//2 Verificar el saldo disponible
+			//3 Actualizar saldo
+			//4 Registrar nmovimiento
+			//5 Actualizar estado de prestamo
+		}
+		
+	}
+	
+	
 }

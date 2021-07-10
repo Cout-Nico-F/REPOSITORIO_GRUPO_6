@@ -152,7 +152,7 @@
 					<td class="dt-body-center">$ <%=p.getImporteSolicitado()%> .-
 					</td>
 					<td class="dt-body-center"><div class="form-check">
-							<input class="form-check-input" type="checkbox" value=""
+							<input class="form-check-input" type="checkbox" name="cbPrestamo<%=indexPrestamo%>" value=""
 								id="flexCheckDefault"		
 					<%if(request.getParameter("cuentaSelecc") == null ||
 					("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
@@ -161,10 +161,13 @@
 						></div></td>
 						<%} %>
 			</form>
+		
 			</tr>
 			
+				 
 			<%
 				}
+						
 						indexPrestamo++;
 					}
 				}
@@ -172,5 +175,8 @@
 
 		</tbody>
 	</table>
+	<div class ="container" align="right">
+	 <button name="btnPagar" type="submit" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar" >Pagar</button>
+	 </div>
 </body>
 </html>
