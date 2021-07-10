@@ -40,7 +40,7 @@
           <a class="nav-link" href="ServletHistorialMovimientos">Historial Movimientos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Transferencias.jsp">Transferir dinero</a>
+          <a class="nav-link" href="Transferencias">Transferir dinero</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="Prestamos.jsp">Pedir un préstamo</a>
