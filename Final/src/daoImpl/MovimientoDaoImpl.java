@@ -116,11 +116,10 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 		dao = new AdminDaoImpl();
 		try {
 			//BigDecimal nuevoImporteOLD = importe.subtract((dao.traerCuenta(cuentaARestar)).getSaldo());
-			BigDecimal nuevoImporte = dao.traerCuenta(cuentaARestar).getSaldo().subtract(importe); //Estaba al revez la resta, y el siguiente if daba siempre falso.
+			BigDecimal nuevoImporte = dao.traerCuenta(cuentaARestar).getSaldo().subtract(importe); 
 			
 			if (nuevoImporte.compareTo(BigDecimal.ZERO) >= 0) {
 				ps = conexion.prepareStatement(actualizarSaldo);
-				//ps.setBigDecimal(1, importe.add((dao.traerCuenta(cuentaARestar)).getSaldo())); //Acá hay que restar, no sumar.
 				
 				ps.setBigDecimal(1, nuevoImporte);
 				

@@ -83,10 +83,32 @@ public class TransferirDaoImpl implements ITransferirDao{
 	}
 	
 	@Override
-	public String TraerNroCuenta (String Cbu) {
+	public String TraerNroCuenta (String cbu) {
 		
+		return "Coming Soon";
+	}
+	
+	@Override
+	public boolean ComprobarCuentaPropia (String cbuOrigen, String idUsuario) {
 		
-		return "";
-		
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs;
+		try {
+			ps=conexion.prepareStatement("select u.IdUsuario from usuarios u inner join cliente cli on u.IdUsuario = cli.IdUsuario inner join cuentas cu on cli.Dni = cu.Dni where cu.cbu = ?");
+			ps.setString(1, cbuOrigen);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("IdUsuario").equals(idUsuario) ) {
+					
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
 	}
 }
