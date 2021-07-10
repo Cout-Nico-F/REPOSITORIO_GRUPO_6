@@ -130,7 +130,9 @@ public class ServletPagarPrestamo extends HttpServlet {
 				ArrayList<Cuota> listaCuotas = p.getListaCuotas();
 				if (listaCuotas.size() > 0) {
 					for (Cuota c : listaCuotas) {
-						
+						if (movNeg.validarFondosSuficientes(String.valueOf(request.getParameter("cuentaSelecc")), c.getImporte())) {
+							movNeg.
+						}
 					}
 				} else {
 					request.setAttribute("msjModal", "No tiene fondos suficientes para pagar las cuotas seleccionadas.");
@@ -156,7 +158,8 @@ public class ServletPagarPrestamo extends HttpServlet {
 				}
 			}
 		}
-		if (movNeg.validarFondosSuficientes(String.valueOf(request.getParameter("cuentaSelecc")), totalAPagar)) {
+		Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
+		if (cuentaSeleccionada.getSaldo().subtract(totalAPagar).compareTo(BigDecimal.ZERO) >= 0) {
 			return listaAux;
 		}
 		return new ArrayList<Prestamo>();
