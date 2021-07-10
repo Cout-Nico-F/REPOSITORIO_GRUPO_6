@@ -59,7 +59,7 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio {
 	}
 	
 	private boolean registrarPagoCuota(int idPrestamo, Cuota cuota) {
-		
+		return false;//"no dejar cosas que no compilan porfas";
 	}
 
 }
