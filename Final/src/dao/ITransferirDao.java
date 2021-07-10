@@ -7,4 +7,5 @@ public interface ITransferirDao {
 	public boolean ComprobarSaldo(String cbu, float cantidad) throws SQLException;
 	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad) throws SQLException;
 	public String TraerNroCuenta (String Cbu);
+	boolean ComprobarCuentaPropia(String cbuOrigen, String idUsuario);
 }
