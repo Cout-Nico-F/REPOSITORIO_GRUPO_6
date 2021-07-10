@@ -7,4 +7,6 @@ public interface ITransferenciaNegocio {
 	public boolean ComprobarSaldo(String cbu, float cantidad);
 
 	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad);
+	
+	boolean ComprobarCuentaPropia(String cbuOrigen, String idUsuario);
 }

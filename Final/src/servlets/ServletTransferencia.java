@@ -33,8 +33,9 @@ public class ServletTransferencia extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
+		if (request.getParameter("btnTransferir") != null) {
+			doPost(request,response);
+		}
 	}
 	
     
@@ -54,6 +55,20 @@ public class ServletTransferencia extends HttpServlet {
 					request.getSession().setAttribute("mensajeOrigenIncorrecto","No existe el CBU de la cuenta de origen ingresada");
 					request.setAttribute("tipoMensajeOrigenIncorrecto","danger");
 					
+					return;
+				}
+				
+				if (ineg.ComprobarCuentaPropia(request.getParameter("inputCbuOrigen"),  request.getSession().getAttribute("IdUsuario").toString() ) == false ) {
+					
+					request.getSession().setAttribute("mensajeOrigenIncorrecto2","No se puede transferir desde la cuenta de otros. Ingrese el cbu de una cuenta propia como origen.");
+					request.setAttribute("tipoMensajeOrigenIncorrecto2","danger");
+					return;
+				}
+				
+				if(request.getParameter("inputCbuOrigen").equals(request.getParameter("inputCbuDestino"))) {
+					
+					request.getSession().setAttribute("mensajeDestinoIncorrecto3","Error: Se ingresaron dos cbu iguales en origen y destino.");
+					request.setAttribute("tipoMensajeDestinoIncorrecto3","danger");
 					return;
 				}
 				
@@ -78,15 +93,13 @@ public class ServletTransferencia extends HttpServlet {
 				
 				//Cartel preguntando Si estamos seguros de querer transferir. 
 				
-				//Transferencia.
-				//Aviso de transferencia Correcta o fallida.
-				
+				//Transferencia + Aviso de transferencia Correcta o fallida.
 				if (ineg.Transferir(request.getParameter("inputCbuOrigen"), request.getParameter("inputCbuDestino"), Float.valueOf(request.getParameter("inputSaldo")) )) {
-					request.getSession().setAttribute("mensajeTransferencia","Transferencia exitosa, ponele.");
+					request.getSession().setAttribute("mensajeTransferencia","Transferencia exitosa!");
 					request.setAttribute("tipoMensajeTransferencia","success");					
 				}
 				else {
-					request.getSession().setAttribute("mensajeTransferencia","No se pudo realizar la transferencia");
+					request.getSession().setAttribute("mensajeTransferencia","No se pudo realizar la transferencia, contacte con un administrador.");
 					request.setAttribute("tipoMensajeTransferencia","danger");	
 				}
 

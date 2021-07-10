@@ -20,11 +20,7 @@ function mensaje() {
 		mensaje = "Ud. va a transferir " + saldo + " a la cuenta " + destino;
 		$("#btnDismiss").html("Cancelar")
 		$("#btnSubmit").show()
-	} else {
-		mensaje = "Por favor, llene los campos"
-		$("#btnDismiss").html("Ok")
-		$("#btnSubmit").hide()
-	}
+	} 
 	$(".modal-body").html(mensaje)
 }
 </script>
@@ -133,6 +129,30 @@ function mensaje() {
 		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
  		</div>
  		 <!-- Alert -->
+ 		  <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeOrigenIncorrecto2") != null && session.getAttribute("mensajeOrigenIncorrecto2") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeOrigenIncorrecto2")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeOrigenIncorrecto2") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeOrigenIncorrecto2");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		  <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeOrigenIncorrecto3") != null && session.getAttribute("mensajeOrigenIncorrecto3") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeOrigenIncorrecto3")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeOrigenIncorrecto3") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeOrigenIncorrecto3");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
         	
         <div class="form">
         		 
@@ -149,8 +169,8 @@ function mensaje() {
               <input type="number" class="form-control" name="inputSaldo" min="1" pattern="^[0-9]+">
            </div>
           <br><br>
-          <input type="button" value="Transferir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="mensaje()">
- 		 
+         <!--   <input type="button" value="Transferir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="mensaje()">
+ 		  Lo comento porque no entra al post y no ejecuta la logica del servlet-->  <input name="btnTransferir" type="submit" value="Transferir" class="btn btn-primary">
     </div>	
     </div>
     </form>

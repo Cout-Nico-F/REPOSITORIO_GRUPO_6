@@ -64,6 +64,7 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio {
 
 	}
 	
+
 	private boolean registrarPagoCuota(int idPrestamo, short cuota) {
 		
 		//1 Actualizar prestamo
@@ -78,6 +79,6 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio {
 			
 		}
 		return resultado;
-	}
 
+	}
 }

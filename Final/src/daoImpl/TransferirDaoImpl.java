@@ -110,7 +110,7 @@ public class TransferirDaoImpl implements ITransferirDao{
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ResultSet rs;
 		try {
-			ps=conexion.prepareStatement("select u.IdUsuario from usuarios u inner join cliente cli on u.IdUsuario = cli.IdUsuario inner join cuentas cu on cli.Dni = cu.Dni where cu.cbu = ?");
+			ps=conexion.prepareStatement("select u.IdUsuario from usuarios u inner join clientes cli on u.IdUsuario = cli.IdUsuario inner join cuentas cu on cli.Dni = cu.Dni where cu.cbu = ?");
 			ps.setString(1, cbuOrigen);
 			
 			rs = ps.executeQuery();

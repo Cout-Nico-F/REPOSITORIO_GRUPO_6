@@ -42,5 +42,11 @@ public class TransferenciaNegocioImpl implements ITransferenciaNegocio {
 		}
 		return r;
 	}
+
+	@Override
+	public boolean ComprobarCuentaPropia(String cbuOrigen, String idUsuario) {
+		
+		return idao.ComprobarCuentaPropia(cbuOrigen, idUsuario);
+	}
 	
 }
