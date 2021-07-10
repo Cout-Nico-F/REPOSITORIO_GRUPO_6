@@ -20,73 +20,72 @@
             <div class="d-flex justify-content-center">
               <div class="col-sm-3"> 
                 <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="nombre" value="<%=cli.getNombre() %>"> <!--  Dejo el placeholder nose porque -->
+                <input type="text" class="form-control" id="nombre" placeholder="nombre" value="<%=cli.getNombre() %>" disabled readonly oncopy="return false;"> <!--  Dejo el placeholder nose porque -->
               </div>
                <div class="col-sm-3">  
                 <label for="apellido" class="col-sm-3 col-form-label">Apellido</label>
-                <input type="text" class="form-control" id="apellido" placeholder="Apellido" value="<%=cli.getApellido() %>">
+                <input type="text" class="form-control" id="apellido" placeholder="Apellido" value="<%=cli.getApellido() %>" disabled readonly oncopy="return false;">
               </div>
             </div>
              <div class="d-flex justify-content-center">
              	<div class="col-sm-3">
               	<label for="dni" class="col-sm-3 col-form-label">DNI</label>
-                <input type="number" class="form-control" id="dni" placeholder="DNI" value="<%=cli.getDni() %>">
+                <input type="number" class="form-control" id="dni" placeholder="DNI" value="<%=cli.getDni() %>" disabled readonly oncopy="return false;">
                 </div>
               <div class="col-sm-3">   
                <label for="cuil" class="col-sm-3 col-form-label">CUIL</label>
-                <input type="number" class="form-control" id="cuil" placeholder="CUIL" value="<%=cli.getCuil() %>">
+                <input type="number" class="form-control" id="cuil" placeholder="CUIL" value="<%=cli.getCuil() %>" disabled readonly oncopy="return false;">
               </div>
             </div>
              <div class="d-flex justify-content-center">
               <div class="col-sm-3">  
                 <label for="fecha" class="col-form-label">Fecha de nacimiento</label>   
-                <input type="text" class="form-control" id="fecha" placeholder="Nacimiento" value="<%=cli.getFechaNacimiento() %>">
+                <input type="text" class="form-control" id="fecha" placeholder="Nacimiento" value="<%=cli.getFechaNacimiento() %>" disabled readonly oncopy="return false;">
               </div>
                <div class="col-sm-3">  
                 <label for="sexo" class="col-sm-4 col-form-label">Sexo</label>
-                <input type="text" class="form-control" id="sexo" placeholder="Sexo" value="<%=cli.getSexo() %>">
+                <input type="text" class="form-control" id="sexo" placeholder="Sexo" value="<%=cli.getSexo() %>" disabled readonly oncopy="return false;">
               </div>
              </div>
              <div class="d-flex justify-content-center">
               <div class="col-sm-3"> 
                 <label for="nacionalidad" class="col-sm-3 col-form-label">Nacionalidad</label>
-                <input type="text" class="form-control" id="nacionalidad" placeholder="Nacionalidad" value="<%=cli.getNacionalidad().getNombre() %>">     	
+                <input type="text" class="form-control" id="nacionalidad" placeholder="Nacionalidad" value="<%=cli.getNacionalidad().getNombre() %>" disabled readonly oncopy="return false;">     	
               </div>
                 <div class="col-sm-3">   
                 <label for="provincia" class="col-sm-3 col-form-label">Provincia</label>   
-                <input type="text" class="form-control" id="provincia" placeholder="Provincia" value="<%=cli.getLocalidad().getProvincia().getNombre() %>">
+                <input type="text" class="form-control" id="provincia" placeholder="Provincia" value="<%=cli.getLocalidad().getProvincia().getNombre() %>" disabled readonly oncopy="return false;">
               </div>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="col-sm-3">    
                 <label for="localidad" class="col-sm-3 col-form-label">Localidad</label>  
-               	<input type="text" class="form-control" id="localidad" placeholder="Localidad" value="<%=cli.getLocalidad().getNombre() %>">
+               	<input type="text" class="form-control" id="localidad" placeholder="Localidad" value="<%=cli.getLocalidad().getNombre() %>" disabled readonly oncopy="return false;">
               </div>
               <div class="col-sm-3">
                <label for="telefono" class="col-sm-3 col-form-label">Teléfono</label>      
-                <input type="number" class="form-control" id="telefono" placeholder="Teléfono" value="<%=cli.getTelefonoFijo() %>">
+                <input type="number" class="form-control" id="telefono" placeholder="Teléfono" value="<%=cli.getTelefonoFijo() %>" disabled readonly oncopy="return false;">
               </div>
             </div>
             <div class="d-flex justify-content-center">
               <div class="col-sm-6">      
                 <label for="correo" class="col-sm-3 col-form-label">E-mail</label>	
-                <input type="email" class="form-control" id=correo placeholder="Correo electrónico" value="<%=cli.getCorreoElectronico() %>">
+                <input type="email" class="form-control" id=correo placeholder="Correo electrónico" value="<%=cli.getCorreoElectronico() %>" disabled readonly oncopy="return false;">
               </div>
               </div>
              <div class="d-flex justify-content-center">
               <div class="col-sm-3">   
                <label for="usuario" class="col-sm-3 col-form-label">Usuario</label>   
-                <input type="text" class="form-control" id="usuario" placeholder="Usuario" value="<%=cli.getUsuario().getNombreUsuario() %>">
+                <input type="text" class="form-control" id="usuario" placeholder="Usuario" value="<%=cli.getUsuario().getNombreUsuario() %>" disabled readonly oncopy="return false;">
               </div>
               <div class="col-sm-3">      
                <label for="contrasena" class="col-sm-3 col-form-label">Contraseña</label>
-                <input type="text" class="form-control" id="contrasena" placeholder="Contraseña" value="<%=cli.getUsuario().getContrasenia() %>">
+                <input type="text" class="form-control" id="contrasena" placeholder="Contraseña" value="<%=cli.getUsuario().getContrasenia() %>" disabled readonly oncopy="return false;">
               </div>
             </div>
             <% }  else { %>
-            	<div class="col-sm-3">      
-              		 <label for="contrasena" class="col-sm-3 col-form-label">Contraseña</label>
-                <input type="text" class="form-control" id="contrasena" placeholder="Contraseña">
+            	<div class="d-flex justify-content-center py-4">      
+              		<h1> Inicie Sesion pls :)</h1>
               </div>
             <% } %>
           </fieldset>
