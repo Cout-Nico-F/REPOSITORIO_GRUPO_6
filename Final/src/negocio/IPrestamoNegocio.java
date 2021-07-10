@@ -7,7 +7,7 @@ import entidad.Cuenta;
 import entidad.Prestamo;
 
 public interface IPrestamoNegocio {
-	public ArrayList<BigDecimal> cargarSaldos(ArrayList<Prestamo> listaPrestamos);
+	public ArrayList<BigDecimal> (ArrayList<Prestamo> listaPrestamos);
 
 	Cuenta buscarCuenta(ArrayList<Cuenta> listaCuentas, String numeroCuenta);
 

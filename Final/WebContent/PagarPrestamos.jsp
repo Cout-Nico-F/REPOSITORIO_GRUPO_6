@@ -130,7 +130,6 @@
 					listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestamos");
 				}
 				if (listaPrestamos != null) {
-					int indexPrestamo = 0;
 					for (Prestamo p : listaPrestamos) {
 			%>
 			<%
@@ -146,13 +145,13 @@
 						type="hidden" name="nroCuenta"></td>
 					<td class="dt-body-center">$ <%=p.getMontoMensual()%> .-
 					</td>
-					<td class="dt-body-center">$ <%=((ArrayList<BigDecimal>) request.getAttribute("listaSaldos")).get(indexPrestamo)%>
+					<td class="dt-body-center">$ <%=((ArrayList<BigDecimal>) request.getAttribute("listaSaldos")).get(listaPrestamos.indexOf(p))%>
 						.-
 					</td>
 					<td class="dt-body-center">$ <%=p.getImporteSolicitado()%> .-
 					</td>
 					<td class="dt-body-center"><div class="form-check">
-							<input class="form-check-input" type="checkbox" name="cbPrestamo<%=indexPrestamo%>" value=""
+							<input class="form-check-input" type="checkbox" name="cbPrestamo<%=listaPrestamos.indexOf(p)%><%=listaCuotas.indexOf(c) %>" value=""
 								id="flexCheckDefault"		
 					<%if(request.getParameter("cuentaSelecc") == null ||
 					("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
@@ -168,7 +167,6 @@
 			<%
 				}
 						
-						indexPrestamo++;
 					}
 				}
 			%>

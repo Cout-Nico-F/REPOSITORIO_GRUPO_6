@@ -33,6 +33,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 	private ClienteNegocio cliNeg = new ClienteNegocioImpl();
 	private IPrestamoNegocio preNeg = new PrestamoNegocioImpl();
 	private IAdminNegocio admNeg = new AdminNegocioImpl();
+	private int cantidadCuotasAMostrar = 3;
 
 
 	public ServletPagarPrestamo() {
@@ -88,9 +89,9 @@ public class ServletPagarPrestamo extends HttpServlet {
 		Prestamo prestamo = new Prestamo();
 		for(Prestamo p : listaPrestamos) {
 		ArrayList<Cuota> listaCuotas = p.getListaCuotas();
-		int numeroCuotasMostradas=3;
-		if(listaCuotas.size()<3) {
-			numeroCuotasMostradas=listaCuotas.size();
+		int numeroCuotasMostradas = cantidadCuotasAMostrar;
+		if(listaCuotas.size() < cantidadCuotasAMostrar) { //Si el tamaño de la lista es menor a la cant. de cuotas que se quiere mostrar,
+			numeroCuotasMostradas=listaCuotas.size();	 //en la línea 96 le recortamos hasta el tamaño de la lista.
 		}
 		listaCuotas = new ArrayList<Cuota>(listaCuotas.subList(0, numeroCuotasMostradas));
 		prestamo = new Prestamo(p.getIdPrestamo(),p.getCliente(),p.getCuenta(),p.getFechaSQL(),p.getImporteSolicitado(),p.getImporteAPagar(),p.getMontoMensual(),p.getCuotas(), p.getEstado(),listaCuotas);
@@ -112,19 +113,20 @@ public class ServletPagarPrestamo extends HttpServlet {
 		}
 	}
 	
+	//1 Checkear los checkbox seleccionados
 	private void pagarPrestamo(HttpServletRequest request) {
 		if(request.getParameter("btnPagar")!=null) {
-			//1 Checkear los checkbox seleccionados
+			BigDecimal totalAPagar = new BigDecimal(0);
 			
-			
-			for(int i=0;i<listaPrestamos.size();i++) {
-				
-				
-				
-				if(request.getParameter("cbPrestamo"+i)!=null) {
-					
+			for (Prestamo p : listaPrestamos) {
+				ArrayList<Cuota> listaCuotas = p.getListaCuotas();
+				int indexPrestamo = listaPrestamos.indexOf(p);
+				for (Cuota c : listaCuotas) {
+					int indexCuota = listaCuotas.indexOf(c); 
+					if (request.getParameter("cbPrestamo" + indexPrestamo + indexCuota) != null) {
+						
+					}
 				}
-				
 			}
 			
 			//2 Verificar el saldo disponible
