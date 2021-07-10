@@ -133,6 +133,30 @@ function mensaje() {
 		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
  		</div>
  		 <!-- Alert -->
+ 		  <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeOrigenIncorrecto2") != null && session.getAttribute("mensajeOrigenIncorrecto2") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeOrigenIncorrecto2")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeOrigenIncorrecto2") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeOrigenIncorrecto2");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
+ 		  <!-- Alert -->
+         <div class="d-flex justify-content-center">
+ 		
+ 		<% if(request.getAttribute("tipoMensajeOrigenIncorrecto3") != null && session.getAttribute("mensajeOrigenIncorrecto3") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->
+ 		<div class="alert alert-<%=request.getAttribute("tipoMensajeOrigenIncorrecto3")%> alert-dismissible fade show" role="alert">
+  			<strong><%=session.getAttribute("mensajeOrigenIncorrecto3") %></strong>
+		</div>
+		<% session.removeAttribute("mensajeOrigenIncorrecto3");} %> <!-- En teoria a partir de aca deja de existir -->
+		 <!-- Remuevo la session pero falta actualizar la pagina -->
+		 <!-- Agregarle un temporizador o algo para que la alerta desaparezca -->
+ 		</div>
+ 		 <!-- Alert -->
         	
         <div class="form">
         		 
