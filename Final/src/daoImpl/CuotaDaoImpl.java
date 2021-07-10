@@ -53,4 +53,10 @@ public class CuotaDaoImpl implements CuotaDao {
         cal.add(Calendar.MONTH, i);
         return cal.getTime();
     }
+
+	@Override
+	public boolean registrarPagoCuota(int idPrestamo, Cuota cuota) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

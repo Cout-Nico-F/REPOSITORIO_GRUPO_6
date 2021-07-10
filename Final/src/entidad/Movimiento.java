@@ -70,6 +70,14 @@ public class Movimiento {
 		IDCuentaDestino = iDCuentaDestino;
 	}
 	
+	public Movimiento(TipoDeMovimiento tipoDeMovimiento, String detalle, BigDecimal importe, long iDCuentaOrigen) { //Constructor para pago de préstamo
+		super();
+		this.tipoDeMovimiento = tipoDeMovimiento;
+		this.detalle = detalle;
+		this.importe = importe;
+		IDCuentaOrigen = iDCuentaOrigen;
+	}
+	
 	
 	
 }
