@@ -49,7 +49,7 @@
           <a class="nav-link" href="ServletPagarPrestamo">Pagar un préstamo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="DatosPersonales.jsp">Datos personales</a>
+          <a class="nav-link" href="ServletDatosPersonales">Datos personales</a>
         </li>
       </ul>
       <div class="ml-auto">
