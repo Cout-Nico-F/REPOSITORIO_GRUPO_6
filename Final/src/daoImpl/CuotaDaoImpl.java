@@ -13,7 +13,7 @@ import entidad.Prestamo;
 
 public class CuotaDaoImpl implements CuotaDao {
 	private static final String InsertarCuotaInsert = "insert into cuotas(IdPrestamos, NumeroCuota, Importe, FechaVencimiento) values";
-	private static final String registrarPagoCuota ="update cuotas set fechaPago =? where idPrestamos = ?";
+	private static final String registrarPagoCuota ="update cuotas set fechaPago =? where idPrestamos = ? and numerocuota=?";
 	@Override
 	public int insertarCuotas (Prestamo prestamo) {
 		PreparedStatement statement;
@@ -63,7 +63,8 @@ public class CuotaDaoImpl implements CuotaDao {
 		try {
 			ps = conexion.prepareStatement(registrarPagoCuota);
 			ps.setDate(1,new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-			ps.setShort(2, numeroCuota);
+			ps.setInt(2,idPrestamo);
+			ps.setShort(3, numeroCuota);
 			if(ps.executeUpdate()>0) {
 				conexion.commit();
 				modifico=true;

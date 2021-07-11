@@ -75,8 +75,8 @@
 				<option selected> Seleccione una Cuenta </option>
 					<%
 						ArrayList<Cuenta> listaCuentas = null;
-						if (request.getAttribute("listaCtasUsuario") != null) {
-							listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCtasUsuario");
+						if (request.getSession().getAttribute("listaCtasUsuario") != null) {
+							listaCuentas = (ArrayList<Cuenta>) request.getSession().getAttribute("listaCtasUsuario");
 							for (Cuenta c : listaCuentas) {
 								if (c.getNumeroCuenta().equals(request.getParameter("cuentaSelecc"))) {
 									%>
@@ -118,9 +118,7 @@
 		<tbody>
 			<%
 				ArrayList<Prestamo> listaPrestamos = null;
-				if (request.getAttribute("listaPrestMostrada") != null) {
-					listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestMostrada");
-				}
+				listaPrestamos = (ArrayList<Prestamo>) request.getSession().getAttribute("listaPrestMostrada");
 				if (listaPrestamos != null) {
 					for (Prestamo p : listaPrestamos) {
 					final String indexPrestamo = String.valueOf(listaPrestamos.indexOf(p));
@@ -162,10 +160,17 @@
 	</table>
 		<% if(request.getParameter("cuentaSelecc") != null &&
 						!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
-							<div class ="container" align="right">
-							 <button name="btnPagar" type="submit" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar" >Pagar</button>
+							<div class="row g-3">
+							<div class ="container" align="right">	 
+							  <div class="col-auto">
+							    <input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago">
+							  </div>
+							  <div class="col-auto">
+							    <button type="submit" name="btnPagar" class="btn btn-success mb-3">Pagar</button>
+							  </div>
 							 </div>
-							<% } %>		
+							 </div>
+							<% } %>
 			
 </form>
 </body>
