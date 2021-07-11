@@ -125,7 +125,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 	// 4 Registrar nmovimiento
 	// 5 Actualizar estado de prestamo
 	private void pagarPrestamo(HttpServletRequest request) {
-		if (request.getParameter("btnPagar") != null) {
+		if (request.getParameter("btnConfirmar") != null) {
 			ArrayList<Prestamo> listaPrestamosAPagar = validarInputSaldo(request);
 			ArrayList<Boolean> resultados = new ArrayList<Boolean>();
 			for (Prestamo p : listaPrestamosAPagar) {
