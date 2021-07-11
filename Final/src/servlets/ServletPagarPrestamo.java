@@ -103,7 +103,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 			prestamo.setListaCuotas(listaCuotas);
 			listaPrestAux.add(prestamo);
 		}
-		request.setAttribute("listaPrestAux", listaPrestAux);
+		request.setAttribute("listaPrestMostrada", listaPrestAux);
 	}
 
 	private void cargarCuentasUsuario(HttpServletRequest request) {
@@ -134,10 +134,12 @@ public class ServletPagarPrestamo extends HttpServlet {
 
 							preNeg.registrarPagoPrestamo(request.getParameter("cuentaSelecc"), c, p.getIdPrestamo(), "detallePago");
 
+						} else {
+							request.setAttribute("msjModal", "No tiene fondos suficientes para pagar las cuotas seleccionadas.");
 						}
 					}
 				} else {
-					request.setAttribute("msjModal", "No tiene fondos suficientes para pagar las cuotas seleccionadas.");
+					request.setAttribute("msjModal", "Debe seleccionar al menos una cuota a pagar");
 				}
 
 			}
@@ -147,23 +149,23 @@ public class ServletPagarPrestamo extends HttpServlet {
 
 	private ArrayList<Prestamo> validarInputSaldo(HttpServletRequest request) {
 		BigDecimal totalAPagar = new BigDecimal(0);
-		ArrayList<Prestamo> listaAux = (ArrayList<Prestamo>) request.getAttribute("listaPrestAux");
-		for (Prestamo p : listaAux) {
-			ArrayList<Cuota> listaAuxCuotas = new ArrayList<Cuota>();
-			ArrayList<Cuota> listaCuotas = p.getListaCuotas();
-			String indexPrestamo = String.valueOf(listaAux.indexOf(p));
-			for (Cuota c : listaCuotas) {
-				String indexCuota = String.valueOf(listaCuotas.indexOf(c));
-				if (request.getParameter("cbPrestamo" + indexPrestamo + indexCuota) != null) {
+		ArrayList<Prestamo> listaPrestMostrados = (ArrayList<Prestamo>) request.getAttribute("listaPrestMostrada");
+		for (Prestamo p : listaPrestMostrados) {
+			ArrayList<Cuota> listaCuotasAPagar = new ArrayList<Cuota>();
+			ArrayList<Cuota> listaCuotasMostradas = p.getListaCuotas();
+			String indexPrestamo = String.valueOf(listaPrestMostrados.indexOf(p));
+			for (Cuota c : listaCuotasMostradas) {
+				String indexCuota = String.valueOf(listaCuotasMostradas.indexOf(c));	
+				if (request.getParameter("cbPrestamo"+indexPrestamo+indexCuota) != null) {
 					totalAPagar.add(c.getImporte());
-					listaAuxCuotas.add(c);
+					listaCuotasAPagar.add(c);
 				}
 			}
-			p.setListaCuotas(listaAuxCuotas);
+			p.setListaCuotas(listaCuotasAPagar);
 		}
 		Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
 		if (cuentaSeleccionada.getSaldo().subtract(totalAPagar).compareTo(BigDecimal.ZERO) >= 0) {
-			return listaAux;
+			return listaPrestMostrados;
 		}
 		return new ArrayList<Prestamo>();
 	}
