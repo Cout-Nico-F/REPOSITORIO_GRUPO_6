@@ -45,27 +45,26 @@ public class ServletPagarPrestamo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (cliNeg.validarUsuarioCliente(request)) {
-			cargarPrestamos(request);
-			cargarSaldos(request);
-			cargarCuentasUsuario(request);
+			if(request.getSession().getAttribute("listaPrestMostrada")==null) {
+				cargarPrestamos(request);
+				cargarCuentasUsuario(request);				
+			}	
+			cargarSelect(request);
 			pagarPrestamo(request);
+			cargarSaldos(request);			
 		} else {
 			response.sendRedirect("Login.jsp");
 			return;
 		}
-
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamos.jsp");
 		rd.forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		if (cliNeg.validarUsuarioCliente(request)) {
-			cargarPrestamos(request);
-			cargarSaldos(request);
-			cargarCuentasUsuario(request);
 
 		} else {
 			response.sendRedirect("Login.jsp");
@@ -83,7 +82,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 		request.setAttribute("listaSaldos", preNeg.cargarSaldos(listaPrestamos));
 	}
 
-	private void cargarPrestamos(HttpServletRequest request) {
+	private void cargarPrestamos(HttpServletRequest request) {	
 		String nombreUsuario = String.valueOf(request.getSession().getAttribute("nombreUsuarioLogeado"));
 		Cliente cli = cliNeg.traerClientePorNombreUsuario(nombreUsuario);
 		listaPrestamos = cliNeg.listarPrestamosPorCliente(cli.getDni());
@@ -103,15 +102,17 @@ public class ServletPagarPrestamo extends HttpServlet {
 			prestamo.setListaCuotas(listaCuotas);
 			listaPrestAux.add(prestamo);
 		}
-		request.setAttribute("listaPrestAux", listaPrestAux);
+		request.getSession().setAttribute("listaPrestMostrada", listaPrestAux);
 	}
 
 	private void cargarCuentasUsuario(HttpServletRequest request) {
 		String nombreUsuario = String.valueOf(request.getSession().getAttribute("nombreUsuarioLogeado"));
 		Cliente cli = cliNeg.traerClientePorNombreUsuario(nombreUsuario);
 		listaCuentas = admNeg.listarCuentas(cli.getDni());
-
-		request.setAttribute("listaCtasUsuario", listaCuentas);
+		request.getSession().setAttribute("listaCtasUsuario", listaCuentas);
+	}
+	
+	private void cargarSelect(HttpServletRequest request) {
 		if (request.getParameter("cuentaSelecc") != null) {
 			Cuenta c = preNeg.buscarCuenta(listaCuentas, String.valueOf(request.getParameter("cuentaSelecc")));
 			request.setAttribute("cuentaSeleccionada", c);
@@ -125,45 +126,57 @@ public class ServletPagarPrestamo extends HttpServlet {
 	// 5 Actualizar estado de prestamo
 	private void pagarPrestamo(HttpServletRequest request) {
 		if (request.getParameter("btnPagar") != null) {
-			ArrayList<Prestamo> listaPrestamosScope = validarInputSaldo(request);
-			for (Prestamo p : listaPrestamosScope) {
+			ArrayList<Prestamo> listaPrestamosAPagar = validarInputSaldo(request);
+			ArrayList<Boolean> resultados = new ArrayList<Boolean>();
+			for (Prestamo p : listaPrestamosAPagar) {
 				ArrayList<Cuota> listaCuotas = p.getListaCuotas();
 				if (listaCuotas.size() > 0) {
 					for (Cuota c : listaCuotas) {
-						if (movNeg.validarFondosSuficientes(String.valueOf(request.getParameter("cuentaSelecc")), c.getImporte())) {
-
-							preNeg.registrarPagoPrestamo(request.getParameter("cuentaSelecc"), c, p.getIdPrestamo(), "detallePago");
-
+						if (movNeg.validarFondosSuficientes(String.valueOf(request.getParameter("cuentaSelecc")), c.getImporte())) 
+						{
+							if(preNeg.registrarPagoPrestamo(request.getParameter("cuentaSelecc"), c, p.getIdPrestamo(), String.valueOf(request.getParameter("detallePago"))))
+								{resultados.add(true);} else {resultados.add(false);}
+						} else {
+							resultados.add(false);
 						}
 					}
-				} else {
-					request.setAttribute("msjModal", "No tiene fondos suficientes para pagar las cuotas seleccionadas.");
 				}
-
+			}
+			if(resultados.size() == 0) {
+				request.setAttribute("msjModal", "Debe seleccionar al menos una cuota a pagar.");
+			} else {
+				if(resultados.indexOf(false)!=-1) {
+					request.setAttribute("msjModal", "No dispone del saldo suficiente para realizar el pago.");
+				}
+				else {
+					request.setAttribute("msjModal", "Su pago se realizó satisfactoriamente.");
+				}
 			}
 		}
-
+		cargarPrestamos(request);
+		cargarCuentasUsuario(request);
+		cargarSelect(request);
 	}
 
 	private ArrayList<Prestamo> validarInputSaldo(HttpServletRequest request) {
 		BigDecimal totalAPagar = new BigDecimal(0);
-		ArrayList<Prestamo> listaAux = (ArrayList<Prestamo>) request.getAttribute("listaPrestAux");
-		for (Prestamo p : listaAux) {
-			ArrayList<Cuota> listaAuxCuotas = new ArrayList<Cuota>();
-			ArrayList<Cuota> listaCuotas = p.getListaCuotas();
-			String indexPrestamo = String.valueOf(listaAux.indexOf(p));
-			for (Cuota c : listaCuotas) {
-				String indexCuota = String.valueOf(listaCuotas.indexOf(c));
-				if (request.getParameter("cbPrestamo" + indexPrestamo + indexCuota) != null) {
+		ArrayList<Prestamo> listaPrestMostrados = (ArrayList<Prestamo>) request.getSession().getAttribute("listaPrestMostrada");
+		for (Prestamo p : listaPrestMostrados) {
+			ArrayList<Cuota> listaCuotasAPagar = new ArrayList<Cuota>();
+			ArrayList<Cuota> listaCuotasMostradas = p.getListaCuotas();
+			String indexPrestamo = String.valueOf(listaPrestMostrados.indexOf(p));
+			for (Cuota c : listaCuotasMostradas) {
+				String indexCuota = String.valueOf(listaCuotasMostradas.indexOf(c));	
+				if (request.getParameter("cbPrestamo"+indexPrestamo+indexCuota) != null) {
 					totalAPagar.add(c.getImporte());
-					listaAuxCuotas.add(c);
+					listaCuotasAPagar.add(c);
 				}
 			}
-			p.setListaCuotas(listaAuxCuotas);
+			p.setListaCuotas(listaCuotasAPagar);
 		}
 		Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
 		if (cuentaSeleccionada.getSaldo().subtract(totalAPagar).compareTo(BigDecimal.ZERO) >= 0) {
-			return listaAux;
+			return listaPrestMostrados;
 		}
 		return new ArrayList<Prestamo>();
 	}

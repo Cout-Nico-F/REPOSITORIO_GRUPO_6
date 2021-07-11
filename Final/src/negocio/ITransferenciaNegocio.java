@@ -8,5 +8,5 @@ public interface ITransferenciaNegocio {
 
 	public boolean Transferir(String cbuOrigen, String cbuDestino, float cantidad);
 	
-	boolean ComprobarCuentaPropia(String cbuOrigen, String idUsuario);
+	public boolean ComprobarCuentaPropia(String cbuOrigen, String idUsuario);
 }

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Transferencia de dinero</title>
-<link href="recursos/style-prestamos.css" rel="stylesheet" type="text/css">
+
 <%@ include file="HeaderCliente.jsp" %>
 <script>
 function submitForm() {
@@ -46,7 +46,7 @@ function mensaje() {
         <form method="Post" action="Transferencias">
         
         <div class="wrapper">
-        	<div class="title"> Transferencia Bancaria </div>
+        	<div class="title py-4"> Transferencia Bancaria </div>
         	
         	
         	<!-- Alert -->
@@ -158,22 +158,25 @@ function mensaje() {
  		</div>
  		 <!-- Alert -->
         	
-        <div class="form">
+        <div class="form px-3">
         		 
-              <div class="inputfield">
-              <label>CBU Cuenta Origen:</label>
-              <input type="number" class="form-control" name="inputCbuOrigen" min="1" pattern="^[0-9]+">
+           <div class="inputfield py-1">
+              <label for="idOrigen" class="col-sm-6 col-form-label">CBU Cuenta Origen:</label>
+              <input type="number" class="form-control" name="inputCbuOrigen" min="1" pattern="^[0-9]+" id="idOrigen">
+
            </div> 
-         <div class="inputfield">
-              <label>CBU Cuenta Destino:</label>
-              <input type="number" class="form-control" name="inputCbuDestino" min="1" pattern="^[0-9]+">
+         <div class="inputfield py-1">
+              <label for="idDestino" class="col-sm-6 col-form-label">CBU Cuenta Destino:</label>
+              <input type="number" class="form-control" name="inputCbuDestino" min="1" pattern="^[0-9]+" id="idDestino">
            </div>    
-          <div class="inputfield">
-              <label style="width: 243px; height: 26px">Cantidad en Pesos:</label>
-              <input type="number" class="form-control" name="inputSaldo" min="1" pattern="^[0-9]+">
+          <div class="inputfield py-1">
+              <label for="idSaldo" class="col-sm-6 col-form-label">Cantidad en Pesos:</label>
+              <input type="number" class="form-control" name="inputSaldo" min="1" pattern="^[0-9]+" id="idSaldo">
            </div>
           <br><br>
-         <button name="btnTransferir" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="mensaje()">Transferir</button>
+          <div class="container">
+          	<button name="btnTransferir" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="mensaje()">Transferir</button>
+          </div>
     </div>	
     </div>
     </form>

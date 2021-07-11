@@ -1,3 +1,4 @@
+<%@page import="sun.reflect.generics.tree.ClassTypeSignature"%>
 <%@page import="entidad.Cuenta"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="entidad.Cuota"%>
@@ -40,20 +41,16 @@
         } );
         <%if (request.getAttribute("msjTituloModal") != null) {%>
 	 		$('.toast-body').html('<span><%=request.getAttribute("msjModal")%></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
-	</span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
-						$('.toast').toast('show');
+			</span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
+			$('.toast').toast('show');
 <%}%>
-	$(document).on(
-								"click",
-								".abrir-modal",
-								function() {
-									var accion = $(this).data("accion")
-									var mensaje = "¿Está seguro de que desea "
-											+ accion + " esta cuenta?"
-									$('input[name="accion"]').val(accion)
-									$(".modal-body").html(mensaje)
-								});
-					});
+	$(document).on("click",".abrir-modal", function() {
+		var accion = $(this).data("accion")
+		var mensaje = "¿Está seguro de que desea "+ accion + " esta cuenta?"
+			$('input[name="accion"]').val(accion)
+			$(".modal-body").html(mensaje)
+		});
+	});
 
 	function submitForm() {
 		if ("eliminar" == $('input[name="accion"]').val()) {
@@ -71,23 +68,22 @@
 	<div class="titlePrestamos"></div>
 	<br><br><br>
 	<form action="ServletPagarPrestamo" method="get">
-		<div align="center">
+		<div align="center">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
-				<select id="slCuentas" name="cuentaSelecc" onchange="this.form.submit()">
+				<select name="cuentaSelecc" onchange="this.form.submit()">
 				<option selected> Seleccione una Cuenta </option>
 					<%
 						ArrayList<Cuenta> listaCuentas = null;
-						if (request.getAttribute("listaCtasUsuario") != null) {
-							listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCtasUsuario");
+						if (request.getSession().getAttribute("listaCtasUsuario") != null) {
+							listaCuentas = (ArrayList<Cuenta>) request.getSession().getAttribute("listaCtasUsuario");
 							for (Cuenta c : listaCuentas) {
 								if (c.getNumeroCuenta().equals(request.getParameter("cuentaSelecc"))) {
 									%>
 									<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>"value="<%=c.getNumeroCuenta() %>" selected><%=c.getTipoDeCuenta().getDescripcion() %>- <%=c.getNumeroCuenta() %></option>
 									<% } else { %>
 										<option label="<%=c.getTipoDeCuenta().getDescripcion()%> - <%=c.getNumeroCuenta()%>"value="<%=c.getNumeroCuenta() %>"><%=c.getTipoDeCuenta().getDescripcion() %> - <%=c.getNumeroCuenta() %></option>
-									<% }									 
-								 
+									<% }									 					 
 							 }		
 						}
 						else {
@@ -106,10 +102,6 @@
 				<label><b>Saldo de cuenta: </b> <i> Sin cuenta seleccionada </i> </label>
 			<% }%>
 		</div>
-	</form>
-
-
-
 	<table id="clientes" class="table table-hover nowrap">
 		<thead>
 			<tr>
@@ -126,18 +118,18 @@
 		<tbody>
 			<%
 				ArrayList<Prestamo> listaPrestamos = null;
-				if (request.getAttribute("listaPrestAux") != null) {
-					listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaPrestAux");
-				}
+				listaPrestamos = (ArrayList<Prestamo>) request.getSession().getAttribute("listaPrestMostrada");
 				if (listaPrestamos != null) {
 					for (Prestamo p : listaPrestamos) {
+					final String indexPrestamo = String.valueOf(listaPrestamos.indexOf(p));
 			%>
 			<%
 				ArrayList<Cuota> listaCuotas = p.getListaCuotas();
-						for (Cuota c : listaCuotas) {
+					for (Cuota c : listaCuotas) {
+					final String indexCuotas = String.valueOf(listaCuotas.indexOf(c));
 			%>
+			
 			<tr>
-				<form id="formPost" action="ServletPagarPrestamo" method="post">
 					<td class="dt-body-center"><%=p.getIdPrestamo()%></td>
 					<td class="dt-body-center"><%=c.getNumeroCuota()%> / <%=p.getCuotas()%>
 					</td>
@@ -151,35 +143,35 @@
 					<td class="dt-body-center">$ <%=p.getImporteSolicitado()%> .-
 					</td>
 					<td class="dt-body-center"><div class="form-check">
-							<input class="form-check-input" type="checkbox" name="cbPrestamo<%=String.valueOf(listaPrestamos.indexOf(p))+String.valueOf(listaCuotas.indexOf(c))%>"
-								id="flexCheckDefault"	
+							<input class="form-check-input" type="checkbox" value="." name="cbPrestamo<%=indexPrestamo%><%=indexCuotas%>"
 					<%if(request.getParameter("cuentaSelecc") == null ||
 					("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
 						disabled></div></td> 
 						<% } else {%>
 						></div></td>
 						<%} %>
-			</form>
-		
-			</tr>
-			
-				 
+			</tr>				 
 			<%
 				}
 						
 					}
-				}
-			%>
-
+				} %>
 		</tbody>
 	</table>
-	<form method="get" action="ServletPagarPrestamo">
-	<%if(request.getParameter("cuentaSelecc") != null &&
-					!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
-						<div class ="container" align="right">
-						 <button name="btnPagar" type="submit" class="btn btn-success abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-accion="autorizar" >Pagar</button>
-						 </div>
-						<% } %>
-	</form>
+		<% if(request.getParameter("cuentaSelecc") != null &&
+						!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
+							<div class="row g-3">
+							<div class ="container" align="right">	 
+							  <div class="col-auto">
+							    <input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago">
+							  </div>
+							  <div class="col-auto">
+							    <button type="submit" name="btnPagar" class="btn btn-success mb-3">Pagar</button>
+							  </div>
+							 </div>
+							 </div>
+							<% } %>
+			
+</form>
 </body>
 </html>
