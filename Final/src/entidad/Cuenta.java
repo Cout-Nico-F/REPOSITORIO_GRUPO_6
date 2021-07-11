@@ -52,6 +52,11 @@ public class Cuenta {
 		saldo = VariablesGlobales.saldoCero;
 		fecha = new Date(Calendar.getInstance().getTime().getTime());
 	}
+	
+	public Cuenta(String numeroCuenta)
+	{
+		this.numeroCuenta = numeroCuenta;
+	}
 
 	public java.sql.Date getFechaSQL() {
 		return fecha;

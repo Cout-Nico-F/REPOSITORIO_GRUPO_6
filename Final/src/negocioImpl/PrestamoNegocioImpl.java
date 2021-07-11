@@ -25,7 +25,6 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio {
 	
 	@Override
 	public Cuenta buscarCuenta(ArrayList<Cuenta> listaCuentas, String numeroCuenta) {
-
 		Cuenta aux = new Cuenta();
 		for (Cuenta c : listaCuentas) {
 			if (c.getNumeroCuenta().equals(numeroCuenta)) {
@@ -62,6 +61,11 @@ public class PrestamoNegocioImpl implements IPrestamoNegocio {
 			return false;
 		}
 
+	}
+	
+	@Override
+	public boolean registrarPrestamo(Prestamo prestamo) {
+		return preDao.insertarPrestamo(prestamo);
 	}
 	
 

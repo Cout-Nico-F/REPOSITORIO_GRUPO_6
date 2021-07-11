@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.CuotaDao;
 import dao.PrestamoDao;
@@ -19,11 +20,44 @@ public class PrestamoDaoImpl implements PrestamoDao {
 	private static final String autorizarPrestamo = "update prestamos set estado = ? where IdPrestamos = ?";
 	private static String listarPrestamosPorCliente = "select * from prestamos where dni = ? and estado=3";
 	private static String listarCuotasPorPrestamo = "select * from cuotas where IdPrestamos = ? and isnull(fechapago) order by fechavencimiento asc";
+	private static String insertarPrestamo = "insert into prestamos(numeroCuenta, Dni, Fecha, ImporteSolicitado, ImporteAPagar, MontoMensual, Cuotas, Estado) values(?, ?, ?, ?, ?, ?, ?, 1)";
 
 	/*
 	 * Estados de los Prestamos: 1-Solicitado 2-Denegado 3-Vigente 4-Pagado
 	 */
 
+	@Override
+	public boolean insertarPrestamo(Prestamo prestamo) {
+		int result = -1;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		PreparedStatement ps;
+		try {
+			ps = conexion.prepareStatement(insertarPrestamo);
+			ps.setLong(1, Long.valueOf(prestamo.getCuenta().getNumeroCuenta()));
+			ps.setInt(2, prestamo.getCliente().getDni());
+			ps.setDate(3, new java.sql.Date(new Date().getTime()));
+			ps.setBigDecimal(4, prestamo.getImporteSolicitado());
+			ps.setBigDecimal(5, prestamo.getImporteAPagar());
+			ps.setBigDecimal(6, prestamo.getMontoMensual());
+			ps.setShort(7, prestamo.getCuotas());
+			result = ps.executeUpdate();
+			if (result > 0) {
+				conexion.commit();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+				return false;
+			}
+			return false;
+		}
+
+		return result > 0;
+	}
+	
 	@Override
 	public ArrayList<Cuota> listarCuotas(int idPrestamo) {
 		PreparedStatement ps;
@@ -191,7 +225,6 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		}
 
 		return actualizo;
-
 	}
 
 }

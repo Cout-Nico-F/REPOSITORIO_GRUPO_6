@@ -43,7 +43,7 @@
           <a class="nav-link" href="Transferencias">Transferir dinero</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Prestamos.jsp">Pedir un préstamo</a>
+          <a class="nav-link" href="SolicitudPrestamo">Solicitar un préstamo</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="ServletPagarPrestamo">Pagar un préstamo</a>

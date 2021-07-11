@@ -12,6 +12,7 @@ public interface PrestamoDao {
 	public ArrayList<Prestamo> listarPrestamosPorCliente(int dni);
 	ArrayList<Cuota> listarCuotas(int idPrestamo);
 	boolean actualizarPrestamo(short estado, int IDPrestamo);
+	boolean insertarPrestamo(Prestamo prestamo);
 	
 
 }
