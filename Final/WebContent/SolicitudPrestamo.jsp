@@ -75,10 +75,10 @@ function submitForm() {
   </div>
 <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
 	  <input type="hidden" name="dniActual" >
-	  <div class="modal-dialog">
-	    <div class="modal-content">
+	  <div class="modal-dialog h-75">
+	    <div class="modal-content h-100">
 	      <div class="modal-header">Términos y condiciones</div>
-	      <div class="modal-body"><embed class="w-100" src="recursos/terminos.html"></div>
+	      <div class="modal-body"><embed class="w-100 h-100" src="recursos/terminos.html"></div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No acepto</button>
 	        <button type="button" class="btn btn-primary" onclick="submitForm()">Acepto</button>
