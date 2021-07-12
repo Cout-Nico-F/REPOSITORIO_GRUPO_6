@@ -145,9 +145,7 @@
 						<label for="numero" class="col-sm-3 col-form-label">Número
 							de cuenta</label>
 						<div class="col-sm-9">
-							<input type="number" class="form-control required" id="numero" name="inputNroCuenta"  <%if(request.getAttribute("inputNroCuenta")!=null){%>readonly value=<%=request.getAttribute("inputNroCuenta")%><% } %>
-								placeholder="Ingrese el Número de cuenta" required onKeyPress="if(this.value.length>8) return false;"
-								 maxlength="9">
+							<input type="number" class="form-control required" id="numero" readonly name="inputNroCuenta"  <%if(request.getAttribute("inputNroCuenta")!=null){%> value=<%=request.getAttribute("inputNroCuenta")%><% }%> >
 						</div>
 					</div>
 					<div class="form-group row my-2">
@@ -166,7 +164,7 @@
 						</div>
 					</div>
 					<div class="mt-3">
-						<% if(request.getAttribute("inputNroCuenta")==null){
+						<% if(request.getAttribute("inputCBU")==null){
 							%> <button class="btn btn-primary"  type="submit" name="btnRegistrar" >Registrar</button> <% 
 						} else {
 							%> <button class="btn btn-primary abrir-modal" type="button" name="btnAsignar" data-bs-toggle="modal" data-bs-target="#modal" data-accion="asignar" >Asignar</button> <%

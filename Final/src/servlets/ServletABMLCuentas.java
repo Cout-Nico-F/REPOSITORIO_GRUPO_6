@@ -38,6 +38,7 @@ public class ServletABMLCuentas extends HttpServlet {
 			cargarCuentas(request);
 			cargarDropdown(request);
 			cargarClientesDatalist(request);
+			cargarNuevoNroCuenta(request);
 		}
 		else {
 			response.sendRedirect("Login.jsp");
@@ -59,6 +60,7 @@ public class ServletABMLCuentas extends HttpServlet {
 			cargarCuentas(request);
 			cargarDropdown(request);
 			cargarClientesDatalist(request);
+			cargarNuevoNroCuenta(request);
 		} else {
 			response.sendRedirect("Login.jsp");
 			return;
@@ -86,9 +88,15 @@ public class ServletABMLCuentas extends HttpServlet {
 				request.setAttribute("msjModal", "La Cuenta no se pudo asignar");
 			}
 		}
-
 	}
 
+	private void cargarNuevoNroCuenta(HttpServletRequest request) {
+		if (request.getAttribute("inputNroCuenta")==null) {
+			request.setAttribute("inputNroCuenta", admNeg.traerUltimoNroCuenta()+1);
+			request.setAttribute("banderaNuevaCta",true);
+		}
+	}
+	
 	private void modificarCuenta(HttpServletRequest request) {
 			String numeroCuenta = request.getParameter("nroCuenta");
 			Cuenta cuenta = admNeg.traerCuenta(Long.valueOf(numeroCuenta));

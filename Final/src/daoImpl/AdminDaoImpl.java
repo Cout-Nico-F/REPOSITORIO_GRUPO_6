@@ -16,14 +16,35 @@ import entidad.TipoDeMovimiento;
 public class AdminDaoImpl implements IAdminDao {
 
 	
-	private static final String insert = "insert into cuentas (NumeroCuenta,Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?,?)";
+	private static final String insert = "insert into cuentas (Dni,IdTipoCuenta,Saldo,Cbu,FechaCreacion) values (?,?,?,?,?)";
 	private static final String listarCuentas = "select * from cuentas where eliminado = false";
 	private static final String eliminarCuenta = "update cuentas set eliminado = true where numerocuenta = ?";
 	private static final String existeCuenta = "select * from cuentas where numerocuenta = ?";
 	private static final String asignarCuenta = "update cuentas set dni=? where numerocuenta = ?";
 	private static final String listarCuentasporDni = "select * from cuentas where eliminado = false and dni = ?";
+	private static final String traerUltimoNroCuenta = "Select Max(numerocuenta) as id from cuentas";
+	
 	private ITipoDeCuentaDao daoTipoCuentas = new TipoDeCuentaDaoImpl();
 	
+	@Override
+	public long traerUltimoNroCuenta() {
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		long ultimaCuenta = 0;
+		ResultSet rs;
+		
+		try {
+			ps=conexion.prepareStatement(traerUltimoNroCuenta);	
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				ultimaCuenta = (rs.getLong("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return ultimaCuenta;
+	}
 	
 	
 	@Override
@@ -61,16 +82,15 @@ public class AdminDaoImpl implements IAdminDao {
 
 		try {
 			ps = conexion.prepareStatement(insert);
-			ps.setString(1, c.getNumeroCuenta());
 			if(c.getDNI()!=0) {
-				ps.setInt(2, c.getDNI());				
+				ps.setInt(1, c.getDNI());				
 			} else {
-				ps.setNull(2, java.sql.Types.NULL);
+				ps.setNull(1, java.sql.Types.NULL);
 			}
-			ps.setShort(3, c.getTipoDeCuenta().getIdTipoCuenta());
-			ps.setBigDecimal(4, c.getSaldo());
-			ps.setString(5, c.getCBU());
-			ps.setDate(6, c.getFechaSQL());
+			ps.setShort(2, c.getTipoDeCuenta().getIdTipoCuenta());
+			ps.setBigDecimal(3, c.getSaldo());
+			ps.setString(4, c.getCBU());
+			ps.setDate(5, c.getFechaSQL());
 
 			if (ps.executeUpdate() > 0) {
 
@@ -230,9 +250,7 @@ public class AdminDaoImpl implements IAdminDao {
 		}
 		return listaCuentas;
 	}
-	
 
-	
 	
 }
 

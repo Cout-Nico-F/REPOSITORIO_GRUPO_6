@@ -44,7 +44,7 @@ create table if not exists localidades (
     primary Key (IdLocalidad)
 );
 create table if not exists cuentas (
-	NumeroCuenta bigint not null, #Hay que validar que sean numeros
+	NumeroCuenta bigint AUTO_INCREMENT, #Hay que validar que sean numeros
     Dni int null,
     IdTipoCuenta tinyint unsigned not null, #Solo hay 2 tipos de cuentas por eso tinyint(1) esta obsoleto ya lo saque
     Saldo decimal(12,2) not null,
@@ -142,7 +142,8 @@ alter table localidades add foreign key (IdProvincia) references provincias (IdP
 # -- Provincia --
 
 # -- Cuenta --
-alter table cuentas auto_increment=1000000;
+ALTER TABLE cuentas CHANGE numerocuenta bigint AUTO_INCREMENT PRIMARY KEY;
+ALTER TABLE cuentas AUTO_INCREMENT = 1000000;
 alter table cuentas add foreign key (Dni) references clientes (Dni);
 alter table cuentas add foreign key (IdTipoCuenta) references tiposDeCuenta (IdTipoCuenta);
 

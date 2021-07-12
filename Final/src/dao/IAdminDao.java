@@ -14,5 +14,5 @@ public interface IAdminDao {
 	public boolean eliminarCuenta(long nroCuenta);
 	public Cuenta traerCuenta(long numeroCuenta);
 	public boolean asignacionCuenta(long nroCuenta, int dni);
-	
+	public long traerUltimoNroCuenta();
 }
