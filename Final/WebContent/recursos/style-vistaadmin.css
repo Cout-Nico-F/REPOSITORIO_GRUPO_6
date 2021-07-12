@@ -231,15 +231,19 @@
                 display: flex;
                 align-items: center;
             }
-            .status.green {
+            .status.pagado {
                 background: rgb(9, 246, 9);
             }
-            .status.grey{
+            .status.solicitado{
                 background: grey;
             }
-            .status.red {
+            .status.denegado{
                 background: red;
             }
+            .status.vigente{
+            	background: yellow;
+            }
+            .status.
             .table-responsive {
                 width: 100%;
                 overflow-x: auto;

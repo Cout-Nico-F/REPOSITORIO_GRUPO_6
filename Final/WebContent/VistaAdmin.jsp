@@ -1,3 +1,7 @@
+<%@page import="entidad.VistaAdmin"%>
+<%@page import="entidad.Prestamo"%>
+<%@page import="entidad.Cuenta"%>
+<%@page import="entidad.TipoDeCuenta"%>
 <%@page import="entidad.Cliente"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -75,8 +79,6 @@
                  <div class="card-header">
                      <h3>Informes estadisticos</h3> <!-- Dentro de la tabla podria haber columnas que sean prestamos rechazados o aceptados
                      o tambien podriamos tener una columna dni de usuario donde traemos su dni o cbu y demas datos como prestamos solicitados, transferencias exitosas o algo asi-->
-                     <button>Mas detalles<span class="las la-arrow-right">
-                     </span></button>
                  </div>
                 <!--  status green  status grey  status red -->
                  <div class="card-body">
@@ -86,18 +88,34 @@
                              <tr>
                                  <td>N° Cuenta</td>
                                  <td>Cuenta</td>
-                                 <td>Prestamos</td>
+                                 <td>Prestamos del Cliente</td>
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>34032738</td>
-                                 <td>123132313213213</td>
-                                 <td>
-                                     <span class="status green"></span>
-                                     Aceptado
-                                 </td>
-                             </tr>
+                         <%if(request.getAttribute("listaCuentasUsuario") != null) { 
+                         ArrayList<VistaAdmin> listaVa = (ArrayList<VistaAdmin>)request.getAttribute("listaCuentasUsuario"); 
+                         for(VistaAdmin va : listaVa) { %>
+                         	<tr>
+                         		<td><%=va.getNumeroCuenta() %></td>
+                         		<td><%=va.getTipoCuenta().getDescripcion() %></td>
+                         		<%if(va.getPrestamo().getEstado() == 1) {%>
+                         		<td><span class="status solicitado"></span><%=va.getPrestamo().getEstado() %></td>
+                         		<% } %>
+                         		<%if(va.getPrestamo().getEstado() == 2) {%>
+                         		<td><span class="status denegado"></span><%=va.getPrestamo().getEstado() %></td>
+                         		<% } %>
+                         		<%if(va.getPrestamo().getEstado() == 3) {%>
+                         		<td><span class="status vigente "></span><%=va.getPrestamo().getEstado() %></td>
+                         		<% } %>
+                         		<%if(va.getPrestamo().getEstado() == 4) {%>
+                         		<td><span class="status pagado"></span><%=va.getPrestamo().getEstado() %></td>
+                         		<% } %>
+                         	</tr>
+                         	<% } %>
+                         	<% } 
+                         	else { %>
+                         	  <h1> Sin datos que mostrar</h1>
+                         	<% } %>
                          </tbody>
                      </table>
                     </div>
