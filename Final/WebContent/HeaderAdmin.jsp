@@ -44,7 +44,7 @@
           <a class="nav-link" href="AutorizacionPrestamos">Autorización de préstamos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="VistaAdmin.jsp">Reportes</a>
+          <a class="nav-link" href="ServletVistaAdmin">Reportes</a>
         </li>
       </ul>
       <div class="ml-auto">

@@ -231,15 +231,19 @@
                 display: flex;
                 align-items: center;
             }
-            .status.green {
+            .status.pagado {
                 background: rgb(9, 246, 9);
             }
-            .status.grey{
+            .status.solicitado{
                 background: grey;
             }
-            .status.red {
+            .status.denegado{
                 background: red;
             }
+            .status.vigente{
+            	background: yellow;
+            }
+            .status.
             .table-responsive {
                 width: 100%;
                 overflow-x: auto;
@@ -268,7 +272,7 @@
                 font-weight: 600;
                 color: var(--text-grey);
             }
-            .contact span {
+            .contact button {
                 font-size: 1.3rem;
                 display: inline-block;
                 position:relative;
@@ -276,6 +280,9 @@
                 top: -45px;
                 margin-left: .5rem;
                 color: var(--main-color);   
+            }
+            .color-icon {
+            	color: var(--main-color);
             }
             @media only screen and (max-width: 1200px){
                 .sidebar {
