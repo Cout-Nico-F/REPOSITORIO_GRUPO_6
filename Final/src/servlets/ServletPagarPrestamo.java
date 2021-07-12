@@ -50,8 +50,8 @@ public class ServletPagarPrestamo extends HttpServlet {
 				cargarCuentasUsuario(request);				
 			}	
 			cargarSelect(request);
+			cargarSaldos(request);
 			pagarPrestamo(request);
-			cargarSaldos(request);			
 		} else {
 			response.sendRedirect("Login.jsp");
 			return;
@@ -119,11 +119,6 @@ public class ServletPagarPrestamo extends HttpServlet {
 		}
 	}
 
-	// 1 Checkear los checkbox seleccionados
-	// 2 Verificar el saldo disponible
-	// 3 Actualizar saldo
-	// 4 Registrar nmovimiento
-	// 5 Actualizar estado de prestamo
 	private void pagarPrestamo(HttpServletRequest request) {
 		ArrayList<Prestamo> listaPrestamosAPagar = validarInputSaldo(request);
 			if (request.getParameter("btnConfirmar") != null) {
@@ -144,29 +139,31 @@ public class ServletPagarPrestamo extends HttpServlet {
 				}
 			}
 			if(resultados.size() == 0) {
-				request.setAttribute("msjModal", "Debe seleccionar al menos una cuota a pagar.");
+				request.setAttribute("msjToast", "Debe seleccionar al menos una cuota a pagar.");
 			} else {
 				if(resultados.indexOf(false)!=-1) {
-					request.setAttribute("msjModal", "No dispone del saldo suficiente para realizar el pago.");
+					request.setAttribute("msjToast", "No dispone del saldo suficiente para realizar el pago.");
 				}
 				else {
-					request.setAttribute("msjModal", "Su pago se realizó satisfactoriamente.");
+					request.setAttribute("msjToast", "Su pago se realizó satisfactoriamente.");
 				}
 			}
 		
 		cargarPrestamos(request);
 		cargarCuentasUsuario(request);
 		cargarSelect(request);
+		cargarSaldos(request);
 		}
 	}
 
 	private ArrayList<Prestamo> validarInputSaldo(HttpServletRequest request) {
 		BigDecimal totalAPagar = new BigDecimal(0);
 		ArrayList<Prestamo> listaPrestMostrados = (ArrayList<Prestamo>) request.getSession().getAttribute("listaPrestMostrada");
-		for (Prestamo p : listaPrestMostrados) {
+		ArrayList<Prestamo> listaPrestLocalMostrados = admNeg.duplicarListaPrestamos(listaPrestMostrados);
+		for (Prestamo p : listaPrestLocalMostrados) {
 			ArrayList<Cuota> listaCuotasAPagar = new ArrayList<Cuota>();
 			ArrayList<Cuota> listaCuotasMostradas = p.getListaCuotas();
-			String indexPrestamo = String.valueOf(listaPrestMostrados.indexOf(p));
+			String indexPrestamo = String.valueOf(listaPrestLocalMostrados.indexOf(p));
 			for (Cuota c : listaCuotasMostradas) {
 				String indexCuota = String.valueOf(listaCuotasMostradas.indexOf(c));	
 				if (request.getParameter("cbPrestamo"+indexPrestamo+indexCuota) != null) {
@@ -176,14 +173,13 @@ public class ServletPagarPrestamo extends HttpServlet {
 			}
 			p.setListaCuotas(listaCuotasAPagar);
 		}
-		if(request.getAttribute("cuentaSeleccionada")!=null) {
+		if(request.getParameter("cuentaSelecc")!=null && !(request.getParameter("cuentaSelecc").equals("No hay cuentas disponibles")) && !(request.getParameter("cuentaSelecc").equals("Seleccione una Cuenta"))) {
 			Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
-			request.setAttribute("totalAPagar", totalAPagar);
 			BigDecimal nuevoSaldo = cuentaSeleccionada.getSaldo().subtract(totalAPagar);
-			request.setAttribute("nuevoSaldo", nuevoSaldo);
+			request.setAttribute("msjModal", "Desea pagar las cuotas seleccionadas? \n Saldo actual de la cuenta: $ "+cuentaSeleccionada.getSaldo()+ " .-\n Total a pagar: $ "+ totalAPagar + " .-\n Nuevo saldo: $ "+nuevoSaldo+ " .-");			
 			if (nuevoSaldo.compareTo(BigDecimal.ZERO) >= 0) {
-				return listaPrestMostrados;
-			}			
+				return listaPrestLocalMostrados;
+			}
 		}
 		return new ArrayList<Prestamo>();
 	}

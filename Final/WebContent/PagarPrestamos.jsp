@@ -39,15 +39,15 @@
             },
             lengthChange: false
         } );
-        <%if (request.getAttribute("msjModal") != null) {%>
-	 		$('.toast-body').html('<span><%=request.getAttribute("msjModal")%></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
+        <%if (request.getAttribute("msjToast") != null) {%>
+	 		$('.toast-body').html('<span><%=request.getAttribute("msjToast")%></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 			</span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 			$('.toast').toast('show');
 <%}%>
 	$(document).on("click",".abrir-modal", function() {
 		var bandera = $(this).data("bandera")
 		$('input[name="banderaModal"]').val(bandera)
-		$(".modal-body").html(mensaje)
+		$(".modal-body").html(<%=request.getAttribute("msjModal")%>)
 		});
 	});
 
@@ -68,27 +68,21 @@
 	<form action="ServletPagarPrestamo" name="formGet" method="get">
   
   
-	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+ 	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
 	  <input type="hidden" name="pagoActual" >
 	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-body"> <% if(request.getAttribute("cuentaSeleccionada")!=null){ %> 
-	      		<%="¿Está seguro de que desea pagar la/s cuota/s seleccionada/s?\n"
-				+ "Saldo actual: " + ((Cuenta)(request.getAttribute("cuentaSeleccionada"))).getSaldo() + " .- \n"
-				+ "Total a pagar: " + request.getAttribute("totalAPagar") + " .- \n"
-				+ "Nuevo saldo: " + request.getAttribute("nuevoSaldo") + " .- " %> 
-				<%} %> </div>
-	       <div class="col-auto">
-		    <input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago">
-		  </div>
-	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-secondary" onclick="submitForm()" data-bs-dismiss="modal">Cancelar</button>
-	        <button type="submit" name="btnConfirmar" class="btn btn-primary" >Confirmar pago</button>
-	        
-	      </div>
-	    </div>
-	  </div>
-	</div>
+ 	    <div class="modal-content">
+	      <div class="modal-body"> <%=request.getAttribute("msjModal") %> </div>
+<!-- 			<div class="col-auto"> -->
+<!-- 			<input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago"> -->
+<!-- 		 	 </div> -->
+			<div class="modal-footer">
+ 	        <button type="submit" class="btn btn-secondary" onclick="submitForm()" data-bs-dismiss="modal">Cancelar</button>
+ 	        <button type="submit" name="btnConfirmar" class="btn btn-primary" >Confirmar pago</button>        
+ 	      </div>
+ 	    </div>
+ 	  </div>
+ 	</div>
 
 		<div align="center">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
@@ -117,7 +111,7 @@
 				</select>
 				
 			</div> <% 
-			if(request.getAttribute("cuentaSeleccionada") != null &&
+			if(request.getParameter("cuentaSelecc") != null &&
 			!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){%>
 			<label><b>Saldo de cuenta: $ <%=((Cuenta)(request.getAttribute("cuentaSeleccionada"))).getSaldo() %> .- </b></label>
 			<%} else {%>

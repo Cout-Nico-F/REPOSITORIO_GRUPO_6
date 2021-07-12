@@ -154,6 +154,13 @@ public class AdminNegocioImpl implements IAdminNegocio {
 		return dao.listarCuentas(dni);
 	}
 
-
-
+	@Override
+	public ArrayList<Prestamo> duplicarListaPrestamos(ArrayList<Prestamo> listaPrestMostrados) {
+		ArrayList<Prestamo> nuevaLista = new ArrayList<Prestamo>();
+		for(Prestamo p: listaPrestMostrados) {
+			Prestamo aux = new Prestamo(p.getIdPrestamo(),p.getCliente(),p.getCuenta(),p.getFechaSQL(),p.getImporteSolicitado(),p.getImporteAPagar(),p.getMontoMensual(),p.getCuotas(),p.getEstado(),p.getListaCuotas());
+			nuevaLista.add(aux);
+		}
+		return nuevaLista;
+	}
 }
