@@ -116,6 +116,7 @@
  	
 <form action="ServletPagarPrestamo" id="formGet" method="get">
 		<input type="hidden" id="detallePago" name="detallePago">
+		<label for="standard-select">Cuotas por prestamo</label>
 		<div class="select">
 				<select name="cantCuotas" onchange="this.form.submit()">
 				<% for (int i=1;i<=20;i++) { %>
