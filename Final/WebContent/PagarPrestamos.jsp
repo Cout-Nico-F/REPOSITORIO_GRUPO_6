@@ -44,12 +44,12 @@
 			$('.toast-header').html('<span><%=request.getAttribute("msjToast") %></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 			$('.toast').toast('show');
 	<%}%>
-	$(document).on("click",".abrir-modal", function() {
-		var bandera = $(this).data("bandera")
-		$('input[name="bandera"]').val(bandera)
+ 	$(document).on("click",".abrir-modal", function() {
+ 		var bandera = document.getElementById('btnBandera');
+ 		$('input[name="InputBandera"]').val(bandera.dataset.bandera)
 		$(".modal-body").html("<%=request.getAttribute("msjModal")%>")
-		});
-	});
+ 		});
+ 	});
 
 	function submitForm() {
 		$("#formGet").submit()
@@ -181,8 +181,8 @@
 							<div class="row g-3">
 							<div class ="container" align="right">	 
 							  <div class="col-auto">
-							    <button type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="abierta">Pagar</button>
-								<input type="hidden" name="bandera" > 
+							    <button id="btnBandera" type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="abierta">Pagar</button>
+								<input type="hidden" name="InputBandera" > 
 							 </div>
 							 </div>
 							<% } %>
