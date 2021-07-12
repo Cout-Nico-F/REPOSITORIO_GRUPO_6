@@ -49,7 +49,7 @@
  		$('input[name="InputBandera"]').val(bandera.dataset.bandera)
  		});
  	
- 	$('#detallePago').on('input change', function () {
+ 	$('#detallePagoModal').on('input change', function () {
         if ($(this).val() != '') {
             $('#btnConfirmar').prop('disabled', false);
         }
@@ -82,6 +82,9 @@
     }
     
 	function submitForm() {
+		var detalle = document.getElementById('detallePagoModal').value;
+		var inputDetalle = document.getElementById('detallePago');
+		$(inputDetalle).val(detalle);
 		$("#formGet").submit()
 	}
 
@@ -112,7 +115,7 @@
  	</div>
  	
 <form action="ServletPagarPrestamo" id="formGet" method="get">
-		<input type="hidden" name="detallePago">
+		<input type="hidden" id="detallePago" name="detallePago">
 		<div align="center">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
