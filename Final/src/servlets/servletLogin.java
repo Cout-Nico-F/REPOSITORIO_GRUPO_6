@@ -50,7 +50,7 @@ public class servletLogin extends HttpServlet {
 					request.setAttribute("tipoMensaje","danger"); 
 					
 				} else {
-					sessionMensaje.setAttribute("mensaje","Usuario correcto"); //Guarda en session el mensaje para el usuario
+					sessionMensaje.setAttribute("mensaje","Bienvenido " + request.getParameter("txtNombreUsuario")); //Guarda en session el mensaje para el usuario
 					request.setAttribute("tipoMensaje","success");
 					
 					sessionUsuario.setAttribute("tipoUsuarioLogeado", u.getEsAdmin());
@@ -60,7 +60,7 @@ public class servletLogin extends HttpServlet {
 			}
 			String redirige;
 			if(u.getEsAdmin()) {
-				redirige="VistaAdmin.jsp";
+				redirige="/Login.jsp"; //Si me redirige a vista admin no se cargan los datos del jsp entonces lo dejo en Login
 			} else {
 				redirige="/Login.jsp";
 			}
