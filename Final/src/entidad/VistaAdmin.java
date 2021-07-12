@@ -7,6 +7,7 @@ public class VistaAdmin {
 	private Prestamo prestamo;
 	
 	
+	
 	public String getNumeroCuenta() {
 		return numeroCuenta;
 	}

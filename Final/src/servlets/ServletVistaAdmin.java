@@ -40,7 +40,7 @@ public class ServletVistaAdmin extends HttpServlet {
 			int contadorClientes = vaNeg.contadorClientes();
 			int contadorSolicitudes = vaNeg.contadorDeSolicitudesDePrestamos();
 			int contadorPrestamosRechazados = vaNeg.contadorDePrestamosRechazados();
-			ArrayList<Cliente> listaClientes = cNeg.traerClientes();
+			ArrayList<Cliente> listaClientes = cNeg.traerClientesSinAdmin();
 			
 			request.setAttribute("CantidadDeClientes", contadorClientes);
 			request.setAttribute("CantidadDeSolicitudes", contadorSolicitudes);
@@ -50,7 +50,6 @@ public class ServletVistaAdmin extends HttpServlet {
 			if(request.getParameter("btnDniusuario") != null) {
 				int dni = Integer.parseInt(request.getParameter("btnDniusuario")); //Hago un parse porque ese request es String
 				ArrayList<VistaAdmin> listaVistaAdmin = vaNeg.traerDatoVistaAdminSegunDni(dni);
-				
 				request.setAttribute("listaCuentasUsuario", listaVistaAdmin);
 			}
 			

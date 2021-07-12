@@ -124,4 +124,10 @@ public class ClienteNegocioImpl implements ClienteNegocio{
 		return cdao.existeCuil(cuil);
 	}
 
+	@Override
+	public ArrayList<Cliente> traerClientesSinAdmin() {
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		return cdao.traerClientesSinAdmin();
+	}
+
 }

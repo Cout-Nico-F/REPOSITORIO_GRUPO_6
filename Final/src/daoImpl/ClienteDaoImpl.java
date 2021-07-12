@@ -25,7 +25,8 @@ public class ClienteDaoImpl implements ClienteDao {
 	private static final String CompararDni = "Select dni From clientes";
 	private static final String CompararCuil = "Select cuil From clientes";
 	private static final String traerClientePorUsuario = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where eliminado=false and u.nombreUsuario = ?";
-	
+	private static final String traerClientesSinAdmins = "select * from clientes c inner join usuarios u on c.idusuario = u.idusuario inner join nacionalidades n on c.idnacionalidad = n.idnacionalidad \r\n" + 
+			"inner join localidades l on c.idlocalidad = l.idlocalidad inner join provincias p on l.idprovincia = p.idprovincia where Eliminado = false and u.EsAdmin = 0;";
 	
 	@Override
 	public Cliente traerClientePorNombreUsuario(String nombreUsuario) {
@@ -330,5 +331,54 @@ public class ClienteDaoImpl implements ClienteDao {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public ArrayList<Cliente> traerClientesSinAdmin() { //Traer los clientes con EsAdmin = 0
+		PreparedStatement statement;
+		ArrayList<Cliente> listaCli = new ArrayList<Cliente>();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ResultSet rs = null;
+		try {
+			statement = conexion.prepareStatement(traerClientesSinAdmins);
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				Cliente c = new Cliente();
+				c.setDni(rs.getInt("c.Dni"));
+				c.setNombre(rs.getString("c.Nombre"));
+				c.setApellido(rs.getString("c.Apellido"));
+				c.setDireccion(rs.getString("c.Direccion"));
+				c.setCorreoElectronico(rs.getString("c.CorreoElectronico"));
+				c.setSexo(rs.getString("c.Sexo"));
+				c.setCuil(rs.getString("c.Cuil"));
+				c.setFechaNacimiento(rs.getDate("c.FechaNacimiento"));
+				c.setTelefonoFijo(rs.getString("c.TelefonoFijo"));
+				c.setCelular(rs.getString("c.Celular"));
+				Usuario u = new Usuario();
+				u.setIdUsuario(rs.getInt("u.IdUsuario"));
+				u.setContrasenia(rs.getString("u.Contrasenia"));
+				u.setNombreUsuario(rs.getString("u.NombreUsuario"));
+				u.setEsAdmin(rs.getBoolean("u.EsAdmin"));
+				c.setUsuario(u);
+				Provincia p = new Provincia();
+				p.setIdProvincia(rs.getInt("p.IdProvincia"));
+				p.setNombre(rs.getString("p.Nombre"));
+				Localidad l = new Localidad();
+				l.setIdLocalidad(rs.getInt("l.IdLocalidad"));
+				l.setNombre(rs.getString("l.Nombre"));
+				l.setProvincia(p);
+				c.setLocalidad(l);
+				Nacionalidad n = new Nacionalidad(); 
+				n.setIdNacionalidad(rs.getInt("n.IdNacionalidad"));
+				n.setNombre(rs.getString("n.Nombre"));
+				c.setNacionalidad(n);
+				listaCli.add(c);
+			}
+			return listaCli; //Envio la lista completa
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return listaCli; //Lo envio vacio
+		}
 	}
 }
