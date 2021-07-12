@@ -7,7 +7,14 @@
 <title>Iniciar Sesion</title>
 <link href="recursos/style-login.css" rel="stylesheet" type="text/css">
 
-<%@ include file="HeaderCliente.jsp" %>	
+
+<%if(session.getAttribute("tipoUsuarioLogeado") != null && (boolean)session.getAttribute("tipoUsuarioLogeado")) { %> <!--  Si es admin entonces muestro el navbar de admin -->
+	<%@ include file="HeaderAdmin.jsp" %>
+<% } 
+else { %>
+	<%@ include file="HeaderCliente.jsp" %>	
+<% } %>
+
 
 </head>
 
