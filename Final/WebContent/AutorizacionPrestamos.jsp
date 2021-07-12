@@ -77,7 +77,7 @@
 	</div>
 		<br>
 		<br>
-	<div class="titlePrestamos">Autorización de Prestamos</div>
+	<div class="titlePrestamos">Autorización de Préstamos</div>
 	<br>
 	 <table id="prestamos" class="table table-hover nowrap">
           <thead>
