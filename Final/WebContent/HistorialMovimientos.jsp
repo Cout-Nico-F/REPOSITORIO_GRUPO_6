@@ -93,13 +93,8 @@
             	ArrayList<Movimiento> listaMov = new ArrayList<Movimiento>();
             	//El warning es por que en tiempo de ejecucion el compilador no sabe si realmente exista un objeto de tipo movimiento
             	//hasta que se cree por lo tanto si getAttribute() no devuelve un ArrayList entonces se lanzara una ClassCastException
-            	try{
-            		listaMov = ((ArrayList<Movimiento>) request.getAttribute("listaMov")); 
-            	}
-            	catch(ClassCastException e){
-            		e.printStackTrace();
-            	}
-            	
+            	listaMov = ((ArrayList<Movimiento>) request.getAttribute("listaMov")); 
+
             	for(Movimiento m : listaMov) { %>
             <tr>
             	<td class="dt-body-center"><%=m.getFechaMovimiento() %> </td>
@@ -107,7 +102,7 @@
             	<td class="dt-body-center"><%=m.getTipoDeMovimiento().getDescripcion() %></td>
             	<td class="dt-body-center"><%=m.getIDCuentaDestino() %></td>
             	<td class="dt-body-center"><%=m.getImporte() %></td>
-            <tr>
+            </tr>
             	<% } %>
             <% } %>
       		</tbody>
