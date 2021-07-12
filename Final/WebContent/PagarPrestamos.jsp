@@ -47,14 +47,43 @@
  	$(document).on("click",".abrir-modal", function() {
  		var bandera = document.getElementById('btnBandera');
  		$('input[name="InputBandera"]').val(bandera.dataset.bandera)
-		$(".modal-body").html("<%=request.getAttribute("msjModal")%>")
  		});
- 	});
+ 	
+ 	$('#detallePago').on('input change', function () {
+        if ($(this).val() != '') {
+            $('#btnConfirmar').prop('disabled', false);
+        }
+        else {
+            $('#btnConfirmar').prop('disabled', true);
+        }
+    });
+ 	
+    });
+    var saldoActual;
+	var totalAPagar = 0;				
+    <%if(request.getAttribute("cuentaSeleccionada")!=null){ %>
+	    saldoActual = parseFloat(<%=((Cuenta)(request.getAttribute("cuentaSeleccionada"))).getSaldo()%>)
+    <%}%>
+    function listenerCheckbox(ele){
+    	if(ele.checked){
+    		totalAPagar += parseFloat(ele.value)
+    	} else {
+    		totalAPagar -= parseFloat(ele.value)
+    	}
+   	 	$('label[name="labelTotalAPagar"]').html("Total a Pagar: $ " + totalAPagar.toFixed(2) + " .-");
+   	    var saldoDeCuenta = saldoActual - totalAPagar;
+   	    $('label[name="saldoPostPago"]').html("Nuevo Saldo si pagase: $ " + saldoDeCuenta + " .-");
+    }
 
+    function cargarMensajeModal(){
+    	var mensaje = "¿Desea pagar las cuotas seleccionadas? Saldo actual de la cuenta: $ "+saldoActual+ " .- \n"+
+    	" Total a pagar: $ "+ totalAPagar + " .- \n Nuevo saldo: $ " + (saldoActual-totalAPagar) + " .-";
+    	$(".modal-body").html(mensaje);
+    }
+    
 	function submitForm() {
 		$("#formGet").submit()
 	}
-	
 
 </script>
 </head>
@@ -67,25 +96,23 @@
 	<div class="titlePrestamos"></div>
 	<br><br><br>
 	
-  
  	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
-	  <input type="hidden" name="pagoActual" >
 	  <div class="modal-dialog">
  	    <div class="modal-content">
-	      <div class="modal-body"> <%=request.getAttribute("msjModal")%> 
-	      </div>
+	      <div class="modal-body"> </div>
  			<div class="col-auto">
- 			<input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago">
+ 			<input type="text" class="form-control" id="detallePagoModal" name="detallePagoModal" required placeholder="Detalle del pago">
  		 	 </div>
 			<div class="modal-footer">
  	        <button type="button" class="btn btn-secondary" onClick="location.reload();" data-bs-dismiss="modal">Cancelar</button>
- 	        <button type="button" name="btnConfirmar" onClick="submitForm()" class="btn btn-primary" >Confirmar pago</button>        
+ 	        <button type="button" id="btnConfirmar" disabled name="btnConfirmar" onClick="submitForm()" class="btn btn-primary" >Confirmar pago</button>        
  	      </div>
  	    </div>
  	  </div>
  	</div>
  	
 <form action="ServletPagarPrestamo" id="formGet" method="get">
+		<input type="hidden" name="detallePago">
 		<div align="center">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
@@ -115,10 +142,15 @@
 			</div> <% 
 			if(request.getParameter("cuentaSelecc") != null &&
 			!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){%>
-			<label><b>Saldo de cuenta: $ <%=((Cuenta)(request.getAttribute("cuentaSeleccionada"))).getSaldo() %> .- </b></label>
+			<label style="font-weight: bold;">Saldo de cuenta: $ <%=((Cuenta)(request.getAttribute("cuentaSeleccionada"))).getSaldo() %> .- </label>
+			<br>
+			<label style="font-weight: bold;" name="labelTotalAPagar" id="labelTotalAPagar"></label>
+			<br>
+			<label style="font-weight: bold;" name="saldoPostPago" id="saldoPostPago"></label>
 			<%} else {%>
 				<label><b>Saldo de cuenta: </b> <i> Sin cuenta seleccionada </i> </label>
 			<% }%>
+			
 		</div>
 	<table id="cuotas" class="table table-hover nowrap">
 		<thead>
@@ -161,7 +193,7 @@
 					<td class="dt-body-center">$ <%=p.getImporteSolicitado()%> .-
 					</td>
 					<td class="dt-body-center"><div class="form-check">
-							<input class="form-check-input" type="checkbox" value="." name="cbPrestamo<%=indexPrestamo%><%=indexCuotas%>"
+							<input class="form-check-input" type="checkbox" onchange="listenerCheckbox(this);" value="<%=c.getImporte()%>" name="cbPrestamo<%=indexPrestamo%><%=indexCuotas%>"
 					<%if(request.getParameter("cuentaSelecc") == null ||
 					("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
 						disabled></div></td> 
@@ -181,11 +213,11 @@
 							<div class="row g-3">
 							<div class ="container" align="right">	 
 							  <div class="col-auto">
-							    <button id="btnBandera" type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="abierta">Pagar</button>
+							    <button id="btnBandera" onclick="cargarMensajeModal();" type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="abierta">Pagar</button>
 								<input type="hidden" name="InputBandera" > 
 							 </div>
 							 </div>
-							<% } %>
+							<% } %>							
 			
 </form>
 </body>

@@ -199,3 +199,7 @@
         flex-direction: row;
       }
     }
+    
+    .pagarPrestamo {
+  	font-weight: bold;
+	}
