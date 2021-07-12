@@ -122,7 +122,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 	private void pagarPrestamo(HttpServletRequest request) {
 		ArrayList<Prestamo> listaPrestamosAPagar = validarInputSaldo(request);
 			if (request.getParameter("btnConfirmar") != null) {
-			//if(request.getParameter("banderaModal").equals("banderaModal")) {
+			
 			ArrayList<Boolean> resultados = new ArrayList<Boolean>();
 			for (Prestamo p : listaPrestamosAPagar) {
 				ArrayList<Cuota> listaCuotas = p.getListaCuotas();

@@ -179,7 +179,7 @@
 							<div class="row g-3">
 							<div class ="container" align="right">	 
 							  <div class="col-auto">
-							    <button type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="banderaModal">Pagar</button>
+							    <button type="submit" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="banderaModal">Pagar</button>
 								<input type="hidden" name="banderaModal" > 
 							 </div>
 							 </div>
