@@ -39,35 +39,46 @@
             },
             lengthChange: false
         } );
-        <%if (request.getAttribute("msjTituloModal") != null) {%>
+        <%if (request.getAttribute("msjModal") != null) {%>
 	 		$('.toast-body').html('<span><%=request.getAttribute("msjModal")%></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 			</span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 			$('.toast').toast('show');
 <%}%>
 	$(document).on("click",".abrir-modal", function() {
-		var accion = $(this).data("accion")
-		var mensaje = "¿Está seguro de que desea "+ accion + " esta cuenta?"
-			$('input[name="accion"]').val(accion)
+		var mensaje = "¿Está seguro de que desea pagar la/s cuota/s seleccionada/s?"
 			$(".modal-body").html(mensaje)
 		});
 	});
 
 	function submitForm() {
-		if ("eliminar" == $('input[name="accion"]').val()) {
-			$("#formPost").submit()
-		} else if ("asignar" == $('input[name="accion"]').val()) {
-			$("#formGet").submit()
-		}
+		$("#formGet").submit()
 	}
 </script>
 </head>
 
 <body>
 	<br>
+	
+	<div class="toast" style="left: 50%; position: fixed; transform: translate(-50%, 0px); z-index: 9999;" data-bs-autohide="false">
+      <div class="toast-body"> </div>
+  </div>
+  
+	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	  <input type="hidden" name="pagoActual" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	        <button type="submit" name="btnConfirmar" class="btn btn-primary" >Confirmar pago</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<div class="titlePrestamos"></div>
 	<br><br><br>
-	<form action="ServletPagarPrestamo" method="get">
+	<form action="ServletPagarPrestamo" name="formGet" method="get">
 		<div align="center">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
@@ -166,8 +177,8 @@
 							    <input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago">
 							  </div>
 							  <div class="col-auto">
-							    <button type="submit" name="btnPagar" class="btn btn-success mb-3">Pagar</button>
-							  </div>
+							    <button type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" >Pagar</button>
+		
 							 </div>
 							 </div>
 							<% } %>
