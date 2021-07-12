@@ -142,7 +142,6 @@ alter table localidades add foreign key (IdProvincia) references provincias (IdP
 # -- Provincia --
 
 # -- Cuenta --
-ALTER TABLE cuentas CHANGE numerocuenta bigint AUTO_INCREMENT PRIMARY KEY;
 ALTER TABLE cuentas AUTO_INCREMENT = 1000000;
 alter table cuentas add foreign key (Dni) references clientes (Dni);
 alter table cuentas add foreign key (IdTipoCuenta) references tiposDeCuenta (IdTipoCuenta);
