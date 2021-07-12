@@ -121,8 +121,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 
 	private void pagarPrestamo(HttpServletRequest request) {
 		ArrayList<Prestamo> listaPrestamosAPagar = validarInputSaldo(request);
-			if (request.getParameter("btnConfirmar") != null) {
-			
+			if (request.getParameter("bandera") != null) {		
 			ArrayList<Boolean> resultados = new ArrayList<Boolean>();
 			for (Prestamo p : listaPrestamosAPagar) {
 				ArrayList<Cuota> listaCuotas = p.getListaCuotas();
@@ -176,7 +175,7 @@ public class ServletPagarPrestamo extends HttpServlet {
 		if(request.getParameter("cuentaSelecc")!=null && !(request.getParameter("cuentaSelecc").equals("No hay cuentas disponibles")) && !(request.getParameter("cuentaSelecc").equals("Seleccione una Cuenta"))) {
 			Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
 			BigDecimal nuevoSaldo = cuentaSeleccionada.getSaldo().subtract(totalAPagar);
-			request.setAttribute("msjModal", "Desea pagar las cuotas seleccionadas? \n Saldo actual de la cuenta: $ "+cuentaSeleccionada.getSaldo()+ " .-\n Total a pagar: $ "+ totalAPagar + " .-\n Nuevo saldo: $ "+nuevoSaldo+ " .-");			
+			request.setAttribute("msjModal", "Desea pagar las cuotas seleccionadas? Saldo actual de la cuenta: $ "+cuentaSeleccionada.getSaldo());//+ " .-\n Total a pagar: $ "+ totalAPagar + " .-\n Nuevo saldo: $ "+nuevoSaldo+ " .-");			
 			if (nuevoSaldo.compareTo(BigDecimal.ZERO) >= 0) {
 				return listaPrestLocalMostrados;
 			}

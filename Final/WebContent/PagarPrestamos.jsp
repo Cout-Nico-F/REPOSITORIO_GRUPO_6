@@ -41,49 +41,51 @@
         } );
         <%if (request.getAttribute("msjToast") != null) {%>
 	 		$('.toast-body').html('<span><%=request.getAttribute("msjToast")%></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
-			</span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
+			$('.toast-header').html('<span><%=request.getAttribute("msjToast") %></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
 			$('.toast').toast('show');
-<%}%>
+	<%}%>
 	$(document).on("click",".abrir-modal", function() {
 		var bandera = $(this).data("bandera")
-		$('input[name="banderaModal"]').val(bandera)
-		$(".modal-body").html(<%=request.getAttribute("msjModal")%>)
+		$('input[name="bandera"]').val(bandera)
+		$(".modal-body").html("<%=request.getAttribute("msjModal")%>")
 		});
 	});
 
 	function submitForm() {
 		$("#formGet").submit()
 	}
+	
+
 </script>
 </head>
 
 <body>
 	<br>
-	
 	<div class="toast" style="left: 50%; position: fixed; transform: translate(-50%, 0px); z-index: 9999;" data-bs-autohide="false">
       <div class="toast-body"> </div>
   </div>
 	<div class="titlePrestamos"></div>
 	<br><br><br>
-	<form action="ServletPagarPrestamo" name="formGet" method="get">
-  
+	
   
  	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
 	  <input type="hidden" name="pagoActual" >
 	  <div class="modal-dialog">
  	    <div class="modal-content">
-	      <div class="modal-body"> <%=request.getAttribute("msjModal") %> </div>
-<!-- 			<div class="col-auto"> -->
-<!-- 			<input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago"> -->
-<!-- 		 	 </div> -->
+	      <div class="modal-body"> <%=request.getAttribute("msjModal")%> 
+	      </div>
+ 			<div class="col-auto">
+ 			<input type="text" class="form-control" name="detallePago" required placeholder="Detalle del pago">
+ 		 	 </div>
 			<div class="modal-footer">
- 	        <button type="submit" class="btn btn-secondary" onclick="submitForm()" data-bs-dismiss="modal">Cancelar</button>
- 	        <button type="submit" name="btnConfirmar" class="btn btn-primary" >Confirmar pago</button>        
+ 	        <button type="button" class="btn btn-secondary" onClick="location.reload();" data-bs-dismiss="modal">Cancelar</button>
+ 	        <button type="button" name="btnConfirmar" onClick="submitForm()" class="btn btn-primary" >Confirmar pago</button>        
  	      </div>
  	    </div>
  	  </div>
  	</div>
-
+ 	
+<form action="ServletPagarPrestamo" id="formGet" method="get">
 		<div align="center">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
@@ -179,8 +181,8 @@
 							<div class="row g-3">
 							<div class ="container" align="right">	 
 							  <div class="col-auto">
-							    <button type="submit" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="banderaModal">Pagar</button>
-								<input type="hidden" name="banderaModal" > 
+							    <button type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="abierta">Pagar</button>
+								<input type="hidden" name="bandera" > 
 							 </div>
 							 </div>
 							<% } %>
