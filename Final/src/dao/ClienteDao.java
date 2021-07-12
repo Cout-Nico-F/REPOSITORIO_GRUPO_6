@@ -3,7 +3,6 @@ package dao;
 import java.util.ArrayList;
 
 import entidad.Cliente;
-import entidad.Usuario;
 
 public interface ClienteDao {
 	
@@ -16,4 +15,5 @@ public interface ClienteDao {
 	public int eliminarCliente(int dni);
 	public boolean existeCuil(String cuil);
 	public boolean existeDni(int dni);
+	public ArrayList<Cliente> traerClientesSinAdmin();
 }

@@ -9,7 +9,6 @@ import entidad.Localidad;
 import entidad.Nacionalidad;
 import entidad.Prestamo;
 import entidad.Provincia;
-import entidad.Usuario;
 
 public interface ClienteNegocio {
 	public boolean insertCliente(Cliente c);
@@ -26,4 +25,5 @@ public interface ClienteNegocio {
 	public boolean existeDni(int dni);
 	public boolean validarUsuarioCliente(HttpServletRequest request);
 	public ArrayList<Prestamo> listarPrestamosPorCliente(int dni);
+	public ArrayList<Cliente> traerClientesSinAdmin();
 }
