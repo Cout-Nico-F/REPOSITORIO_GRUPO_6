@@ -144,7 +144,7 @@
              <div class="form-group row my-2">
               <label for="nacionalidad" class="col-sm-3 col-form-label">Nacionalidad</label>
                 <div class="col-sm-9">      
-                   <input type="text" class="form-control" id="nacionalidad" value="<%=cActual.getNacionalidad().getIdNacionalidad()%>" readonly>
+                   <input type="text" class="form-control" id="nacionalidad" value="<%=cActual.getNacionalidad().getNombre()%>" readonly>
               </div>
             </div>
              <div class="form-group row my-2">
