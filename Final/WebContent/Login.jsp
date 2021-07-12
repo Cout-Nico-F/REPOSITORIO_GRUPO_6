@@ -2,11 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Iniciar Sesion</title>
 <link href="recursos/style-login.css" rel="stylesheet" type="text/css">
-<%@ include file="HeaderCliente.jsp" %>
+
+<%@ include file="HeaderCliente.jsp" %>	
+
 </head>
+
 <body>
 
 	<style>
@@ -17,15 +21,11 @@
 	</style>
 
         <form action="servletLogin" method="post">
-         
-          <fieldset>
-           	
+          <fieldset>          	
           <div class="d-flex bd-highlight">
-          
           		<div class="p-4 flex-grow-1 bd-highlight">	
           			<img src="https://debmedia.com/blog/wp-content/uploads/2020/06/20-05-1-Oportunidades-para-mejorar-la-atenci%C3%B3n-al-cliente-en-un-banco-despu%C3%A9s-de-la-pandemia-pre.jpg" >
           		</div>
-         	
          <div class="p-4 bd-highlight">
          	
  		<% if(request.getAttribute("tipoMensaje") != null && session.getAttribute("mensaje") != null){ %>	<!-- Son 2 strings podria hacer isEmpty() -->

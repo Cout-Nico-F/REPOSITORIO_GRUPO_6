@@ -63,13 +63,7 @@
          </div>
 
          <div class="card-single">
-             <div>
-                 <h1>2K</h1> <!-- Esto podria sera un contador de clientes registrados -->
-                 <span>Saldo</span>
-             </div>
-             <div>
-                 <span class="las la-users"></span>
-             </div>
+         	  	<h1>Bienvenido!</h1>
          </div>
      </div>
 
@@ -114,7 +108,11 @@
                          	<% } %>
                          	<% } 
                          	else { %>
-                         	  <h1> Sin datos que mostrar</h1>
+                         		<tr>
+                         	  		<td><span> Sin datos que mostrar</span></td>
+                         	  		<td><span> Sin datos que mostrar</span></td>
+                         	  		<td><span> Sin datos que mostrar</span></td>
+                         	  	</tr>
                          	<% } %>
                          </tbody>
                      </table>
@@ -126,10 +124,8 @@
          <div class="customers">
              <div class="card">
                  <div class="card-header">
-                     <h3>Nuevos clientes</h3> <!-- Dentro de la tabla podria haber columnas que sean prestamos rechazados o aceptados
-                     o tambien podriamos tener una columna dni de usuario donde traemos su dni o cbu y demas datos como prestamos solicitados, transferencias exitosas o algo asi-->
+                     <h3>Clientes Recientes</h3>
                  </div>
-                 <!-- Esta es la seccion donde se van a mostrar los nuevos usuarios para dar de alta -->
                  <div class="card-body">
                  	<%if(request.getAttribute("listaClientes") != null) { 
                  	 ArrayList<Cliente> listaCliente = (ArrayList<Cliente>) request.getAttribute("listaClientes"); 
@@ -143,7 +139,7 @@
                                  <small><%=lc.getCorreoElectronico() %></small> <!-- Aca podria ir una breve descripcion de una linea o un telefono o el email -->
                              </div>
                              <div class="container px-4"> 
-                             <button type="submit" name="btnDniusuario" value="<%=lc.getDni() %>"><i class="fas fa-info-circle color-icon"></i></button>
+                             <button type="submit" name="btnDniusuario" value="<%=lc.getDni() %>"><i class="fas fa-info-circle color-icon"></i></button>	
                         	</div>
                          </div>
                      </div>
