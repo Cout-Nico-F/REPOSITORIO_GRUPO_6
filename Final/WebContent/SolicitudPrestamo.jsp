@@ -42,6 +42,8 @@ $(document).ready(function() {
 		$('.toast-body').html('<span><%=request.getAttribute("mensaje") %></span><button class="btn" type="button" data-bs-dismiss="toast"><i class="bi bi-x-lg"></i></button>')
      	$('.toast').toast('show');
 	<% } %>
+	
+	calcularMontos()
 })
 function calcularMontos() {
 	const formatter = new Intl.NumberFormat('es-AR', {
@@ -74,7 +76,6 @@ function submitForm() {
       <div class="toast-body"></div>
   </div>
 <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
-	  <input type="hidden" name="dniActual" >
 	  <div class="modal-dialog h-75">
 	    <div class="modal-content h-100">
 	      <div class="modal-header">Términos y condiciones</div>
