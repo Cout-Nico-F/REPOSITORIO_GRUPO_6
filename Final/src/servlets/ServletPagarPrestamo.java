@@ -36,7 +36,6 @@ public class ServletPagarPrestamo extends HttpServlet {
 	private IPrestamoNegocio preNeg = new PrestamoNegocioImpl();
 	private IAdminNegocio admNeg = new AdminNegocioImpl();
 	private MovimientoNegocio movNeg = new MovimientoNegocioImpl();
-	private int cantidadCuotasAMostrar = 3;
 
 	public ServletPagarPrestamo() {
 		super();
@@ -45,10 +44,13 @@ public class ServletPagarPrestamo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (cliNeg.validarUsuarioCliente(request)) {
-			if(request.getSession().getAttribute("listaPrestMostrada")==null) {
+			if(request.getSession().getAttribute("listaPrestMostrada")==null || 
+				!String.valueOf(request.getAttribute("cuotasSelecc")).equals(String.valueOf(request.getParameter("cantCuotas")))) {
+				cargarSelect(request);
 				cargarPrestamos(request);
 				cargarCuentasUsuario(request);				
 			}	
+			
 			cargarSelect(request);
 			cargarSaldos(request);
 			pagarPrestamo(request);
@@ -90,8 +92,8 @@ public class ServletPagarPrestamo extends HttpServlet {
 		Prestamo prestamo = new Prestamo();
 		for (Prestamo p : listaPrestamos) {
 			ArrayList<Cuota> listaCuotas = p.getListaCuotas();
-			int numeroCuotasMostradas = cantidadCuotasAMostrar;
-			if (listaCuotas.size() < cantidadCuotasAMostrar) { // Si el tamaño de la lista es menor a la cant. de cuotas
+			int numeroCuotasMostradas = Integer.valueOf(String.valueOf(request.getAttribute("cuotasSelecc")));
+			if (listaCuotas.size() < numeroCuotasMostradas) { // Si el tamaño de la lista es menor a la cant. de cuotas
 																// que se quiere mostrar,
 				numeroCuotasMostradas = listaCuotas.size(); // en la línea 96 le recortamos hasta el tamaño de la lista.
 			}
@@ -116,6 +118,11 @@ public class ServletPagarPrestamo extends HttpServlet {
 		if (request.getParameter("cuentaSelecc") != null) {
 			Cuenta c = preNeg.buscarCuenta(listaCuentas, String.valueOf(request.getParameter("cuentaSelecc")));
 			request.setAttribute("cuentaSeleccionada", c);
+		}
+		if(request.getParameter("cantCuotas")!=null) {
+			request.setAttribute("cuotasSelecc", request.getParameter("cantCuotas"));
+		} else {
+			request.setAttribute("cuotasSelecc", 1);
 		}
 	}
 
@@ -148,9 +155,9 @@ public class ServletPagarPrestamo extends HttpServlet {
 				}
 			}
 		
+		cargarSelect(request);
 		cargarPrestamos(request);
 		cargarCuentasUsuario(request);
-		cargarSelect(request);
 		cargarSaldos(request);
 		}
 	}

@@ -118,10 +118,21 @@
 		<input type="hidden" id="detallePago" name="detallePago">
 		<div class="select">
 				<select name="cantCuotas" onchange="this.form.submit()">
-				<option selected> 3 </option>
-					<% for (int i=1;i<=20;i++) { %>
-						<option><%=i %></option>
+				<% for (int i=1;i<=20;i++) { %>
+					<% if(request.getAttribute("cuotasSelecc")!=null){%>
+						<% if(Integer.valueOf((String.valueOf(request.getAttribute("cuotasSelecc"))))==i) {%>
+							<option selected> <%=i %> </option>
+						<%} else {%>
+							<option> <%=i %> </option>
+						<%}%>
+					<% } else { %>
+						<% if(i==1){%>
+							<option selected> <%=i %></option>
+						<%} else {%>
+							<option> <%=i %></option>
+							<%} %>
 						<%} %>
+				<%} %>
 				</select>
 		</div>
 			
