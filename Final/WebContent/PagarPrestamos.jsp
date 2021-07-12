@@ -115,8 +115,13 @@
  	</div>
  	
 <form action="ServletPagarPrestamo" id="formGet" method="get">
+
 		<input type="hidden" id="detallePago" name="detallePago">
-		<label for="standard-select">Cuotas por prestamo</label>
+		<div class="container"> 
+		<div class="row d-flex justify-content-center"> 
+				<label for="standard-select">Cuotas por prestamo</label>
+		</div>
+		<div class="row d-flex justify-content-center">
 		<div class="select">
 				<select name="cantCuotas" onchange="this.form.submit()">
 				<% for (int i=1;i<=20;i++) { %>
@@ -136,8 +141,10 @@
 				<%} %>
 				</select>
 		</div>
+		 </div>
+		</div>
 			
-		<div align="center">		
+		<div align="center" class="py-4">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
 				<select name="cuentaSelecc" onchange="this.form.submit()">
@@ -236,7 +243,7 @@
 						!("Seleccione una Cuenta".equals(request.getParameter("cuentaSelecc")))){ %>
 							<div class="row g-3">
 							<div class ="container" align="right">	 
-							  <div class="col-auto">
+							  <div class="d-flex justify-content-end py-4">
 							    <button id="btnBandera" onclick="cargarMensajeModal();" type="button" name="btnPagar" class="btn btn-success mb-3 abrir-modal" data-bs-toggle="modal" data-bs-target="#modal" data-bandera="abierta">Pagar</button>
 								<input type="hidden" name="InputBandera" > 
 							 </div>
