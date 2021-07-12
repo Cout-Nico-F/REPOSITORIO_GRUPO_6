@@ -63,7 +63,9 @@
          </div>
 
          <div class="card-single">
-         	  	<h1>Bienvenido!</h1>
+         	<%if(session.getAttribute("nombreUsuarioLogeado") != null) { %>
+         	  <h1 class="py-3 px-2"><%=session.getAttribute("nombreUsuarioLogeado") %></h1>
+         	  <% } %>
          </div>
      </div>
 
@@ -93,13 +95,13 @@
                          		<td><%=va.getNumeroCuenta() %></td>
                          		<td><%=va.getTipoCuenta().getDescripcion() %></td>
                          		<%if(va.getPrestamo().getEstado() == 1) {%>
-                         		<td><span class="status solicitado"></span><%=va.getPrestamo().getEstado() %></td>
+                         		<td><span class="status solicitado"></span><%=va.getPrestamo().getFecha() %></td>
                          		<% } %>
                          		<%if(va.getPrestamo().getEstado() == 2) {%>
-                         		<td><span class="status denegado"></span><%=va.getPrestamo().getEstado() %></td>
+                         		<td><span class="status denegado"></span><%=va.getPrestamo().getFecha() %></td>
                          		<% } %>
                          		<%if(va.getPrestamo().getEstado() == 3) {%>
-                         		<td><span class="status vigente "></span><%=va.getPrestamo().getEstado() %></td>
+                         		<td><span class="status vigente "></span><%=va.getPrestamo().getFecha() %></td>
                          		<% } %>
                          		<%if(va.getPrestamo().getEstado() == 4) {%>
                          		<td><span class="status pagado"></span><%=va.getPrestamo().getEstado() %></td>
