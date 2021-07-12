@@ -125,8 +125,9 @@ public class ServletPagarPrestamo extends HttpServlet {
 	// 4 Registrar nmovimiento
 	// 5 Actualizar estado de prestamo
 	private void pagarPrestamo(HttpServletRequest request) {
-		if (request.getParameter("btnConfirmar") != null) {
-			ArrayList<Prestamo> listaPrestamosAPagar = validarInputSaldo(request);
+		ArrayList<Prestamo> listaPrestamosAPagar = validarInputSaldo(request);
+			if (request.getParameter("btnConfirmar") != null) {
+			//if(request.getParameter("banderaModal").equals("banderaModal")) {
 			ArrayList<Boolean> resultados = new ArrayList<Boolean>();
 			for (Prestamo p : listaPrestamosAPagar) {
 				ArrayList<Cuota> listaCuotas = p.getListaCuotas();
@@ -152,10 +153,11 @@ public class ServletPagarPrestamo extends HttpServlet {
 					request.setAttribute("msjModal", "Su pago se realizó satisfactoriamente.");
 				}
 			}
-		}
+		
 		cargarPrestamos(request);
 		cargarCuentasUsuario(request);
 		cargarSelect(request);
+		}
 	}
 
 	private ArrayList<Prestamo> validarInputSaldo(HttpServletRequest request) {
@@ -174,9 +176,14 @@ public class ServletPagarPrestamo extends HttpServlet {
 			}
 			p.setListaCuotas(listaCuotasAPagar);
 		}
-		Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
-		if (cuentaSeleccionada.getSaldo().subtract(totalAPagar).compareTo(BigDecimal.ZERO) >= 0) {
-			return listaPrestMostrados;
+		if(request.getAttribute("cuentaSeleccionada")!=null) {
+			Cuenta cuentaSeleccionada = (Cuenta)(request.getAttribute("cuentaSeleccionada"));
+			request.setAttribute("totalAPagar", totalAPagar);
+			BigDecimal nuevoSaldo = cuentaSeleccionada.getSaldo().subtract(totalAPagar);
+			request.setAttribute("nuevoSaldo", nuevoSaldo);
+			if (nuevoSaldo.compareTo(BigDecimal.ZERO) >= 0) {
+				return listaPrestMostrados;
+			}			
 		}
 		return new ArrayList<Prestamo>();
 	}
