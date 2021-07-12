@@ -50,9 +50,12 @@
 		<label for="standard-select">Seleccione la cuenta</label>
 		<div class="select"> 
 			<select id="standard-select" name="slvalue" onchange="this.form.submit()">
+			
+			<option value="0" label="Seleccione una cuenta" selected>
+			
 		 <% if(request.getAttribute("listaTiposCta") != null){
 			ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
-			listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaTiposCta");
+			listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaTiposCta"); 
 			 for(Cuenta c : listaCuentas) { 
 			 	if(c.getNumeroCuenta().equals(request.getParameter("slvalue")))
 			 	{
