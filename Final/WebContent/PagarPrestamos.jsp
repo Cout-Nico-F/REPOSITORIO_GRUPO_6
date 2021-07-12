@@ -116,6 +116,15 @@
  	
 <form action="ServletPagarPrestamo" id="formGet" method="get">
 		<input type="hidden" id="detallePago" name="detallePago">
+		<div class="select">
+				<select name="cantCuotas" onchange="this.form.submit()">
+				<option selected> 3 </option>
+					<% for (int i=1;i<=20;i++) { %>
+						<option><%=i %></option>
+						<%} %>
+				</select>
+		</div>
+			
 		<div align="center">		
 			<label for="standard-select">Seleccione la cuenta a debitar</label>
 			<div class="select">
